@@ -1,0 +1,17 @@
+# Python 3.11. Versions are those on the machine that produced the paper's results (investpf env).
+pyblp==1.3.0
+pyRVtest==0.3.2
+numpy==2.4.1
+pandas==2.2.3
+scipy==1.17.1
+matplotlib==3.10.8
+seaborn==0.13.2
+statsmodels==0.14.6
+linearmodels==6.0
+pyhdfe==0.2.0
+patsy==1.0.2
+ipython==9.8.0
+ipykernel==7.4.0
+nbconvert==7.17.2
+# imported by the notebooks; not installed in the investpf env, so version unknown
+dill
