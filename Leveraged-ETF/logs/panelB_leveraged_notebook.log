@@ -1,0 +1,124 @@
+##### CELL 3
+          month_t market_m_bull_bear  market_ids
+2807  2007.000000               Bull           1
+2808  2007.083333               Bull           2
+414   2007.166667               Bull           3
+416   2007.250000               Bull           4
+418   2007.333333               Bull           5
+N after cell3: 26935
+##### CELL 3 done in 5.9s
+##### CELL 4
+<class 'pandas.core.frame.DataFrame'>
+Index: 15401 entries, 2 to 48274
+Columns: 140 entries, market_m_index to rotator
+memory usage: 16.6+ MB
+None
+   market_m_index      month_t  product_j  firm_ids market_m_bull_bear  market_m_cluster  market_m_index_mret                                                product_fund_name  product_daily  product_l
+N after cell4 (estimation sample): 15401  markets: 177
+##### CELL 4 done in 0.1s
+##### CELL 5
+Exact equality:           False
+All close (float-safe):   True
+Max absolute difference:  5.134781488891349e-16
+##### CELL 5 done in 0.0s
+##### CELL 6
+##### CELL 8
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +6.0611E-27     0       +1.2787E+03        +9.4917E+01   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+===============================================================================
+   prices      product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------------  --------------------  --------------------
+ -3.7116E+00       -1.3755E+00           +2.5450E-01           +7.0644E-01     
+(+3.2840E-01)     (+2.4729E-01)         (+3.5883E-02)         (+4.0441E-02)    
+===============================================================================
+##### CELL 8 done in 0.1s
+##### CELL 9
+LOGIT_IV mean own-price elasticity: -4.891613408485686
+##### CELL 9 done in 0.8s
+##### CELL 12
+##### CELL 16
+Problem Results Summary:
+=========================================================================================
+GMM    Objective    Gradient                 Clipped  Weighting Matrix  Covariance Matrix
+Step     Value        Norm        Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -----------  -----------  -------  ----------------  -----------------
+ 2    +5.0375E+00  +1.8988E-07  +2.9384E+00     0       +2.9168E+04        +8.9165E+16   
+=========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:27:12       No           5            71         138207       425281   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +2.0836E+00 
+        (+1.0209E-01)
+=====================
+Beta Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+===============================================================================
+   prices      product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------------  --------------------  --------------------
+ -6.4845E+00       -1.5461E+00           +2.6081E-01           +7.7932E-01     
+(+7.1902E-02)     (+2.6414E-01)         (+3.6695E-02)         (+4.4801E-02)    
+===============================================================================
+##### CELL 16 done in 1632.1s
+##### CELL 17
+##### CELL 18
+BLP_1RC mean own-price elasticity: -5.910514970516203
+##### CELL 18 done in 0.7s
+##### CELL 24
+##### CELL 24 done in 0.0s
+##### CELL 25
+Problem Results Summary:
+============================================================================================================
+GMM    Objective    Gradient        Hessian         Hessian     Clipped  Weighting Matrix  Covariance Matrix
+Step     Value        Norm      Min Eigenvalue  Max Eigenvalue  Shares   Condition Number  Condition Number 
+----  -----------  -----------  --------------  --------------  -------  ----------------  -----------------
+ 2    +9.0288E+01  +7.5802E-08   +1.5444E+01     +8.2122E+01       0       +4.2867E+04        +2.4716E+18   
+============================================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:29:26       Yes          24           38         100760       308404   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+===============================================================================
+       Sigma:            prices      log_product_fund_age  product_past_1yr_ret
+--------------------  -------------  --------------------  --------------------
+       prices          +1.8126E+00                                             
+                      (+4.7617E-01)                                            
+log_product_fund_age   +0.0000E+00       -7.5453E-02                           
+                                        (+1.3177E+00)                          
+product_past_1yr_ret   +0.0000E+00       +0.0000E+00           -9.4884E-02     
+                                                              (+1.2663E-01)    
+===============================================================================
+Beta Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+===============================================================================
+   prices      product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------------  --------------------  --------------------
+ -6.1413E+00       -1.6435E+00           +2.4414E-01           +7.8519E-01     
+(+1.0325E+00)     (+2.9396E-01)         (+5.7248E-02)         (+1.9002E-01)    
+===============================================================================
+##### CELL 25 done in 1766.9s
+##### CELL 26
+BLP_3RC mean own-price elasticity: -5.953273831812739
+##### CELL 26 done in 18.1s

@@ -1,0 +1,30 @@
+panel=index  N=108300  markets=166  products=1302
+--- Route A: pyblp, price as its own instrument ---
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +1.1169E-25     0       +3.5431E+01        +2.7358E+01   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===============================================================================
+   prices      product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------------  --------------------  --------------------
+ -9.3769E-01       -2.3065E-01           +4.1311E-01           +5.4613E-01     
+(+4.5191E-02)     (+3.8931E-02)         (+3.7018E-02)         (+1.2148E-02)    
+===============================================================================
+beta: {'prices': np.float64(-0.9377), 'product_tracking_err': np.float64(-0.2307), 'product_past_1yr_ret': np.float64(0.4131), 'log_product_fund_age': np.float64(0.5461)}
+se  : {'prices': np.float64(0.0452), 'product_tracking_err': np.float64(0.0389), 'product_past_1yr_ret': np.float64(0.037), 'log_product_fund_age': np.float64(0.0121)}
+mean own-price elasticity (pyblp): -0.2699843793109963
+--- Route B: pyhdfe + statsmodels OLS ---
+beta: {'prices': np.float64(-0.9377), 'product_tracking_err': np.float64(-0.2307), 'product_past_1yr_ret': np.float64(0.4131), 'log_product_fund_age': np.float64(0.5461)}
+se  : {'prices': np.float64(0.0453), 'product_tracking_err': np.float64(0.039), 'product_past_1yr_ret': np.float64(0.0371), 'log_product_fund_age': np.float64(0.0122)}
+mean own-price elasticity (alpha*p*(1-s)): -0.26750272780160117  N = 108300
