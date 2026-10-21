@@ -73,7 +73,11 @@ def main(procs, group='fee_t1', fixrest=''):
         problem = pyblp.Problem((X1, X2), d, agent_formulation=pyblp.Formulation('1'), agent_data=agents,
                                 rc_types=['log', 'log'])
         print(problem, flush=True)
-        res = problem.solve(sigma=sigma0, pi=pi0, optimization=pyblp.Optimization(bfgs, {'gtol': 1e-7}),
+        opt = pyblp.Optimization(bfgs, {'gtol': 1e-7})
+        if os.environ.get('FINALIZE') == '1':  # results at the best checkpointed point, no further optimization
+            opt = pyblp.Optimization('return')
+            print('FINALIZE: evaluating at the best checkpointed point', flush=True)
+        res = problem.solve(sigma=sigma0, pi=pi0, optimization=opt,
                             se_type='clustered')
         print(res)
         print(f'solve time {time.time() - t:.0f}s', flush=True)
