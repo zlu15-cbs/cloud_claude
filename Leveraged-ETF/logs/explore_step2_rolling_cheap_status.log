@@ -1,0 +1,97 @@
+cheap_t33_w12: share of fund-months cheap 0.369; funds ever cheap 488 of 1302; funds that switch status 180 (in 39 more than once)
+cheap_q20_w12: share of fund-months cheap 0.230; funds ever cheap 330 of 1302; funds that switch status 172 (in 37 more than once)
+cheap_t33_w6: share of fund-months cheap 0.363; funds ever cheap 495 of 1302; funds that switch status 214 (in 60 more than once)
+
+last month: 33rd percentile fee = 0.070, 20th = 0.050
+                                         product_fund_name  prices  cheap_t33_w12  cheap_q20_w12  cheap_t33_w6
+product_ids                                                                                                   
+16416                             iShares Core S&P 500 ETF    0.03            1.0            1.0           1.0
+56419                           iShares Core MSCI EAFE ETF    0.07            1.0            0.0           1.0
+16417                   iShares Core US Aggregate Bond ETF    0.03            1.0            1.0           1.0
+16448                      iShares Russell 1000 Growth ETF    0.18            0.0            0.0           0.0
+16437                         iShares Core S&P Mid-Cap ETF    0.05            1.0            1.0           1.0
+27635                               SPDR S&P 500 ETF Trust    0.09            1.0            1.0           0.0
+29218                                     SPDR Gold Shares    0.40            0.0            0.0           0.0
+28279                   Technology Select Sector SPDR Fund    0.08            0.0            0.0           0.0
+28277                    Financial Select Sector SPDR Fund    0.08            0.0            0.0           0.0
+29250                           SPDR Portfolio S&P 500 ETF    0.02            1.0            1.0           1.0
+63885        Vanguard Total Stock Market Index Fund; Insti    0.02            1.0            1.0           1.0
+31461              Vanguard 500 Index Fund; Admiral Shares    0.04            1.0            1.0           1.0
+50485                  Vanguard 500 Index Fund; ETF Shares    0.03            1.0            1.0           1.0
+31466        Vanguard Total Stock Market Index Fund; ETF C    0.03            1.0            1.0           1.0
+31462        Vanguard Total Stock Market Index Fund; Admir    0.04            1.0            1.0           1.0
+data ready, N=108300, 21s
+=== A10_cheap_t33_w12  (13s)  formula: prices + I(prices*cheap_t33_w12) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + cheap_t33_w12  excluded IVs: ['demand_instruments0', 'demand_instruments1']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +1.8789E-23     0       +9.7743E+01        +4.2474E+04   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+====================================================================================================================
+   prices      cheap_t33_w12*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age  cheap_t33_w12
+-------------  --------------------  --------------------  --------------------  --------------------  -------------
+ -5.3244E+00       -1.1376E+01           -5.2829E-01           +4.0390E-01           +5.8932E-01        +1.3097E+00 
+(+1.4609E+00)     (+3.9738E-01)         (+7.3974E-02)         (+3.5312E-02)         (+1.5561E-02)      (+6.5804E-02)
+====================================================================================================================
+{'spec': 'A10_cheap_t33_w12', 'tier': 'C', 'N': 108300, 'avg_own_elasticity': np.float64(-1.8753), 'share_abs_e_gt1': np.float64(0.7424), 'share_abs_e_gt1_broad': np.float64(0.7032), 'share_abs_e_gt1_big3': np.float64(0.6783), 'share_neg_mc_single_product': np.float64(0.2576), 'share_neg_mc_bertrand
+=== A10_cheap_q20_w12  (11s)  formula: prices + I(prices*cheap_q20_w12) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + cheap_q20_w12  excluded IVs: ['demand_instruments0', 'demand_instruments1']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +3.8662E-21     0       +3.0449E+02        +1.3142E+08   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+====================================================================================================================
+   prices      cheap_q20_w12*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age  cheap_q20_w12
+-------------  --------------------  --------------------  --------------------  --------------------  -------------
+ -3.9428E+02       -3.3912E+02           -1.4611E+01           +2.3091E-01           +1.0925E+00        +1.0584E+01 
+(+3.3309E+03)     (+2.7825E+03)         (+1.2102E+02)         (+1.6901E+00)         (+4.9826E+00)      (+8.1083E+01)
+====================================================================================================================
+{'spec': 'A10_cheap_q20_w12', 'tier': 'C', 'N': 108300, 'avg_own_elasticity': np.float64(-118.4261), 'share_abs_e_gt1': np.float64(1.0), 'share_abs_e_gt1_broad': np.float64(1.0), 'share_abs_e_gt1_big3': np.float64(1.0), 'share_neg_mc_single_product': np.float64(0.0), 'share_neg_mc_bertrand_firm': np
+=== A10_cheap_t33_w6  (12s)  formula: prices + I(prices*cheap_t33_w6) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + cheap_t33_w6  excluded IVs: ['demand_instruments0', 'demand_instruments1']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +8.3497E-23     0       +9.7380E+01        +9.5345E+04   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===================================================================================================================
+   prices      cheap_t33_w6*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age  cheap_t33_w6 
+-------------  -------------------  --------------------  --------------------  --------------------  -------------
+ -7.3856E+00       -1.1977E+01          -5.6684E-01           +4.0986E-01           +6.1515E-01        +1.1764E+00 
+(+2.3686E+00)     (+4.8423E-01)        (+1.0106E-01)         (+3.6556E-02)         (+2.4249E-02)      (+1.0537E-01)
+===================================================================================================================
+{'spec': 'A10_cheap_t33_w6', 'tier': 'C', 'N': 108300, 'avg_own_elasticity': np.float64(-2.4727), 'share_abs_e_gt1': np.float64(0.8009), 'share_abs_e_gt1_broad': np.float64(0.7638), 'share_abs_e_gt1_big3': np.float64(0.7571), 'share_neg_mc_single_product': np.float64(0.1991), 'share_neg_mc_bertrand_
+total 57s
+             spec  share_positive_loading  loading_p5  loading_median  loading_p95
+A10_cheap_t33_w12                     0.0     -16.701          -5.324       -5.324
+A10_cheap_q20_w12                     0.0    -733.406        -394.284     -394.284
+ A10_cheap_t33_w6                     0.0     -19.362          -7.386       -7.386

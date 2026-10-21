@@ -69,6 +69,14 @@ def add_variables(d):
     d = d.merge(lf[['product_ids', 'month_key', 'lagfee_t']], on=['product_ids', 'month_key'], how='left')
     d['lfee_t1'] = (d.lagfee_t == 0).astype(float)
     d['lfee_t2'] = (d.lagfee_t == 1).astype(float)
+    # A10: rolling 'cheap' status. Monthly flag: fee <= that month's q-quantile fee across sample funds. A fund becomes
+    # cheap after W consecutive flagged months and stops being cheap after W consecutive unflagged months (hysteresis);
+    # status at t uses months before t only; the initial status is the flag in the fund's first month.
+    for q, w, name in [(1 / 3, 12, 'cheap_t33_w12'), (0.2, 12, 'cheap_q20_w12'), (1 / 3, 6, 'cheap_t33_w6')]:
+        cut = d.groupby('month_key').prices.transform(lambda x: x.quantile(q))
+        d['_flag'] = (d.prices <= cut + 1e-12).astype(int)
+        d[name] = rolling_status(d, w)
+    d = d.drop(columns='_flag')
     # A8: share class from the fund name (mutual funds only; ETFs are the base group)
     nm = d.product_fund_name.fillna('').str.lower()
     mf = d.ETF_ind == 0
@@ -78,6 +86,24 @@ def add_variables(d):
     d['sc_retail'] = retail.astype(float)
     d['sc_mf_other'] = (mf & ~inst & ~retail).astype(float)
     return d
+
+
+def rolling_status(d, w):
+    status = pd.Series(0.0, index=d.index)
+    for _, g in d.sort_values('month_key').groupby('product_ids'):
+        flags, state, run_in, run_out = g._flag.to_numpy(), None, 0, 0
+        out = np.empty(len(g))
+        for i, f in enumerate(flags):
+            if state is None:
+                state = f
+            out[i] = state  # status at t from months before t (and the first-month flag)
+            run_in, run_out = (run_in + 1, 0) if f else (0, run_out + 1)
+            if run_in >= w:
+                state = 1
+            if run_out >= w:
+                state = 0
+        status[g.index] = out
+    return status
 
 
 def spec_list():
@@ -98,6 +124,8 @@ def spec_list():
     s['A9_low_fee_tercile'] = dict(tier='A', z=['fee_t1'])  # two groups: cheapest third vs the rest
     s['A9_low_fee_quintile'] = dict(tier='A', z=['fee_q1'])
     s['A9_low_fee_40pct'] = dict(tier='A', z=['fee_b40'])
+    for n in ('cheap_t33_w12', 'cheap_q20_w12', 'cheap_t33_w6'):
+        s['A10_' + n] = dict(tier='C', z=[n], controls=[n])
     s['A8_share_class'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other'])
     s['A8_share_class_broad'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other', 'broad'])
     for c in (0.01, 0.005, 0.02):
