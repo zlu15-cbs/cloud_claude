@@ -1,0 +1,99 @@
+data ready, N=108300, 21s
+=== A9_low_fee_tercile  (12s)  formula: prices + I(prices*fee_t1) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_instruments1']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +1.4766E-23     0       +6.8556E+02        +1.8049E+05   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+==============================================================================================
+   prices      fee_t1*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  --------------------  --------------------  --------------------
+ -1.1132E+01    -4.5315E+01       -8.8628E-01           +4.6852E-01           +6.0513E-01     
+(+5.7180E+00)  (+8.1556E+00)     (+2.8626E-01)         (+4.1306E-02)         (+5.7335E-02)    
+==============================================================================================
+{'spec': 'A9_low_fee_tercile', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-4.6459), 'share_abs_e_gt1': np.float64(0.9683), 'share_abs_e_gt1_broad': np.float64(0.9687), 'share_abs_e_gt1_big3': np.float64(0.9535), 'share_neg_mc_single_product': np.float64(0.0317), 'share_neg_mc_bertran
+=== A9b_low_fee12_tercile  (10s)  formula: prices + I(prices*fee12_t1) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_instruments1']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +9.8237E-23     0       +5.8025E+02        +1.3861E+07   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+================================================================================================
+   prices      fee12_t1*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  ---------------  --------------------  --------------------  --------------------
+ -1.4732E+02     -4.4700E+02        -1.9621E+01           +1.1726E+00           +1.3840E+00     
+(+4.4205E+02)   (+1.2196E+03)      (+5.4787E+01)         (+1.9795E+00)         (+2.6965E+00)    
+================================================================================================
+{'spec': 'A9b_low_fee12_tercile', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-56.443), 'share_abs_e_gt1': np.float64(1.0), 'share_abs_e_gt1_broad': np.float64(1.0), 'share_abs_e_gt1_big3': np.float64(1.0), 'share_neg_mc_single_product': np.float64(0.0), 'share_neg_mc_bertrand_firm': 
+=== A9_low_fee_40pct  (11s)  formula: prices + I(prices*fee_b40) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_instruments1']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +4.4616E-25     0       +5.0614E+02        +6.0597E+04   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===============================================================================================
+   prices      fee_b40*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------  --------------------  --------------------  --------------------
+ -5.3249E+00    -3.2144E+01        -1.4163E+00           +4.7128E-01           +6.1366E-01     
+(+3.3250E+00)  (+3.9563E+00)      (+3.2578E-01)         (+3.9836E-02)         (+3.6089E-02)    
+===============================================================================================
+{'spec': 'A9_low_fee_40pct', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-2.9911), 'share_abs_e_gt1': np.float64(0.9197), 'share_abs_e_gt1_broad': np.float64(0.9177), 'share_abs_e_gt1_big3': np.float64(0.888), 'share_neg_mc_single_product': np.float64(0.0803), 'share_neg_mc_bertrand_f
+=== A9b_low_fee12_40pct  (11s)  formula: prices + I(prices*fee12_b40) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_instruments1']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +5.1083E-25     0       +5.0255E+02        +1.0152E+05   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+=================================================================================================
+   prices      fee12_b40*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  ----------------  --------------------  --------------------  --------------------
+ -1.3855E+01     -4.0671E+01         -2.0913E+00           +4.6197E-01           +6.6147E-01     
+(+6.7577E+00)   (+8.3143E+00)       (+6.1772E-01)         (+3.8783E-02)         (+6.8956E-02)    
+=================================================================================================
+{'spec': 'A9b_low_fee12_40pct', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-5.7227), 'share_abs_e_gt1': np.float64(0.9816), 'share_abs_e_gt1_broad': np.float64(0.9846), 'share_abs_e_gt1_big3': np.float64(0.971), 'share_neg_mc_single_product': np.float64(0.0184), 'share_neg_mc_bertran
+total 64s
+                 spec  share_positive_loading  loading_p5  loading_median  loading_p95
+   A9_low_fee_tercile                     0.0     -56.447         -11.132      -11.132
+A9b_low_fee12_tercile                     0.0    -594.325        -147.323     -147.323
+     A9_low_fee_40pct                     0.0     -37.469          -5.325       -5.325
+  A9b_low_fee12_40pct                     0.0     -54.526         -13.855      -13.855

@@ -1,0 +1,28 @@
+
+cheapest third: 22 switching funds; their share of within-fund fee variation: 0.019 of all, 0.040 of the first-month cheap group
+                                                 name                          firm    n  fee_first  fee_min  fee_max  within_ss   t1  t1_12  b40  b40_12
+product_ids                                                                                                                                              
+43715        SPDR Portfolio Intermediate Term Corpora  State Street Global Advisors  140      0.150    0.040    0.550      2.161  1.0    0.0  1.0     0.0
+17491        JPMorgan 100% US Treasury Securities Mon     JPMorgan Asset Management  166      0.160    0.050    0.260      1.306  0.0    1.0  1.0     1.0
+17490        JPMorgan 100% US Treasury Securities Mon     JPMorgan Asset Management  166      0.160    0.040    0.210      0.794  0.0    1.0  1.0     1.0
+48409        SPDR Portfolio Short Term Corporate Bond  State Street Global Advisors  156      0.130    0.040    0.230      0.380  1.0    0.0  1.0     1.0
+62651        Allspring 100% Treasury Money Market Fun                     Allspring  101      0.110    0.060    0.200      0.185  1.0    0.0  1.0     1.0
+43025          iShares Core Aggressive Allocation ETF                     BlackRock   86      0.110    0.110    0.200      0.121  1.0    0.0  1.0     1.0
+40288        Total Stock Market Index Portfolio; Inve                      Vanguard  166      0.149    0.079    0.161      0.077  1.0    0.0  1.0     1.0
+39115        Mid-Cap Index Portfolio; Investor Share                       Vanguard  166      0.149    0.079    0.161      0.077  1.0    0.0  1.0     1.0
+38371        Equity Index Portfolio; Investor Share C                      Vanguard  166      0.149    0.079    0.161      0.077  1.0    0.0  1.0     1.0
+38372        Total Bond Market Index Portfolio; Inves                      Vanguard  166      0.149    0.079    0.161      0.077  1.0    0.0  1.0     1.0
+
+cheapest 40%: 36 switching funds; their share of within-fund fee variation: 0.024 of all, 0.057 of the first-month cheap group
+                                                 name                          firm    n  fee_first  fee_min  fee_max  within_ss   t1  t1_12  b40  b40_12
+product_ids                                                                                                                                              
+43715        SPDR Portfolio Intermediate Term Corpora  State Street Global Advisors  140       0.15     0.04     0.55      2.161  1.0    0.0  1.0     0.0
+16486        iShares Broad USD Investment Grade Corpo                     BlackRock  166       0.20     0.04     0.20      0.692  0.0    0.0  1.0     0.0
+16411        iShares Core S&P Total US Stock Market E                     BlackRock  166       0.20     0.03     0.20      0.619  0.0    0.0  1.0     0.0
+16417              iShares Core US Aggregate Bond ETF                     BlackRock  166       0.20     0.03     0.20      0.574  0.0    0.0  1.0     0.0
+16437                    iShares Core S&P Mid-Cap ETF                     BlackRock  166       0.20     0.05     0.20      0.488  0.0    0.0  1.0     0.0
+16467                  iShares Core S&P Small-Cap ETF                     BlackRock  166       0.20     0.06     0.20      0.438  0.0    0.0  1.0     0.0
+29225               SPDR Portfolio S&P 500 Growth ETF  State Street Global Advisors  118       0.20     0.04     0.20      0.378  0.0    0.0  0.0     1.0
+32494            WisdomTree International Equity Fund                    WisdomTree  109       0.19     0.19     0.49      0.248  0.0    0.0  1.0     0.0
+28280               Utilities Select Sector SPDR Fund  State Street Global Advisors  166       0.20     0.08     0.20      0.180  0.0    0.0  0.0     1.0
+28278              Industrial Select Sector SPDR Fund  State Street Global Advisors  166       0.20     0.08     0.20      0.180  0.0    0.0  0.0     1.0

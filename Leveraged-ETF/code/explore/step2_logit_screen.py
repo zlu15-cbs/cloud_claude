@@ -62,6 +62,11 @@ def add_variables(d):
     for k in range(4):
         d[f'fee_q{k + 1}'] = d.product_ids.map(q == k).astype(float)
     d['fee_b40'] = d.fee_q1 + d.fee_q2  # A9: cheapest 40% of funds at their first month
+    # A9b: same groups from the fund's average fee over its first 12 months in the sample (fewer if shorter)
+    avg12 = d.sort_values('month_t').groupby('product_ids').head(12).groupby('product_ids').prices.mean()
+    r = avg12.rank(method='first')
+    d['fee12_t1'] = d.product_ids.map(pd.qcut(r, 3, labels=False) == 0).astype(float)
+    d['fee12_b40'] = d.product_ids.map(pd.qcut(r, 5, labels=False) <= 1).astype(float)
     # A5c: fee tercile 12 months earlier (within that month's cross-section), time-varying; base = highest
     lf = d[['product_ids', 'month_key', 'prices']].copy()
     lf['lagfee_t'] = lf.groupby('month_key').prices.transform(lambda x: pd.qcut(x.rank(method='first'), 3, labels=False))
@@ -126,6 +131,8 @@ def spec_list():
     s['A9_low_fee_40pct'] = dict(tier='A', z=['fee_b40'])
     for n in ('cheap_t33_w12', 'cheap_q20_w12', 'cheap_t33_w6'):
         s['A10_' + n] = dict(tier='C', z=[n], controls=[n])
+    s['A9b_low_fee12_tercile'] = dict(tier='A', z=['fee12_t1'])
+    s['A9b_low_fee12_40pct'] = dict(tier='A', z=['fee12_b40'])
     s['A8_share_class'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other'])
     s['A8_share_class_broad'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other', 'broad'])
     for c in (0.01, 0.005, 0.02):

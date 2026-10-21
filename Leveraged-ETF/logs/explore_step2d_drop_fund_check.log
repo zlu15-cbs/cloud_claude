@@ -1,0 +1,8 @@
+A9_low_fee_tercile       all funds              {'prices': '-11.13 (5.72)', 'fee_t1*prices': '-45.32 (8.16)'}  F: [24.9, 17.3]
+A9_low_fee_tercile       without [43715]        {'prices': '-11.85 (6.35)', 'fee_t1*prices': '-48.83 (9.71)'}  F: [23.5, 16.3]
+A9b_low_fee12_tercile    all funds              {'prices': '-147.32 (442.05)', 'fee12_t1*prices': '-447.00 (1219.58)'}  F: [0.4, 0.4]
+A9b_low_fee12_tercile    without [43715]        {'prices': '-144.35 (420.61)', 'fee12_t1*prices': '-435.47 (1150.23)'}  F: [0.5, 0.4]
+A9_low_fee_40pct         all funds              {'prices': '-5.32 (3.32)', 'fee_b40*prices': '-32.14 (3.96)'}  F: [34.3, 22.9]
+A9_low_fee_40pct         without [43715]        {'prices': '-5.52 (3.49)', 'fee_b40*prices': '-33.23 (4.35)'}  F: [33.9, 22.5]
+A9b_low_fee12_40pct      all funds              {'prices': '-13.86 (6.76)', 'fee12_b40*prices': '-40.67 (8.31)'}  F: [24.2, 15.8]
+A9b_low_fee12_40pct      without [43715]        {'prices': '-13.98 (6.80)', 'fee12_b40*prices': '-40.72 (8.26)'}  F: [24.0, 15.6]
