@@ -70,6 +70,9 @@ def spec_list():
     s['A4_asset_class'] = dict(tier='A', z=['ac_us_large_blend', 'ac_us_other_equity', 'ac_intl_equity', 'ac_bond'])
     s['A5_fee_tercile'] = dict(tier='A', z=['fee_t1', 'fee_t2'])
     s['A6_aum_tercile'] = dict(tier='A', z=['aum_t1', 'aum_t2'])
+    s['A7_broad_fee'] = dict(tier='A', z=['broad', 'fee_t1', 'fee_t2'])
+    s['A7_firms_fee'] = dict(tier='A', z=['vanguard', 'blackrock', 'ssga', 'fee_t1', 'fee_t2'])
+    s['A7_broad_firms_fee'] = dict(tier='A', z=['broad', 'vanguard', 'blackrock', 'ssga', 'fee_t1', 'fee_t2'])
     for c in (0.01, 0.005, 0.02):
         s[f'B1_logp_c{c}'] = dict(tier='B', z=[], form='log', c=c)
     s['B2_p_sq'] = dict(tier='B', z=[], form='sq')
