@@ -1,0 +1,82 @@
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:N=108300; start sigma [0.5 0.5], pi [2.40694511 4.03246916] (0 checkpointed evaluations)
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:Dimensions:
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:=====================================================
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log: T     N      F     I      K1    K2    D    MD    ED 
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:---  ------  ---  ------  ----  ----  ---  ----  ----
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:166  108300  90   498000   3     2     1    7     2  
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:=====================================================
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:Formulations:
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:=========================================================================================
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:       Column Indices:                  0                     1                     2    
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:-----------------------------  --------------------  --------------------  --------------
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log: X1: Linear Characteristics    product_tracking_err  product_past_1yr_ret  log_product_fu
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:X2: Nonlinear Characteristics     (-prices)*rest       fee_t1*(-prices)                  
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:       d: Demographics                  1                                                
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run_part1.log:=========================================================================================
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:N=108300; start sigma [0.66251373 0.74514073], pi [2.50564015 4.98712638] (5 checkpointed evalu
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:Dimensions:
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:=====================================================
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log: T     N      F     I      K1    K2    D    MD    ED 
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:---  ------  ---  ------  ----  ----  ---  ----  ----
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:166  108300  90   498000   3     2     1    7     2  
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:=====================================================
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:Formulations:
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:===============================================================================================
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:       Column Indices:                  0                     1                     2          
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:-----------------------------  --------------------  --------------------  --------------------
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log: X1: Linear Characteristics    product_tracking_err  product_past_1yr_ret  log_product_fund_age
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:X2: Nonlinear Characteristics     (-prices)*rest       fee_t1*(-prices)                        
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:       d: Demographics                  1                                                      
+/tmp/claude-0/-home-user-cloud-claude/3554418d-52b7-53ec-a15f-d6e21672f3a3/scratchpad/explore/s7/run.log:===============================================================================================
+
+Stopped after 50 evaluations (theta = sigma_rest, sigma_cheap, pi_rest, pi_cheap):
+541.5159 [0.5, 0.5, 2.407, 4.032]
+2937.9662 [0.175, -0.065, 1.854, 4.571]
+149.7699 [0.44, 0.395, 2.304, 4.132]
+155079.3071 [1.207, 1.6, 2.997, 7.074]
+142.1690 [0.663, 0.745, 2.506, 4.987]
+142.1690 [0.663, 0.745, 2.506, 4.987]
+9710.5680 [0.545, -0.119, 2.0, 5.046]
+139.9696 [0.662, 0.74, 2.503, 4.987]
+135.6281 [0.662, 0.736, 2.49, 4.97]
+120.1913 [0.663, 0.719, 2.437, 4.899]
+395.1252 [0.824, 1.071, 1.659, 5.131]
+117.1538 [0.69, 0.777, 2.309, 4.937]
+110.8489 [1.045, 0.733, 2.273, 4.937]
+99.5470 [1.265, 0.696, 2.212, 4.887]
+81.9837 [1.125, 0.682, 2.13, 4.763]
+56.7760 [1.6, 0.566, 1.91, 4.523]
+44.0406 [2.432, 0.433, 1.661, 4.333]
+40.5109 [2.861, 0.407, 1.483, 4.289]
+37.7915 [3.312, 0.393, 1.183, 4.195]
+36.1546 [3.591, 0.414, 0.983, 4.189]
+35.1748 [3.985, 0.41, 0.788, 4.168]
+34.3348 [4.592, 0.398, 0.504, 4.133]
+33.8278 [5.205, 0.388, 0.226, 4.109]
+33.5699 [6.002, 0.379, -0.155, 4.072]
+33.2652 [6.744, 0.377, -0.485, 4.065]
+33.1420 [7.596, 0.373, -0.882, 4.045]
+33.0545 [8.389, 0.373, -1.247, 4.035]
+32.9719 [9.277, 0.373, -1.649, 4.029]
+32.9157 [10.658, 0.369, -2.272, 4.013]
+32.8549 [12.059, 0.366, -2.896, 4.005]
+32.8094 [13.827, 0.363, -3.683, 3.994]
+32.7605 [16.125, 0.36, -4.7, 3.986]
+32.7897 [20.752, 0.355, -6.761, 3.964]
+32.7439 [17.922, 0.358, -5.501, 3.978]
+32.7216 [20.002, 0.358, -6.424, 3.974]
+32.7034 [22.076, 0.359, -7.343, 3.973]
+32.6966 [24.981, 0.358, -8.631, 3.967]
+32.6929 [25.806, 0.358, -8.995, 3.967]
+32.6919 [26.899, 0.358, -9.478, 3.966]
+32.6918 [27.391, 0.357, -9.695, 3.966]
+32.6918 [27.522, 0.357, -9.753, 3.965]
+32.6917 [27.609, 0.357, -9.791, 3.965]
+32.6917 [27.683, 0.357, -9.824, 3.965]
+32.6916 [27.758, 0.357, -9.856, 3.965]
+32.6914 [27.844, 0.357, -9.893, 3.964]
+32.6911 [27.955, 0.356, -9.94, 3.964]
+32.6906 [28.103, 0.356, -10.002, 3.964]
+32.6897 [28.31, 0.355, -10.088, 3.963]
+32.6880 [28.597, 0.354, -10.204, 3.962]
+32.6851 [28.979, 0.353, -10.355, 3.962]

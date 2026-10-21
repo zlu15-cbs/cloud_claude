@@ -6,7 +6,10 @@ coefficient (pyblp rc_types='log'): alpha_ig = exp(pi_g + sigma_g * nu_ig). The 
 in the agent formulation. Excluded instruments: Hausman IV and BLP_IV_newproduct_1, each split by group (4 for
 4 nonlinear parameters). Monte Carlo 3000 draws, seed 623543, BFGS gtol 1e-7, clustered SE, as in the notebooks.
 
-    python step7_lognormal_two_group.py PROCESSES [GROUP_COLUMN]   # default fee_t1; e.g. fee12_b40
+    python step7_lognormal_two_group.py PROCESSES [GROUP_COLUMN] [fixrest]   # default fee_t1; e.g. fee12_b40
+
+With 'fixrest' the non-cheap group's sigma is fixed at 0 (coefficient -exp(pi_rest) for everyone): in the
+cheapest-third run that sigma diverged (to 29, with pi_rest -> -10) without improving the objective.
 """
 import json
 import os
@@ -25,7 +28,7 @@ from step2_logit_screen import add_variables, summarize
 pyblp.options.verbose = False
 
 
-def main(procs, group='fee_t1'):
+def main(procs, group='fee_t1', fixrest=''):
     d = add_variables(common.load('index'))
     funds = top15(d)
     g = d[group]
@@ -39,13 +42,17 @@ def main(procs, group='fee_t1'):
     X2 = pyblp.Formulation('0 + I(-prices*rest) + I(-prices*cheap)')
     integ = pyblp.Integration('monte_carlo', size=3000, specification_options={'seed': 623543})
     # start: logit IV A9 loadings (-11.1 rest, -56.4 cheap) -> pi = log(11.1), log(56.4); sigma 0.5
-    ckpt = 'step7_ckpt.json' if group == 'fee_t1' else f'step7_{group}_ckpt.json'
+    tag = ('' if group == 'fee_t1' else '_' + group) + ('_fixrest' if fixrest else '')
+    ckpt = f'step7{tag}_ckpt.json'
     history = json.load(open(ckpt)) if os.path.exists(ckpt) else []
     if history:
         best = min(history, key=lambda r: r['obj'])['theta']
-        sigma0, pi0 = np.diag(best[:2]), np.array(best[2:]).reshape(2, 1)
-    else:
-        sigma0, pi0 = np.diag([0.5, 0.5]), np.array([[np.log(11.1)], [np.log(56.4)]])
+        k = 1 if fixrest else 2  # unfixed sigmas come first in theta
+        sig = [0.0] + best[:1] if fixrest else best[:2]
+        sigma0, pi0 = np.diag(sig), np.array(best[k:]).reshape(2, 1)
+    else:  # start from the logit IV loadings of the chosen grouping
+        sigma0 = np.diag([0.0 if fixrest else 0.5, 0.5])
+        pi0 = np.array([[np.log(11.1)], [np.log(56.4)]]) if group == 'fee_t1' else np.array([[np.log(13.8)], [np.log(54.1)]])
     print(f'N={len(d)}; start sigma {np.diag(sigma0)}, pi {pi0.flatten()} ({len(history)} checkpointed evaluations)',
           flush=True)
 
@@ -70,15 +77,14 @@ def main(procs, group='fee_t1'):
                             se_type='clustered')
         print(res)
         print(f'solve time {time.time() - t:.0f}s', flush=True)
-        row, fund_rows = summarize(f'A9_lognormal_BLP_{group}', dict(tier='A'), d, res, funds, [], {}, {})
+        row, fund_rows = summarize(f'A9_lognormal_BLP{tag}', dict(tier='A'), d, res, funds, [], {}, {})
     print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()})
     f = pd.DataFrame(fund_rows)
     print(f[['name', 'p_last', 'e_last', 'e_mean', 'mu_bertrand_firm_mean', 'mc_bertrand_firm_mean']].round(3)
           .to_string(index=False))
-    sfx = '' if group == 'fee_t1' else '_' + group
-    pd.DataFrame([row]).to_csv(f'step7{sfx}_summary.csv', index=False)
-    f.to_csv(f'step7{sfx}_funds.csv', index=False)
+    pd.DataFrame([row]).to_csv(f'step7{tag}_summary.csv', index=False)
+    f.to_csv(f'step7{tag}_funds.csv', index=False)
 
 
 if __name__ == '__main__':
-    main(int(sys.argv[1]), *sys.argv[2:3])
+    main(int(sys.argv[1]), *sys.argv[2:4])
