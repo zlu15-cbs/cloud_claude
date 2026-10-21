@@ -81,6 +81,21 @@ def main(procs, group='fee_t1', fixrest=''):
                             se_type='clustered')
         print(res)
         print(f'solve time {time.time() - t:.0f}s', flush=True)
+        if os.environ.get('STEP2') == '1':  # optimize the second GMM step from this point, weighting matrix held fixed
+            ckpt, history[:] = ckpt.replace('_ckpt', '_step2_ckpt'), []
+            if os.path.exists(ckpt):
+                history.extend(json.load(open(ckpt)))
+            th = min(history, key=lambda r: r['obj'])['theta'] if history else None
+            s2, p2 = (res.sigma, res.pi) if th is None else (
+                np.diag([0.0, th[0]] if fixrest else th[:2]), np.array(th[1 if fixrest else 2:]).reshape(2, 1))
+            print(f'STEP2: one-step GMM with W = updated weighting matrix, start sigma {np.diag(s2)}, pi {p2.flatten()}',
+                  flush=True)
+            t = time.time()
+            res = problem.solve(sigma=s2, pi=p2, W=res.updated_W, method='1s',
+                                optimization=pyblp.Optimization(bfgs, {'gtol': 1e-7}), se_type='clustered')
+            print(res)
+            print(f'step-2 solve time {time.time() - t:.0f}s', flush=True)
+            tag += '_step2'
         row, fund_rows = summarize(f'A9_lognormal_BLP{tag}', dict(tier='A'), d, res, funds, [], {}, {})
     print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()})
     f = pd.DataFrame(fund_rows)

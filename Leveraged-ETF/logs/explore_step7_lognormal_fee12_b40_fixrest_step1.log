@@ -1,0 +1,80 @@
+N=108300; start sigma [0.  0.5], pi [2.62466859 3.99083419] (0 checkpointed evaluations)
+Dimensions:
+=====================================================
+ T     N      F     I      K1    K2    D    MD    ED 
+---  ------  ---  ------  ----  ----  ---  ----  ----
+166  108300  90   498000   3     2     1    7     2  
+=====================================================
+Formulations:
+===============================================================================================
+       Column Indices:                  0                     1                     2          
+-----------------------------  --------------------  --------------------  --------------------
+ X1: Linear Characteristics    product_tracking_err  product_past_1yr_ret  log_product_fund_age
+X2: Nonlinear Characteristics     (-prices)*rest       cheap*(-prices)                         
+       d: Demographics                  1                                                      
+===============================================================================================
+N=108300; start sigma [0.         0.98203801], pi [2.05697904 4.52023535] (37 checkpointed evaluations)
+Dimensions:
+=====================================================
+ T     N      F     I      K1    K2    D    MD    ED 
+---  ------  ---  ------  ----  ----  ---  ----  ----
+166  108300  90   498000   3     2     1    7     2  
+=====================================================
+Formulations:
+===============================================================================================
+       Column Indices:                  0                     1                     2          
+-----------------------------  --------------------  --------------------  --------------------
+ X1: Linear Characteristics    product_tracking_err  product_past_1yr_ret  log_product_fund_age
+X2: Nonlinear Characteristics     (-prices)*rest       cheap*(-prices)                         
+       d: Demographics                  1                                                      
+===============================================================================================
+FINALIZE: evaluating at the best checkpointed point
+Problem Results Summary:
+================================================================================================================
+GMM    Objective     Projected    Reduced Hessian  Reduced Hessian  Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm  Min Eigenvalue   Max Eigenvalue   Shares   Condition Number  Condition Number 
+----  -----------  -------------  ---------------  ---------------  -------  ----------------  -----------------
+ 2    +7.6118E+01   +4.2461E+02     -1.3562E+02      +2.3623E+04       0       +2.3859E+06        +5.8137E+03   
+================================================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:08:55       Yes          0             2          3635         11250   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+==============================================================================================
+Types:  |      Sigma:       (-prices)*rest  cheap*(-prices)  |        Pi:              1      
+------  |  ---------------  --------------  ---------------  |  ---------------  -------------
+ Log    |  (-prices)*rest    +0.0000E+00                     |  (-prices)*rest    +2.0570E+00 
+        |                                                    |                   (+4.7305E-01)
+        |                                                    |                                
+ Log    |  cheap*(-prices)   +0.0000E+00      +9.8204E-01    |  cheap*(-prices)   +4.5202E+00 
+        |                                    (+2.1181E-01)   |                   (+6.2029E-01)
+==============================================================================================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+================================================================
+product_tracking_err  product_past_1yr_ret  log_product_fund_age
+--------------------  --------------------  --------------------
+    -1.3437E+00           +4.6909E-01           +4.6901E-01     
+   (+3.8916E-01)         (+5.1240E-02)         (+2.2846E-02)    
+================================================================
+solve time 537s
+{'spec': 'A9_lognormal_BLP_fee12_b40_fixrest', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-3.5281), 'share_abs_e_gt1': np.float64(0.9641), 'share_abs_e_gt1_broad': np.float64(0.9774), 'share_abs_e_gt1_big3': np.float64(0.9429), 'share_neg_mc_single_product': np.float64(0.0359), 'shar
+                                                                                         name  p_last  e_last  e_mean  mu_bertrand_firm_mean  mc_bertrand_firm_mean
+                                                      iShares Trust: iShares Core S&P 500 ETF    0.03  -2.546  -3.458                  0.027                  0.027
+                                                    iShares Trust: iShares Core MSCI EAFE ETF    0.07  -3.227  -3.776                  0.029                  0.060
+                                            iShares Trust: iShares Core US Aggregate Bond ETF    0.03  -0.231  -0.585                  0.166                 -0.090
+                                               iShares Trust: iShares Russell 1000 Growth ETF    0.18  -1.389  -1.506                  0.166                  0.029
+                                                  iShares Trust: iShares Core S&P Mid-Cap ETF    0.05  -0.386  -0.808                  0.166                 -0.061
+                                                                       SPDR S&P 500 ETF Trust    0.09  -3.111  -3.658                  0.025                  0.061
+                                                            SPDR Gold Trust: SPDR Gold Shares    0.40  -3.099  -3.071                  0.134                  0.266
+                                 Select Sector SPDR Trust: Technology Select Sector SPDR Fund    0.08  -3.291  -3.948                  0.039                  0.099
+                                  Select Sector SPDR Trust: Financial Select Sector SPDR Fund    0.08  -3.300  -3.945                  0.039                  0.099
+                                                SPDR Series Trust: SPDR Portfolio S&P 500 ETF    0.02  -2.229  -2.821                  0.014                  0.017
+Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares    0.02  -2.081  -2.250                  0.032                 -0.012
+                                Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares    0.04  -2.795  -3.202                  0.040                  0.005
+                                    Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares    0.03  -2.549  -3.135                  0.038                  0.000
+               Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares    0.03  -2.569  -3.161                  0.039                  0.001
+           Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares    0.04  -2.835  -3.227                  0.040                  0.005
