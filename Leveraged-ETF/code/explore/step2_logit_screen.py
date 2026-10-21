@@ -57,6 +57,25 @@ def add_variables(d):
     d = d.merge(lag[['product_ids', 'month_key', 'lag_t']], on=['product_ids', 'month_key'], how='left')
     d['laum_t1'] = (d.lag_t == 0).astype(float)
     d['laum_t2'] = (d.lag_t == 1).astype(float)
+    # A5b: fee quintile at the fund's first month (finer version of A5); base = highest quintile
+    q = pd.qcut(first['prices'].rank(method='first'), 5, labels=False)
+    for k in range(4):
+        d[f'fee_q{k + 1}'] = d.product_ids.map(q == k).astype(float)
+    # A5c: fee tercile 12 months earlier (within that month's cross-section), time-varying; base = highest
+    lf = d[['product_ids', 'month_key', 'prices']].copy()
+    lf['lagfee_t'] = lf.groupby('month_key').prices.transform(lambda x: pd.qcut(x.rank(method='first'), 3, labels=False))
+    lf['month_key'] += 12
+    d = d.merge(lf[['product_ids', 'month_key', 'lagfee_t']], on=['product_ids', 'month_key'], how='left')
+    d['lfee_t1'] = (d.lagfee_t == 0).astype(float)
+    d['lfee_t2'] = (d.lagfee_t == 1).astype(float)
+    # A8: share class from the fund name (mutual funds only; ETFs are the base group)
+    nm = d.product_fund_name.fillna('').str.lower()
+    mf = d.ETF_ind == 0
+    inst = mf & nm.str.contains(r'institutional|inst\b|class i\b|premier|select|class k\b|class z\b|class y\b|class r6|admiral')
+    retail = mf & ~inst & nm.str.contains(r'investor|retail|class a\b|class c\b|class r\b|class t\b|service|advisor')
+    d['sc_inst'] = inst.astype(float)
+    d['sc_retail'] = retail.astype(float)
+    d['sc_mf_other'] = (mf & ~inst & ~retail).astype(float)
     return d
 
 
@@ -73,6 +92,10 @@ def spec_list():
     s['A7_broad_fee'] = dict(tier='A', z=['broad', 'fee_t1', 'fee_t2'])
     s['A7_firms_fee'] = dict(tier='A', z=['vanguard', 'blackrock', 'ssga', 'fee_t1', 'fee_t2'])
     s['A7_broad_firms_fee'] = dict(tier='A', z=['broad', 'vanguard', 'blackrock', 'ssga', 'fee_t1', 'fee_t2'])
+    s['A5b_fee_quintile'] = dict(tier='A', z=['fee_q1', 'fee_q2', 'fee_q3', 'fee_q4'])
+    s['A5c_lag12_fee_tercile'] = dict(tier='C', z=['lfee_t1', 'lfee_t2'], controls=['lfee_t1', 'lfee_t2'], sample='lag12')
+    s['A8_share_class'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other'])
+    s['A8_share_class_broad'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other', 'broad'])
     for c in (0.01, 0.005, 0.02):
         s[f'B1_logp_c{c}'] = dict(tier='B', z=[], form='log', c=c)
     s['B2_p_sq'] = dict(tier='B', z=[], form='sq')

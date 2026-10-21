@@ -1,0 +1,99 @@
+data ready, N=108300, 21s
+=== A5b_fee_quintile  (15s)  formula: prices + I(prices*fee_q1) + I(prices*fee_q2) + I(prices*fee_q3) + I(prices*fee_q4) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3', 'd
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +7.9205E-23     0       +2.9628E+03        +1.8868E+05   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===========================================================================================================================================
+   prices      fee_q1*prices  fee_q2*prices  fee_q3*prices  fee_q4*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  -------------  -------------  -------------  --------------------  --------------------  --------------------
+ +5.4513E+00    -5.3259E+01    -3.4330E+01    -1.3162E+01    -9.5127E+00       -1.1736E+00           +4.4825E-01           +5.8944E-01     
+(+2.3673E+00)  (+3.5826E+00)  (+2.8744E+00)  (+6.0011E-01)  (+1.1182E+00)     (+2.3807E-01)         (+4.2667E-02)         (+2.7673E-02)    
+===========================================================================================================================================
+{'spec': 'A5b_fee_quintile', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-1.692), 'share_abs_e_gt1': np.float64(0.9419), 'share_abs_e_gt1_broad': np.float64(0.9404), 'share_abs_e_gt1_big3': np.float64(0.9177), 'share_neg_mc_single_product': np.float64(0.0581), 'share_neg_mc_bertrand_f
+=== A5c_lag12_fee_tercile  (9s)  formula: prices + I(prices*lfee_t1) + I(prices*lfee_t2) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + lfee_t1 + lfee_t2  excluded IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +4.2752E-22     0       +4.7812E+02        +1.0020E+05   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 148 Clusters in Parentheses):
+=============================================================================================================================================
+   prices      lfee_t1*prices  lfee_t2*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age     lfee_t1        lfee_t2   
+-------------  --------------  --------------  --------------------  --------------------  --------------------  -------------  -------------
+ -1.8733E+00    -1.6210E+01     -8.1689E+00        -9.1832E-01           +5.5715E-01           +5.4935E-01        +3.7033E+00    +2.9676E+00 
+(+1.6846E+00)  (+6.3034E-01)   (+5.5901E-01)      (+1.1019E-01)         (+3.7782E-02)         (+2.3740E-02)      (+2.2923E-01)  (+2.4108E-01)
+=============================================================================================================================================
+{'spec': 'A5c_lag12_fee_tercile', 'tier': 'C', 'N': 88645, 'avg_own_elasticity': np.float64(-1.5457), 'share_abs_e_gt1': np.float64(0.6593), 'share_abs_e_gt1_broad': np.float64(0.6447), 'share_abs_e_gt1_big3': np.float64(0.6451), 'share_neg_mc_single_product': np.float64(0.3407), 'share_neg_mc_bertr
+=== A8_share_class  (12s)  formula: prices + I(prices*sc_inst) + I(prices*sc_retail) + I(prices*sc_mf_other) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3']
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +1.2301E-24     0       +4.7397E+02        +8.9555E+04   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+=====================================================================================================================================
+   prices      prices*sc_inst  prices*sc_retail  prices*sc_mf_other  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------  ----------------  ------------------  --------------------  --------------------  --------------------
+ -9.2330E+00    -1.9942E+00      +1.8382E+00        +2.1656E+00          -6.3045E-01           +4.1306E-01           +5.7230E-01     
+(+2.2978E+00)  (+5.0497E-01)    (+3.0071E-01)      (+3.2514E-01)        (+1.1574E-01)         (+3.3329E-02)         (+1.8610E-02)    
+=====================================================================================================================================
+{'spec': 'A8_share_class', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-2.5571), 'share_abs_e_gt1': np.float64(0.6688), 'share_abs_e_gt1_broad': np.float64(0.5922), 'share_abs_e_gt1_big3': np.float64(0.5948), 'share_neg_mc_single_product': np.float64(0.3312), 'share_neg_mc_bertrand_fi
+=== A8_share_class_broad  (12s)  formula: prices + I(prices*sc_inst) + I(prices*sc_retail) + I(prices*sc_mf_other) + I(prices*broad) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instr
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +1.0332E-24     0       +8.4866E+02        +1.7166E+05   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+====================================================================================================================================================
+   prices      prices*sc_inst  prices*sc_retail  prices*sc_mf_other  broad*prices   product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------  ----------------  ------------------  -------------  --------------------  --------------------  --------------------
+ -1.0042E+01    +2.2491E+00      +5.7877E+00        +6.3071E+00       -7.4470E+00       -5.4405E-01           +4.0518E-01           +5.0980E-01     
+(+2.6034E+00)  (+1.0613E+00)    (+5.7858E-01)      (+8.1312E-01)     (+9.5335E-01)     (+1.3567E-01)         (+3.1937E-02)         (+2.8179E-02)    
+====================================================================================================================================================
+{'spec': 'A8_share_class_broad', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-3.2175), 'share_abs_e_gt1': np.float64(0.7579), 'share_abs_e_gt1_broad': np.float64(0.7885), 'share_abs_e_gt1_big3': np.float64(0.7334), 'share_neg_mc_single_product': np.float64(0.2421), 'share_neg_mc_bertr
+total 70s
+                 spec  share_positive_loading  loading_p5  loading_median  loading_p95
+     A5b_fee_quintile                   0.146     -47.807          -7.710        5.451
+A5c_lag12_fee_tercile                   0.000     -18.084         -10.042       -1.873
+       A8_share_class                   0.000     -11.227          -9.233       -7.067
+ A8_share_class_broad                   0.000     -17.489         -11.182       -4.254
