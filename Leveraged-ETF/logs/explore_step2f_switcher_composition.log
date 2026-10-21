@@ -1,0 +1,47 @@
+funds with first-month fee exactly 0.20: 67 | funds with 12-month average exactly 0.20: 49 of 1302
+switchers: 36 | cheap under first month only: 18 | cheap under 12-month avg only: 18
+first month, rank 40%, all funds                           rest   -5.32 ( 3.32)  cheap  -37.47  F  22.9
+first month, rank 40%, without the 36 switchers            rest  -16.38 (10.92)  cheap  -69.33  F  10.2
+12-month avg, rank 40%, all funds                          rest  -13.86 ( 6.76)  cheap  -54.53  F  15.8
+12-month avg, rank 40%, without the 36 switchers           rest  -16.38 (10.92)  cheap  -69.33  F  10.2
+   (first month, value cutoff fee <= 0.20: 0.43 of funds cheap)
+first month, value cutoff fee <= 0.20                      rest   -2.91 ( 2.45)  cheap  -30.42  F  26.9
+   (12-month avg, value cutoff fee <= 0.20: 0.43 of funds cheap)
+12-month avg, value cutoff fee <= 0.20                     rest   -2.53 ( 2.37)  cheap  -29.66  F  27.4
+                                      name  first_month  avg12  fee_first  fee_avg12  fee_before  fee_after  dlog_share_12m  response_per_pp
+           Franklin LibertyQ US Equity ETF            0      1       0.25      0.186       0.250      0.180           0.182    -2.596000e+00
+iShares S&P 500 Index Fund; Institutional             0      1       0.23      0.155       0.230      0.140           0.008    -9.200000e-02
+Invesco BulletShares 2022 Corporate Bond E            0      1       0.22      0.130       0.220      0.100           0.255    -2.127000e+00
+         SPDR S&P 600 Small Cap Growth ETF            0      1       0.25      0.175       0.210      0.150           0.179    -2.991000e+00
+                  iShares Russell 2000 ETF            1      0       0.20      0.200       0.200      0.190          -0.002     2.130000e-01
+            iShares Core S&P Small-Cap ETF            1      0       0.20      0.200       0.200      0.167          -0.013     4.140000e-01
+                     iShares TIPS Bond ETF            1      0       0.20      0.200       0.200      0.190          -0.149     1.491800e+01
+iShares Core S&P Total US Stock Market ETF            1      0       0.20      0.200       0.200      0.125           0.084    -1.123000e+00
+               iShares Russell Mid-Cap ETF            1      0       0.20      0.200       0.200      0.190          -0.025     2.475000e+00
+              iShares Core S&P Mid-Cap ETF            1      0       0.20      0.200       0.200      0.167           0.022    -6.790000e-01
+            iShares Russell 1000 Value ETF            1      0       0.20      0.200       0.200      0.190          -0.128     1.284800e+01
+           iShares Russell 1000 Growth ETF            1      0       0.20      0.200       0.200      0.190          -0.011     1.089000e+00
+   iShares MSCI ACWI Low Carbon Target ETF            0      1       0.20      0.200       0.200      0.200          -0.010    -3.571928e+14
+Fidelity SAI International Value Index Fun            0      1       0.20      0.182       0.200      0.180           0.251    -1.253100e+01
+               Invesco QQQ Trust, Series 1            1      0       0.20      0.200       0.200      0.200           0.101     3.632365e+15
+Vanguard S&P Mid-Cap 400 Value Index Fund;            0      1       0.20      0.200       0.200      0.200           0.055              inf
+iShares Intermediate Government/Credit Bon            1      0       0.20      0.200       0.200      0.200          -0.003    -1.180286e+14
+JPMorgan Equity Index Fund; Class I Shares            1      0       0.20      0.200       0.200      0.200          -0.083    -3.004055e+15
+                  iShares Russell 3000 ETF            1      0       0.20      0.200       0.200      0.200          -0.101    -3.637105e+15
+                  iShares Dow Jones US ETF            1      0       0.20      0.200       0.200      0.200          -0.191    -6.874015e+15
+Vanguard Tax-Managed Capital Appreciation             0      1       0.20      0.187       0.200      0.120           1.171    -1.463400e+01
+Vanguard Tax-Managed Growth & Income Fund;            0      1       0.20      0.187       0.200      0.120           0.912    -1.140100e+01
+    Xtrackers Low Beta High Yield Bond ETF            0      1       0.20      0.200       0.200      0.200          -0.069             -inf
+Columbia Small Cap Index Fund; Institution            0      1       0.20      0.200       0.200      0.200           0.055              inf
+Vanguard Total World Stock Index Fund; Ins            0      1       0.20      0.170       0.200      0.163           0.238    -6.499000e+00
+Calvert US Large-Cap Core Responsible Inde            1      0       0.19      0.212       0.190      0.220           0.141     4.691000e+00
+Fidelity Emerging Markets Index Fund; Prem            0      1       0.20      0.190       0.190      0.140           0.160    -3.209000e+00
+      WisdomTree International Equity Fund            1      0       0.19      0.408       0.190      0.480          -0.166    -5.740000e-01
+        Technology Select Sector SPDR Fund            0      1       0.20      0.196       0.172      0.150           0.038    -1.738000e+00
+        Industrial Select Sector SPDR Fund            0      1       0.20      0.196       0.172      0.150           0.508    -2.346500e+01
+         Utilities Select Sector SPDR Fund            0      1       0.20      0.196       0.172      0.150          -0.240     1.105800e+01
+        iShares Core US Aggregate Bond ETF            1      0       0.20      0.200       0.160      0.078          -0.220     2.700000e+00
+SPDR Portfolio Intermediate Term Corporate            1      0       0.15      0.483       0.150      0.483           0.106     3.170000e-01
+iShares Broad USD Investment Grade Corpora            1      0       0.20      0.200       0.150      0.077           0.121    -1.656000e+00
+         SPDR Portfolio S&P 500 Growth ETF            0      1       0.20      0.185       0.150      0.057           0.531    -5.693000e+00
+Xtrackers USD High Yield Corporate Bond ET            0      1       0.20      0.178       0.150      0.067          -0.280     3.357000e+00
