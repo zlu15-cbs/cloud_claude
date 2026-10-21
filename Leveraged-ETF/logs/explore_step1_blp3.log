@@ -1,0 +1,33 @@
+Problem Results Summary:
+================================================================================================================
+GMM    Objective     Projected    Reduced Hessian  Reduced Hessian  Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm  Min Eigenvalue   Max Eigenvalue   Shares   Condition Number  Condition Number 
+----  -----------  -------------  ---------------  ---------------  -------  ----------------  -----------------
+ 2    +1.3062E+02   +1.2189E-01     +0.0000E+00      +2.9358E+02       0       +3.1477E+05        +1.3169E+09   
+================================================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 01:29:43       Yes          0             2           657         2304    
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===============================================================================
+       Sigma:            prices      log_product_fund_age  product_past_1yr_ret
+--------------------  -------------  --------------------  --------------------
+       prices          -8.0000E-03                                             
+                      (+5.9868E+01)                                            
+log_product_fund_age   +0.0000E+00       +1.0000E-03                           
+                                        (+4.1362E+01)                          
+product_past_1yr_ret   +0.0000E+00       +0.0000E+00           -9.0000E-03     
+                                                              (+2.6843E+02)    
+===============================================================================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===============================================================================
+   prices      product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------------  --------------------  --------------------
+ -8.3480E+00       -5.4423E-01           +3.8715E-01           +5.9412E-01     
+(+1.5909E+00)     (+1.5358E-01)         (+6.2358E-02)         (+2.6345E-02)    
+===============================================================================
+solve time 5385s

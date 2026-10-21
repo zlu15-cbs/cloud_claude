@@ -1,0 +1,17 @@
+N 15401 price: median 0.950 min 0.040 max 2.920
+=== Table 2 Panel B col 2 (linear)
+beta {'prices': np.float64(-3.7116), 'product_tracking_err': np.float64(-1.3755), 'product_past_1yr_ret': np.float64(0.2545), 'log_product_fund_age': np.float64(0.7064)}
+se   {'prices': np.float64(0.3284), 'product_tracking_err': np.float64(0.2473), 'product_past_1yr_ret': np.float64(0.0359), 'log_product_fund_age': np.float64(0.0404)}
+avg own elasticity (per-market mean): -4.8916   share |e|>1: 0.993   share e>0: 0.000
+=== B1 log(p + 0.01)
+beta {'log(prices + 0.01)': np.float64(-8.3662), 'product_tracking_err': np.float64(-1.7182), 'product_past_1yr_ret': np.float64(0.2666), 'log_product_fund_age': np.float64(0.5874)}
+se   {'log(prices + 0.01)': np.float64(0.8561), 'product_tracking_err': np.float64(0.3103), 'product_past_1yr_ret': np.float64(0.0395), 'log_product_fund_age': np.float64(0.0442)}
+avg own elasticity (per-market mean): -8.2006   share |e|>1: 1.000   share e>0: 0.000
+=== B1 log(p + 0.005)
+beta {'log(prices + 0.005)': np.float64(-8.4981), 'product_tracking_err': np.float64(-1.7322), 'product_past_1yr_ret': np.float64(0.267), 'log_product_fund_age': np.float64(0.5844)}
+se   {'log(prices + 0.005)': np.float64(0.9076), 'product_tracking_err': np.float64(0.3149), 'product_past_1yr_ret': np.float64(0.0397), 'log_product_fund_age': np.float64(0.0448)}
+avg own elasticity (per-market mean): -8.3674   share |e|>1: 1.000   share e>0: 0.000
+=== B1 log(p + 0.02)
+beta {'log(prices + 0.02)': np.float64(-8.1591), 'product_tracking_err': np.float64(-1.6951), 'product_past_1yr_ret': np.float64(0.266), 'log_product_fund_age': np.float64(0.5926)}
+se   {'log(prices + 0.02)': np.float64(0.7779), 'product_tracking_err': np.float64(0.303), 'product_past_1yr_ret': np.float64(0.0393), 'log_product_fund_age': np.float64(0.0433)}
+avg own elasticity (per-market mean): -7.9273   share |e|>1: 1.000   share e>0: 0.000

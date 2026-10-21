@@ -1,0 +1,46 @@
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +5.7559E-01   +6.2314E-04   +1.6944E+00     0       +5.1316E+04        +8.7132E+10   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:49:11       Yes          0             2           659         2309    
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +2.7000E-02 
+        (+2.2645E+03)
+=====================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===============================================================================
+   prices      product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------------  --------------------  --------------------
+ -6.7713E+00       -5.0529E-01           +4.1359E-01           +5.8024E-01     
+(+3.3211E+01)     (+1.3307E+00)         (+1.2202E+00)         (+1.7579E-01)    
+===============================================================================
+solve time 2953s
+                        firm  product_ids                                                                                          name      aum   month_t    p      s       e  loading  loading_for_e1  bt_markup_level  bt_lerner
+                   BlackRock        16416                                                       iShares Trust: iShares Core S&P 500 ETF 521628.9 2024.5833 0.03 0.0324 -0.1966  -6.7723        -34.4488           0.1786     3.9228
+                   BlackRock        56419                                                     iShares Trust: iShares Core MSCI EAFE ETF 124056.9 2024.5833 0.07 0.0077 -0.4704  -6.7723        -14.3966           0.1785     2.1341
+                   BlackRock        16417                                             iShares Trust: iShares Core US Aggregate Bond ETF 116890.2 2024.5833 0.03 0.0073 -0.2017  -6.7723        -33.5770           0.1786     3.6401
+                   BlackRock        16448                                                iShares Trust: iShares Russell 1000 Growth ETF  96427.6 2024.5833 0.18 0.0060 -1.2117  -6.7722         -5.5890           0.1786     0.9178
+                   BlackRock        16437                                                   iShares Trust: iShares Core S&P Mid-Cap ETF  89662.4 2024.5833 0.05 0.0056 -0.3367  -6.7723        -20.1119           0.1786     2.2211
+State Street Global Advisors        27635                                                                        SPDR S&P 500 ETF Trust 566342.0 2024.5833 0.09 0.0352 -0.5881  -6.7723        -11.5160           0.1604     1.9439
+State Street Global Advisors        29218                                                             SPDR Gold Trust: SPDR Gold Shares  69692.6 2024.5833 0.40 0.0043 -2.6971  -6.7721         -2.5109           0.1609     0.4024
+State Street Global Advisors        28279                                  Select Sector SPDR Trust: Technology Select Sector SPDR Fund  69366.0 2024.5833 0.08 0.0043 -0.5394  -6.7723        -12.5541           0.1609     1.2350
+State Street Global Advisors        28277                                   Select Sector SPDR Trust: Financial Select Sector SPDR Fund  45922.8 2024.5833 0.08 0.0029 -0.5402  -6.7723        -12.5357           0.1609     1.2350
+State Street Global Advisors        29250                                                 SPDR Series Trust: SPDR Portfolio S&P 500 ETF  44366.4 2024.5833 0.02 0.0028 -0.1351  -6.7723        -50.1381           0.1606     5.4992
+                    Vanguard        63885 Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares 700879.4 2024.5833 0.02 0.0435 -0.1296  -6.7723        -52.2742           0.2762    13.8115
+                    Vanguard        31461                                 Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares 542138.1 2024.5833 0.04 0.0337 -0.2618  -6.7723        -25.8706           0.2650     6.0677
+                    Vanguard        50485                                     Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares 508721.6 2024.5833 0.03 0.0316 -0.1968  -6.7723        -34.4203           0.2676     7.3466
+                    Vanguard        31466                Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares 430969.1 2024.5833 0.03 0.0268 -0.1977  -6.7723        -34.2496           0.2650     7.0909
+                    Vanguard        31462            Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares 395577.9 2024.5833 0.04 0.0246 -0.2642  -6.7723        -25.6293           0.2650     6.0677
+share of all fund-months with negative implied marginal cost (Bertrand): 0.4677

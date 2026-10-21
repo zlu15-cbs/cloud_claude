@@ -1,0 +1,71 @@
+data ready, N=108300, 17s
+=== A7_broad_fee  (168s)  formula: prices + I(prices*broad) + I(prices*fee_t1) + I(prices*fee_t2) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +1.3221E-22     0       +2.7043E+03        +2.5220E+05   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+============================================================================================================================
+   prices      broad*prices   fee_t1*prices  fee_t2*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  -------------  -------------  --------------------  --------------------  --------------------
+ -7.2135E-02    +5.4548E+00    -5.1086E+01    -1.4135E+01       -8.4009E-01           +4.8195E-01           +6.0933E-01     
+(+4.1981E+00)  (+1.3472E+00)  (+5.8031E+00)  (+5.4857E-01)     (+1.9901E-01)         (+4.5714E-02)         (+4.8441E-02)    
+============================================================================================================================
+{'spec': 'A7_broad_fee', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-2.1079), 'share_abs_e_gt1': np.float64(0.7686), 'share_abs_e_gt1_broad': np.float64(0.9276), 'share_abs_e_gt1_big3': np.float64(0.7833), 'share_neg_mc_single_product': np.floa
+=== A7_firms_fee  (187s)  formula: prices + I(prices*vanguard) + I(prices*blackrock) + I(prices*ssga) + I(prices*fee_t1) + I(prices*fee_t2) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_instruments0', 'demand_inst
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +4.8497E-25     0       +2.3941E+03        +7.6345E+04   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===============================================================================================================================================================
+   prices      prices*vanguard  blackrock*prices   prices*ssga   fee_t1*prices  fee_t2*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  ---------------  ----------------  -------------  -------------  -------------  --------------------  --------------------  --------------------
+ +1.7333E+01     +1.1151E+01      +7.5757E-01      +4.4826E+00    -4.0961E+01    -1.7329E+01       -9.3622E-03           +4.6884E-01           +5.1149E-01     
+(+1.8309E+00)   (+1.2253E+00)    (+5.6925E-01)    (+6.9753E-01)  (+1.8237E+00)  (+8.0300E-01)     (+7.7998E-02)         (+5.0657E-02)         (+1.4237E-02)    
+===============================================================================================================================================================
+{'spec': 'A7_firms_fee', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(2.6449), 'share_abs_e_gt1': np.float64(0.5792), 'share_abs_e_gt1_broad': np.float64(0.4834), 'share_abs_e_gt1_big3': np.float64(0.5493), 'share_neg_mc_single_product': np.float
+=== A7_broad_firms_fee  (168s)  formula: prices + I(prices*broad) + I(prices*vanguard) + I(prices*blackrock) + I(prices*ssga) + I(prices*fee_t1) + I(prices*fee_t2) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excluded IVs: ['demand_ins
+Problem Results Summary:
+===============================================================
+GMM    Objective   Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Shares   Condition Number  Condition Number 
+----  -----------  -------  ----------------  -----------------
+ 2    +5.0122E-25     0       +2.4762E+03        +9.7229E+04   
+===============================================================
+Cumulative Statistics:
+========================
+Computation   Objective 
+   Time      Evaluations
+-----------  -----------
+ 00:00:00         2     
+========================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+==============================================================================================================================================================================
+   prices      broad*prices   prices*vanguard  blackrock*prices   prices*ssga   fee_t1*prices  fee_t2*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  ---------------  ----------------  -------------  -------------  -------------  --------------------  --------------------  --------------------
+ +1.7242E+01    +4.6993E-01     +1.1161E+01      +9.3945E-01      +4.6482E+00    -4.1074E+01    -1.7485E+01       -1.7338E-02           +4.6915E-01           +5.1423E-01     
+(+1.9786E+00)  (+9.2937E-01)   (+1.2313E+00)    (+6.2079E-01)    (+9.0743E-01)  (+1.8924E+00)  (+6.5374E-01)     (+9.0061E-02)         (+5.0790E-02)         (+1.7321E-02)    
+==============================================================================================================================================================================
+{'spec': 'A7_broad_firms_fee', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(2.6793), 'share_abs_e_gt1': np.float64(0.5813), 'share_abs_e_gt1_broad': np.float64(0.4836), 'share_abs_e_gt1_big3': np.float64(0.5532), 'share_neg_mc_single_product': np
+total 541s

@@ -1,0 +1,17 @@
+                        firm                                          name      aum   month_t    p      s  paper  formula_3rc    diff
+                   BlackRock                      iShares Core S&P 500 ETF 521628.9 2024.5833 0.03 0.0324 -0.242      -0.2423 -0.0003
+                   BlackRock                    iShares Core MSCI EAFE ETF 124056.9 2024.5833 0.07 0.0077 -0.580      -0.5799  0.0001
+                   BlackRock            iShares Core US Aggregate Bond ETF 116890.2 2024.5833 0.03 0.0073 -0.249      -0.2486  0.0004
+                   BlackRock               iShares Russell 1000 Growth ETF  96427.6 2024.5833 0.18 0.0060 -1.494      -1.4936  0.0004
+                   BlackRock                  iShares Core S&P Mid-Cap ETF  89662.4 2024.5833 0.05 0.0056 -0.415      -0.4151 -0.0001
+State Street Global Advisors                        SPDR S&P 500 ETF Trust 566342.0 2024.5833 0.09 0.0352 -0.725      -0.7249  0.0001
+State Street Global Advisors                              SPDR Gold Shares  69692.6 2024.5833 0.40 0.0043 -3.325      -3.3248  0.0002
+State Street Global Advisors            Technology Select Sector SPDR Fund  69366.0 2024.5833 0.08 0.0043 -0.665      -0.6650  0.0000
+State Street Global Advisors             Financial Select Sector SPDR Fund  45922.8 2024.5833 0.08 0.0029 -0.666      -0.6659  0.0001
+State Street Global Advisors                    SPDR Portfolio S&P 500 ETF  44366.4 2024.5833 0.02 0.0028 -0.167      -0.1665  0.0005
+                    Vanguard Vanguard Total Stock Market Index Fund; Insti 700879.4 2024.5833 0.02 0.0435 -0.160      -0.1597  0.0003
+                    Vanguard       Vanguard 500 Index Fund; Admiral Shares 542138.1 2024.5833 0.04 0.0337 -0.323      -0.3227  0.0003
+                    Vanguard           Vanguard 500 Index Fund; ETF Shares 508721.6 2024.5833 0.03 0.0316 -0.243      -0.2425  0.0005
+                    Vanguard Vanguard Total Stock Market Index Fund; ETF C 430969.1 2024.5833 0.03 0.0268 -0.244      -0.2437  0.0003
+                    Vanguard Vanguard Total Stock Market Index Fund; Admir 395577.9 2024.5833 0.04 0.0246 -0.326      -0.3257  0.0003
+max |diff|: 0.0005
