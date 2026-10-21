@@ -1,0 +1,99 @@
+c
+
+# Logit version
+elasticity_dir="./python/elasticity_outputs/logit version"
+
+elasticity_files=list.files(elasticity_dir)
+i=1
+elasticity_logit=list()
+for ( i in 1:length(elasticity_files) ) {
+  temp=as.matrix(fread(paste0(elasticity_dir,"/",elasticity_files[i]),header=TRUE))
+  
+  temp_market_id=as.numeric(str_extract(elasticity_files[i], "(\\d+)"))
+  
+  temp_product_id=bull_w_costs[market_ids==temp_market_id]$product_j
+  
+  colnames(temp)=as.character(temp_product_id)
+  rownames(temp)=as.character(temp_product_id)
+  
+  temp = data.table(reshape2::melt(temp, varnames = c("product_ids_row", "product_ids_col"), value.name = "logit_elasticities"))
+  temp[,market_ids:=unique(bull_w_costs[market_ids==temp_market_id]$market_ids)]
+  temp[,month_t:=unique(bull_w_costs[market_ids==temp_market_id]$month_t)]
+  
+  elasticity_logit[[i]]=temp
+}
+elasticity_logit=rbindlist(elasticity_logit)
+
+setkey(elasticity_logit,month_t,product_ids_row,product_ids_col)
+
+# BLP version
+elasticity_dir="./python/elasticity_outputs/BLP version"
+
+elasticity_files=list.files(elasticity_dir)
+i=1
+elasticity_BLP=list()
+for ( i in 1:length(elasticity_files) ) {
+  temp=as.matrix(fread(paste0(elasticity_dir,"/",elasticity_files[i]),header=TRUE))
+  
+  temp_market_id=as.numeric(str_extract(elasticity_files[i], "(\\d+)"))
+  
+  temp_product_id=bull_w_costs[market_ids==temp_market_id]$product_j
+  
+  colnames(temp)=as.character(temp_product_id)
+  rownames(temp)=as.character(temp_product_id)
+  
+  temp = data.table(reshape2::melt(temp, varnames = c("product_ids_row", "product_ids_col"), value.name = "BLP_elasticities"))
+  temp[,market_ids:=unique(bull_w_costs[market_ids==temp_market_id]$market_ids)]
+  temp[,month_t:=unique(bull_w_costs[market_ids==temp_market_id]$month_t)]
+  
+  elasticity_BLP[[i]]=temp
+}
+elasticity_BLP=rbindlist(elasticity_BLP)
+
+setkey(elasticity_BLP,month_t,product_ids_row,product_ids_col)
+
+##### Measures change in column k affect the market share in row j
+elasticity_all=unique(merge(elasticity_BLP,elasticity_logit,by=c('month_t','product_ids_row','product_ids_col','market_ids')))
+elasticity_all[,product_ids_col:=as.character(product_ids_col)]
+elasticity_all[,product_ids_row:=as.character(product_ids_row)]
+
+bull_w_costs[,product_ids_col:=as.character(product_j)]
+bull_w_costs[,product_ids_row:=as.character(product_j)]
+
+elasticity_all=merge(elasticity_all,
+                     bull_w_costs[,.SD,.SDcols=c('market_ids','product_ids_row','firm_ids','product_leverage','market_m_index','market_m_cluster')],
+                     by=c('product_ids_row','market_ids'),all.x=TRUE)
+setnames(elasticity_all,old=c('firm_ids','product_leverage','market_m_index','market_m_cluster'),new=c('firm_ids_row','product_leverage_row','market_m_index_row','market_m_cluster_row'))
+
+elasticity_all=merge(elasticity_all,
+                     bull_w_costs[,.SD,.SDcols=c('market_ids','product_ids_col','firm_ids','product_leverage','market_m_index','market_m_cluster')],
+                     by=c('product_ids_col','market_ids'),all.x=TRUE)
+setnames(elasticity_all,old=c('firm_ids','product_leverage','market_m_index','market_m_cluster'),new=c('firm_ids_col','product_leverage_col','market_m_index_col','market_m_cluster_col'))
+
+setkey(elasticity_all,month_t,product_ids_row,product_ids_col)
+
+##### Elasticity for top 5 funds
+get_elas_top5=elasticity_all[as.numeric(product_ids_col) %in% bull_w_costs[month_t==max(month_t)][
+  order(firm_ids,-product_mtna),head(.SD,5),by=firm_ids][
+    firm_ids %in% c('Direxion','ProShares')]$product_j][product_ids_col==product_ids_row,tail(.SD,1),by=.(product_ids_col)][,.SD,.SDcols=c('product_ids_col','BLP_elasticities')]
+colnames(get_elas_top5)[1]='product_j'
+get_elas_top5[,product_j:=as.numeric(product_j)]
+
+##### Top 5 LETF products by AUM (at end of the sample) and their lerner index
+top_lerner=bull_w_costs[product_j %in% bull_w_costs[month_t==max(month_t)][
+  order(firm_ids,-product_mtna),head(.SD,5),by=firm_ids][
+    firm_ids %in% c('Direxion','ProShares')]$product_j]
+
+top_lerner=top_lerner[,.(
+  fund_name=tail(product_fund_name,1),
+  Lev=tail(product_leverage,1),
+  AUM=tail(product_mtna,1),
+  BLP_mc_bt=mean(BLP_mu_bt,na.rm=TRUE),
+  BLP_mc_bt_prosh_direx_075=mean(BLP_mu_bt_prosh_direx_065,na.rm=TRUE),
+  BLP_mc_cournot=mean(BLP_mu_cournot,na.rm=TRUE),
+  BLP_mc_monopoly=mean(BLP_mu_monopoly,na.rm=TRUE)
+),by=.(firm_ids,product_j)][order(-firm_ids,-AUM)]
+
+top_lerner=merge(top_lerner,get_elas_top5,by='product_j',all.x=TRUE)[order(-firm_ids,-AUM)]
+
+fwrite(top_lerner,file="top5_markup.csv")

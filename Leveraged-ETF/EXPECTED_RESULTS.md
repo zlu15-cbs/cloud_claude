@@ -93,7 +93,14 @@ Panel A (index funds): **all but one have |elasticity| < 1.**
 
 Panel B (leveraged): already |elasticity| between 3.8 and 5.4 (ProShares UltraPro QQQ -3.839, Direxion Semiconductor Bull 3X -4.035, others -4.9 to -5.4). Nothing to fix; use as a reference for what the BLP gives when prices are high.
 
-An elasticity below 1 in absolute value is inconsistent with a Bertrand margin below 1 for a single-product firm, since margin = 1/|e|. Panel A's margins (0.13 to 0.22) imply |e| around 4.5 to 7.7. The two columns of the same table cannot both be right as stated. **Check first** how the table is built: whether "Elasticity" is the mean of the diagonal over the sample (as in Table 2) and "Bertrand" is the mean of the fund-month margins (the mean of 1/|e| differs a lot from 1/mean|e| if some months have tiny |e|), and whether multi-product firms are the reason (the margin then comes from the full ownership matrix, not 1/|e|). The table-building code is not in this folder (see "Not available" below; A7 is in the broadspecial notebooks).
+How the table is built **[source: coauthor's R, `code/R_table5/Get_passive_index_elasticities.txt` and `Get_passive_lev_elasticities.txt`]**:
+- Funds: the top 5 by `product_mtna` in the last month, per firm.
+- "Elasticity": the BLP own elasticity in the **last market only** (`tail(.SD,1)`).
+- Bertrand / Bertrand_PW / Cournot / Monopoly: **sample means** of the fund-month margins.
+
+The elasticity and the margins therefore come from different periods. That explains why a −0.16 elasticity sits next to a 0.22 margin. The table note's "averaged over the entire sample period" is accurate for the margins only.
+
+In this sample 1 − s ≥ 0.95 (max share 5.0 percent), so a fund's own elasticity is about α·p.
 
 ## Hypotheses to test for why large funds have |e| < 1 **[inference — verify by running]**
 
@@ -137,7 +144,7 @@ Panel A IV: the broad-based interaction is large and negative (the sum of the tw
 
 ## Not available in this folder
 
-- The code that turns the pyblp results into Table 5 and A3 (Lerner / Bertrand / Cournot columns): in the notebooks the later cells (conduct section, pyRVtest) write `lev_product_data_w_costs_*.csv` and `nonlev_product_data_w_costs_*.csv`; Table 5 is presumably built from those. Whether the table-building step lives in R (`P16_LeverageMKT\Code\*.R`) or in these notebooks is not established.
+- Table 5 and A3 are built in R from the per-market elasticity CSVs (`code/R_table5/`). Those CSVs and the R scripts that build the panel are not here.
 - Table 2 col (1) Logit OLS code.
 - The coauthor's reported per-market elasticity CSVs (`elasticity_outputs`, 6.0 GB; `elasticity_outputs_broad`, 3.0 GB) stay in Dropbox `P16_LeverageMKT\Code\python\`.
 - The LaTeX sources are at `C:\Users\zlu15\Dropbox\Apps\Overleaf\Leveraged ETF\` (not copied).
