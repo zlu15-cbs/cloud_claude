@@ -1,0 +1,31 @@
+B1_logp_c0.01 on lev: N=15401  X1: log(prices + 0.01) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  X2: 0 + log(prices + 0.01)  IVs: ['demand_instruments0', 'demand_instruments1']  start sigma 1.0000 (0 checkpointed evaluations)
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +5.7008E-01   +0.0000E+00   +0.0000E+00     0       +2.6783E+04        +4.2705E+18   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:02:54       Yes          3             7          4355         14339   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+======================================
+      Sigma:        log(prices + 0.01)
+------------------  ------------------
+log(prices + 0.01)     -1.1442E-02    
+                      (+1.0307E-03)   
+======================================
+Beta Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+====================================================================================
+log(prices + 0.01)  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+------------------  --------------------  --------------------  --------------------
+   -7.7263E+00          -1.6703E+00           +2.6531E-01           +5.8941E-01     
+  (+5.8664E-01)        (+2.9352E-01)         (+3.8838E-02)         (+4.2611E-02)    
+====================================================================================
+solve time 174s
+mean own-price elasticity (per-market mean): -7.573326317394025
