@@ -1,0 +1,63 @@
+lev: N=15401, excluded instruments: 2 + 6 differentiation
+=== Stage 1: B1 instruments + differentiation instruments
+Problem Results Summary:
+=========================================================================================
+GMM    Objective    Gradient                 Clipped  Weighting Matrix  Covariance Matrix
+Step     Value        Norm        Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -----------  -----------  -------  ----------------  -----------------
+ 2    +2.1918E+02  +1.5201E-12  +2.5009E+01     0       +5.4498E+05        +1.4945E+05   
+=========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:30:11       Yes          8            80          57674       187408   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+======================================
+      Sigma:        log(prices + 0.01)
+------------------  ------------------
+log(prices + 0.01)     -2.2822E-02    
+                      (+1.3897E+01)   
+======================================
+Beta Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+====================================================================================
+log(prices + 0.01)  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+------------------  --------------------  --------------------  --------------------
+   -4.8620E+00          -1.1446E+00           +3.0953E-01           +5.7140E-01     
+  (+3.6321E-01)        (+2.4119E-01)         (+4.6589E-02)         (+3.9168E-02)    
+====================================================================================
+stage 1 time 1812s
+stage1_diffIV mean own-price elasticity (per-market mean): -4.765639874246404
+=== Stage 2: approximate optimal instruments
+Problem Results Summary:
+=========================================================================================
+GMM    Objective    Gradient                 Clipped  Weighting Matrix  Covariance Matrix
+Step     Value        Norm        Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -----------  -----------  -------  ----------------  -----------------
+ 2    +1.5332E-03  +7.8875E-13  +3.0331E-03     0       +2.1674E+02        +8.5538E+17   
+=========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:03:30       Yes          3             8          5385         17626   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+======================================
+      Sigma:        log(prices + 0.01)
+------------------  ------------------
+log(prices + 0.01)     +8.1930E-02    
+                      (+1.4567E+02)   
+======================================
+Beta Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+====================================================================================
+log(prices + 0.01)  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+------------------  --------------------  --------------------  --------------------
+   +4.6968E+02          +4.2028E+01           +1.1514E-01           +1.3171E+00     
+  (+2.2049E+00)        (+1.5144E+01)         (+4.7599E-01)         (+1.7423E+00)    
+====================================================================================
+stage 2 time 242s
+stage2_optIV mean own-price elasticity (per-market mean): 460.38772993278724
