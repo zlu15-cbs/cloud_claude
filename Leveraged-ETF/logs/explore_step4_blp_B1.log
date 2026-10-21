@@ -1,0 +1,47 @@
+B1_logp_c0.01 on index: N=108300  X1: log(prices + 0.01) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  X2: 0 + log(prices + 0.01)  IVs: ['demand_instruments0', 'demand_instruments1']  start sigma 1.0000 (0 checkpointed evaluations)
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +5.8400E-20   +7.6403E-11   +5.3392E-02     0       +7.4275E+03        +3.8776E+05   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:36:30       Yes          4            13          69789       212154   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+======================================
+      Sigma:        log(prices + 0.01)
+------------------  ------------------
+log(prices + 0.01)     +5.8882E+00    
+                      (+1.8492E+01)   
+======================================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+====================================================================================
+log(prices + 0.01)  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+------------------  --------------------  --------------------  --------------------
+   -8.9026E+00          -3.0895E+00           +4.9973E-01           +5.2666E-01     
+  (+2.1439E+01)        (+7.0709E+00)         (+1.8368E-01)         (+1.6278E-01)    
+====================================================================================
+solve time 2192s
+{'spec': 'B1_logp_c0.01_BLP1RC', 'tier': 'B', 'N': 108300, 'avg_own_elasticity': np.float64(-6.2612), 'share_abs_e_gt1': np.float64(0.9817), 'share_abs_e_gt1_broad': np.float64(0.9841), 'share_abs_e_gt1_big3': np.float64(0.9958), 'share_neg_mc_single_product': np.float64(0.0183), 'share_neg_mc_bertr
+ product_ids                                                                                          name                         firm  p_last   e_last   e_mean  lerner_single_last  mu_bertrand_firm_mean  mc_bertrand_firm_mean
+       16416                                                       iShares Trust: iShares Core S&P 500 ETF                    BlackRock    0.03  -9.5930 -10.3977              0.1042                 0.0067                 0.0476
+       56419                                                     iShares Trust: iShares Core MSCI EAFE ETF                    BlackRock    0.07  -7.8249  -8.1645              0.1278                 0.0166                 0.0722
+       16417                                             iShares Trust: iShares Core US Aggregate Bond ETF                    BlackRock    0.03 -10.1558  -9.9931              0.0985                 0.0114                 0.0642
+       16448                                                iShares Trust: iShares Russell 1000 Growth ETF                    BlackRock    0.18  -5.3636  -6.2341              0.1864                 0.0513                 0.1435
+       16437                                                   iShares Trust: iShares Core S&P Mid-Cap ETF                    BlackRock    0.05  -8.8276  -8.6184              0.1133                 0.0183                 0.0861
+       27635                                                                        SPDR S&P 500 ETF Trust State Street Global Advisors    0.09  -6.7115  -8.4372              0.1490                 0.0118                 0.0745
+       29218                                                             SPDR Gold Trust: SPDR Gold Shares State Street Global Advisors    0.40  -3.6164  -3.9512              0.2765                 0.1148                 0.2852
+       28279                                  Select Sector SPDR Trust: Technology Select Sector SPDR Fund State Street Global Advisors    0.08  -7.4984  -7.4129              0.1334                 0.0220                 0.1166
+       28277                                   Select Sector SPDR Trust: Financial Select Sector SPDR Fund State Street Global Advisors    0.08  -7.5200  -7.4104              0.1330                 0.0220                 0.1166
+       29250                                                 SPDR Series Trust: SPDR Portfolio S&P 500 ETF State Street Global Advisors    0.02 -10.9005 -10.3479              0.0917                 0.0034                 0.0272
+       63885 Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares                     Vanguard    0.02  -9.1551 -10.0577              0.1092                 0.0105                 0.0095
+       31461                                 Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares                     Vanguard    0.04  -8.9723 -10.4437              0.1115                 0.0164                 0.0283
+       50485                                     Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares                     Vanguard    0.03  -9.6110 -11.1108              0.1040                 0.0151                 0.0237
+       31466                Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares                     Vanguard    0.03  -9.7191 -11.2039              0.1029                 0.0155                 0.0247
+       31462            Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares                     Vanguard    0.04  -9.1304 -10.5530              0.1095                 0.0164                 0.0283

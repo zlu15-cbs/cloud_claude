@@ -1,0 +1,47 @@
+A5_fee_tercile on index: N=108300  X1: prices + I(prices*fee_t1) + I(prices*fee_t2) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  X2: 0 + prices  IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3', 'demand_instruments4', 'demand_i
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +6.7936E+01   +1.4836E-09   +2.5537E-01     0       +7.4416E+06        +5.7663E+05   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:25:20       Yes          11           18          39975       122842   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +2.8531E+00 
+        (+1.6503E+00)
+=====================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+=============================================================================================================
+   prices      fee_t1*prices  fee_t2*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  -------------  --------------------  --------------------  --------------------
+ +9.5176E+00    -5.0832E+01    -1.7341E+01       -5.1459E-01           +4.8188E-01           +5.2657E-01     
+(+2.0129E+00)  (+9.7392E+00)  (+3.5847E+00)     (+1.3519E-01)         (+4.6320E-02)         (+3.7827E-02)    
+=============================================================================================================
+solve time 1522s
+{'spec': 'A5_fee_tercile_BLP1RC', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(0.3475), 'share_abs_e_gt1': np.float64(0.9204), 'share_abs_e_gt1_broad': np.float64(0.9223), 'share_abs_e_gt1_big3': np.float64(0.8852), 'share_neg_mc_single_product': np.float64(0.0796), 'share_neg_mc_bertr
+ product_ids                                                                                          name                         firm  p_last  e_last  e_mean  lerner_single_last  mu_bertrand_firm_mean  mc_bertrand_firm_mean
+       16416                                                       iShares Trust: iShares Core S&P 500 ETF                    BlackRock    0.03 -1.2120 -2.2344              0.8251                 0.0359                 0.0184
+       56419                                                     iShares Trust: iShares Core MSCI EAFE ETF                    BlackRock    0.07 -2.8828 -3.6677              0.3469                 0.0369                 0.0518
+       16417                                             iShares Trust: iShares Core US Aggregate Bond ETF                    BlackRock    0.03 -0.2471 -0.6078              4.0476                 0.1335                -0.0578
+       16448                                                iShares Trust: iShares Russell 1000 Growth ETF                    BlackRock    0.18 -1.2950 -1.4303              0.7722                 0.1479                 0.0469
+       16437                                                   iShares Trust: iShares Core S&P Mid-Cap ETF                    BlackRock    0.05 -0.4055 -0.8261              2.4663                 0.1366                -0.0322
+       27635                                                                        SPDR S&P 500 ETF Trust State Street Global Advisors    0.09 -3.5914 -3.4576              0.2784                 0.0304                 0.0560
+       29218                                                             SPDR Gold Trust: SPDR Gold Shares State Street Global Advisors    0.40 -2.2898 -2.3737              0.4367                 0.1753                 0.2247
+       28279                                  Select Sector SPDR Trust: Technology Select Sector SPDR Fund State Street Global Advisors    0.08 -0.6326 -1.0758              1.5807                 0.1358                 0.0028
+       28277                                   Select Sector SPDR Trust: Financial Select Sector SPDR Fund State Street Global Advisors    0.08 -0.6336 -1.0755              1.5784                 0.1358                 0.0028
+       29250                                                 SPDR Series Trust: SPDR Portfolio S&P 500 ETF State Street Global Advisors    0.02 -0.8348 -1.2750              1.1978                 0.0304                 0.0002
+       63885 Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares                     Vanguard    0.02 -0.7995 -0.8150              1.2508                 0.0642                -0.0442
+       31461                                 Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares                     Vanguard    0.04 -1.6115 -1.8171              0.6205                 0.0638                -0.0191
+       50485                                     Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares                     Vanguard    0.03 -1.2130 -1.6079              0.8244                 0.0638                -0.0250
+       31466                Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares                     Vanguard    0.03 -1.2193 -1.6660              0.8202                 0.0638                -0.0235
+       31462            Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares                     Vanguard    0.04 -1.6270 -1.8260              0.6146                 0.0638                -0.0191
