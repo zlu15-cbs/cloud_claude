@@ -61,6 +61,7 @@ def add_variables(d):
     q = pd.qcut(first['prices'].rank(method='first'), 5, labels=False)
     for k in range(4):
         d[f'fee_q{k + 1}'] = d.product_ids.map(q == k).astype(float)
+    d['fee_b40'] = d.fee_q1 + d.fee_q2  # A9: cheapest 40% of funds at their first month
     # A5c: fee tercile 12 months earlier (within that month's cross-section), time-varying; base = highest
     lf = d[['product_ids', 'month_key', 'prices']].copy()
     lf['lagfee_t'] = lf.groupby('month_key').prices.transform(lambda x: pd.qcut(x.rank(method='first'), 3, labels=False))
@@ -94,6 +95,9 @@ def spec_list():
     s['A7_broad_firms_fee'] = dict(tier='A', z=['broad', 'vanguard', 'blackrock', 'ssga', 'fee_t1', 'fee_t2'])
     s['A5b_fee_quintile'] = dict(tier='A', z=['fee_q1', 'fee_q2', 'fee_q3', 'fee_q4'])
     s['A5c_lag12_fee_tercile'] = dict(tier='C', z=['lfee_t1', 'lfee_t2'], controls=['lfee_t1', 'lfee_t2'], sample='lag12')
+    s['A9_low_fee_tercile'] = dict(tier='A', z=['fee_t1'])  # two groups: cheapest third vs the rest
+    s['A9_low_fee_quintile'] = dict(tier='A', z=['fee_q1'])
+    s['A9_low_fee_40pct'] = dict(tier='A', z=['fee_b40'])
     s['A8_share_class'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other'])
     s['A8_share_class_broad'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other', 'broad'])
     for c in (0.01, 0.005, 0.02):
