@@ -41,9 +41,16 @@ def main(procs, panel, tier):
         funds = None
         d[tier] = d.product_ids.map(raw_entry_tiers((q,), path=LETF, id_col='product_ticker')[tier]).astype(float)
     d['cheap'] = d[tier]
+    if os.environ.get('EXTRA_IV_NAME'):
+        extra = os.environ['EXTRA_IV_NAME']
+        tier = tier + '_' + extra.replace('BLP_IV_', '')
     h, x = d['demand_instruments0'].copy(), d[extra]
     d['demand_instruments0'], d['demand_instruments1'] = h, h * d.cheap
-    d['demand_instruments2'], d['demand_instruments3'] = x, x * d.cheap
+    d['demand_instruments2'] = x
+    if os.environ.get('EXTRA_NOINTERACT') == '1':
+        tier = tier + '_noint'
+    else:
+        d['demand_instruments3'] = x * d.cheap
     X1 = pyblp.Formulation('0 + I(prices*cheap) + product_tracking_err + product_past_1yr_ret + log_product_fund_age',
                            absorb='C(product_ids) + C(market_ids)')
     X2 = pyblp.Formulation('0 + I(-prices)')
