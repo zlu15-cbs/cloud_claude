@@ -31,6 +31,9 @@ pyblp.options.verbose = False
 def main(procs, group='fee_t1', fixrest=''):
     d = add_variables(common.load('index'))
     funds = top15(d)
+    if group not in d:  # raw-entry tiers, e.g. 'raw20' (see tiers.py)
+        from tiers import raw_entry_tiers
+        d[group] = d.product_ids.map(raw_entry_tiers((int(group[3:]) / 100,))[group]).astype(float)
     g = d[group]
     d['cheap'] = g
     d['rest'] = 1 - g  # X2 terms are written in prices so pyblp can differentiate them
@@ -52,7 +55,8 @@ def main(procs, group='fee_t1', fixrest=''):
         sigma0, pi0 = np.diag(sig), np.array(best[k:]).reshape(2, 1)
     else:  # start from the logit IV loadings of the chosen grouping
         sigma0 = np.diag([0.0 if fixrest else 0.5, 0.5])
-        pi0 = np.array([[np.log(11.1)], [np.log(56.4)]]) if group == 'fee_t1' else np.array([[np.log(13.8)], [np.log(54.1)]])
+        start = {'fee_t1': (11.1, 56.4), 'raw20': (8.1, 40.8), 'raw10': (6.2, 68.6)}.get(group, (13.8, 54.1))  # logit IV
+        pi0 = np.log(np.array(start)).reshape(2, 1)
     print(f'N={len(d)}; start sigma {np.diag(sigma0)}, pi {pi0.flatten()} ({len(history)} checkpointed evaluations)',
           flush=True)
 

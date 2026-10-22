@@ -1,0 +1,44 @@
+product_ids,name,firm,start,months,fee_before,fee_during,aum_bn
+6563,iShares MSCI EAFE International Index Fund; I,BlackRock,2016.58333333333,5,0.09,0.11,0.5136000000000001
+6565,BlackRock S&P 500 Index Fund; Institutional S,BlackRock,2011.0,12,0.33,0.3,1.0539
+9091,SPDR Dow Jones Industrial Average ETF Trust,State Street Global Advisors,2016.75,12,0.17,0.15,11.6751
+9361,BNY Mellon Institutional S&P 500 Stock Index ,BNY Mellon Investment Management,2018.75,12,0.2,0.5,2.5473000000000003
+11977,Fidelity Multi-Asset Index Fund,Fidelity Investments,2022.0,12,0.08,0.1,8.524299999999998
+16387,iShares MSCI Canada ETF,BlackRock,2017.5,12,0.49,0.47,3.1913
+16388,iShares MSCI Eurozone ETF,BlackRock,2017.5,12,0.49,0.47,13.641
+16393,iShares MSCI Taiwan ETF,BlackRock,2015.5,12,0.62,0.64,3.7773000000000003
+16397,iShares MSCI South Korea ETF,BlackRock,2010.5,12,0.61,0.59,3.3427
+16397,iShares MSCI South Korea ETF,BlackRock,2015.5,12,0.62,0.64,3.6957
+16398,iShares MSCI South Africa ETF,BlackRock,2010.5,12,0.61,0.59,0.5204
+16399,iShares MSCI Germany ETF,BlackRock,2010.5,12,0.53,0.51,1.4889000000000001
+16399,iShares MSCI Germany ETF,BlackRock,2011.5,12,0.51,0.53,3.615
+16399,iShares MSCI Germany ETF,BlackRock,2017.5,12,0.49,0.47,5.1127
+16401,iShares MSCI Mexico ETF,BlackRock,2017.5,12,0.49,0.47,1.3872
+16403,iShares MSCI Japan ETF,BlackRock,2017.5,12,0.49,0.47,16.579
+16418,iShares MSCI Emerging Markets ETF,BlackRock,2015.5,12,0.69,0.72,24.6178
+16514,iShares S&P GSCI Commodity-Indexed Trust,BlackRock,2011.0,12,0.75,0.8,1.8444
+17490,JPMorgan 100% US Treasury Securities Money Ma,JPMorgan Asset Management,2012.0,12,0.06,0.1,7.8037
+27635,SPDR S&P 500 ETF Trust,State Street Global Advisors,2022.75,12,0.09,0.04,367.3538
+28106,Schwab Fundamental U.S. Small Company Index F,Charles Schwab Investment Management,2011.75,12,0.35,0.32,0.5629
+28109,Schwab Fundamental U.S. Large Company Index F,Charles Schwab Investment Management,2011.75,12,0.35,0.32,1.4897
+29235,SPDR S&P Oil & Gas Equipment & Services ETF,State Street Global Advisors,2010.5,12,0.35,0.37,0.2732
+29239,SPDR S&P Homebuilders ETF,State Street Global Advisors,2010.5,12,0.35,0.37,0.6904
+29240,SPDR S&P Biotech ETF,State Street Global Advisors,2010.5,12,0.35,0.37,0.4604
+29970,Social Choice Equity Fund; Retail Class Share,Nuveen,2014.75,12,0.46,0.44,0.9177000000000001
+29971,Nuveen Equity Index Fund; Class A Shares,Nuveen,2021.75,12,0.32,0.28,1.4932999999999998
+30715,Victory Nasdaq-100 Index Fund; Fund Shares Cl,Victory Capital Management,2021.0,12,0.44,0.42,3.5374
+32500,WisdomTree International SmallCap Dividend Fu,WisdomTree,2011.25,12,0.58,0.38,0.499
+36373,SPDR Bloomberg Barclays International Treasur,State Street Global Advisors,2010.5,12,0.5,0.52,1.096
+36481,iShares MSCI Chile Capped ETF,BlackRock,2010.5,12,0.61,0.59,0.5454
+37043,iShares MSCI Turkey ETF,BlackRock,2010.5,12,0.61,0.59,0.5091
+37046,iShares MSCI ACWI ex US ETF,BlackRock,2022.5,12,0.32,0.34,4.1261
+43588,First Trust Consumer Discretionary AlphaDEX F,First Trust,2015.5,12,0.63,0.61,2.5597
+43715,SPDR Portfolio Intermediate Term Corporate Bo,State Street Global Advisors,2012.5,12,0.15,0.55,0.2926
+48409,SPDR Portfolio Short Term Corporate Bond ETF,State Street Global Advisors,2011.5,12,0.13,0.23,0.3449
+48719,International Equity Index Fund; Institutiona,Principal,2015.5,12,0.32,0.34,0.7707999999999999
+51797,iShares MSCI China ETF,BlackRock,2015.5,12,0.62,0.64,2.0435
+53442,Vanguard Long-Term Bond Index Fund; Instituti,Vanguard,2017.0,12,0.04,0.4,2.7802
+54509,iShares MSCI India ETF,BlackRock,2015.5,12,0.68,0.71,3.9031
+54509,iShares MSCI India ETF,BlackRock,2021.5,12,0.65,0.68,5.89
+61337,iShares Core MSCI Europe ETF,BlackRock,2022.5,12,0.09,0.11,3.9267
+86110,Fidelity SAI Long-Term Treasury Bond Index Fu,Fidelity Investments,2020.0,12,0.03,0.05,0.9322999999999999

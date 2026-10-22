@@ -1,0 +1,42 @@
+SPY rows corrected: 12 fees there: [np.float64(0.04)]
+                                                       test      N  share_funds_cheap  b_rest  se_rest  b_interaction  se_interaction  b_cheap_total  min_F  n15  n15_gt1  avg_own_e  share_gt1  share_pos_e  share_neg_mc  b[broad*prices]  se[broad*prices]
+                      1. raw-entry 10th pct (all raw funds) 108300              0.204  -6.183    5.239        -62.443          22.487        -68.626 11.248   15       10     -3.179      0.764        0.000         0.306              NaN               NaN
+                      1. raw-entry 15th pct (all raw funds) 108300              0.306 -16.046    8.151        -45.018          10.795        -61.064 10.860   15       14     -6.272      0.972        0.000         0.048              NaN               NaN
+                      1. raw-entry 20th pct (all raw funds) 108300              0.385  -8.132    4.315        -32.641           4.204        -40.772 18.310   15       11     -3.931      0.929        0.000         0.131              NaN               NaN
+                      1. raw-entry 25th pct (all raw funds) 108300              0.446  -6.485    3.431        -23.600           1.257        -30.085 34.917   15        9     -3.271      0.921        0.000         0.139              NaN               NaN
+                      1. raw-entry 30th pct (all raw funds) 108300              0.504  -3.426    2.564        -18.844           0.549        -22.270 39.639   15        7     -2.294      0.861        0.000         0.242              NaN               NaN
+      2. raw-entry 20th pct, cutoffs from sample funds only 108300              0.252 -37.370   29.773       -104.475          59.378       -141.845  4.510   15       14    -13.672      0.999        0.000         0.006              NaN               NaN
+                    3. raw-entry 20th pct, without Vanguard  81603              0.296   6.199    1.154        -28.596           1.542        -22.397 73.126   10        5      0.952      0.879        0.667         0.054              NaN               NaN
+                   3. raw-entry 20th pct, without BlackRock  86035              0.386 -12.852    9.139        -56.938          19.787        -69.790 12.035   10       10     -6.255      0.986        0.000         0.032              NaN               NaN
+3. raw-entry 20th pct, without State Street Global Advisors  99636              0.391  -6.292    4.160        -34.795           4.661        -41.087 17.970   11       10     -3.567      0.913        0.000         0.147              NaN               NaN
+            4. raw-entry 20th pct + broad-based interaction 108300              0.385  -8.137    3.895        -32.648           3.698        -40.786 35.203   15       11     -3.935      0.929        0.000         0.130           -0.015             1.195
+         5. raw-entry 20th pct, SPY fee corrected to 0.0945 108300              0.385  -8.155    4.332        -32.766           4.246        -40.921 18.267   15       11     -3.944      0.929        0.000         0.130              NaN               NaN
+         5b. raw-entry 20th pct, SPY anomaly months dropped 108288              0.385  -8.147    4.326        -32.723           4.229        -40.869 18.276   15       11     -3.939      0.929        0.000         0.130              NaN               NaN
+
+6. temporary fee changes (>= 0.02 pp, reversed to the exact prior fee within 12 months): 43 episodes, 39 funds; share of sample fund-months inside an episode: 0.0047
+ product_ids                                          name                                 firm   start  months  fee_before  fee_during  aum_bn
+       27635                        SPDR S&P 500 ETF Trust         State Street Global Advisors 2022.75      12        0.09        0.04 367.354
+       16418             iShares MSCI Emerging Markets ETF                            BlackRock 2015.50      12        0.69        0.72  24.618
+       16403                        iShares MSCI Japan ETF                            BlackRock 2017.50      12        0.49        0.47  16.579
+       16388                     iShares MSCI Eurozone ETF                            BlackRock 2017.50      12        0.49        0.47  13.641
+        9091   SPDR Dow Jones Industrial Average ETF Trust         State Street Global Advisors 2016.75      12        0.17        0.15  11.675
+       11977               Fidelity Multi-Asset Index Fund                 Fidelity Investments 2022.00      12        0.08        0.10   8.524
+       17490 JPMorgan 100% US Treasury Securities Money Ma            JPMorgan Asset Management 2012.00      12        0.06        0.10   7.804
+       54509                        iShares MSCI India ETF                            BlackRock 2021.50      12        0.65        0.68   5.890
+       16399                      iShares MSCI Germany ETF                            BlackRock 2017.50      12        0.49        0.47   5.113
+       37046                   iShares MSCI ACWI ex US ETF                            BlackRock 2022.50      12        0.32        0.34   4.126
+       61337                  iShares Core MSCI Europe ETF                            BlackRock 2022.50      12        0.09        0.11   3.927
+       54509                        iShares MSCI India ETF                            BlackRock 2015.50      12        0.68        0.71   3.903
+       16393                       iShares MSCI Taiwan ETF                            BlackRock 2015.50      12        0.62        0.64   3.777
+       16397                  iShares MSCI South Korea ETF                            BlackRock 2015.50      12        0.62        0.64   3.696
+       16399                      iShares MSCI Germany ETF                            BlackRock 2011.50      12        0.51        0.53   3.615
+       30715 Victory Nasdaq-100 Index Fund; Fund Shares Cl           Victory Capital Management 2021.00      12        0.44        0.42   3.537
+       16397                  iShares MSCI South Korea ETF                            BlackRock 2010.50      12        0.61        0.59   3.343
+       16387                       iShares MSCI Canada ETF                            BlackRock 2017.50      12        0.49        0.47   3.191
+       53442 Vanguard Long-Term Bond Index Fund; Instituti                             Vanguard 2017.00      12        0.04        0.40   2.780
+       43588 First Trust Consumer Discretionary AlphaDEX F                          First Trust 2015.50      12        0.63        0.61   2.560
+        9361 BNY Mellon Institutional S&P 500 Stock Index      BNY Mellon Investment Management 2018.75      12        0.20        0.50   2.547
+       51797                        iShares MSCI China ETF                            BlackRock 2015.50      12        0.62        0.64   2.043
+       16514      iShares S&P GSCI Commodity-Indexed Trust                            BlackRock 2011.00      12        0.75        0.80   1.844
+       29971      Nuveen Equity Index Fund; Class A Shares                               Nuveen 2021.75      12        0.32        0.28   1.493
+       28109 Schwab Fundamental U.S. Large Company Index F Charles Schwab Investment Management 2011.75      12        0.35        0.32   1.490
