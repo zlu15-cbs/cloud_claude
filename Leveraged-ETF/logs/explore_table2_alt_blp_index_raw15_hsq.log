@@ -1,0 +1,47 @@
+A11_raw15_hsq on index: N=108300  X1: prices + I(prices*raw15) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  X2: 0 + prices  IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3']  start sigma 1.0000 (0 checkpointed evaluations)
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +2.4589E+02   +1.5383E-08   +5.6474E+00     0       +1.4890E+04        +1.1011E+08   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:13:18       Yes          7            12          7720         25120   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +2.1724E-02 
+        (+1.1680E+02)
+=====================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+==============================================================================================
+   prices      prices*raw15   product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  --------------------  --------------------  --------------------
+ -8.0958E+00    -2.2015E+01       -9.9149E-01           +4.4476E-01           +5.3201E-01     
+(+1.4712E+00)  (+1.2452E+00)     (+1.5537E-01)         (+6.7758E-02)         (+2.6944E-02)    
+==============================================================================================
+solve time 800s
+{'spec': 'A11_raw15_hsq_BLP1RC', 'tier': 'A', 'N': 108300, 'avg_own_elasticity': np.float64(-3.139), 'share_abs_e_gt1': np.float64(0.8757), 'share_abs_e_gt1_broad': np.float64(0.8592), 'share_abs_e_gt1_big3': np.float64(0.8412), 'share_neg_mc_single_product': np.float64(0.1243), 'share_neg_mc_bertra
+ product_ids                                                                                          name                         firm  p_last  e_last  e_mean  lerner_single_last  mu_bertrand_firm_mean  mc_bertrand_firm_mean
+       16416                                                       iShares Trust: iShares Core S&P 500 ETF                    BlackRock    0.03 -0.8741 -1.6074              1.1440                 0.0487                 0.0056
+       56419                                                     iShares Trust: iShares Core MSCI EAFE ETF                    BlackRock    0.07 -2.0916 -2.6605              0.4781                 0.0481                 0.0406
+       16417                                             iShares Trust: iShares Core US Aggregate Bond ETF                    BlackRock    0.03 -0.8968 -2.2645              1.1151                 0.0487                 0.0269
+       16448                                                iShares Trust: iShares Russell 1000 Growth ETF                    BlackRock    0.18 -5.3876 -5.8317              0.1856                 0.0487                 0.1461
+       16437                                                   iShares Trust: iShares Core S&P Mid-Cap ETF                    BlackRock    0.05 -1.4972 -3.1257              0.6679                 0.0487                 0.0556
+       27635                                                                        SPDR S&P 500 ETF Trust State Street Global Advisors    0.09 -2.6148 -2.5044              0.3824                 0.0397                 0.0467
+       29218                                                             SPDR Gold Trust: SPDR Gold Shares State Street Global Advisors    0.40 -3.2246 -3.2054              0.3101                 0.1309                 0.2691
+       28279                                  Select Sector SPDR Trust: Technology Select Sector SPDR Fund State Street Global Advisors    0.08 -0.6449 -1.1192              1.5505                 0.1309                 0.0077
+       28277                                   Select Sector SPDR Trust: Financial Select Sector SPDR Fund State Street Global Advisors    0.08 -0.6459 -1.1189              1.5483                 0.1309                 0.0077
+       29250                                                 SPDR Series Trust: SPDR Portfolio S&P 500 ETF State Street Global Advisors    0.02 -0.1615 -0.2470              6.1924                 0.1303                -0.0997
+       63885 Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares                     Vanguard    0.02 -0.5760 -0.5862              1.7360                 0.0726                -0.0526
+       31461                                 Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares                     Vanguard    0.04 -1.1639 -1.3068              0.8592                 0.0693                -0.0246
+       50485                                     Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares                     Vanguard    0.03 -0.8748 -1.1543              1.1431                 0.0701                -0.0313
+       31466                Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares                     Vanguard    0.03 -0.8792 -1.1955              1.1374                 0.0693                -0.0291
+       31462            Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares                     Vanguard    0.04 -1.1749 -1.3129              0.8511                 0.0693                -0.0246
