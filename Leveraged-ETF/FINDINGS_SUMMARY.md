@@ -23,7 +23,7 @@ Detailed companion files:
 4. **What works best within the linear-in-fee model: a fee tier set at the fund's first month in the full raw data.**
    - A fund is "cheap" if its fee then was at or below that month's 20th percentile across all index funds.
    - In logit IV, the cheap group's price coefficient is about −41 against −8 for the rest (F = 18). 11 of the 15 Table 5 funds go above |e| = 1, and negative implied marginal costs fall from 52% to 13% of fund-months.
-   - **Caveats.** The non-cheap group's slope rests on Vanguard funds: drop Vanguard and it turns positive. The result also depends on which fund population sets the percentile cutoffs. The BLP version is in section 6.
+   - **Caveats.** The cheap group's coefficient is robust (to the cutoff and to dropping any one firm). The non-cheap group's slope is not: it is imprecise, and it rests on Vanguard funds; drop Vanguard and it turns positive. The result also depends on which fund population sets the percentile cutoffs. The BLP version is in section 6.
 5. **Log price is the most robust way to lift the elasticities, but it leaves the linear specification.**
    - Logit IV: every fund-month is above |e| = 1, with F = 824 and 3% negative marginal cost.
    - The BLP random coefficient on log price is not identified, even with stronger instruments.
@@ -140,9 +140,11 @@ Robustness of the 20th-percentile spec:
   - Correcting SPY's fee error: no change.
   - Dropping State Street (−6.3 / −41.1, F 18) or BlackRock (−12.9 / −69.8, F 12).
   - Adding the broad-based interaction: no change.
-  - The cheap coefficient moves smoothly with the cutoff, with F ≥ 10.9 from the 10th to the 30th percentile. This is much better than the sample-first-month versions.
+  - The **cheap** coefficient moves smoothly with the cutoff (−69, −61, −41, −30, −22 from the 10th to the 30th percentile), with F ≥ 10.9 throughout. This is much better than the sample-first-month versions.
+  - The **non-cheap** coefficient is not smooth and is imprecise everywhere: −6.2, −16.0, −8.1, −6.5, −3.4 (SEs 2.6–8.2), then positive at the 40th and 50th percentiles.
 - **Fails.**
-  - **Dropping Vanguard:** the rest coefficient becomes **+6.2 (SE 1.2)** and 67% of fund-months get positive own elasticities. The non-cheap slope is identified mainly from Vanguard funds' fee changes.
+  - **Dropping Vanguard:** the rest coefficient becomes **+6.2 (SE 1.2)** and 67% of fund-months get positive own elasticities. The non-cheap slope is identified mainly from Vanguard funds' fee changes; Vanguard is about a quarter of the sample's fund-months.
+  - The cheap coefficient survives dropping Vanguard (total −22.4, F 73). So the robust part is the *gap*: cheap funds respond far more to fees than the rest. The fragile part is the level and sign of the non-cheap slope. Most Table 5 funds are cheap, so their elasticities rest on the robust coefficient. The 60% of fund-months outside the cheap group rest on the fragile one.
   - **Cutoffs computed among sample funds only:** F falls to 4.5. The definition needs the full raw population.
 - **Interpretation** *(inference)*. The data consistently want a much steeper fee slope for low-fee funds: the cheap coefficient is 4–11 times the rest's at every cutoff. That is a feature of the demand curve's shape, which log price captures with one parameter. The tier is a linear approximation of it, and its exact size depends on the cutoff.
 
