@@ -27,7 +27,7 @@ Detailed companion files:
    - **BLP:** no credible one-RC version exists with the available instruments. The notebook's extra index instrument conflicts with the Hausman IV once the interaction is added. See section 6 and `Table2_alt.md`.
 5. **`Table2_alt.md`: Table 2 with the interaction.**
    - Logit IV at the 10th, 15th and 20th percentiles lifts 10, 14 and 11 of the 15 funds above 1.
-   - BLP versions fail because the instruments conflict (section 6).
+   - No one-RC BLP version is credible: the instruments conflict, and with a consistent instrument the normal RC yields upward-sloping demand for non-cheap funds (section 6). Table A7 col 3 as coded has two RCs and is exactly identified, and its saved output does not match the published table.
    - The published leveraged Table 2 col 3 instruments also fail an overidentification test (J = 14.2, p < 0.001).
 6. **Log price is the most robust way to lift the elasticities, but it leaves the linear specification.**
    - Logit IV: every fund-month is above |e| = 1, with F = 824 and 3% negative marginal cost.
@@ -175,27 +175,27 @@ Robustness of the 20th-percentile spec:
   - Always optimize both steps before reporting.
 - **Practical:** each index-market BLP evaluation takes 1–11 minutes. The container restarted several times. All long runs now use parallel workers (`pyblp.parallel`, one BLAS thread each) and per-evaluation checkpoints.
 
-## 6. Table2_alt and the BLP versions of the interaction *(run; `Table2_alt.md`, `logs/explore_table2_alt_*`, `logs/explore_step10*`)*
+## 6. Table2_alt and the BLP versions of the interaction *(run; `Table2_alt.md`, `logs/explore_table2_alt_*`, `logs/explore_step10*`, `step11*`, `step12*`)*
 
-`Table2_alt.md` reports Table 2 with price × cheap added (raw-entry tier at the 10th, 15th and 20th percentiles), for both panels.
+`Table2_alt.md` reports Table 2 with price × cheap added for index funds (raw-entry tier at the 10th, 15th and 20th percentiles). Leveraged funds have no interaction, per the paper's A7, where it is not significant.
 
 - **Logit IV with the interaction is the usable alternative.**
   - Cheap funds' coefficient is −41 to −69; the rest's is −6 to −16. Weakest F is 10.9–18.3.
   - No upward-sloping demand. The average elasticity is −3.2 to −6.3, and negative marginal cost falls to 5–31% of fund-months.
-  - 10, 14 and 11 of the 15 Table 5 funds are above |e| = 1 at the 10th, 15th and 20th percentiles.
-  - 9 funds are above 1 at every cutoff: four Vanguard funds, iShares S&P 500, EAFE and Russell 1000 Growth, SPY, and SPDR Gold.
-- **No one-RC BLP version is credible with the available instruments.**
-  - *Notebook instruments* (`BLP_IV_newproduct_1`): the non-cheap mean coefficient goes to about 0 with a large σ (4.6–8.3). Part of the market then has upward-sloping demand (SPDR Gold +1.9 to +2.7), and the average elasticity is +0.33 to −0.47.
-  - *Squared Hausman IV:* signs are right, but σ goes to 0 (not identified) and the overidentifying restrictions are rejected. Only 2–7 of 15 funds are above 1.
-  - *Lognormal RC on −price:* degenerate (mean log-coefficient → −16.7).
-  - *RC on price × cheap:* not identified (σ = 0.07, SE 39), with a positive non-cheap slope.
-  - Also run before the 1-RC focus: a two-group lognormal model (2 RCs). Its first step converged (cheap median coefficient ≈ −61, rest ≈ −8.7). It was not completed through step 2.
-- **Why: the instruments conflict once the interaction is added.**
-  - With price × cheap, `BLP_IV_newproduct_1` alone implies a **positive** non-cheap slope (+1.3 to +3.2), while the Hausman IV implies −6 to −16. Hansen J rejects at every cutoff (p < 0.001).
-  - In the paper's own index specification, with no interaction, the two agree (J = 0.58, p = 0.45).
-- **Leveraged panel.**
-  - The two notebook instruments already disagree **in the published Table 2 Panel B specification** (Hausman −3.71, `BLP_IV_rival_funds1` −5.06; J = 14.2, p < 0.001).
-  - The percentile tier barely discriminates there, because most leveraged funds charge 0.95%.
+  - 10, 14 and 11 of the 15 Table 5 funds are above |e| = 1 at the three cutoffs.
+- **No one-RC BLP version (one random coefficient, on the expense ratio) is credible.** Cheap funds always come out sensibly; non-cheap funds do not.
+  - *Notebook instruments* (`BLP_IV_newproduct_1`, also × cheap): the non-cheap mean goes to about 0 with a large σ, so part of the market has upward-sloping demand. The instruments conflict: with the interaction, `newproduct_1` alone implies a positive non-cheap slope (+1.3 to +3.2) against the Hausman IV's −6 to −16, and Hansen J rejects (p < 0.001).
+  - *Squared Hausman IV:* σ goes to 0 (logit), the restrictions are rejected, and only 2–7 of 15 funds are above 1.
+  - *Uninteracted `newproduct_3`* (exactly identified; the best candidate from a screen of 24 instruments): σ = 6.5–9.4 (significant), with a non-cheap mean of +0.9, −1.7 and +9.9 at the three cutoffs. SPDR Gold's elasticity is +3.5 to +8.6, and the average is +0.35 to +4.59.
+  - *Also tried:* a lognormal RC on −price (degenerate, price coefficient → 0) and the RC on price × cheap (not identified, positive non-cheap slope).
+- **Mechanism** *(inference)*. A normal RC on the expense ratio can explain "cheap funds are more elastic" through sorting: price-sensitive consumers hold cheap funds. That leaves a positive-coefficient tail in expensive funds. The interaction term and σ compete for the same pattern.
+- **Table A7 col 3 as coded** in the broadspecial notebook:
+  - It has **two** RCs (price and price × broad) and four instruments, so it is exactly identified. That is why it "converges".
+  - Its saved output (−32.53 / +10.84, σ on price × broad = 13.93) does not match the published A7 (−6.934 / −6.186).
+  - Under the broad interaction, `newproduct_1` also conflicts with the Hausman IV (J = 96).
+  - With **one** RC on the expense ratio, A7 gives −8.87 / −3.58, σ = 0.64 (not identified), objective 93.5 (rejected). Signs are still plausible, because under broad the conflicting instrument still implies negative slopes.
+  - The coauthor will provide the code behind the published A7 columns.
+- **Leveraged instruments.** The leveraged notebook's two instruments already disagree in the published Table 2 Panel B spec (Hausman −3.71, `BLP_IV_rival_funds1` −5.06; J = 14.2, p < 0.001).
 
 ## 7. Recommendations and what is worth exploring next
 
