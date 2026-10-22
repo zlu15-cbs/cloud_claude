@@ -23,11 +23,16 @@ Detailed companion files:
 4. **What works best within the linear-in-fee model: a fee tier set at the fund's first month in the full raw data.**
    - A fund is "cheap" if its fee then was at or below that month's 20th percentile across all index funds.
    - In logit IV, the cheap group's price coefficient is about −41 against −8 for the rest (F = 18). 11 of the 15 Table 5 funds go above |e| = 1, and negative implied marginal costs fall from 52% to 13% of fund-months.
-   - **Caveats.** The cheap group's coefficient is robust (to the cutoff and to dropping any one firm). The non-cheap group's slope is not: it is imprecise, and it rests on Vanguard funds; drop Vanguard and it turns positive. The result also depends on which fund population sets the percentile cutoffs. The BLP version is in section 6.
-5. **Log price is the most robust way to lift the elasticities, but it leaves the linear specification.**
+   - **Caveats.** The cheap group's coefficient is robust, to the cutoff and to dropping any one firm. The non-cheap slope is imprecise. The result depends on computing the percentile cutoffs over all raw funds.
+   - **BLP:** no credible one-RC version exists with the available instruments. The notebook's extra index instrument conflicts with the Hausman IV once the interaction is added. See section 6 and `Table2_alt.md`.
+5. **`Table2_alt.md`: Table 2 with the interaction.**
+   - Logit IV at the 10th, 15th and 20th percentiles lifts 10, 14 and 11 of the 15 funds above 1.
+   - BLP versions fail because the instruments conflict (section 6).
+   - The published leveraged Table 2 col 3 instruments also fail an overidentification test (J = 14.2, p < 0.001).
+6. **Log price is the most robust way to lift the elasticities, but it leaves the linear specification.**
    - Logit IV: every fund-month is above |e| = 1, with F = 824 and 3% negative marginal cost.
    - The BLP random coefficient on log price is not identified, even with stronger instruments.
-6. **Data issues to fix.**
+7. **Data issues to fix.**
    - SPY's fee is recorded as 0.04% from Oct 2022 to Sep 2023 (actual 0.0945%).
    - 43 temporary fee changes in 39 funds, at least two of them likely typos.
    - Zero-fee funds are dropped by the sample filter.
@@ -170,14 +175,27 @@ Robustness of the 20th-percentile spec:
   - Always optimize both steps before reporting.
 - **Practical:** each index-market BLP evaluation takes 1–11 minutes. The container restarted several times. All long runs now use parallel workers (`pyblp.parallel`, one BLAS thread each) and per-evaluation checkpoints.
 
-## 6. BLP for the raw-entry 20th-percentile tier
+## 6. Table2_alt and the BLP versions of the interaction *(run; `Table2_alt.md`, `logs/explore_table2_alt_*`, `logs/explore_step10*`)*
 
-**Running at the time of writing** (`code/explore/step7_lognormal_two_group.py 3 raw20`, log `logs/explore_step7_raw20_blp.log` once finished). Setup:
-- lognormal price coefficients for both groups, both GMM steps optimized;
-- instruments: Hausman IV and `BLP_IV_newproduct_1`, each split by group;
-- Monte Carlo with 3000 draws, seed 623543.
+`Table2_alt.md` reports Table 2 with price × cheap added (raw-entry tier at the 10th, 15th and 20th percentiles), for both panels.
 
-This section will be updated with the result. Until then, treat the logit IV numbers in 5b as the evidence.
+- **Logit IV with the interaction is the usable alternative.**
+  - Cheap funds' coefficient is −41 to −69; the rest's is −6 to −16. Weakest F is 10.9–18.3.
+  - No upward-sloping demand. The average elasticity is −3.2 to −6.3, and negative marginal cost falls to 5–31% of fund-months.
+  - 10, 14 and 11 of the 15 Table 5 funds are above |e| = 1 at the 10th, 15th and 20th percentiles.
+  - 9 funds are above 1 at every cutoff: four Vanguard funds, iShares S&P 500, EAFE and Russell 1000 Growth, SPY, and SPDR Gold.
+- **No one-RC BLP version is credible with the available instruments.**
+  - *Notebook instruments* (`BLP_IV_newproduct_1`): the non-cheap mean coefficient goes to about 0 with a large σ (4.6–8.3). Part of the market then has upward-sloping demand (SPDR Gold +1.9 to +2.7), and the average elasticity is +0.33 to −0.47.
+  - *Squared Hausman IV:* signs are right, but σ goes to 0 (not identified) and the overidentifying restrictions are rejected. Only 2–7 of 15 funds are above 1.
+  - *Lognormal RC on −price:* degenerate (mean log-coefficient → −16.7).
+  - *RC on price × cheap:* not identified (σ = 0.07, SE 39), with a positive non-cheap slope.
+  - Also run before the 1-RC focus: a two-group lognormal model (2 RCs). Its first step converged (cheap median coefficient ≈ −61, rest ≈ −8.7). It was not completed through step 2.
+- **Why: the instruments conflict once the interaction is added.**
+  - With price × cheap, `BLP_IV_newproduct_1` alone implies a **positive** non-cheap slope (+1.3 to +3.2), while the Hausman IV implies −6 to −16. Hansen J rejects at every cutoff (p < 0.001).
+  - In the paper's own index specification, with no interaction, the two agree (J = 0.58, p = 0.45).
+- **Leveraged panel.**
+  - The two notebook instruments already disagree **in the published Table 2 Panel B specification** (Hausman −3.71, `BLP_IV_rival_funds1` −5.06; J = 14.2, p < 0.001).
+  - The percentile tier barely discriminates there, because most leveraged funds charge 0.95%.
 
 ## 7. Recommendations and what is worth exploring next
 
@@ -188,8 +206,9 @@ This section will be updated with the result. Until then, treat the logit IV num
    - Use one averaging definition across Table 2's columns.
    - State the Bull-only filter and the panels' end months.
 2. **If the linear model stays as is,** say plainly that it implies Lerner > 1 (negative marginal cost) for the cheapest funds, and give a reason. Securities-lending income is the natural candidate, and could be modelled as a negative cost component.
-3. **If you add fee-level heterogeneity in the linear model,** use the raw-entry tier, pre-specified at the 20th percentile, with the 10th and 30th as robustness columns. Report the cutoff grid, and be upfront that the non-cheap slope depends on Vanguard.
+3. **If you add fee-level heterogeneity in the linear model,** report the logit IV version from `Table2_alt.md`: the raw-entry tier, with the 15th or 20th percentile as the main cutoff and the others as robustness. Do not report a BLP version until an extra instrument agrees with the Hausman IV under the interaction.
 4. **Worth exploring:**
+   - *An extra instrument for the random coefficient that passes an overidentification test with the Hausman IV,* both under the interaction (index) and in the published spec (leveraged).
    - *Why Vanguard drives the non-cheap slope.* Which Vanguard funds changed fees, and are those changes plausibly exogenous (e.g. Vanguard's at-cost structure passing through scale economies)? A firm-specific slope for Vanguard is one way to make this explicit.
    - *Stronger instruments for any random coefficient on price* (index market): cost shifters with real within-fund variation, or the coauthors' 3-RC rework.
    - *Data cleaning:* fix SPY's fee, review the 43 temporary fee episodes, and check how expense ratios are sourced (annual prospectus values vs monthly).
@@ -208,3 +227,5 @@ This section will be updated with the result. Until then, treat the logit IV num
 | Cutoff sweeps, ties, switchers | `code/explore/step2e_cutoff_sweep.py`, `step2f_switcher_composition.py` |
 | BLP (normal and lognormal) | `code/explore/step4_blp_shortlist.py`, `step6_logp_blp_strong_iv.py`, `step7_lognormal_two_group.py` |
 | Fee percentiles, SPY/VTI | `code/explore/fee_percentiles_spy_vti.py` |
+| Table 2 with the interaction | `Table2_alt.md`, `code/explore/table2_alt_logit.py`, `step4_blp_shortlist.py`, `step9_lognormal_1rc.py`, `make_table2_alt.py` |
+| Instrument conflict checks | `code/explore/step10_instrument_check.py`, `step10b_instrument_check_baseline.py` |
