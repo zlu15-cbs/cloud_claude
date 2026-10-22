@@ -9,6 +9,17 @@ For each month of the **full raw file** (index funds 1994–2025), compute the q
 - For most funds it is set before the 2010–2024 estimation window (index: 54% of sample funds first appear in the raw data before 2010).
 - It is measured relative to the market at the time, so it does not depend on the sample's share filter.
 - Cutoffs reported: q = 10th, 15th and 20th percentiles.
+- **What fixing the tier at entry means for repriced funds.** Several large funds launched at a mid-range fee and were repriced to the cheap end later (the iShares "Core" repricing in 2012, the SPDR Portfolio fee cuts in 2017). They are classified by their launch fee:
+
+  | Fund | First raw month | Fee then (%) | 10th / 15th / 20th cutoff that month | Fee now (%) |
+  |---|---|---|---|---|
+  | iShares Core US Aggregate Bond (AGG) | Apr 2004 | 0.20 | 0.150 / 0.200 / 0.250 | 0.03 |
+  | iShares Core S&P Mid-Cap | Jul 2001 | 0.20 | 0.180 / 0.208 / 0.250 | 0.05 |
+  | iShares Russell 1000 Growth | Jul 2001 | 0.20 | 0.180 / 0.208 / 0.250 | 0.18 |
+  | SPDR Portfolio S&P 500 | Jun 2006 | 0.21 | 0.121 / 0.180 / 0.230 | 0.02 |
+  | iShares Core S&P 500 | Jul 2001 | 0.09 | 0.180 / 0.208 / 0.250 | 0.03 |
+
+  So AGG is "not cheap" at the 10th percentile but cheap at the 15th and 20th; SPDR Portfolio S&P 500 is cheap only at the 20th. This is the price of a predetermined tier (definitions that use later fees failed the exogeneity checks, `logs/explore_step2_rolling_cheap_status.log`), and it is a further reason to prefer the 15th or 20th percentile as the main cutoff: the large repricings of these funds are within-fund fee changes that, at the 10th percentile, identify the *non-cheap* slope.
 
 ## Columns
 
