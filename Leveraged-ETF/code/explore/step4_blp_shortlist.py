@@ -48,6 +48,10 @@ def main(name, procs, panel):
     for k, v in enumerate(sp['z'], start=k0 + 1):
         d[f'demand_instruments{k}'] = d[f'demand_instruments{k0}'] * d[v]
     x2 = f'0 + log(prices + {c})' if form == 'log' else '0 + prices'
+    rc_on_cheap = os.environ.get('RC_ON') == 'cheap'  # put the single RC on price x cheap (first z) instead of price
+    if rc_on_cheap:
+        x2 = f'0 + I(prices*{sp["z"][0]})'
+        name += '_rcCheap'
     ckpt = f'step4_{panel}_{name}_ckpt.json'
     history = json.load(open(ckpt)) if os.path.exists(ckpt) else []
     sigma0 = np.array([[min(history, key=lambda r: r['obj'])['theta'][0]]]) if history else np.ones((1, 1))
