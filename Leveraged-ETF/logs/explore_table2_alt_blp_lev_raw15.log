@@ -1,0 +1,34 @@
+A11_raw15 on lev: N=15401  X1: prices + I(prices*raw15) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  X2: 0 + prices  IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3']  start sigma 1.0000 (0 checkpointed evaluations)
+--- BFGS stalled at sigma 2.319 after 132 evaluations; stopped and evaluated there (FINALIZE):
+A11_raw15 on lev: N=15401  X1: prices + I(prices*raw15) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  X2: 0 + prices  IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3']  start sigma 2.3191 (132 checkpointed evaluations)
+FINALIZE: evaluating at the best checkpointed point
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +9.4709E-01   +9.3563E-01   +9.4215E+01     0       +8.6788E+04        +7.6401E+02   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:01:41       Yes          0             2          3114         9677    
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +2.3191E+00 
+        (+2.6975E-01)
+=====================
+Beta Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+==============================================================================================
+   prices      prices*raw15   product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  --------------------  --------------------  --------------------
+ -4.1861E+00    -1.2186E+01       -2.0155E+00           +2.9318E-01           +5.0649E-01     
+(+4.2502E-01)  (+1.0291E+00)     (+2.8934E-01)         (+4.7669E-02)         (+5.5230E-02)    
+==============================================================================================
+solve time 102s
+{'spec': 'A11_raw15_BLP1RC_lev', 'N': 15401, 'avg_own_elasticity': -8.759527643124056, 'share_pos_e': 0.11148626712551132, 'share_neg_mc_bertrand_firm': 0.019674047139796116, 'sigma': 2.3190809752578048, 'sigma_se': 0.2697509122585559, 'b[prices]': np.float64(-4.186076084432811), 'se[prices]': np.fl

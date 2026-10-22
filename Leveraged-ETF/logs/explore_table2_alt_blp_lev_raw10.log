@@ -1,0 +1,31 @@
+A11_raw10 on lev: N=15401  X1: prices + I(prices*raw10) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  X2: 0 + prices  IVs: ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3']  start sigma 1.0000 (0 checkpointed evaluations)
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +9.2793E-01   +1.8498E-08   +9.3350E+01     0       +8.7203E+04        +7.9671E+02   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:06:57       Yes          9            15          38858       118955   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +2.3087E+00 
+        (+2.6539E-01)
+=====================
+Beta Estimates (Robust SEs Adjusted for 177 Clusters in Parentheses):
+==============================================================================================
+   prices      prices*raw10   product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  --------------------  --------------------  --------------------
+ -4.1503E+00    -1.2262E+01       -2.0174E+00           +2.9353E-01           +5.0338E-01     
+(+4.2389E-01)  (+1.0335E+00)     (+2.8957E-01)         (+4.7789E-02)         (+5.5165E-02)    
+==============================================================================================
+solve time 417s
+{'spec': 'A11_raw10_BLP1RC_lev', 'N': 15401, 'avg_own_elasticity': -8.636822285010538, 'share_pos_e': 0.1117459905200961, 'share_neg_mc_bertrand_firm': 0.0222063502369976, 'sigma': 2.308692294557021, 'sigma_se': 0.26539149505312604, 'b[prices]': np.float64(-4.1502673599296696), 'se[prices]': np.floa

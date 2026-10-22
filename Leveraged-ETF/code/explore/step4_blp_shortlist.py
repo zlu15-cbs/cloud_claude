@@ -68,7 +68,11 @@ def main(name, procs, panel):
     with pyblp.parallel(procs):
         problem = pyblp.Problem((pyblp.Formulation('0 + ' + formula, absorb='C(product_ids) + C(market_ids)'),
                                  pyblp.Formulation(x2)), d, integration=integ)
-        res = problem.solve(sigma0, optimization=pyblp.Optimization(bfgs, {'gtol': 1e-7}), se_type='clustered')
+        opt = pyblp.Optimization(bfgs, {'gtol': 1e-7})
+        if os.environ.get('FINALIZE') == '1':  # BFGS stalled: results at the best checkpointed point, no optimization
+            opt = pyblp.Optimization('return')
+            print('FINALIZE: evaluating at the best checkpointed point', flush=True)
+        res = problem.solve(sigma0, optimization=opt, se_type='clustered')
         print(res)
         print(f'solve time {time.time() - t:.0f}s', flush=True)
         sig = {'sigma': float(res.sigma.flatten()[0]), 'sigma_se': float(res.sigma_se.flatten()[0])}
