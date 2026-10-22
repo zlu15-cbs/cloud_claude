@@ -94,7 +94,28 @@ for panel, title in (('index', 'Panel A: Passive index funds'), ('lev', 'Panel B
         print('| Share negative MC (firm Bertrand) | ' + ' | '.join(
             val(r, ['share_neg_mc', 'share_neg_mc_bertrand_firm'], '{:.2f}') for _, r in cols) + ' |')
 
-print('\n#### The 15 Table 5 funds: own elasticity in the last month (Panel A)\n')
+# clean 15-fund table for the recommended model: logit IV with the interaction, by cutoff
+funds_iv = funds[funds.column == 'IV']
+base_iv = funds_iv[funds_iv.cutoff == 'none (Table 2)'].set_index('product_ids')
+PAPER15 = {16416: -0.242, 56419: -0.580, 16417: -0.249, 16448: -1.494, 16437: -0.415, 27635: -0.725, 29218: -3.325,
+           28279: -0.665, 28277: -0.666, 29250: -0.167, 63885: -0.160, 31461: -0.323, 50485: -0.243, 31466: -0.244,
+           31462: -0.326}
+print('\n#### The 15 Table 5 funds under logit IV with the interaction (own elasticity, last month)\n')
+print('| Fund | p (%) | Table 5 (paper) | Table 2 logit IV | 10th pct: cheap? / e | 15th pct: cheap? / e | 20th pct: cheap? / e |')
+print('|---|---|---|---|---|---|---|')
+for pid, r in base_iv.iterrows():
+    cells = [f'{PAPER15[pid]:.2f}', f'{r.e_last:.2f}']
+    for q in (10, 15, 20):
+        x = funds_iv[(funds_iv.cutoff == f'{q}th pct') & (funds_iv.product_ids == pid)].iloc[0]
+        cells.append(f'{"yes" if x.cheap else "no"} / {x.e_last:.2f}')
+    print(f'| {r["name"]} | {r.p:.2f} | ' + ' | '.join(cells) + ' |')
+avg = logit[(logit.panel == 'index') & (logit.column == 'IV')].set_index('cutoff').avg_own_e_market_mean
+print('| **Average own-price elasticity (per-market mean, all funds)** | | | ' + ' | '.join(
+    f'**{avg[c]:.3f}**' for c in ('none (Table 2)', '10th pct', '15th pct', '20th pct')) + ' |')
+n15 = {c: int(funds_iv[funds_iv.cutoff == c].e_last.abs().gt(1).sum()) for c in ('none (Table 2)', '10th pct', '15th pct', '20th pct')}
+print('| **Table 5 funds with abs(e) > 1** | | | ' + ' | '.join(f'**{n15[c]}/15**' for c in n15) + ' |')
+
+print('\n#### The 15 Table 5 funds: own elasticity in the last month (Panel A), all columns\n')
 funds = pd.read_csv(os.path.join(E, 'table2_alt_funds.csv'))
 iv = funds[funds.column == 'IV']
 PAPER = {16416: -0.242, 56419: -0.580, 16417: -0.249, 16448: -1.494, 16437: -0.415, 27635: -0.725, 29218: -3.325,
