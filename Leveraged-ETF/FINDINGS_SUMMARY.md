@@ -120,6 +120,7 @@ Why this is hard in a linear-in-fee model: |e| = 1 at p = 0.03% needs a coeffici
 | Market state (sentiment, VIX) | interaction ≈ 0 | no effect |
 | AUM tercile lagged 12 months | 1 of 15 | fails exogeneity (lead-test t −58 to −81; ξ̂ AR(1) 0.98) |
 | Rolling "cheap" status (monthly percentile, 6/12-month entry and exit) | 3 of 15 | lead tests fail (t −15 to −17); status responds to past demand shocks |
+| Percentile of the fee 12 months earlier (raw-file cross-section; `explore_step16*`) | continuous: 2 of 15; ≤ 20th pct indicator: 7 of 15 | continuous version is ≈ price × rank(price) (corr 0.92): slope turns positive above the 54th percentile, 46% slope upward; ≤ 10th / 15th indicators have weak first stages (F 11 / 1.6); ≤ 20th gives cheap slope −23.5 vs −40.8 for the entry tier and fails lead tests (t −4 to −10). Details in `Table2_alt.md` |
 | Fee tier at first **sample** month, by rank | looked good | ties: 67 funds at exactly 0.20% split arbitrarily by row order |
 | Fee tier at first sample month, by fee cutoff (0.05–0.25%) | 4–15 of 15 | first stage collapses at 0.15–0.18%; very sensitive to the cutoff |
 | BLP, normal random coefficient, with any fee-tier interaction | | mean price coefficient turns **positive** for the non-cheap group (+1.8 to +9.5) |
@@ -226,3 +227,4 @@ Robustness of the 20th-percentile spec:
 | σ identification (profile, J at fixed σ, calibrated σ) | `code/explore/step13_sigma_profile.py` |
 | Instrument screens, differentiation and optimal IVs | `code/explore/step12_iv_screen.py`, `step12b_iv_screen_uninteracted.py`, `step14_diff_iv_screen.py`, `step15_optimal_iv.py` |
 | Table A7 col 3 re-run | `RESULTS_A7_col3.md`, `code/explore/a7_col3.py` |
+| Lagged-fee percentile interaction | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv`; section in `Table2_alt.md` |

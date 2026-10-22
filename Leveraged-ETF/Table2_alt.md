@@ -186,6 +186,53 @@ Elasticities are own-price elasticities. "Avg" is the per-market mean, as in Tab
 5. **Table A7 column (3), for comparison** (`RESULTS_A7_col3.md`): the published column is this same design (one RC, interaction in X1, `newproduct_1` uninteracted). It re-runs exactly (β −6.934, × broad −6.186, σ 2.25, average elasticity −2.346). It works for the broad-based split because `newproduct_1` alone implies negative slopes for both groups there; it lifts only 2 of the 15 Table 5 funds above |e| = 1.
 6. **Leveraged funds.** No interaction, per the paper's A7. The notebook's two leveraged instruments already disagree in the published Table 2 Panel B col 3 (Hausman −3.71, `BLP_IV_rival_funds1` −5.06; J = 14.2, p < 0.001; `logs/explore_step10b_instrument_check_baseline.log`).
 
+## Variant: interaction with the percentile of the fund's expense ratio 12 months earlier *(run; `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv`)*
+
+Question: instead of the entry-based "cheap" tier, interact the expense ratio with the fund's **current** position in the fee distribution, measured 12 months earlier. `pct12_jt` is the percentile rank (0–1) of fund j's fee in month t−12 among all index funds with a recorded fee in the raw file that month (the same population the entry tiers use). It is time-varying, so its main effect is a control (fund FE do not absorb it). Logit IV, Table 2 Panel A controls, fund and month FE, SE clustered by month; instruments Hausman IV and Hausman IV × z. Sample: Panel A rows with a fee observed 12 months earlier (105,049 of 108,300; baseline logit IV on this sample: −4.81, average elasticity −1.39).
+
+| | (a) price × pct12 (continuous) | (b) price × 1[pct12 ≤ 0.10] | (c) price × 1[pct12 ≤ 0.15] | (d) price × 1[pct12 ≤ 0.20] | Entry tier, 20th pct (col 2′) |
+|---|---|---|---|---|---|
+| Expense ratio | −15.73 (1.44) | **+17.21** (6.95) | −34.39 (26.3) | −9.28 (1.70) | −8.13 (4.32) |
+| Expense ratio × z | **+29.24** (1.25) | +18.44 (13.2) | −24.78 (11.3) | −14.19 (0.49) | −32.64 (4.20) |
+| Implied slope, cheap group (z = 1) | +13.5 at the top of the distribution | +35.6 | −59.2 | −23.5 | −40.8 |
+| Share of fund-months with z = 1 | | 0.21 | 0.32 | 0.42 | 0.38 (of funds) |
+| Weakest first-stage F | 190 | **11.1** | **1.6** | 48.0 | 18.3 |
+| Avg own-price elasticity | −0.16 | +5.19 | −10.5 | −3.18 | −3.93 |
+| Share e > 0 | 46% (pct12 > 0.54) | ≈ 100% | 0 | 0 | 0 |
+| Share negative MC (firm Bertrand) | 0.45 | 0.00 | 0.02 | 0.19 | 0.13 |
+| Table 5 funds with e < −1 | 2 / 15 | 0 / 15 | 15 / 15 | 7 / 15 | 11 / 15 |
+| Lead tests, t of ξ̂(t−1) / ξ̂(t−3) / ξ̂(t−12) on z_t | 1.1 / 2.8 / 8.3 | 2.2 / 0.9 / −4.9 | −2.5 / −4.3 / −9.4 | −3.8 / −5.1 / −9.8 | n/a (fixed by fund) |
+| ξ̂ within-fund AR(1) | 0.975 | 0.975 | 0.975 | 0.975 | |
+
+**The 15 Table 5 funds, own elasticity in the last month (Aug 2024).** "pct12" is the fund's lagged-fee percentile in that month.
+
+| Fund | p (%) | pct12 | Table 2 logit IV | Entry tier 20th: cheap? / e | (a) continuous | (d) ≤ 0.20 | (b) ≤ 0.10 / (c) ≤ 0.15 (weak IVs) |
+|---|---|---|---|---|---|---|---|
+| iShares Core S&P 500 ETF | 0.03 | 0.04 | −0.16 | yes / −1.18 | −0.43 | −0.68 | +1.03 / −1.72 |
+| iShares Core MSCI EAFE ETF | 0.07 | 0.12 | −0.39 | yes / −2.83 | −0.84 | −1.63 | +1.20 / −4.11 |
+| iShares Core US Aggregate Bond ETF | 0.03 | 0.04 | −0.17 | yes / −1.21 | −0.44 | −0.70 | +1.06 / −1.76 |
+| iShares Russell 1000 Growth ETF | 0.18 | 0.32 | −1.00 | yes / −7.30 | −1.16 | −1.66 | +3.08 / −6.15 |
+| iShares Core S&P Mid-Cap ETF | 0.05 | 0.08 | −0.28 | yes / −2.03 | −0.67 | −1.17 | +1.77 / −2.94 |
+| SPDR S&P 500 ETF Trust | 0.09 | 0.06 | −0.49 | yes / −3.54 | −1.22 | −2.04 | +3.10 / −5.14 |
+| SPDR Gold Shares | 0.40 | 0.56 | −2.23 | no / −3.24 | **+0.21** | −3.70 | +6.85 / −13.70 |
+| Technology Select Sector SPDR | 0.08 | 0.17 | −0.45 | no / −0.65 | −0.86 | −1.87 | +1.37 / −2.74 |
+| Financial Select Sector SPDR | 0.08 | 0.17 | −0.45 | no / −0.65 | −0.86 | −1.87 | +1.37 / −2.74 |
+| SPDR Portfolio S&P 500 ETF | 0.02 | 0.02 | −0.11 | yes / −0.81 | −0.30 | −0.47 | +0.71 / −1.18 |
+| Vanguard Total Stock Market Inst. Plus | 0.02 | 0.02 | −0.11 | yes / −0.78 | −0.29 | −0.45 | +0.68 / −1.13 |
+| Vanguard 500 Index Admiral | 0.04 | 0.06 | −0.22 | yes / −1.58 | −0.54 | −0.91 | +1.38 / −2.29 |
+| Vanguard 500 Index ETF | 0.03 | 0.04 | −0.16 | yes / −1.18 | −0.43 | −0.68 | +1.04 / −1.72 |
+| Vanguard Total Stock Market ETF | 0.03 | 0.04 | −0.16 | yes / −1.19 | −0.43 | −0.69 | +1.04 / −1.73 |
+| Vanguard Total Stock Market Admiral | 0.04 | 0.06 | −0.22 | yes / −1.59 | −0.55 | −0.92 | +1.39 / −2.31 |
+
+**What the results say.**
+
+1. **The continuous interaction (a) is well identified but gives the wrong shape.** The slope is −15.7 at the bottom of the fee distribution and rises linearly with rank, crossing zero at the 54th percentile; 46% of fund-months have upward-sloping demand and SPDR Gold (pct12 = 0.56) gets +0.21. The reason is mechanical: pct12 is almost the rank of the fund's own current fee (correlation with `prices` 0.92), so price × pct12 is close to price × rank(price), a smooth version of the price-squared specification tried earlier (which also produced positive slopes at the top). A line in the rank cannot represent "very steep for the cheapest funds, moderately steep for everyone else" without turning positive at the expensive end. Even at the bottom of the distribution the slope (−15.7) is too small for the 0.02–0.04% funds: 2 of 15 Table 5 funds are below −1.
+2. **The ≤ 10th and ≤ 15th percentile indicators are not usable: weak first stages** (F 11 and 1.6, versus 190 for the continuous version and 11–18 for the entry tiers). With a time-varying indicator the interaction's within-fund variation comes from the 16–17% of funds that switch status (on average 2.5–4 times each) plus the fund's own fee changes; Hausman IV × indicator predicts it poorly at these cutoffs. Column (b) returns a positive price coefficient for both groups (+17.2 and +35.6), column (c) huge imprecise negatives (−34 ± 26, −59). Neither should be read as an estimate.
+3. **The ≤ 20th percentile indicator (d) works and lands close to the entry tier**, with a lower cheap slope: non-cheap −9.3 (1.7), cheap −23.5, average elasticity −3.18, no upward-sloping demand, 19% negative MC, 7 of 15 Table 5 funds below −1 (entry tier at the same cutoff: −8.1, −40.8, −3.93, 13%, 11 of 15). The two classifications agree in 84% of fund-months, so most of the difference is in the cheap slope: −23.5 is not enough for the 2–4 basis point funds (needs about −33 at 0.03%).
+4. **Exogeneity.** As with every time-varying classifier tried before (lag-12 AUM tercile, lag-12 fee tercile, rolling cheap status), the lead tests reject: past demand shocks predict the lagged-fee indicator (t = −3.8 / −5.1 / −9.8 on ξ̂ from 1 / 3 / 12 months earlier for (d); +8.3 at 12 months for the continuous version), and ξ̂ is highly persistent within fund (AR(1) 0.975). A fund's fee rank a year ago responds to the demand shocks it experienced before that, and those shocks carry into today's ξ. The entry tier is fixed at the fund's first raw month, so it cannot pass this test by construction and does not need to.
+
+**Bottom line.** Interacting the fee with the percentile of the 12-month-lagged fee does not improve on the entry-based cheap tier. The continuous version turns the slope positive for the expensive half of the market, two of the three indicator cutoffs have weak instruments, and the one that works (≤ 20th pct) gives a flatter cheap slope (7 of 15 Table 5 funds above |e| = 1 versus 11) and fails the lead tests that the entry tier is immune to. Column (2′) with the entry tier remains the recommended alternative.
+
 ## Recommendation
 
 - **Report (2′), logit IV with the interaction, as the alternative demand model**, with the 15th or 20th percentile as the main cutoff and the others as robustness. State in a footnote that a random coefficient on the expense ratio is not identified once the interaction is included, citing the σ profile (objective 3.77 → 0 over σ = 0 → 6.5, upward-sloping demand past σ ≈ 2) and the J test (σ = 0.027 not rejected, p = 0.088). The paper's own index-market column (3) has σ = 0.027, so the logit IV extension loses no heterogeneity the paper had found.
