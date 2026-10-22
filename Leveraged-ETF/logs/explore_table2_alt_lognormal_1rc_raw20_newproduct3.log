@@ -1,0 +1,50 @@
+index raw20_newproduct_3_noint: N=108300, cheap share of funds 0.385; start sigma 0.500 pi 2.092 (0 checkpointed evaluations)
+--- BFGS stalled (objective 2.516 for 10+ evaluations); stopped and evaluated at the best point:
+index raw20_newproduct_3_noint: N=108300, cheap share of funds 0.385; start sigma -1.611 pi 0.946 (36 checkpointed evaluations)
+FINALIZE: evaluating at the best checkpointed point
+Problem Results Summary:
+================================================================================================================
+GMM    Objective     Projected    Reduced Hessian  Reduced Hessian  Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm  Min Eigenvalue   Max Eigenvalue   Shares   Condition Number  Condition Number 
+----  -----------  -------------  ---------------  ---------------  -------  ----------------  -----------------
+ 2    +2.2577E+00   +1.7198E+00     +0.0000E+00      +7.1090E+00       0       +3.4178E+04        +1.9810E+16   
+================================================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:15:54       Yes          0             2          1994         6272    
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+============================================================
+Types:  |  Sigma:      -prices     |    Pi:          1      
+------  |  -------  -------------  |  -------  -------------
+ Log    |  -prices   -1.6111E+00   |  -prices   +9.4639E-01 
+        |           (+1.2960E+00)  |           (+1.8817E-01)
+============================================================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+===============================================================================
+cheap*prices   product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  --------------------  --------------------  --------------------
+ -2.9816E+01       -1.4392E+00           +4.7322E-01           +6.0501E-01     
+(+1.5528E+00)     (+1.8161E-01)         (+3.8779E-02)         (+2.1590E-02)    
+===============================================================================
+solve time 956s
+                                                                                         name  p_last  e_last  e_mean  mu_bertrand_firm_mean  mc_bertrand_firm_mean
+                                                      iShares Trust: iShares Core S&P 500 ETF    0.03  -1.109  -1.965                  0.070                 -0.016
+                                                    iShares Trust: iShares Core MSCI EAFE ETF    0.07  -2.411  -3.045                  0.076                  0.012
+                                            iShares Trust: iShares Core US Aggregate Bond ETF    0.03  -1.140  -2.641                  0.075                  0.000
+                                               iShares Trust: iShares Russell 1000 Growth ETF    0.18  -5.791  -6.301                  0.096                  0.099
+                                                  iShares Trust: iShares Core S&P Mid-Cap ETF    0.05  -1.787  -3.540                  0.083                  0.021
+                                                                       SPDR S&P 500 ETF Trust    0.09  -2.942  -2.894                  0.045                  0.042
+                                                            SPDR Gold Trust: SPDR Gold Shares    0.40  -0.592  -0.626                  0.658                 -0.258
+                                 Select Sector SPDR Trust: Technology Select Sector SPDR Fund    0.08  -0.357  -0.489                  0.295                 -0.156
+                                  Select Sector SPDR Trust: Financial Select Sector SPDR Fund    0.08  -0.358  -0.489                  0.295                 -0.156
+                                                SPDR Series Trust: SPDR Portfolio S&P 500 ETF    0.02  -0.809  -1.181                  0.038                 -0.008
+Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares    0.02  -0.771  -0.809                  0.063                 -0.043
+                                Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares    0.04  -1.425  -1.642                  0.066                 -0.021
+                                    Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares    0.03  -1.110  -1.477                  0.065                 -0.027
+               Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares    0.03  -1.116  -1.528                  0.065                 -0.025
+           Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares    0.04  -1.438  -1.650                  0.066                 -0.021
+{'spec': 'raw20_newproduct_3_noint_lognormal_1RC_index', 'N': 108300, 'sigma': -1.6111, 'sigma_se': 1.296, 'pi': 0.9464, 'pi_se': 0.1882, 'median_price_coef_rest': -2.5764, 'avg_own_elasticity': -1.9904, 'share_abs_e_gt1': 0.4313, 'share_pos_e': 0.0, 'share_neg_mc': 0.6664, 'share_funds_cheap': 0.38
