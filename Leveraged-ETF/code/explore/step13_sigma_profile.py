@@ -17,7 +17,7 @@ import pyblp
 
 import common
 from step1_table5_elasticity import top15
-from step2_logit_screen import add_variables
+from step2_logit_screen import add_variables, summarize
 from tiers import raw_entry_tiers
 
 pyblp.options.verbose = False
@@ -56,6 +56,11 @@ def main(procs, tier, extra='BLP_IV_newproduct_3', grid=None):
                              n15_gt1=int((last.e.abs() > 1).sum()), n15_pos=int((last.e > 0).sum()),
                              spdr_gold_e=float(last.loc[29218, 'e']), secs=round(time.time() - t)))
             print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in rows[-1].items()}, flush=True)
+            if extra == 'none':  # calibrated sigma: full Table2_alt-style row (betas, clustered SEs, costs) and 15 funds
+                row, fund_rows = summarize(f'{tier}_sigma{s}_calibrated_BLP1RC', dict(tier='A'), d, res, funds, [], {},
+                                           {'sigma': float(s), 'sigma_se': np.nan, 'share_pos_e': float((e > 0).mean())})
+                pd.DataFrame([row]).to_csv(f'step13cal_{tier}_s{s}_summary.csv', index=False)
+                pd.DataFrame(fund_rows).to_csv(f'step13cal_{tier}_s{s}_funds.csv', index=False)
     out = pd.DataFrame(rows)
     pd.set_option('display.width', 220)
     print(out.round(4).to_string(index=False))

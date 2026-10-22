@@ -1,0 +1,9 @@
+The model may be under-identified. The total number of unfixed parameters is 6, which is more than the total number of moments, 5. Consider checking whether instruments were properly specified when initializing the problem, and whether parameters were properly configured when solving the problem.
+The model may be under-identified. The total number of unfixed parameters is 6, which is more than the total number of moments, 5. Consider checking whether instruments were properly specified when initializing the problem, and whether parameters were properly configured when solving the problem.
+The model may be under-identified. The total number of unfixed parameters is 6, which is more than the total number of moments, 5. Consider checking whether instruments were properly specified when initializing the problem, and whether parameters were properly configured when solving the problem.
+The model may be under-identified. The total number of unfixed parameters is 6, which is more than the total number of moments, 5. Consider checking whether instruments were properly specified when initializing the problem, and whether parameters were properly configured when solving the problem.
+ sigma  objective  b_rest  b_interaction  b_cheap_total  avg_own_e  share_pos_e  share_abs_e_gt1  n15_gt1  n15_pos  spdr_gold_e  secs
+ 0.001        0.0 -8.1315       -32.6405       -40.7720    -3.9309          0.0           0.9292       11        0      -3.2385   202
+ 0.027        0.0 -8.1312       -32.6396       -40.7708    -3.9307          0.0           0.9292       11        0      -3.2387   196
+ 0.100        0.0 -8.1290       -32.6394       -40.7684    -3.9290          0.0           0.9292       11        0      -3.2378   193
+ 0.250        0.0 -8.1192       -32.6507       -40.7699    -3.9209          0.0           0.9292       11        0      -3.2299   198
