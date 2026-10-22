@@ -1,0 +1,42 @@
+stage 0 at sigma=0.027: beta {'prices': np.float64(-7.051), 'cheap*prices': np.float64(-31.877), 'product_tracking_err': np.float64(-1.676), 'product_past_1yr_ret': np.float64(0.469), 'log_product_fund_age': np.float64(0.644)} (295s)
+optimal instruments computed (117s): 1 columns
+stage 1 start sigma 0.0270 (0 checkpointed evaluations)
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +3.9469E-19   +1.6847E-09   +0.0000E+00     0       +2.2861E+04        +5.8423E+04   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:20:40       Yes          5            10          6406         21440   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   -3.2489E-01 
+        (+6.4169E-01)
+=====================
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+==============================================================================================
+   prices      cheap*prices   product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  --------------------  --------------------  --------------------
+ +4.0367E+00    -1.7350E+01       -6.2542E-01           +4.4367E-01           +5.5142E-01     
+(+9.2377E-01)  (+9.7033E-01)     (+1.0367E-01)         (+3.8366E-02)         (+9.7785E-03)    
+==============================================================================================
+stage 1 solve time 1240s
+Traceback (most recent call last):
+  File "/home/user/cloud_claude/Leveraged-ETF/code/explore/step15_optimal_iv.py", line 87, in <module>
+    main(int(sys.argv[1]), sys.argv[2], float(sys.argv[3]) if len(sys.argv) > 3 else 0.027)
+  File "/home/user/cloud_claude/Leveraged-ETF/code/explore/step15_optimal_iv.py", line 76, in main
+    row, fund_rows = summarize(f'{tier}_optIV_1RC', dict(tier='A'), d, res, funds, [], {},
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/cloud_claude/Leveraged-ETF/code/explore/step2_logit_screen.py", line 219, in summarize
+    row = dict(spec=name, tier=sp['tier'], N=len(d), avg_own_elasticity=avg,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: dict() got multiple values for keyword argument 'objective'

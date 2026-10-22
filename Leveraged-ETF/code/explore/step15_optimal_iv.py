@@ -75,7 +75,7 @@ def main(procs, tier, sigma0=0.027):
         e = res.extract_diagonals(em).flatten()
         row, fund_rows = summarize(f'{tier}_optIV_1RC', dict(tier='A'), d, res, funds, [], {},
                                    {'sigma': float(res.sigma[0, 0]), 'sigma_se': float(res.sigma_se[0, 0]),
-                                    'share_pos_e': float((e > 0).mean()), 'objective': float(res.objective)})
+                                    'share_pos_e': float((e > 0).mean())})
     print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()})
     f = pd.DataFrame(fund_rows)
     print(f[['name', 'p_last', 'e_last', 'e_mean', 'mu_bertrand_firm_mean', 'mc_bertrand_firm_mean']].round(3).to_string(index=False))
