@@ -34,6 +34,12 @@ def main(name, procs, panel):
         d['broad'] = (d.broad_specialized == 'broad-based').astype(float)
         d['big3'] = 0.0
         extra_iv = 'BLP_IV_rival_funds1'
+        raws = [z for z in sp['z'] if z.startswith('raw') and z not in d]
+        if raws:  # raw-entry tiers from the LETF raw file (cutoffs across leveraged funds)
+            from tiers import LETF, raw_entry_tiers
+            rt = raw_entry_tiers(tuple(int(z[3:]) / 100 for z in raws), path=LETF, id_col='product_ticker')
+            for z in raws:
+                d[z] = d.product_ids.map(rt[z]).astype(float)
     funds = top15(d) if panel == 'index' else d.iloc[:0]
     d, formula, endog, excl, exog = build(d, sp)
     form, c = sp.get('form', 'lin'), sp.get('c')
@@ -65,11 +71,18 @@ def main(name, procs, panel):
         res = problem.solve(sigma0, optimization=pyblp.Optimization(bfgs, {'gtol': 1e-7}), se_type='clustered')
         print(res)
         print(f'solve time {time.time() - t:.0f}s', flush=True)
+        sig = {'sigma': float(res.sigma.flatten()[0]), 'sigma_se': float(res.sigma_se.flatten()[0])}
         if panel == 'lev':
-            print('mean own-price elasticity (per-market mean):',
-                  res.extract_diagonal_means(res.compute_elasticities()).flatten().mean())
+            e = res.extract_diagonals(res.compute_elasticities()).flatten()
+            row = dict(spec=name + '_BLP1RC_lev', N=len(d), avg_own_elasticity=float(
+                res.extract_diagonal_means(res.compute_elasticities()).flatten().mean()), share_pos_e=float((e > 0).mean()),
+                share_neg_mc_bertrand_firm=float((res.compute_costs().flatten() < 0).mean()), **sig)
+            for tl, b_, s_ in zip(res.beta_labels, res.beta.flatten(), res.beta_se.flatten()):
+                row[f'b[{tl}]'], row[f'se[{tl}]'] = b_, s_
+            print(row)
+            pd.DataFrame([row]).to_csv(f'step4_lev_{name}_summary.csv', index=False)
             return
-        row, fund_rows = summarize(name + '_BLP1RC', dict(tier=sp['tier']), d, res, funds, endog, {}, {})
+        row, fund_rows = summarize(name + '_BLP1RC', dict(tier=sp['tier']), d, res, funds, endog, {}, sig)
     print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()})
     pd.DataFrame([row]).to_csv(f'step4_{name}_summary.csv', index=False)
     pd.DataFrame(fund_rows).to_csv(f'step4_{name}_funds.csv', index=False)

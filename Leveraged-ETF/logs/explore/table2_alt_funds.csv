@@ -1,0 +1,121 @@
+cutoff,column,product_ids,name,p,cheap,e_last
+none (Table 2),OLS,16416,iShares Core S&P 500 ETF,0.03,0.0,-0.0272199297022577
+none (Table 2),OLS,56419,iShares Core MSCI EAFE ETF,0.07,0.0,-0.06513303769439184
+none (Table 2),OLS,16417,iShares Core US Aggregate Bond ETF,0.03,0.0,-0.027926673306634585
+none (Table 2),OLS,16448,iShares Russell 1000 Growth ETF,0.18,0.0,-0.16777442722127991
+none (Table 2),OLS,16437,iShares Core S&P Mid-Cap ETF,0.05,0.0,-0.046623696238928314
+none (Table 2),OLS,27635,SPDR S&P 500 ETF Trust,0.09,0.0,-0.08142555874439214
+none (Table 2),OLS,29218,SPDR Gold Shares,0.4,0.0,-0.3734545127969864
+none (Table 2),OLS,28279,Technology Select Sector SPDR Fund,0.08,0.0,-0.07469242335926934
+none (Table 2),OLS,28277,Financial Select Sector SPDR Fund,0.08,0.0,-0.07480158568492866
+none (Table 2),OLS,29250,SPDR Portfolio S&P 500 ETF,0.02,0.0,-0.018702208249861112
+none (Table 2),OLS,63885,Vanguard Total Stock Market Index Fund; Insti,0.02,0.0,-0.01793795160075181
+none (Table 2),OLS,31461,Vanguard 500 Index Fund; Admiral Shares,0.04,0.0,-0.0362454894671625
+none (Table 2),OLS,50485,Vanguard 500 Index Fund; ETF Shares,0.03,0.0,-0.027242468075101146
+none (Table 2),OLS,31466,Vanguard Total Stock Market Index Fund; ETF C,0.03,0.0,-0.02737823735562538
+none (Table 2),OLS,31462,Vanguard Total Stock Market Index Fund; Admir,0.04,0.0,-0.036586715329696186
+none (Table 2),IV,16416,iShares Core S&P 500 ETF,0.03,0.0,-0.1627339349250492
+none (Table 2),IV,56419,iShares Core MSCI EAFE ETF,0.07,0.0,-0.38939687330459183
+none (Table 2),IV,16417,iShares Core US Aggregate Bond ETF,0.03,0.0,-0.1669591907938703
+none (Table 2),IV,16448,iShares Russell 1000 Growth ETF,0.18,0.0,-1.0030368564563417
+none (Table 2),IV,16437,iShares Core S&P Mid-Cap ETF,0.05,0.0,-0.2787390574738226
+none (Table 2),IV,27635,SPDR S&P 500 ETF Trust,0.09,0.0,-0.48680146212305
+none (Table 2),IV,29218,SPDR Gold Shares,0.4,0.0,-2.232692113746715
+none (Table 2),IV,28279,Technology Select Sector SPDR Fund,0.08,0.0,-0.44654751482820293
+none (Table 2),IV,28277,Financial Select Sector SPDR Fund,0.08,0.0,-0.44720014012865106
+none (Table 2),IV,29250,SPDR Portfolio S&P 500 ETF,0.02,0.0,-0.11181086702201075
+none (Table 2),IV,63885,Vanguard Total Stock Market Index Fund; Insti,0.02,0.0,-0.10724177029168841
+none (Table 2),IV,31461,Vanguard 500 Index Fund; Admiral Shares,0.04,0.0,-0.21669310644055598
+none (Table 2),IV,50485,Vanguard 500 Index Fund; ETF Shares,0.03,0.0,-0.16286868024363532
+none (Table 2),IV,31466,Vanguard Total Stock Market Index Fund; ETF C,0.03,0.0,-0.16368037481828435
+none (Table 2),IV,31462,Vanguard Total Stock Market Index Fund; Admir,0.04,0.0,-0.21873312005983045
+10th pct,OLS,16416,iShares Core S&P 500 ETF,0.03,1.0,-0.022909711030139147
+10th pct,OLS,56419,iShares Core MSCI EAFE ETF,0.07,1.0,-0.054819358037133795
+10th pct,OLS,16417,iShares Core US Aggregate Bond ETF,0.03,0.0,-0.029779509976475754
+10th pct,OLS,16448,iShares Russell 1000 Growth ETF,0.18,0.0,-0.17890567108996278
+10th pct,OLS,16437,iShares Core S&P Mid-Cap ETF,0.05,0.0,-0.04971701469925847
+10th pct,OLS,27635,SPDR S&P 500 ETF Trust,0.09,1.0,-0.0685319926137399
+10th pct,OLS,29218,SPDR Gold Shares,0.4,0.0,-0.39823190780677925
+10th pct,OLS,28279,Technology Select Sector SPDR Fund,0.08,0.0,-0.079648003260957
+10th pct,OLS,28277,Financial Select Sector SPDR Fund,0.08,0.0,-0.07976440812344576
+10th pct,OLS,29250,SPDR Portfolio S&P 500 ETF,0.02,0.0,-0.019943034067955112
+10th pct,OLS,63885,Vanguard Total Stock Market Index Fund; Insti,0.02,1.0,-0.015097514657128606
+10th pct,OLS,31461,Vanguard 500 Index Fund; Admiral Shares,0.04,1.0,-0.030506092371346993
+10th pct,OLS,50485,Vanguard 500 Index Fund; ETF Shares,0.03,1.0,-0.02292868049900188
+10th pct,OLS,31466,Vanguard Total Stock Market Index Fund; ETF C,0.03,1.0,-0.02304295099924208
+10th pct,OLS,31462,Vanguard Total Stock Market Index Fund; Admir,0.04,1.0,-0.03079328583555378
+10th pct,IV,16416,iShares Core S&P 500 ETF,0.03,1.0,-1.9921220378151125
+10th pct,IV,56419,iShares Core MSCI EAFE ETF,0.07,1.0,-4.766836696498829
+10th pct,IV,16417,iShares Core US Aggregate Bond ETF,0.03,0.0,-0.18415425095002586
+10th pct,IV,16448,iShares Russell 1000 Growth ETF,0.18,0.0,-1.1063392203669433
+10th pct,IV,16437,iShares Core S&P Mid-Cap ETF,0.05,0.0,-0.30744628130704
+10th pct,IV,27635,SPDR S&P 500 ETF Trust,0.09,1.0,-5.959223693463783
+10th pct,IV,29218,SPDR Gold Shares,0.4,0.0,-2.4626361798595364
+10th pct,IV,28279,Technology Select Sector SPDR Fund,0.08,0.0,-0.4925372644403257
+10th pct,IV,28277,Financial Select Sector SPDR Fund,0.08,0.0,-0.49325710335894757
+10th pct,IV,29250,SPDR Portfolio S&P 500 ETF,0.02,0.0,-0.12332622341187872
+10th pct,IV,63885,Vanguard Total Stock Market Index Fund; Insti,0.02,1.0,-1.3128097349257526
+10th pct,IV,31461,Vanguard 500 Index Fund; Admiral Shares,0.04,1.0,-2.652668068167018
+10th pct,IV,50485,Vanguard 500 Index Fund; ETF Shares,0.03,1.0,-1.9937715346995302
+10th pct,IV,31466,Vanguard Total Stock Market Index Fund; ETF C,0.03,1.0,-2.003707966525369
+10th pct,IV,31462,Vanguard Total Stock Market Index Fund; Admir,0.04,1.0,-2.677641077578186
+15th pct,OLS,16416,iShares Core S&P 500 ETF,0.03,1.0,-0.04417881452301495
+15th pct,OLS,56419,iShares Core MSCI EAFE ETF,0.07,1.0,-0.10571299864093366
+15th pct,OLS,16417,iShares Core US Aggregate Bond ETF,0.03,1.0,-0.04532588194584166
+15th pct,OLS,16448,iShares Russell 1000 Growth ETF,0.18,1.0,-0.27230324923650395
+15th pct,OLS,16437,iShares Core S&P Mid-Cap ETF,0.05,1.0,-0.07567174680639087
+15th pct,OLS,27635,SPDR S&P 500 ETF Trust,0.09,1.0,-0.13215628021636622
+15th pct,OLS,29218,SPDR Gold Shares,0.4,0.0,-0.26670992721331743
+15th pct,OLS,28279,Technology Select Sector SPDR Fund,0.08,0.0,-0.05334307155197342
+15th pct,OLS,28277,Financial Select Sector SPDR Fund,0.08,0.0,-0.053421031986064786
+15th pct,OLS,29250,SPDR Portfolio S&P 500 ETF,0.02,0.0,-0.013356551949769377
+15th pct,OLS,63885,Vanguard Total Stock Market Index Fund; Insti,0.02,1.0,-0.029113867866701455
+15th pct,OLS,31461,Vanguard 500 Index Fund; Admiral Shares,0.04,1.0,-0.058827586036449206
+15th pct,OLS,50485,Vanguard 500 Index Fund; ETF Shares,0.03,1.0,-0.04421539502136276
+15th pct,OLS,31466,Vanguard Total Stock Market Index Fund; ETF C,0.03,1.0,-0.044435752896192456
+15th pct,OLS,31462,Vanguard Total Stock Market Index Fund; Admir,0.04,1.0,-0.05938140650021333
+15th pct,IV,16416,iShares Core S&P 500 ETF,0.03,1.0,-1.7726028447684774
+15th pct,IV,56419,iShares Core MSCI EAFE ETF,0.07,1.0,-4.2415615752275535
+15th pct,IV,16417,iShares Core US Aggregate Bond ETF,0.03,1.0,-1.818627053403244
+15th pct,IV,16448,iShares Russell 1000 Growth ETF,0.18,1.0,-10.925723549799454
+15th pct,IV,16437,iShares Core S&P Mid-Cap ETF,0.05,1.0,-3.036205364626303
+15th pct,IV,27635,SPDR S&P 500 ETF Trust,0.09,1.0,-5.302555100103758
+15th pct,IV,29218,SPDR Gold Shares,0.4,0.0,-6.390596468093771
+15th pct,IV,28279,Technology Select Sector SPDR Fund,0.08,0.0,-1.2781453177206412
+15th pct,IV,28277,Financial Select Sector SPDR Fund,0.08,0.0,-1.28001331596113
+15th pct,IV,29250,SPDR Portfolio S&P 500 ETF,0.02,0.0,-0.32003433320964564
+15th pct,IV,63885,Vanguard Total Stock Market Index Fund; Insti,0.02,1.0,-1.1681464421333385
+15th pct,IV,31461,Vanguard 500 Index Fund; Admiral Shares,0.04,1.0,-2.3603608988817175
+15th pct,IV,50485,Vanguard 500 Index Fund; ETF Shares,0.03,1.0,-1.7740705775751286
+15th pct,IV,31466,Vanguard Total Stock Market Index Fund; ETF C,0.03,1.0,-1.7829120777377636
+15th pct,IV,31462,Vanguard Total Stock Market Index Fund; Admir,0.04,1.0,-2.3825820413039036
+20th pct,OLS,16416,iShares Core S&P 500 ETF,0.03,1.0,-0.054070541506625845
+20th pct,OLS,56419,iShares Core MSCI EAFE ETF,0.07,1.0,-0.1293823553782041
+20th pct,OLS,16417,iShares Core US Aggregate Bond ETF,0.03,1.0,-0.05547443967289602
+20th pct,OLS,16448,iShares Russell 1000 Growth ETF,0.18,1.0,-0.33327250400893443
+20th pct,OLS,16437,iShares Core S&P Mid-Cap ETF,0.05,1.0,-0.09261480577850985
+20th pct,OLS,27635,SPDR S&P 500 ETF Trust,0.09,1.0,-0.1617463418145302
+20th pct,OLS,29218,SPDR Gold Shares,0.4,0.0,-0.18285472516250773
+20th pct,OLS,28279,Technology Select Sector SPDR Fund,0.08,0.0,-0.03657168966252503
+20th pct,OLS,28277,Financial Select Sector SPDR Fund,0.08,0.0,-0.03662513886817806
+20th pct,OLS,29250,SPDR Portfolio S&P 500 ETF,0.02,1.0,-0.037150666386761476
+20th pct,OLS,63885,Vanguard Total Stock Market Index Fund; Insti,0.02,1.0,-0.03563252246356274
+20th pct,OLS,31461,Vanguard 500 Index Fund; Admiral Shares,0.04,1.0,-0.07199920294061697
+20th pct,OLS,50485,Vanguard 500 Index Fund; ETF Shares,0.03,1.0,-0.0541153124534157
+20th pct,OLS,31466,Vanguard Total Stock Market Index Fund; ETF C,0.03,1.0,-0.054385008907381974
+20th pct,OLS,31462,Vanguard Total Stock Market Index Fund; Admir,0.04,1.0,-0.07267702493961102
+20th pct,IV,16416,iShares Core S&P 500 ETF,0.03,1.0,-1.183557393377627
+20th pct,IV,56419,iShares Core MSCI EAFE ETF,0.07,1.0,-2.832067869372462
+20th pct,IV,16417,iShares Core US Aggregate Bond ETF,0.03,1.0,-1.214287510146196
+20th pct,IV,16448,iShares Russell 1000 Growth ETF,0.18,1.0,-7.295046898705711
+20th pct,IV,16437,iShares Core S&P Mid-Cap ETF,0.05,1.0,-2.027258005210768
+20th pct,IV,27635,SPDR S&P 500 ETF Trust,0.09,1.0,-3.540487544089296
+20th pct,IV,29218,SPDR Gold Shares,0.4,0.0,-3.2385352578828437
+20th pct,IV,28279,Technology Select Sector SPDR Fund,0.08,0.0,-0.6477202396994516
+20th pct,IV,28277,Financial Select Sector SPDR Fund,0.08,0.0,-0.648666877183713
+20th pct,IV,29250,SPDR Portfolio S&P 500 ETF,0.02,1.0,-0.8131959593112109
+20th pct,IV,63885,Vanguard Total Stock Market Index Fund; Insti,0.02,1.0,-0.7799651017232023
+20th pct,IV,31461,Vanguard 500 Index Fund; Admiral Shares,0.04,1.0,-1.5760002874619092
+20th pct,IV,50485,Vanguard 500 Index Fund; ETF Shares,0.03,1.0,-1.1845373906849441
+20th pct,IV,31466,Vanguard Total Stock Market Index Fund; ETF C,0.03,1.0,-1.1904408128287818
+20th pct,IV,31462,Vanguard Total Stock Market Index Fund; Admir,0.04,1.0,-1.5908372248394476

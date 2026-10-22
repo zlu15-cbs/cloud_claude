@@ -82,6 +82,13 @@ def add_variables(d):
         d['_flag'] = (d.prices <= cut + 1e-12).astype(int)
         d[name] = rolling_status(d, w)
     d = d.drop(columns='_flag')
+    # A11: raw-entry tiers (fee at the fund's first raw month vs that month's percentile across all raw index funds)
+    import os
+    if os.path.exists('nonLev_funds_product_month_level_v2_patched.csv'):
+        from tiers import raw_entry_tiers
+        rt = raw_entry_tiers((0.10, 0.15, 0.20, 0.30))
+        for c in ('raw10', 'raw15', 'raw20', 'raw30'):
+            d[c] = d.product_ids.map(rt[c]).astype(float)
     # A8: share class from the fund name (mutual funds only; ETFs are the base group)
     nm = d.product_fund_name.fillna('').str.lower()
     mf = d.ETF_ind == 0
@@ -133,6 +140,8 @@ def spec_list():
         s['A10_' + n] = dict(tier='C', z=[n], controls=[n])
     s['A9b_low_fee12_tercile'] = dict(tier='A', z=['fee12_t1'])
     s['A9b_low_fee12_40pct'] = dict(tier='A', z=['fee12_b40'])
+    for q in (10, 15, 20, 30):
+        s[f'A11_raw{q}'] = dict(tier='A', z=[f'raw{q}'])
     s['A8_share_class'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other'])
     s['A8_share_class_broad'] = dict(tier='A', z=['sc_inst', 'sc_retail', 'sc_mf_other', 'broad'])
     for c in (0.01, 0.005, 0.02):
