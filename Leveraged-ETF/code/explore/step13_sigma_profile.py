@@ -7,6 +7,7 @@ so the profile shows whether the objective has a sensible root near sigma = 0 or
 
     python step13_sigma_profile.py PROCESSES raw20 [EXTRA_IV] [sigma grid, comma separated]
 """
+import os
 import sys
 import time
 
@@ -41,7 +42,8 @@ def main(procs, tier, extra='BLP_IV_newproduct_3', grid=None):
         problem = pyblp.Problem((X1, X2), d, integration=integ)
         for s in grid:
             t = time.time()
-            res = problem.solve(np.array([[s]]), optimization=pyblp.Optimization('return'), method='1s', se_type='clustered')
+            res = problem.solve(np.array([[s]]), optimization=pyblp.Optimization('return'),
+                                method=os.environ.get('METHOD', '1s'), se_type='clustered')  # METHOD=2s: Hansen J at fixed sigma
             em = res.compute_elasticities()
             e = res.extract_diagonals(em).flatten()
             last = d.assign(e=e).sort_values('month_t').groupby('product_ids').last().loc[funds.product_ids]
@@ -57,7 +59,7 @@ def main(procs, tier, extra='BLP_IV_newproduct_3', grid=None):
     out = pd.DataFrame(rows)
     pd.set_option('display.width', 220)
     print(out.round(4).to_string(index=False))
-    out.to_csv(f'step13_sigma_profile_{tier}_{extra.replace("BLP_IV_", "")}.csv', index=False)
+    out.to_csv(f'step13_sigma_profile_{tier}_{extra.replace("BLP_IV_", "")}{"_2s" if os.environ.get("METHOD") == "2s" else ""}.csv', index=False)
     if extra == 'none':  # calibrated-sigma run: also save the 15 funds at each grid point
         pass
 
