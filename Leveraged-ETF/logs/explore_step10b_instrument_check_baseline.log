@@ -1,0 +1,7 @@
+panel         instruments  b_price    se  hansen_J  J_pvalue  avg_own_e
+index             Hausman   -5.606 1.310       NaN       NaN     -1.614
+index BLP_IV_newproduct_1   -7.013 0.973       NaN       NaN     -2.019
+index                both   -6.772 0.837     0.576     0.448     -1.950
+  lev             Hausman   -3.712 0.328       NaN       NaN     -4.892
+  lev BLP_IV_rival_funds1   -5.055 0.414       NaN       NaN     -6.662
+  lev                both   -4.227 0.222    14.206     0.000     -5.571

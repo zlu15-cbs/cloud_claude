@@ -40,6 +40,9 @@ def main(name, procs, panel):
             rt = raw_entry_tiers(tuple(int(z[3:]) / 100 for z in raws), path=LETF, id_col='product_ticker')
             for z in raws:
                 d[z] = d.product_ids.map(rt[z]).astype(float)
+    if os.environ.get('EXTRA_IV') == 'hsq':  # identify sigma with the squared Hausman IV instead of the notebook's extra IV
+        d['_hausman_sq'] = d['demand_instruments0'] ** 2
+        extra_iv = '_hausman_sq'
     funds = top15(d) if panel == 'index' else d.iloc[:0]
     d, formula, endog, excl, exog = build(d, sp)
     form, c = sp.get('form', 'lin'), sp.get('c')
@@ -48,6 +51,8 @@ def main(name, procs, panel):
     for k, v in enumerate(sp['z'], start=k0 + 1):
         d[f'demand_instruments{k}'] = d[f'demand_instruments{k0}'] * d[v]
     x2 = f'0 + log(prices + {c})' if form == 'log' else '0 + prices'
+    if os.environ.get('EXTRA_IV') == 'hsq':
+        name += '_hsq'
     rc_on_cheap = os.environ.get('RC_ON') == 'cheap'  # put the single RC on price x cheap (first z) instead of price
     if rc_on_cheap:
         x2 = f'0 + I(prices*{sp["z"][0]})'
