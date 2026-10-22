@@ -27,7 +27,8 @@ Detailed companion files:
    - **BLP:** no credible one-RC version exists with the available instruments. The notebook's extra index instrument conflicts with the Hausman IV once the interaction is added. See section 6 and `Table2_alt.md`.
 5. **`Table2_alt.md`: Table 2 with the interaction.**
    - Logit IV at the 10th, 15th and 20th percentiles lifts 10, 14 and 11 of the 15 funds above 1.
-   - No one-RC BLP version is credible: the instruments conflict, and with a consistent instrument the normal RC yields upward-sloping demand for non-cheap funds (section 6). Table A7 col 3 as coded has two RCs and is exactly identified, and its saved output does not match the published table.
+   - One-RC BLP: σ is not identified once the interaction enters (flat objective; the paper's σ = 0.027 not rejected, J p = 0.088); every estimator that lets σ float gives upward-sloping demand for non-cheap funds. The reportable BLP column holds σ at the paper's 0.027 (section 6).
+   - Table A7 col (3) in the 26-Sep notebook is this same design and re-runs exactly (β −6.934, σ 2.25); my earlier "unsaved run" conclusion is withdrawn. It lifts only 2 of the 15 Table 5 funds above 1.
    - The published leveraged Table 2 col 3 instruments also fail an overidentification test (J = 14.2, p < 0.001).
 6. **Log price is the most robust way to lift the elasticities, but it leaves the linear specification.**
    - Logit IV: every fund-month is above |e| = 1, with F = 824 and 3% negative marginal cost.
@@ -175,27 +176,19 @@ Robustness of the 20th-percentile spec:
   - Always optimize both steps before reporting.
 - **Practical:** each index-market BLP evaluation takes 1–11 minutes. The container restarted several times. All long runs now use parallel workers (`pyblp.parallel`, one BLAS thread each) and per-evaluation checkpoints.
 
-## 6. Table2_alt and the BLP versions of the interaction *(run; `Table2_alt.md`, `logs/explore_table2_alt_*`, `logs/explore_step10*`, `step11*`, `step12*`)*
+## 6. Table2_alt, the one-RC BLP, and Table A7 col 3 *(run; `Table2_alt.md`, `RESULTS_A7_col3.md`, `logs/explore_table2_alt_*`, `explore_step10*`–`step15*`, `explore_a7_col3.log`)*
 
-`Table2_alt.md` reports Table 2 with price × cheap added for index funds (raw-entry tier at the 10th, 15th and 20th percentiles). Leveraged funds have no interaction, per the paper's A7, where it is not significant.
+`Table2_alt.md` reports Table 2 with price × cheap added for index funds (raw-entry tier at the 10th, 15th and 20th percentiles). Leveraged funds have no interaction, per the paper's A7.
 
-- **Logit IV with the interaction is the usable alternative.**
-  - Cheap funds' coefficient is −41 to −69; the rest's is −6 to −16. Weakest F is 10.9–18.3.
-  - No upward-sloping demand. The average elasticity is −3.2 to −6.3, and negative marginal cost falls to 5–31% of fund-months.
-  - 10, 14 and 11 of the 15 Table 5 funds are above |e| = 1 at the three cutoffs.
-- **No one-RC BLP version (one random coefficient, on the expense ratio) is credible.** Cheap funds always come out sensibly; non-cheap funds do not.
-  - *Notebook instruments* (`BLP_IV_newproduct_1`, also × cheap): the non-cheap mean goes to about 0 with a large σ, so part of the market has upward-sloping demand. The instruments conflict: with the interaction, `newproduct_1` alone implies a positive non-cheap slope (+1.3 to +3.2) against the Hausman IV's −6 to −16, and Hansen J rejects (p < 0.001).
-  - *Squared Hausman IV:* σ goes to 0 (logit), the restrictions are rejected, and only 2–7 of 15 funds are above 1.
-  - *Uninteracted `newproduct_3`* (exactly identified; the best candidate from a screen of 24 instruments): σ = 6.5–9.4 (significant), with a non-cheap mean of +0.9, −1.7 and +9.9 at the three cutoffs. SPDR Gold's elasticity is +3.5 to +8.6, and the average is +0.35 to +4.59.
-  - *Also tried:* a lognormal RC on −price (degenerate, price coefficient → 0) and the RC on price × cheap (not identified, positive non-cheap slope).
-- **Mechanism** *(inference)*. A normal RC on the expense ratio can explain "cheap funds are more elastic" through sorting: price-sensitive consumers hold cheap funds. That leaves a positive-coefficient tail in expensive funds. The interaction term and σ compete for the same pattern.
-- **Table A7 col 3 as coded** in the broadspecial notebook:
-  - It has **two** RCs (price and price × broad) and four instruments, so it is exactly identified. That is why it "converges".
-  - Its saved output (−32.53 / +10.84, σ on price × broad = 13.93) does not match the published A7 (−6.934 / −6.186).
-  - Under the broad interaction, `newproduct_1` also conflicts with the Hausman IV (J = 96).
-  - With **one** RC on the expense ratio, A7 gives −8.87 / −3.58, σ = 0.64 (not identified), objective 93.5 (rejected). Signs are still plausible, because under broad the conflicting instrument still implies negative slopes.
-  - The coauthor will provide the code behind the published A7 columns.
-- **Leveraged instruments.** The leveraged notebook's two instruments already disagree in the published Table 2 Panel B spec (Hausman −3.71, `BLP_IV_rival_funds1` −5.06; J = 14.2, p < 0.001).
+- **Logit IV with the interaction is the usable alternative:** cheap coefficient −41 to −69 against −6 to −16 for the rest, no upward-sloping demand, average elasticity −3.2 to −6.3, negative MC down to 5–31%, and 10 / 14 / 11 of the 15 Table 5 funds above |e| = 1.
+- **One RC on the expense ratio: σ is not identified once the interaction is in.**
+  - A profile of the GMM objective over σ (`explore_step13_sigma_profile_raw20.log`) is shallow and monotone: 3.77 at σ = 0 to 0 at σ = 6.5, with the economics breaking past σ ≈ 2 (54% upward-sloping demand at the root). The cheap slope and the Table 5 count (10–11 above 1) are stable at every σ; only the non-cheap slope moves.
+  - Hansen J with efficient weighting at the paper's σ = 0.027: 2.92 on 1 df, p = 0.088. The paper's σ is not rejected.
+  - Every estimator that lets σ float breaks the non-cheap funds: notebook instruments, squared Hausman, uninteracted `newproduct_3`, the A7 design (`newproduct_1` uninteracted: σ 5.6, SPDR Gold +2.0), Chamberlain optimal instruments from the Hausman IV (non-cheap +4.0), and a lognormal RC (stalls; no e > 0 but 67% negative MC). Entered alone, every extra instrument in the data implies a non-cheap slope near zero or positive, against −6 to −16 from the Hausman IV.
+  - **Reportable BLP column: σ held at the paper's 0.027** (H, H × cheap; exactly identified): non-cheap −6.2 / −16.0 / −8.1, cheap −68.6 / −61.1 / −40.8, average elasticity −3.18 / −6.27 / −3.93, 10 / 14 / 11 of 15 above 1, no upward-sloping demand. Numerically this is the logit IV column; the σ profile and the J test are its justification.
+- **Table A7 col 3 (26-Sep notebook, commit `f2d8bff`), corrected.** My earlier statement that the published A7 col (3) came from an unsaved two-RC run was based on the 25-May notebook and is withdrawn. The current notebook's col (3) is one RC on the expense ratio with the interaction in X1 and instruments Hausman, Hausman × broad and `BLP_IV_newproduct_1` **uninteracted** (the × broad version is built but never enters). It re-runs exactly: β −6.934 (1.295), × broad −6.186 (0.607), σ 2.2525 (0.680), average elasticity −2.346; clustered SEs 1.214 / 0.653 / 0.768. It lifts only 2 of the 15 Table 5 funds above |e| = 1. It works for broad because `newproduct_1` alone implies negative slopes for both groups there (J p = 0.045), whereas under the cheap split it implies a non-cheap slope of +2.6 / −1.0 / +0.5.
+- **Data note from the A7 run.** `broad_specialized` is inconsistent for S&P 500 funds: 22.6% of SPX fund-months are "specialized", including SPY in all 166 months, SPDR Portfolio S&P 500 and VTI's ETF class, while other share classes of the same portfolios are "broad-based".
+- **Leveraged instruments.** The leveraged notebook's two instruments already disagree in the published Table 2 Panel B col 3 (Hausman −3.71, `BLP_IV_rival_funds1` −5.06; J = 14.2, p < 0.001).
 
 ## 7. Recommendations and what is worth exploring next
 
@@ -206,9 +199,10 @@ Robustness of the 20th-percentile spec:
    - Use one averaging definition across Table 2's columns.
    - State the Bull-only filter and the panels' end months.
 2. **If the linear model stays as is,** say plainly that it implies Lerner > 1 (negative marginal cost) for the cheapest funds, and give a reason. Securities-lending income is the natural candidate, and could be modelled as a negative cost component.
-3. **If you add fee-level heterogeneity in the linear model,** report the logit IV version from `Table2_alt.md`: the raw-entry tier, with the 15th or 20th percentile as the main cutoff and the others as robustness. Do not report a BLP version until an extra instrument agrees with the Hausman IV under the interaction.
+3. **If you add fee-level heterogeneity in the linear model,** report from `Table2_alt.md` the logit IV column and the BLP column with σ held at the Table 2 estimate (0.027), with the 15th or 20th percentile as the main cutoff and the others as robustness, and a footnote giving the σ profile and J test. Do not report a column with σ estimated jointly with the interaction.
 4. **Worth exploring:**
-   - *An extra instrument for the random coefficient that passes an overidentification test with the Hausman IV,* both under the interaction (index) and in the published spec (leveraged).
+   - *An instrument for the random coefficient that agrees with the Hausman IV under the cheap interaction.* None of the 24 in the data does; differentiation instruments built from the Hausman IV and Chamberlain optimal instruments do not either. A cost shifter with within-fund variation is the natural candidate.
+   - *The `broad_specialized` label for S&P 500 funds* (SPY coded specialized), since A7 is identified from it.
    - *Why Vanguard drives the non-cheap slope.* Which Vanguard funds changed fees, and are those changes plausibly exogenous (e.g. Vanguard's at-cost structure passing through scale economies)? A firm-specific slope for Vanguard is one way to make this explicit.
    - *Stronger instruments for any random coefficient on price* (index market): cost shifters with real within-fund variation, or the coauthors' 3-RC rework.
    - *Data cleaning:* fix SPY's fee, review the 43 temporary fee episodes, and check how expense ratios are sourced (annual prospectus values vs monthly).
@@ -229,3 +223,6 @@ Robustness of the 20th-percentile spec:
 | Fee percentiles, SPY/VTI | `code/explore/fee_percentiles_spy_vti.py` |
 | Table 2 with the interaction | `Table2_alt.md`, `code/explore/table2_alt_logit.py`, `step4_blp_shortlist.py`, `step9_lognormal_1rc.py`, `make_table2_alt.py` |
 | Instrument conflict checks | `code/explore/step10_instrument_check.py`, `step10b_instrument_check_baseline.py` |
+| σ identification (profile, J at fixed σ, calibrated σ) | `code/explore/step13_sigma_profile.py` |
+| Instrument screens, differentiation and optimal IVs | `code/explore/step12_iv_screen.py`, `step12b_iv_screen_uninteracted.py`, `step14_diff_iv_screen.py`, `step15_optimal_iv.py` |
+| Table A7 col 3 re-run | `RESULTS_A7_col3.md`, `code/explore/a7_col3.py` |

@@ -86,4 +86,16 @@ The published column (3) design — one RC on the expense ratio, the interaction
 
 Under broad-based, both instruments put negative slopes on both groups, so the BLP's σ (2.25) is pinned by a third moment that agrees with the first two, and the elasticities stay sensible. Under the cheap split, the third moment wants a non-cheap slope near zero, and the one-RC BLP delivers it by inflating σ (section 6 of `FINDINGS_SUMMARY.md`; σ profile in `logs/explore_step13_sigma_profile_raw20.log`).
 
-{{A7_DESIGN_CHEAP}}
+**The A7 column (3) design applied to the cheap-fund tier (run; `logs/explore_table2_alt_blp_index_raw20_a7design_newproduct1.log`).** One RC on the expense ratio, price × cheap (20th-percentile raw-entry tier) in X1, instruments Hausman, Hausman × cheap and `BLP_IV_newproduct_1` uninteracted; exactly identified, converged.
+
+| | Estimate (clustered SE) |
+|---|---|
+| Expense ratio (non-cheap) | −1.32 (1.40) |
+| Expense ratio × cheap | −40.85 (5.68) |
+| RC sd, expense ratio | 5.58 (1.23) |
+| Average own-price elasticity | −0.58 |
+| SPDR Gold Shares, own elasticity | **+2.0** |
+| Table 5 funds with \|e\| > 1 / with e > 0 | 11 / 1 |
+
+Same design, opposite outcome: under the cheap split the third instrument pulls σ to 5.6 and the non-cheap slope to zero, and part of the market gets upward-sloping demand. The diagnosis and the usable alternative (σ held at the paper's Table 2 col 3 value) are in `Table2_alt.md`.
+
