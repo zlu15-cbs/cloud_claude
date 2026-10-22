@@ -1,0 +1,170 @@
+# Everything else that was explored, and why it was set aside
+
+Companion to `MAIN_SPEC_entry_cheap_tier.md`, which holds the recommended specification. This file records the other routes to larger own-price elasticities for the big index funds: other interactions, time-varying fee classifiers, log price, the one-random-coefficient BLP with the interaction, and the paper's Table A7 column (3). An appendix lists the facts about Table 5 and the data found along the way. Statements marked *inference* are my reading; everything else was run (scripts in `code/explore/`, logs in `logs/`, result tables in `logs/explore/*.csv`). The paper's numbers were never changed.
+
+Throughout, unless stated: logit IV on the Table 2 Panel A sample (N = 108,300, Jan 2010 – Aug 2024), notebook controls, fund and month FE, SE clustered by month; each p × z term is instrumented by Hausman IV × z; F is the Sanderson–Windmeijer first-stage F, minimum over the endogenous terms. "Table 5 > 1" counts the 15 Table 5 funds with |e| > 1 in their last month (Table 2 logit IV: 2 of 15).
+
+**Why this is hard in a linear-in-fee model.** With shares this small the own elasticity is α·p. |e| = 1 at p = 0.03% needs α ≈ −33, and −25 to −52 across the 2–4 basis point funds; −5.6 for Russell 1000 Growth (0.18%), −2.5 for SPDR Gold (0.40%). The pooled estimate is −5.6 (logit IV) to −8.3 (3 RC). Any fix therefore either gives low-fee funds a much steeper slope (an interaction) or changes the functional form (log price).
+
+---
+
+## 1. Interactions with fixed fund characteristics (`logs/explore_step2_screen.log`, `explore_step2_A7_combos.log`, `explore_step2_shareclass_pastfee.log`)
+
+| Spec | Price terms, coef (SE) | min F | Avg e | Table 5 > 1 | Share e > 0 | Neg. MC (firm Bertrand) | Verdict |
+|---|---|---|---|---|---|---|---|
+| Table 2 logit IV | −5.606 (1.310) | 33.6 | −1.61 | 2 | 0 | 0.52 | baseline |
+| Broad-based (the paper's A7 col 2) | −7.503 (1.770); × broad −5.278 (0.372) | 53.0 | −2.86 | 2 | 0 | 0.40 | reproduces A7 exactly; too small |
+| ETF vs mutual fund | −2.988 (1.205); × ETF −1.889 (0.220) | 28.6 | −1.15 | 1 | 0 | 0.60 | too small |
+| Big 3 | −4.141 (1.261); × Big3 −4.397 (0.382) | 36.6 | −1.67 | 2 | 0 | 0.48 | too small |
+| Firm dummies (Vanguard, BlackRock, SSGA) | −7.406; × Vanguard −6.453, × BlackRock −5.528, × SSGA −1.935 | 74.1 | −2.68 | 2 | 0 | 0.37 | too small |
+| Share class (institutional/Admiral, retail, other MF, ETF; parsed from names) | institutional −11.2, ETF −9.2, retail −7.4 | | | 2 | 0 | | 12 of the 15 are ETFs; too small |
+| Asset class (5 groups from `market_m_cluster`) | base **+2.271**; US large blend −10.7, other US equity −14.0, intl −4.6, bond −5.2 | 87.4 | −0.90 | 1 | **0.39** | 0.35 | "other" group (incl. SPDR Gold, e = +0.90) slopes upward |
+| AUM tercile at first sample month | base **+8.133**; low −17.9, mid −8.0 | 55.9 | −0.42 | 2 | **0.67** | 0.02 | largest funds slope upward |
+| Fee tercile at first **sample** month | −3.714 (6.133); low −52.7, mid −12.0 | 22.6 | −3.75 | 13 | 0 | 0.06 | works in logit IV, but see section 2 (ties) and section 4 (BLP: base turns +9.5) |
+| Broad + fee tercile | −0.07; × broad **+5.46**; fee terciles −51.1 / −14.1 | 48.7 | −2.11 | 12 | 0.10 | 0.42 | broad effect flips sign once fee tier is in |
+| Firms + fee tercile; broad + firms + fee tercile | base **+17.3**; × Vanguard +11.2 | 134–252 | +2.6 | 3 | **0.60–0.64** | | break the base slope |
+| Broad-based, with the raw-entry 20th-pct tier included | × broad −0.02 (1.2) | | | | | | adds nothing: A7's broad effect looks like a fee-level proxy *(inference)* |
+| Price squared | −26.39 (2.61); p² +21.13 (0.84) | 43.9 | −1.14 | 7 | 0.09 | 0.20 | slope positive above p = 0.62% |
+| Market state (sentiment, VIX residuals) × price | interaction ≈ 0 (t < 0.5) | 34–36 | −1.6 | 2 | 0 | 0.52 | no effect |
+
+What this shows: fixed characteristics other than the fee level either leave 13 of the 15 funds below 1 or buy the elasticities with upward-sloping demand for part of the market. The fee level itself is the characteristic that matters, and the first-sample-month tercile already shows it (13 of 15). The entry-based tier in the main file is the clean version of that spec.
+
+## 2. Time-varying fee and size classifiers (all fail exogeneity or identification)
+
+Each of these makes "cheap" (or "large") depend on information inside the estimation window. Since the classifier varies within fund, its main effect is included as a control and three diagnostics are run: within-fund corr(z, ξ̂), **lead tests** (regress ξ̂ from 1, 3 and 12 months *earlier* on today's z, within fund; a significant coefficient means past demand shocks predict the classifier), and the within-fund AR(1) of ξ̂ (0.975–0.978 throughout, so a 12-month lag does not break the link between past shocks and today's ξ).
+
+| Classifier | Price terms | min F | Table 5 > 1 | Lead-test t (1 / 3 / 12 months) | Verdict |
+|---|---|---|---|---|---|
+| AUM tercile 12 months earlier (within-month, sample funds) | base **+3.49**; low +0.33, mid +0.24 | 29.1 | 1 | **−58 / −61 / −81** | fails; 100% upward-sloping |
+| Fee tercile 12 months earlier (within-month, sample funds) | rest −1.87 (1.68); low −18.1, mid −10.0 total | 28.2 | 3 | −8.3 / −8.4 / −14.2 | fails; −18 is too flat for 0.03% funds |
+| Rolling cheap status (monthly raw percentile; 6- or 12-month entry and exit rules) | | | 3 | **−15 to −17** | fails; status responds to past demand shocks |
+| **Percentile of the fee 12 months earlier** (raw-file cross-section; `explore_step16*`): | | | | | |
+| (a) continuous, price × pct12 | −15.73 (1.44); × pct12 **+29.24** (1.25) | 190 | 2 | 1.1 / 2.8 / 8.3 | slope turns positive above the 54th pct; 46% upward-sloping |
+| (b) price × 1[pct12 ≤ 0.10] | **+17.21** (6.95); × z +18.44 (13.2) | **11.1** | 0 | 2.2 / 0.9 / −4.9 | weak IVs; positive slopes |
+| (c) price × 1[pct12 ≤ 0.15] | −34.39 (26.3); × z −24.78 (11.3) | **1.6** | 15 | −2.5 / −4.3 / −9.4 | weak IVs; not an estimate |
+| (d) price × 1[pct12 ≤ 0.20] | −9.28 (1.70); × z −14.19 (0.49), total −23.5 | 48.0 | 7 | **−3.8 / −5.1 / −9.8** | works mechanically but fails lead tests; cheap slope flatter than the entry tier's −40.8 |
+| *Entry tier, 20th pct (main file)* | −8.13 (4.32); × cheap −32.64 (4.20) | 18.3 | 11 | n/a (fixed by fund) | |
+
+Notes on the lagged-fee percentile (N = 105,049 fund-months with a fee observed 12 months earlier; baseline logit IV on that sample −4.81, average e −1.39):
+- The continuous version is well identified but has the wrong shape: pct12 is almost the rank of the fund's own current fee (correlation 0.92), so price × pct12 is a smooth version of the price-squared spec, and a line in the rank cannot represent "very steep for the cheapest funds, moderately steep for everyone else" without turning positive at the expensive end. Even at the bottom of the distribution its slope (−15.7) is too small for 2–4 bp funds. SPDR Gold (pct12 = 0.56) gets e = +0.21.
+- With a time-varying indicator the interaction's within-fund variation comes from the 16–17% of funds that switch status (2.5–4 times each on average) plus the fund's own fee changes; Hausman IV × indicator predicts it poorly at the 10th and 15th cutoffs.
+- The ≤ 20th indicator agrees with the entry tier in 84% of fund-months; the difference in the Table 5 count (7 vs 11) is the flatter cheap slope.
+- 15-fund elasticities under (a) and (d), last month: iShares Core S&P 500 −0.43 / −0.68; EAFE −0.84 / −1.63; AGG −0.44 / −0.70; Russell 1000 Growth −1.16 / −1.66; Mid-Cap −0.67 / −1.17; SPY −1.22 / −2.04; SPDR Gold +0.21 / −3.70; Technology and Financial Select Sector −0.86 / −1.87; SPDR Portfolio S&P 500 −0.30 / −0.47; Vanguard TSM Inst. Plus −0.29 / −0.45; Vanguard 500 Admiral −0.54 / −0.91; Vanguard 500 ETF −0.43 / −0.68; Vanguard TSM ETF −0.43 / −0.69; Vanguard TSM Admiral −0.55 / −0.92 (`logs/explore/step16_funds.csv`).
+
+Two fixed-at-entry variants that were also set aside, both because of the definition rather than exogeneity:
+- Fee tier by **rank** at the fund's first *sample* month: 67 funds tied at exactly 0.20% were split arbitrarily by row order.
+- Fee tier at the first sample month by a **fixed fee cutoff** (0.05–0.25%): 4–15 of 15 depending on the cutoff, with the first stage collapsing at 0.15–0.18%. "First sample month" is also mostly not the launch: 43% of funds enter in Jan 2010 and 43% enter when they pass the share filter.
+- Average fee over the fund's first 12 sample months instead of the first month: similar to the first-month version; superseded by the raw-entry percentile.
+
+## 3. Log price (functional form) (`logs/explore_step2_screen.log`, `explore_step4_blp_B1.log`, `explore_step5*`, `explore_step6*`)
+
+Utility α·log(p + c) instead of α·p. This is the one form that lifts every fund above |e| = 1, but it leaves the paper's linear specification, which the authors want to keep. Recorded for completeness.
+
+| | Index, logit IV | Index, BLP 1 RC | Leveraged, logit IV | Leveraged, BLP 1 RC |
+|---|---|---|---|---|
+| α on log(p + 0.01) | −2.694 (0.078) | −8.90 (21.4) | −8.366 (0.856) | −7.726 (0.587) |
+| σ | | 5.89 (18.5), not identified | | ≈ 0 (collapses to logit) |
+| First-stage F | 824 | | | |
+| Avg own e | −2.49 | −6.26 | −8.20 (Table 2: −4.89) | −7.57 |
+| Table 5 > 1 / share e > 0 / neg. MC | 15 of 15 (−1.7 to −2.6) / 0 / 3% | | | |
+
+- Little sensitivity to c (0.005, 0.02). The exogeneity assumption is the paper's own (Hausman IV, now in logs).
+- The BLP random coefficient on log price is not identified; differentiation instruments push σ to 0 in the leveraged market and fail overidentification (J = 219); optimal instruments then degenerate.
+- It roughly doubles the leveraged-market elasticity, which would lower the paper's leveraged markups *(inference)*. Any functional-form change has to be made for both markets.
+
+## 4. The one-random-coefficient BLP with the cheap interaction (`logs/explore_table2_alt_*`, `explore_step10*`–`step15*`)
+
+Design: Table 2 col 3 (one RC on the expense ratio; Monte Carlo 3000 draws, seed 623543; BFGS gtol 1e-7; clustered SE) with price × cheap (raw-entry tier) in the mean utility. Instruments: Hausman IV, Hausman IV × cheap, plus one or more extra instruments for σ. Every variant was run at the 20th percentile, most also at the 10th and 15th.
+
+### 4a. σ is not identified once the interaction is in
+
+- **σ profile** (`logs/explore_step13_sigma_profile_raw20.log`; one-step GMM with β concentrated out; instruments H, H × cheap, `BLP_IV_newproduct_3`):
+
+  | σ | objective | non-cheap slope | cheap slope | avg e | share e > 0 | SPDR Gold e |
+  |---|---|---|---|---|---|---|
+  | 0 – 1 | 3.77 – 3.50 | −4.7 | −35 | −2.8 | 0 | −1.9 |
+  | 2 | 2.88 | −4.6 | −37 | −2.5 | 0.2% | −1.4 |
+  | 3 | 1.99 | −4.0 | −38 | −2.1 | 5% | −0.7 |
+  | 4 | 1.09 | −3.0 | −39 | −1.5 | 30% | +0.3 |
+  | 6.5 (BFGS root) | 0.00 | **+0.9** | −42 | +0.4 | 54% | +3.5 |
+
+  The objective is shallow and monotone; its only root is at σ = 6.5, where more than half the market has upward-sloping demand. The cheap slope and the Table 5 count (10–11 above 1) are stable at every σ; only the non-cheap slope moves, because a large σ forces the mean coefficient up to keep expensive funds' shares positive.
+- **Hansen J at fixed σ, efficient weighting** (`logs/explore_step13_hansenJ_fixed_sigma_raw20.log`): at the paper's σ = 0.027, J = 2.92 on 1 df, p = 0.088. The instruments do not reject the model with σ held at the paper's value.
+- **Why.** Entered alone in logit IV, every extra instrument in the data implies a non-cheap slope near zero or positive (`newproduct_1`: +2.6 / −1.0 / +0.5 at the 10th / 15th / 20th; `logs/explore_step12*`, `step14*`), while the Hausman IV implies −6 to −16. A floating σ reconciles them by inflating heterogeneity. Hansen J for (H, H × cheap, `newproduct_1`) is 21–39, p < 0.001.
+
+### 4b. Every estimator that lets σ float breaks the non-cheap funds (20th percentile unless noted)
+
+| Variant | Non-cheap slope (SE) | Cheap × price | σ (SE) | Avg e | Outcome |
+|---|---|---|---|---|---|
+| Notebook IVs (`newproduct_1`, also × cheap); 10th / 15th / 20th | +0.27 (1.6) / −4.30 (2.4) / −1.01 (1.9) | −49.3 / −58.4 / −41.3 | 4.55 / 8.29 / n.a. | +0.33 / −0.43 / −0.47 | upward-sloping; instruments conflict |
+| Squared Hausman IV (and × cheap); 10th / 15th / 20th | −1.89 (0.8) / −8.10 (1.5) / −3.61 (0.7) | −18.1 / −22.0 / −20.7 | ≈ 0, n.s. (SE 10–117) | −0.95 / −3.14 / −2.02 | collapses to logit; restrictions rejected |
+| `newproduct_3` uninteracted (exactly identified; chosen by an instrument screen); 10th / 15th / 20th | +9.89 (4.7) / −1.71 (7.1) / +0.91 (5.4) | −60.6 / −60.6 / −42.7 | 8.71 / 9.36 / 6.48 | +4.59 / +0.69 / +0.35 | upward-sloping (SPDR Gold +3.5 at the 20th) |
+| A7 design: `newproduct_1` uninteracted (the published A7 col 3 design) | −1.32 (1.40) | −40.85 (5.68) | 5.58 (1.23) | −0.58 | converged; SPDR Gold +2.0; 11 of 15 above 1, 1 positive |
+| Chamberlain optimal IVs from the Hausman IV (`explore_step15*`) | **+4.0 (0.9)** | | 0.32 (0.64) | | positive non-cheap slope |
+| Lognormal RC on −price (sign-constrained), `newproduct_3` | −2.6 (median) | | 1.6 (1.3) | −1.99 | stalled, no root; no e > 0 but 67% negative MC |
+| Lognormal, two groups, free σ for the non-cheap group (`explore_step7*`) | → 0 | | → 29 | | σ diverges; fixing it at 0 works but is then logit |
+| Normal RC with the first-sample-month fee tercile (`explore_step4_blp_A5.log`) | **+9.52 (2.01)** | −50.8 / −17.3 | 2.85 (1.65) | +0.35 | converged; highest-fee tercile slopes upward |
+
+Lessons for any heterogeneous-slope BLP here: a normal RC on price with a large σ gives many simulated consumers a positive price coefficient; the sign-constrained (lognormal) version cannot go positive, so it drives the non-cheap mean toward zero instead; two-step GMM runs often stall in step 1 and the step-2 optimum can move a lot (one run moved the cheap-group median coefficient from −92 to −24 before it was stopped), so both steps must be optimized before reporting.
+
+### 4c. σ held at the paper's 0.027: a sensitivity exhibit, not an estimated BLP (`logs/explore/step13cal_raw{10,15,20}_s0.027_*.csv`)
+
+Holding σ at the Table 2 col 3 estimate and estimating the two price coefficients with H and H × cheap gives non-cheap −6.18 / −16.05 / −8.13, cheap −62.4 / −45.0 / −32.6, average elasticity −3.18 / −6.27 / −3.93, 10 / 14 / 11 of 15 above 1, no upward-sloping demand at the 10th / 15th / 20th percentiles. These are the logit IV numbers to the third decimal. Fixing a nonlinear parameter at a value estimated from another specification on the same data is not standard practice (calibration from an independent source, or micro moments, would be); with σ this small the column adds a label, not information. What it documents, with the σ profile and the J test, is that the data cannot pin σ once the interaction enters and do not reject the paper's own value. If shown at all, label it as σ fixed and put it in a robustness position.
+
+### 4d. Table A7 column (3), for comparison (`RESULTS_A7_col3.md`, `code/explore/a7_col3.py`)
+
+The published A7 col (3) (26-Sep notebook, commit `f2d8bff`) is this same design: one RC on the expense ratio, price × broad in X1, instruments Hausman, Hausman × broad and `BLP_IV_newproduct_1` **uninteracted** (the × broad version is built but never enters), exactly identified. It re-runs exactly: β −6.934 (1.295), × broad −6.186 (0.607), σ 2.2525 (0.680), average elasticity −2.346 (clustered SEs 1.214 / 0.653 / 0.768). It lifts only 2 of the 15 Table 5 funds above |e| = 1 (Russell 1000 Growth −1.18, SPDR Gold −2.23; the S&P 500 funds −0.39 to −0.61). It works for broad because `newproduct_1` alone implies negative slopes for both groups there (−7.7 specialized, −6.5 broad; J p = 0.045); under the cheap split the same instrument implies a non-cheap slope near zero, which is why the identical design fails there. An earlier conclusion that the published column came from an unsaved two-RC run was based on the 25-May notebook and is withdrawn.
+
+Data note from that run: `broad_specialized` is inconsistent for S&P 500 funds. SPY (all 166 months), SPDR Portfolio S&P 500 and VTI's ETF class are coded "specialized" while other share classes of the same portfolios are "broad-based"; 22.6% of SPX fund-months are "specialized". A7 is identified from this label.
+
+### 4e. Leveraged market
+
+No interaction (not significant in the paper's A7 logit, and not pursued). Separately, the leveraged notebook's two instruments already disagree in the published Table 2 Panel B col 3: the Hausman IV alone implies −3.71 and `BLP_IV_rival_funds1` alone −5.06; Hansen J = 14.2, p < 0.001 (`logs/explore_step10b_instrument_check_baseline.log`). Panel B col 3 is also flagged "not converged" by pyblp (gradient 1.9e-7 vs gtol 1e-7), though its estimates match the paper.
+
+---
+
+## Appendix A. Facts about Table 5 and the data found along the way
+
+**Table 5.**
+- The "Elasticity" column equals −8.348 × p × (1 − s) in each fund's **last sample month** (Aug 2024), for all 15 funds to within 0.0005; −8.348 is the Table 2 col 4 (3 RC) price coefficient, and with σ ≈ 0 the 3-RC model is effectively logit. Logit IV (−5.606) and BLP 1 RC do not reproduce the column.
+- The "Bertrand" (and Cournot, Monopoly) columns are **markup levels in percentage points** (p − mc), averaged over the sample; the coauthor's R averages pyRVtest's `markups`, which notebook cell 34 labels "Price minus Marginal Cost in Percentage Points per Annum" (Lerner is computed separately as markup / price in cell 33). A 0.22 markup on a fund charging 0.02–0.04% means marginal cost of about −0.19 pp. The two columns are therefore consistent with each other: both say Lerner > 1 and negative marginal cost for the cheapest funds.
+- Two Vanguard rows are swapped: the 430,969 AUM fund is VTI's **ETF** class (p = 0.03, e −0.244) and the 395,578 fund is the **Admiral** class (p = 0.04, e −0.326).
+- The note "averaged over the entire sample period" is true for the markups only.
+
+**Table 2 replication** (`RESULTS_table2.md`): all 16 columns match the point estimates and average elasticities to three decimals. SEs that do not match: Panel A col 2 price SE is 1.310 here vs 0.131 in the paper (exactly 10×, likely a decimal slip); Panel B col 2 past-return SE 0.036 vs 0.040; BLP SEs 1.2–1.9× the paper's. Column (1) elasticities match the observation-level mean while columns (2)–(4) match the per-market mean. The leveraged notebook's Bull-only filter is what Table 2 uses.
+
+**Data.**
+- Sample periods: index raw Jan 1994 – Dec 2025, estimation Jan 2010 – Aug 2024; leveraged raw Jan 2007 – Sep 2024, estimation Jan 2010 – Sep 2024. The panels end a month apart.
+- Index sample: median share 0.037%, max 4.97%; median fee 0.20%, 5th percentile 0.04%; only 3.75% of fee variance is within fund.
+- Zero-fee funds (e.g. Fidelity's) are dropped by the `prices > 0` filter and sit in the outside option.
+- **SPY's fee is recorded as 0.04% from Oct 2022 to Sep 2023**; it was 0.0945% throughout. Correcting it changes the tier estimates only in the third decimal, but it should be fixed at the source.
+- **43 temporary fee changes in 39 funds** (≥ 0.02 pp, reverting to the exact prior fee within 12 months; `logs/explore/step8_fee_reversals.csv`). Likely typos: Vanguard Long-Term Bond Index Institutional (0.04 → 0.40 → 0.04) and BNY Mellon Institutional S&P 500 (0.20 → 0.50 → 0.20). Most others last exactly 12 months, suggesting annual prospectus values. All fee changes in the file occur in January.
+- SPY's fee never changed (0.09%) but moved from the 6th–8th percentile of index-fund fees in 2010 to the 43rd–48th in 2024; VTI cut from 0.06% to 0.03% and stayed in the 2nd–10th percentile (`logs/explore/fee_percentiles_spy_vti.csv`).
+- `market_m_cluster` is an index cluster (313 codes), not an asset class. `csent_index_resid` and `chg_VIX_resid` vary within a month.
+- "First month in the sample" is mostly not the launch: 43% of funds enter in Jan 2010, 43% when they first pass the share ≥ 0.01% filter, 15% at their first raw month.
+
+**Paper fixes regardless of the model:** relabel Table 5's markup columns as levels in pp and the elasticity as last-month; swap the two Vanguard rows; fix the Panel A col 2 price SE; use one averaging definition across Table 2's columns; state the Bull-only filter and the panels' end months; if the linear model stays as is, say that it implies Lerner > 1 for the cheapest funds and give a reason (securities-lending income is the natural candidate).
+
+## Appendix B. Worth exploring next
+
+- An instrument for the random coefficient that agrees with the Hausman IV under the cheap interaction: none of the 24 in the data does, nor differentiation or optimal instruments built from the Hausman IV. A cost shifter with within-fund variation is the natural candidate.
+- Why Vanguard drives the non-cheap slope (which Vanguard funds changed fees, and whether those changes are exogenous); a Vanguard-specific slope.
+- The `broad_specialized` label for S&P 500 funds.
+- Data cleaning: SPY's fee, the 43 temporary fee episodes, how expense ratios are sourced.
+- Zero-fee funds modelled explicitly rather than folded into the outside option.
+- One demand model for both markets if the functional form changes.
+
+## Appendix C. Code and logs
+
+| What | Where |
+|---|---|
+| Logit IV screen (all interactions, diagnostics) | `code/explore/step2_logit_screen.py`, `step2b`–`step2d`, `logs/explore_step2_*.log`, `logs/explore/step2_*.csv` |
+| Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
+| Log price | `step2_logit_screen.py` (B1), `step4_blp_shortlist.py`, `step5_*`, `step6_logp_blp_strong_iv.py` |
+| BLP with the interaction | `step4_blp_shortlist.py` (env `EXTRA_IV`, `EXTRA_IV_NAME`, `EXTRA_NOINTERACT`), `step9_lognormal_1rc.py`, `step7_lognormal_two_group.py`, `logs/explore_table2_alt_*` |
+| σ profile, Hansen J at fixed σ, σ-fixed exhibit | `step13_sigma_profile.py`, `logs/explore_step13_*`, `logs/explore/step13cal_*` |
+| Instrument checks and screens, optimal IVs | `step10_instrument_check.py`, `step10b_*`, `step12_iv_screen.py`, `step12b_*`, `step14_diff_iv_screen.py`, `step15_optimal_iv.py` |
+| Table A7 col 3 re-run | `RESULTS_A7_col3.md`, `code/explore/a7_col3.py`, `logs/explore_a7_col3.log` |
+| Table 5 reconstruction | `step1_table5_elasticity.py`, `step1b_formula_check.py`, `logs/explore_step1*` |
+| Table 2 replication | `RESULTS_table2.md`, `code/table2_logit_ols.py`, `code/solve_rc3_resumable.py` |
+| Superseded working documents (kept for the record) | `docs/superseded/Table2_alt.md`, `FINDINGS_SUMMARY.md`, `EXPLORATION_price_heterogeneity.md` |

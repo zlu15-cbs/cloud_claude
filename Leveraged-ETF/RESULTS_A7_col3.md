@@ -4,7 +4,7 @@ Source: `code/main_Danny_March2026_testing_v3_nonLev_Apr2026_matchEgan_broadspec
 
 ## Correction to the earlier report
 
-My earlier A7 statements (in `Table2_alt.md` and `FINDINGS_SUMMARY.md`) were based on the 25-May copy of the notebook, in which cell 11 put both `prices` and `prices × broad` into X2 (two random coefficients) and renamed both `BLP_IV_newproduct_1` and its × broad version to instrument columns. That copy's saved output (−32.53 / +10.84) did not match the published table, and I concluded the published columns came from an unsaved run. **That conclusion is withdrawn.** The 26-Sep notebook contains the published column (3), and its saved output matches the table.
+My earlier A7 statements (in `docs/superseded/Table2_alt.md` and `docs/superseded/FINDINGS_SUMMARY.md`) were based on the 25-May copy of the notebook, in which cell 11 put both `prices` and `prices × broad` into X2 (two random coefficients) and renamed both `BLP_IV_newproduct_1` and its × broad version to instrument columns. That copy's saved output (−32.53 / +10.84) did not match the published table, and I concluded the published columns came from an unsaved run. **That conclusion is withdrawn.** The 26-Sep notebook contains the published column (3), and its saved output matches the table.
 
 ## Read from the notebook
 
@@ -77,14 +77,14 @@ Two points follow:
 
 ## Why the same design works for the broad-based interaction and not for the cheap-fund interaction
 
-The published column (3) design — one RC on the expense ratio, the interaction in the mean utility, and one extra instrument entered **without** the interaction — is the design I applied to the cheap-fund tier (`Table2_alt.md`, columns (3‴) with `newproduct_3` and the run with `newproduct_1` itself). The difference is what the extra instrument says about the non-interacted slope (logit IV, instrument entered alone; `logs/explore_step12*`):
+The published column (3) design — one RC on the expense ratio, the interaction in the mean utility, and one extra instrument entered **without** the interaction — is the design I applied to the cheap-fund tier (`docs/superseded/Table2_alt.md`, columns (3‴) with `newproduct_3` and the run with `newproduct_1` itself). The difference is what the extra instrument says about the non-interacted slope (logit IV, instrument entered alone; `logs/explore_step12*`):
 
 | Interaction | `newproduct_1` alone implies | Hausman IV implies | Hansen J (H, H × z, `newproduct_1`) |
 |---|---|---|---|
 | broad-based | −7.7 (specialized), −6.5 (broad) | −7.5, −12.8 | 4.0, p = 0.045 |
 | cheap, 10th / 15th / 20th pct | **+2.6 / −1.0 / +0.5** (non-cheap) | −6.2 / −16.0 / −8.1 | 21 / 39 / 24, p < 0.001 |
 
-Under broad-based, both instruments put negative slopes on both groups, so the BLP's σ (2.25) is pinned by a third moment that agrees with the first two, and the elasticities stay sensible. Under the cheap split, the third moment wants a non-cheap slope near zero, and the one-RC BLP delivers it by inflating σ (section 6 of `FINDINGS_SUMMARY.md`; σ profile in `logs/explore_step13_sigma_profile_raw20.log`).
+Under broad-based, both instruments put negative slopes on both groups, so the BLP's σ (2.25) is pinned by a third moment that agrees with the first two, and the elasticities stay sensible. Under the cheap split, the third moment wants a non-cheap slope near zero, and the one-RC BLP delivers it by inflating σ (section 6 of `docs/superseded/FINDINGS_SUMMARY.md`; σ profile in `logs/explore_step13_sigma_profile_raw20.log`).
 
 **The A7 column (3) design applied to the cheap-fund tier (run; `logs/explore_table2_alt_blp_index_raw20_a7design_newproduct1.log`).** One RC on the expense ratio, price × cheap (20th-percentile raw-entry tier) in X1, instruments Hausman, Hausman × cheap and `BLP_IV_newproduct_1` uninteracted; exactly identified, converged.
 
@@ -97,5 +97,5 @@ Under broad-based, both instruments put negative slopes on both groups, so the B
 | SPDR Gold Shares, own elasticity | **+2.0** |
 | Table 5 funds with \|e\| > 1 / with e > 0 | 11 / 1 |
 
-Same design, opposite outcome: under the cheap split the third instrument pulls σ to 5.6 and the non-cheap slope to zero, and part of the market gets upward-sloping demand. The diagnosis and the usable alternative (σ held at the paper's Table 2 col 3 value) are in `Table2_alt.md`.
+Same design, opposite outcome: under the cheap split the third instrument pulls σ to 5.6 and the non-cheap slope to zero, and part of the market gets upward-sloping demand. The diagnosis and the usable alternative (σ held at the paper's Table 2 col 3 value) are in `docs/superseded/Table2_alt.md`.
 

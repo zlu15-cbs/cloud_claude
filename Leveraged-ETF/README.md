@@ -2,6 +2,15 @@
 
 What to reproduce and what to look for: see `EXPECTED_RESULTS.md` (Table 2 numbers, Table 5, Tables A3 and A7).
 
+## Results of the cloud session (read these two)
+
+| File | Content |
+|---|---|
+| `MAIN_SPEC_entry_cheap_tier.md` | The recommended alternative demand model: logit IV with expense ratio × cheap (fee at the fund's first raw month ≤ the 10th/15th/20th percentile), Table 2 with the interaction, the 15 Table 5 funds, robustness |
+| `OTHER_SPECS_explored.md` | Everything else tried and why it was set aside: other interactions, time-varying classifiers, log price, the one-RC BLP with the interaction, Table A7 col 3; appendix on Table 5 and data issues |
+| `RESULTS_table2.md`, `RESULTS_A7_col3.md` | Replication records for Table 2 and Table A7 column (3) |
+| `docs/superseded/` | Earlier working documents, kept for the record; superseded by the two files above |
+
 ## Layout
 
 | Path | Content |
