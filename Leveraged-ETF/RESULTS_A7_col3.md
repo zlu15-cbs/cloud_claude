@@ -72,7 +72,7 @@ Every coefficient and SE matches the saved output to four decimals, and the aver
 
 Two points follow:
 - The published A7 col (3) model lifts only 2 of the 15 funds above |e| = 1 (Russell 1000 Growth and SPDR Gold). The broad-based interaction roughly doubles the Table 5 elasticities (Table 2 col 3 gives −0.16 to −0.33 for the S&P 500 funds; here −0.39 to −0.61) but does not change the picture.
-- **The `broad_specialized` label looks inconsistent for some of these funds.** SPY, SPDR Portfolio S&P 500 and VTI's ETF share class are coded "specialized", while the S&P 500 and Total Stock Market mutual-fund classes of the same portfolios are "broad-based". If the label is meant to describe the index, these should agree. Worth checking at the source.
+- **The `broad_specialized` label looks inconsistent for some of these funds.** SPY, SPDR Portfolio S&P 500 and VTI's ETF share class are coded "specialized", while the S&P 500 and Total Stock Market mutual-fund classes of the same portfolios are "broad-based". If the label is meant to describe the index, these should agree. Across the estimation sample, 22.6% of fund-months tracking the S&P 500 (`market_m_index == 'SPX'`) are coded "specialized" (SPY in all 166 months). Since the A7 interaction is identified from this label, it is worth checking at the source.
 
 
 ## Why the same design works for the broad-based interaction and not for the cheap-fund interaction
