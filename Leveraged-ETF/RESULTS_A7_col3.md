@@ -36,7 +36,44 @@ Cell 11 builds `BLP_IV_newproduct_1_x_broad` but never renames it to a `demand_i
 
 Cells 2, 3, 4, 11, 12, 13, 14 and 15 executed verbatim in one namespace. The only substitution is the `bfgs` object from cell 14, replaced by the same SciPy BFGS wrapped to checkpoint each evaluation (parallel over markets with `pyblp.parallel`, which does not change the numbers).
 
-{{A7_RERUN}}
+**Result (`logs/explore/a7_col3_summary.csv`, `a7_col3_funds.csv`).** Converged, objective 0.0, 7 objective evaluations, 1408 s on two worker processes.
+
+| | Re-run | Notebook / published | Clustered SE (added) |
+|---|---|---|---|
+| Expense ratio | −6.934 (1.2947) | −6.934 (1.2947) | (1.214) |
+| Expense ratio × broad-based | −6.186 (0.6068) | −6.186 (0.6068) | (0.653) |
+| RC sd, expense ratio | 2.2525 (0.680) | 2.2525 (0.680) | (0.768) |
+| Tracking error | −0.5203 (0.0769) | −0.52035 (0.0769) | (0.067) |
+| Past 1-yr return | 0.4098 (0.0152) | 0.40975 (0.0152) | (0.032) |
+| Age (log) | 0.5158 (0.0163) | 0.51583 (0.0163) | (0.022) |
+| Average own-price elasticity (per-market mean) | **−2.346** | A7 reports −2.346 | |
+
+Every coefficient and SE matches the saved output to four decimals, and the average elasticity matches A7 to three. 0.02% of fund-months have a positive own elasticity; 70% have |e| > 1.
+
+**The 15 Table 5 funds, own elasticity in the last month (Aug 2024), under A7 col (3):**
+
+| Fund | p (%) | broad-based? | e |
+|---|---|---|---|
+| iShares Core S&P 500 ETF | 0.03 | yes | −0.39 |
+| iShares Core MSCI EAFE ETF | 0.07 | yes | −0.92 |
+| iShares Core US Aggregate Bond ETF | 0.03 | yes | −0.40 |
+| iShares Russell 1000 Growth ETF | 0.18 | no | −1.18 |
+| iShares Core S&P Mid-Cap ETF | 0.05 | no | −0.36 |
+| SPDR S&P 500 ETF Trust | 0.09 | **no** | −0.61 |
+| SPDR Gold Shares | 0.40 | no | −2.23 |
+| Technology Select Sector SPDR | 0.08 | no | −0.56 |
+| Financial Select Sector SPDR | 0.08 | no | −0.56 |
+| SPDR Portfolio S&P 500 ETF | 0.02 | no | −0.15 |
+| Vanguard Total Stock Market Inst. Plus | 0.02 | yes | −0.26 |
+| Vanguard 500 Index Admiral | 0.04 | yes | −0.52 |
+| Vanguard 500 Index ETF | 0.03 | yes | −0.39 |
+| Vanguard Total Stock Market ETF | 0.03 | **no** | −0.21 |
+| Vanguard Total Stock Market Admiral | 0.04 | yes | −0.52 |
+
+Two points follow:
+- The published A7 col (3) model lifts only 2 of the 15 funds above |e| = 1 (Russell 1000 Growth and SPDR Gold). The broad-based interaction roughly doubles the Table 5 elasticities (Table 2 col 3 gives −0.16 to −0.33 for the S&P 500 funds; here −0.39 to −0.61) but does not change the picture.
+- **The `broad_specialized` label looks inconsistent for some of these funds.** SPY, SPDR Portfolio S&P 500 and VTI's ETF share class are coded "specialized", while the S&P 500 and Total Stock Market mutual-fund classes of the same portfolios are "broad-based". If the label is meant to describe the index, these should agree. Worth checking at the source.
+
 
 ## Why the same design works for the broad-based interaction and not for the cheap-fund interaction
 

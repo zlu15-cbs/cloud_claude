@@ -1,0 +1,60 @@
+Dimensions:
+================================================
+ T     N      F     I      K1    K2    MD    ED 
+---  ------  ---  ------  ----  ----  ----  ----
+166  108300  90   498000   5     1     6     2  
+================================================
+Formulations:
+=====================================================================================================================================
+       Column Indices:           0                  1                         2                     3                     4          
+-----------------------------  ------  ----------------------------  --------------------  --------------------  --------------------
+ X1: Linear Characteristics    prices  broad_specialized_ind*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+X2: Nonlinear Characteristics  prices                                                                                                
+=====================================================================================================================================
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +3.2032E-18   +5.2688E-09   +4.3253E+00     0       +2.2422E+05        +1.4259E+04   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:23:28       Yes          5            10          15807        48824   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +2.2525E+00 
+        (+6.8000E-01)
+=====================
+Beta Estimates (Robust SEs in Parentheses):
+=============================================================================================================
+   prices      broad_specialized_ind*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  ----------------------------  --------------------  --------------------  --------------------
+ -6.9340E+00           -6.1860E+00               -5.2035E-01           +4.0975E-01           +5.1583E-01     
+(+1.2947E+00)         (+6.0681E-01)             (+7.6926E-02)         (+1.5197E-02)         (+1.6327E-02)    
+=============================================================================================================
+cell 15 solve time 1408s
+{'N': 108300, 'sigma': 2.2525, 'sigma_se_robust': 0.68, 'sigma_se_clustered': 0.7682, 'objective': 0.0, 'converged': True, 'iterations': 0, 'avg_own_elasticity': -2.346, 'share_pos_e': 0.0002, 'share_abs_e_gt1': 0.6976, 'b[prices]': -6.934, 'se_robust[prices]': 1.2947, 'se_clustered[prices]': 1.2141
+                                                      name  p_last  broad  e_last
+product_ids                                                                      
+16416                             iShares Core S&P 500 ETF    0.03      1  -0.390
+56419                           iShares Core MSCI EAFE ETF    0.07      1  -0.921
+16417                   iShares Core US Aggregate Bond ETF    0.03      1  -0.400
+16448                      iShares Russell 1000 Growth ETF    0.18      0  -1.177
+16437                         iShares Core S&P Mid-Cap ETF    0.05      0  -0.356
+27635                               SPDR S&P 500 ETF Trust    0.09      0  -0.607
+29218                                     SPDR Gold Shares    0.40      0  -2.232
+28279                   Technology Select Sector SPDR Fund    0.08      0  -0.560
+28277                    Financial Select Sector SPDR Fund    0.08      0  -0.561
+29250                           SPDR Portfolio S&P 500 ETF    0.02      0  -0.146
+63885        Vanguard Total Stock Market Index Fund; Insti    0.02      1  -0.258
+31461              Vanguard 500 Index Fund; Admiral Shares    0.04      1  -0.517
+50485                  Vanguard 500 Index Fund; ETF Shares    0.03      1  -0.390
+31466        Vanguard Total Stock Market Index Fund; ETF C    0.03      0  -0.212
+31462        Vanguard Total Stock Market Index Fund; Admir    0.04      1  -0.522
