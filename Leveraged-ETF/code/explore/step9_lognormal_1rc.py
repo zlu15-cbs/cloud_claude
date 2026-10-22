@@ -79,8 +79,11 @@ def main(procs, panel, tier):
         ids, nodes, weights = integ._build_many(1, np.unique(d.market_ids))
         problem = pyblp.Problem((X1, X2), d, agent_formulation=pyblp.Formulation('1'),
                                 agent_data={'market_ids': ids, 'nodes': nodes, 'weights': weights}, rc_types=['log'])
-        res = problem.solve(sigma=sigma0, pi=pi0, optimization=pyblp.Optimization(bfgs, {'gtol': 1e-7}),
-                            se_type='clustered')
+        opt = pyblp.Optimization(bfgs, {'gtol': 1e-7})
+        if os.environ.get('FINALIZE') == '1':  # BFGS stalled: evaluate at the best checkpointed point
+            opt = pyblp.Optimization('return')
+            print('FINALIZE: evaluating at the best checkpointed point', flush=True)
+        res = problem.solve(sigma=sigma0, pi=pi0, optimization=opt, se_type='clustered')
         print(res)
         print(f'solve time {time.time() - t:.0f}s', flush=True)
         em = res.compute_elasticities()
