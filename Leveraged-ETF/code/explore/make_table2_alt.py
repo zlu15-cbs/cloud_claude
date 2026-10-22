@@ -4,7 +4,8 @@
 
 Per panel and cutoff, columns: Table 2 as published and replicated (logit OLS, logit IV, BLP 1 RC), then the
 interaction model: logit OLS, logit IV, BLP 1 RC with the notebook's extra instrument (index: BLP_IV_newproduct_1,
-LETF: BLP_IV_rival_funds1) and, for the index panel, BLP 1 RC with the squared Hausman IV as the extra instrument.
+LETF: BLP_IV_rival_funds1), BLP 1 RC with the squared Hausman IV as the extra instrument, and BLP 1 RC with
+H, H x cheap and an uninteracted BLP_IV_newproduct_3 (exactly identified). Panel B (LETF) is Table 2 without an interaction.
 """
 import os
 import sys
@@ -58,15 +59,20 @@ for panel, title in (('index', 'Panel A: Passive index funds'), ('lev', 'Panel B
                for c in ('OLS', 'IV')}
         if panel == 'index':
             blp_n, blp_h = read(f'step4_A11_raw{q}_summary.csv'), read(f'step4_A11_raw{q}_hsq_summary.csv')
+            blp_3 = read(f'step4_A11_raw{q}_newproduct_3_noint_summary.csv')
             cols = [('(1) Logit OLS', base['OLS']), ('(2) Logit IV', base['IV']), ('(3) BLP 1 RC', COL3[panel]),
                     ('(1′) Logit OLS', alt['OLS']), ('(2′) Logit IV', alt['IV']),
-                    ('(3′) BLP 1 RC, notebook IVs', blp_n), ('(3″) BLP 1 RC, Hausman² IV', blp_h)]
-        else:
-            cols = [('(1) Logit OLS', base['OLS']), ('(2) Logit IV', base['IV']), ('(3) BLP 1 RC', COL3[panel]),
-                    ('(1′) Logit OLS', alt['OLS']), ('(2′) Logit IV', alt['IV']),
-                    ('(3′) BLP 1 RC, notebook IVs', read(f'step4_lev_A11_raw{q}_summary.csv'))]
+                    ('(3′) BLP 1 RC, notebook IVs', blp_n), ('(3″) BLP 1 RC, Hausman² IV', blp_h),
+                    ('(3‴) BLP 1 RC, newproduct_3 (exactly identified)', blp_3)]
+        else:  # Panel B: no interaction (not significant in the paper's A7 logit); Table 2 as is
+            if q != 10:
+                continue
+            cols = [('(1) Logit OLS', base['OLS']), ('(2) Logit IV', base['IV']), ('(3) BLP 1 RC', COL3[panel])]
         share = alt['IV']['share_funds_cheap']
-        print(f'\n#### {title}: cheap = fee at first raw month ≤ {q}th percentile ({share:.0%} of funds)\n')
+        if panel == 'index':
+            print(f'\n#### {title}: cheap = fee at first raw month ≤ {q}th percentile ({share:.0%} of funds)\n')
+        else:
+            print(f'\n#### {title}: no interaction (Table 2 as published and replicated)\n')
         print('| | ' + ' | '.join(h for h, _ in cols) + ' |')
         print('|---|' + '---|' * len(cols))
         for v, lab in VARS:
@@ -92,11 +98,12 @@ PAPER = {16416: -0.242, 56419: -0.580, 16417: -0.249, 16448: -1.494, 16437: -0.4
          31462: -0.326}
 blp = {}
 for q in (10, 15, 20):
-    for tag, f in (('n', f'step4_A11_raw{q}_funds.csv'), ('h', f'step4_A11_raw{q}_hsq_funds.csv')):
+    for tag, f in (('n', f'step4_A11_raw{q}_funds.csv'), ('h', f'step4_A11_raw{q}_hsq_funds.csv'),
+                   ('3', f'step4_A11_raw{q}_newproduct_3_noint_funds.csv')):
         p = os.path.join(E, f)
         if os.path.exists(p):
             blp[(q, tag)] = pd.read_csv(p).set_index('product_ids').e_last
-heads = ['Table 5', 'Logit IV (Table 2)'] + [f'{q}th: cheap? / logit IV / BLP notebook IVs / BLP Hausman²'
+heads = ['Table 5', 'Logit IV (Table 2)'] + [f'{q}th: cheap? / logit IV / BLP notebook IVs / BLP Hausman² / BLP newproduct_3'
                                              for q in (10, 15, 20)]
 print('| Fund | p (%) | ' + ' | '.join(heads) + ' |')
 print('|---|---|' + '---|' * len(heads))
@@ -106,5 +113,6 @@ for pid, r in iv[iv.cutoff == 'none (Table 2)'].set_index('product_ids').iterrow
         x = iv[(iv.cutoff == f'{q}th pct') & (iv.product_ids == pid)].iloc[0]
         n = f'{blp[(q, "n")][pid]:.2f}' if (q, 'n') in blp else 'n/a'
         h = f'{blp[(q, "h")][pid]:.2f}' if (q, 'h') in blp else 'n/a'
-        cells.append(f'{"yes" if x.cheap else "no"} / {x.e_last:.2f} / {n} / {h}')
+        n3 = f'{blp[(q, "3")][pid]:.2f}' if (q, '3') in blp else 'n/a'
+        cells.append(f'{"yes" if x.cheap else "no"} / {x.e_last:.2f} / {n} / {h} / {n3}')
     print(f'| {r["name"]} | {r.p:.2f} | ' + ' | '.join(cells) + ' |')

@@ -1,0 +1,31 @@
+A7 1rc: N=108300, IVs ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3'], start sigma [1.] (0 checkpointed evaluations)
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 2    +9.3473E+01   +9.7176E-08   +1.7363E+00     0       +1.5074E+06        +3.5244E+04   
+===========================================================================================
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:24:34       Yes          11           15          20284        63448   
+===========================================================================
+Nonlinear Coefficient Estimates (Robust SEs in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +6.4042E-01 
+        (+1.8870E+00)
+=====================
+Beta Estimates (Robust SEs in Parentheses):
+=============================================================================================================
+   prices      broad_specialized_ind*prices  product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  ----------------------------  --------------------  --------------------  --------------------
+ -8.8689E+00           -3.5805E+00               -6.1968E-01           +4.1159E-01           +5.3794E-01     
+(+1.6109E+00)         (+4.8612E-01)             (+9.5188E-02)         (+1.6378E-02)         (+1.7383E-02)    
+=============================================================================================================
+solve time 1476s
+{'mode': '1rc', 'objective': 93.47306418222094, 'avg_own_e': -2.9819004091569328, 'share_pos_e': 0.0, 'share_abs_e_gt1': 0.702797783933518, 'sigma': [0.6404170760690903], 'sigma_se': [1.8869866186891802], 'b[prices]': np.float64(-8.86887344703301), 'b[broad_specialized_ind*prices]': np.float64(-3.58
