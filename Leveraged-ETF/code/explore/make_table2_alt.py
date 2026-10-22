@@ -61,13 +61,13 @@ for panel, title in (('index', 'Panel A: Passive index funds'), ('lev', 'Panel B
             blp_n, blp_h = read(f'step4_A11_raw{q}_summary.csv'), read(f'step4_A11_raw{q}_hsq_summary.csv')
             blp_3 = read(f'step4_A11_raw{q}_newproduct_3_noint_summary.csv')
             blp_c = read(f'step13cal_raw{q}_s0.027_summary.csv')
-            blp_o = read(f'step15_raw{q}_s0.027_summary.csv')
+            blp_a = read(f'step4_A11_raw{q}_newproduct_1_noint_summary.csv')
             cols = [('(1) Logit OLS', base['OLS']), ('(2) Logit IV', base['IV']), ('(3) BLP 1 RC', COL3[panel]),
                     ('(1′) Logit OLS', alt['OLS']), ('(2′) Logit IV', alt['IV']),
                     ('(3′) BLP 1 RC, notebook IVs', blp_n), ('(3″) BLP 1 RC, Hausman² IV', blp_h),
                     ('(3‴) BLP 1 RC, newproduct_3 (exactly identified)', blp_3),
-                    ('(3⁗) BLP 1 RC, σ fixed at 0.027 (Table 2 col 3)', blp_c),
-                    ('(3⁗′) BLP 1 RC, optimal IVs from Hausman', blp_o)]
+                    ('(3A7) BLP 1 RC, A7 design (newproduct_1 uninteracted)', blp_a),
+                    ('(3σ) BLP 1 RC, σ fixed at 0.027 (Table 2 col 3)', blp_c)]
         else:  # Panel B: no interaction (not significant in the paper's A7 logit); Table 2 as is
             if q != 10:
                 continue
@@ -104,11 +104,11 @@ blp = {}
 for q in (10, 15, 20):
     for tag, f in (('n', f'step4_A11_raw{q}_funds.csv'), ('h', f'step4_A11_raw{q}_hsq_funds.csv'),
                    ('3', f'step4_A11_raw{q}_newproduct_3_noint_funds.csv'), ('c', f'step13cal_raw{q}_s0.027_funds.csv'),
-                   ('o', f'step15_raw{q}_s0.027_funds.csv')):
+                   ('o', f'step4_A11_raw{q}_newproduct_1_noint_funds.csv')):
         p = os.path.join(E, f)
         if os.path.exists(p):
             blp[(q, tag)] = pd.read_csv(p).set_index('product_ids').e_last
-heads = ['Table 5', 'Logit IV (Table 2)'] + [f'{q}th: cheap? / logit IV / BLP notebook IVs / BLP Hausman² / BLP newproduct_3 / BLP σ=0.027 / BLP optimal IVs'
+heads = ['Table 5', 'Logit IV (Table 2)'] + [f'{q}th: cheap? / logit IV / BLP notebook IVs / BLP Hausman² / BLP newproduct_3 / BLP A7 design / BLP σ=0.027'
                                              for q in (10, 15, 20)]
 print('| Fund | p (%) | ' + ' | '.join(heads) + ' |')
 print('|---|---|' + '---|' * len(heads))
@@ -121,5 +121,5 @@ for pid, r in iv[iv.cutoff == 'none (Table 2)'].set_index('product_ids').iterrow
         n3 = f'{blp[(q, "3")][pid]:.2f}' if (q, '3') in blp else 'n/a'
         c = f'{blp[(q, "c")][pid]:.2f}' if (q, 'c') in blp else 'n/a'
         o = f'{blp[(q, "o")][pid]:.2f}' if (q, 'o') in blp else 'n/a'
-        cells.append(f'{"yes" if x.cheap else "no"} / {x.e_last:.2f} / {n} / {h} / {n3} / {c} / {o}')
+        cells.append(f'{"yes" if x.cheap else "no"} / {x.e_last:.2f} / {n} / {h} / {n3} / {o} / {c}')
     print(f'| {r["name"]} | {r.p:.2f} | ' + ' | '.join(cells) + ' |')

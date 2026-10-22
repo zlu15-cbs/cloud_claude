@@ -1,0 +1,3 @@
+The model may be under-identified. The total number of unfixed parameters is 6, which is more than the total number of moments, 5. Consider checking whether instruments were properly specified when initializing the problem, and whether parameters were properly configured when solving the problem.
+ sigma  objective  b_rest  b_interaction  b_cheap_total  avg_own_e  share_pos_e  share_abs_e_gt1  n15_gt1  n15_pos  spdr_gold_e  secs
+ 0.027        0.0  -6.183       -62.4405       -68.6236    -3.1791          0.0           0.7636       10        0      -2.4628   260
