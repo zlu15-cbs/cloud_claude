@@ -20,7 +20,7 @@ Throughout, unless stated: logit IV on the Table 2 Panel A sample (N = 108,300, 
 | Share class (institutional/Admiral, retail, other MF, ETF; parsed from names) | institutional −11.2, ETF −9.2, retail −7.4 | | | 2 | 0 | | 12 of the 15 are ETFs; too small |
 | Asset class (5 groups from `market_m_cluster`) | base **+2.271**; US large blend −10.7, other US equity −14.0, intl −4.6, bond −5.2 | 87.4 | −0.90 | 1 | **0.39** | 0.35 | "other" group (incl. SPDR Gold, e = +0.90) slopes upward |
 | AUM tercile at first sample month | base **+8.133**; low −17.9, mid −8.0 | 55.9 | −0.42 | 2 | **0.67** | 0.02 | largest funds slope upward |
-| Fee tercile at first **sample** month | −3.714 (6.133); low −52.7, mid −12.0 | 22.6 | −3.75 | 13 | 0 | 0.06 | works in logit IV, but see section 2 (ties) and section 4 (BLP: base turns +9.5) |
+| Fee tercile at first **sample** month | −3.714 (6.133); low −52.7, mid −12.0 | 22.6 | −3.75 | 13 | 0 | 0.06 | works in logit IV, but see section 2 (definition) and section 4 (BLP: base turns +9.5) |
 | Broad + fee tercile | −0.07; × broad **+5.46**; fee terciles −51.1 / −14.1 | 48.7 | −2.11 | 12 | 0.10 | 0.42 | broad effect flips sign once fee tier is in |
 | Firms + fee tercile; broad + firms + fee tercile | base **+17.3**; × Vanguard +11.2 | 134–252 | +2.6 | 3 | **0.60–0.64** | | break the base slope |
 | Broad-based, with the raw-entry 20th-pct tier included | × broad −0.02 (1.2) | | | | | | adds nothing: A7's broad effect looks like a fee-level proxy *(inference)* |
@@ -51,10 +51,24 @@ Notes on the lagged-fee percentile (N = 105,049 fund-months with a fee observed 
 - The ≤ 20th indicator agrees with the entry tier in 84% of fund-months; the difference in the Table 5 count (7 vs 11) is the flatter cheap slope.
 - 15-fund elasticities under (a) and (d), last month: iShares Core S&P 500 −0.43 / −0.68; EAFE −0.84 / −1.63; AGG −0.44 / −0.70; Russell 1000 Growth −1.16 / −1.66; Mid-Cap −0.67 / −1.17; SPY −1.22 / −2.04; SPDR Gold +0.21 / −3.70; Technology and Financial Select Sector −0.86 / −1.87; SPDR Portfolio S&P 500 −0.30 / −0.47; Vanguard TSM Inst. Plus −0.29 / −0.45; Vanguard 500 Admiral −0.54 / −0.91; Vanguard 500 ETF −0.43 / −0.68; Vanguard TSM ETF −0.43 / −0.69; Vanguard TSM Admiral −0.55 / −0.92 (`logs/explore/step16_funds.csv`).
 
-Two fixed-at-entry variants that were also set aside, both because of the definition rather than exogeneity:
-- Fee tier by **rank** at the fund's first *sample* month: 67 funds tied at exactly 0.20% were split arbitrarily by row order.
+Two fixed-at-entry variants that were also set aside, because of the definition rather than exogeneity:
 - Fee tier at the first sample month by a **fixed fee cutoff** (0.05–0.25%): 4–15 of 15 depending on the cutoff, with the first stage collapsing at 0.15–0.18%. "First sample month" is also mostly not the launch: 43% of funds enter in Jan 2010 and 43% enter when they pass the share filter.
 - Average fee over the fund's first 12 sample months instead of the first month: similar to the first-month version; superseded by the raw-entry percentile.
+
+### 2b. Robustness checks of the entry tier, 20th percentile (`logs/explore_step8_raw20_robustness.log`, `logs/explore/step8_robustness.csv`)
+
+The cutoff grid itself is in the main file. The checks below hold the 20th-percentile definition fixed and change the sample or the model.
+
+| Check | Rest / cheap total | F | Result |
+|---|---|---|---|
+| Correct SPY's fee error (recorded 0.04% Oct 2022 – Sep 2023, actual 0.0945%) | unchanged to the 3rd decimal | | holds |
+| Drop State Street | −6.3 / −41.1 | 18 | holds |
+| Drop BlackRock | −12.9 / −69.8 | 12 | holds |
+| Add the paper's broad-based interaction | broad × price = −0.02 (SE 1.2) | | holds; A7's broad effect looks like a fee-level proxy *(inference)* |
+| Percentile cutoffs computed among **sample** funds only (instead of the full raw population) | | **4.5** | first stage collapses; the definition needs the raw population |
+| **Drop Vanguard** | **+6.2 (1.2)** / −22.4 | 73 | **fails for the rest:** 67% of fund-months get positive own elasticities; the cheap total survives |
+
+The last row is the main caveat of the specification. The non-cheap slope is identified mainly from Vanguard funds' fee changes (Vanguard is about a quarter of the sample's fund-months). The robust part of the result is the **gap**: cheap funds respond far more to fees than the rest, at every cutoff and in every subsample. The fragile part is the level and sign of the non-cheap slope. Most Table 5 funds are cheap, so their elasticities rest on the robust coefficient; the 60% of fund-months outside the cheap group rest on the fragile one. Worth checking which Vanguard funds changed fees and whether those changes are plausibly exogenous (Vanguard's at-cost structure passing through scale economies); a Vanguard-specific slope would make this explicit.
 
 ## 3. Log price (functional form) (`logs/explore_step2_screen.log`, `explore_step4_blp_B1.log`, `explore_step5*`, `explore_step6*`)
 
@@ -159,6 +173,8 @@ No interaction (not significant in the paper's A7 logit, and not pursued). Separ
 | What | Where |
 |---|---|
 | Logit IV screen (all interactions, diagnostics) | `code/explore/step2_logit_screen.py`, `step2b`–`step2d`, `logs/explore_step2_*.log`, `logs/explore/step2_*.csv` |
+| Entry-tier robustness (SPY fix, drop firms, broad, sample-only cutoffs) | `code/explore/step8_raw20_robustness.py`, `logs/explore_step8_raw20_robustness.log`, `logs/explore/step8_robustness.csv` |
+| First-sample-month fixed-fee-cutoff variants | `code/explore/step2e_cutoff_sweep.py`, `step2f_switcher_composition.py`, `logs/explore/step2e_cutoff_sweep_value.csv` |
 | Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
 | Log price | `step2_logit_screen.py` (B1), `step4_blp_shortlist.py`, `step5_*`, `step6_logp_blp_strong_iv.py` |
 | BLP with the interaction | `step4_blp_shortlist.py` (env `EXTRA_IV`, `EXTRA_IV_NAME`, `EXTRA_NOINTERACT`), `step9_lognormal_1rc.py`, `step7_lognormal_two_group.py`, `logs/explore_table2_alt_*` |
