@@ -47,9 +47,15 @@ def main(name, procs, panel):
     d, formula, endog, excl, exog = build(d, sp)
     form, c = sp.get('form', 'lin'), sp.get('c')
     k0 = len(excl)
+    if os.environ.get('EXTRA_IV_NAME'):  # a named extra instrument, e.g. BLP_IV_newproduct_3
+        extra_iv = os.environ['EXTRA_IV_NAME']
+        name += '_' + extra_iv.replace('BLP_IV_', '')
     d[f'demand_instruments{k0}'] = d[extra_iv]
-    for k, v in enumerate(sp['z'], start=k0 + 1):
-        d[f'demand_instruments{k}'] = d[f'demand_instruments{k0}'] * d[v]
+    if os.environ.get('EXTRA_NOINTERACT') == '1':  # extra IV enters alone: (price, price x z, sigma) exactly identified
+        name += '_noint'
+    else:
+        for k, v in enumerate(sp['z'], start=k0 + 1):
+            d[f'demand_instruments{k}'] = d[f'demand_instruments{k0}'] * d[v]
     x2 = f'0 + log(prices + {c})' if form == 'log' else '0 + prices'
     if os.environ.get('EXTRA_IV') == 'hsq':
         name += '_hsq'

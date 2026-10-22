@@ -1,0 +1,7 @@
+A7 2rc: N=108300, IVs ['demand_instruments0', 'demand_instruments1', 'demand_instruments2', 'demand_instruments3'], start sigma [1. 1.] (0 checkpointed evaluations)
+stopped after 5 evaluations (theta = sigma_price, sigma_price_x_broad):
+37.6901 [1.0, 1.0]
+34.0345 [1.164, 1.997]
+18.463 [1.819, 5.983]
+20.103 [3.288, 14.927]
+12.1682 [2.516, 10.227]

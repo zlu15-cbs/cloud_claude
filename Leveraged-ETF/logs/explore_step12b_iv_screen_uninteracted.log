@@ -1,0 +1,52 @@
+
+== broad
+    z           candidate  b_base  b_z_total   min_F     J   J_p
+broad rival_log_fund_age3  -7.164    -12.474 138.518 0.098 0.755
+broad rival_tracking_err4  -7.598    -12.830  27.858 0.151 0.697
+broad        rival_funds1  -7.146    -12.417  55.516 0.280 0.597
+broad        newproduct_3  -8.191    -13.363  52.795 0.485 0.486
+broad        newproduct_2  -6.132    -11.622  65.996 1.704 0.192
+broad        rival_funds5  -7.256    -12.727  28.002 1.922 0.166
+broad rival_log_fund_age4  -5.699    -11.141  67.531 2.143 0.143
+broad        newproduct_5  -5.271    -10.824  62.507 2.790 0.095
+broad        newproduct_1  -4.966    -10.551  54.040 4.009 0.045
+broad        newproduct_4  -4.671    -10.314  78.355 4.388 0.036
+
+== raw10
+    z           candidate  b_base  b_z_total  min_F      J   J_p
+raw10    newp_exp_ratio_2  -5.784    -66.145  7.159  0.048 0.827
+raw10 rival_tracking_err4  -5.636    -65.174  6.936  0.107 0.744
+raw10 rival_tracking_err5  -1.696    -43.051  7.968  4.665 0.031
+raw10 rival_tracking_err1  -1.067    -41.782  9.738  5.546 0.019
+raw10        newproduct_3  -1.763    -44.810  9.248  6.536 0.011
+raw10        rival_funds4  -0.705    -36.253 19.933 10.602 0.001
+raw10    newp_exp_ratio_3   0.695    -32.690  9.812 18.205 0.000
+raw10        newproduct_1   2.554    -27.700 31.019 21.021 0.000
+raw10        newproduct_5   2.727    -26.777 45.389 21.211 0.000
+raw10        newproduct_2   2.367    -28.480 12.681 24.419 0.000
+
+== raw15
+    z           candidate  b_base  b_z_total  min_F      J   J_p
+raw15 rival_tracking_err4 -16.386    -62.031  5.859  0.077 0.781
+raw15    newp_exp_ratio_2 -14.369    -56.926  7.920  0.384 0.536
+raw15        newproduct_3 -11.091    -49.196  9.106  3.996 0.046
+raw15 rival_tracking_err5  -8.003    -40.993  7.674  8.745 0.003
+raw15    newp_exp_ratio_3  -7.783    -41.507  8.416 13.732 0.000
+raw15 rival_tracking_err1  -5.555    -35.811 10.029 15.124 0.000
+raw15        rival_funds4  -5.505    -34.207 18.024 19.920 0.000
+raw15        newproduct_2  -2.862    -30.627 14.900 37.480 0.000
+raw15        newproduct_5  -0.789    -26.040 51.519 38.034 0.000
+raw15        newproduct_1  -1.003    -26.681 44.031 39.153 0.000
+
+== raw20
+    z           candidate  b_base  b_z_total  min_F      J   J_p
+raw20 rival_tracking_err5  -8.147    -40.808  9.533  0.001 0.978
+raw20    newp_exp_ratio_2  -7.917    -40.318 12.642  0.034 0.854
+raw20 rival_tracking_err1  -7.692    -39.879 10.938  0.116 0.734
+raw20        rival_funds5  -6.979    -38.080 16.277  1.097 0.295
+raw20        newproduct_3  -5.947    -36.410 14.791  2.916 0.088
+raw20        rival_funds4  -8.525    -42.431  9.999  3.892 0.049
+raw20    newp_exp_ratio_3  -4.190    -33.005 12.363 13.957 0.000
+raw20        newproduct_2  -3.005    -30.857 20.104 14.435 0.000
+raw20        rival_funds1  -0.988    -26.053 41.143 17.122 0.000
+raw20 rival_log_fund_age4  -1.205    -26.751 53.557 18.258 0.000
