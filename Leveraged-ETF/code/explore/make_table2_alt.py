@@ -95,6 +95,7 @@ for panel, title in (('index', 'Panel A: Passive index funds'), ('lev', 'Panel B
             val(r, ['share_neg_mc', 'share_neg_mc_bertrand_firm'], '{:.2f}') for _, r in cols) + ' |')
 
 # clean 15-fund table for the recommended model: logit IV with the interaction, by cutoff
+funds = pd.read_csv(os.path.join(E, 'table2_alt_funds.csv'))
 funds_iv = funds[funds.column == 'IV']
 base_iv = funds_iv[funds_iv.cutoff == 'none (Table 2)'].set_index('product_ids')
 PAPER15 = {16416: -0.242, 56419: -0.580, 16417: -0.249, 16448: -1.494, 16437: -0.415, 27635: -0.725, 29218: -3.325,

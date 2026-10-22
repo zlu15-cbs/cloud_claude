@@ -94,7 +94,29 @@ Elasticities are own-price elasticities. "Avg" is the per-market mean, as in Tab
 | Share e > 0 (upward-sloping) | 0.000 | 0.000 |  |
 | Share negative MC (firm Bertrand) | 0.36 | 0.01 |  |
 
-#### The 15 Table 5 funds: own elasticity in the last month (Panel A)
+#### The 15 Table 5 funds under logit IV with the interaction (own elasticity, last month)
+
+| Fund | p (%) | Table 5 (paper) | Table 2 logit IV | 10th pct: cheap? / e | 15th pct: cheap? / e | 20th pct: cheap? / e |
+|---|---|---|---|---|---|---|
+| iShares Core S&P 500 ETF | 0.03 | -0.24 | -0.16 | yes / -1.99 | yes / -1.77 | yes / -1.18 |
+| iShares Core MSCI EAFE ETF | 0.07 | -0.58 | -0.39 | yes / -4.77 | yes / -4.24 | yes / -2.83 |
+| iShares Core US Aggregate Bond ETF | 0.03 | -0.25 | -0.17 | no / -0.18 | yes / -1.82 | yes / -1.21 |
+| iShares Russell 1000 Growth ETF | 0.18 | -1.49 | -1.00 | no / -1.11 | yes / -10.93 | yes / -7.30 |
+| iShares Core S&P Mid-Cap ETF | 0.05 | -0.41 | -0.28 | no / -0.31 | yes / -3.04 | yes / -2.03 |
+| SPDR S&P 500 ETF Trust | 0.09 | -0.72 | -0.49 | yes / -5.96 | yes / -5.30 | yes / -3.54 |
+| SPDR Gold Shares | 0.40 | -3.33 | -2.23 | no / -2.46 | no / -6.39 | no / -3.24 |
+| Technology Select Sector SPDR Fund | 0.08 | -0.67 | -0.45 | no / -0.49 | no / -1.28 | no / -0.65 |
+| Financial Select Sector SPDR Fund | 0.08 | -0.67 | -0.45 | no / -0.49 | no / -1.28 | no / -0.65 |
+| SPDR Portfolio S&P 500 ETF | 0.02 | -0.17 | -0.11 | no / -0.12 | no / -0.32 | yes / -0.81 |
+| Vanguard Total Stock Market Index Fund; Insti | 0.02 | -0.16 | -0.11 | yes / -1.31 | yes / -1.17 | yes / -0.78 |
+| Vanguard 500 Index Fund; Admiral Shares | 0.04 | -0.32 | -0.22 | yes / -2.65 | yes / -2.36 | yes / -1.58 |
+| Vanguard 500 Index Fund; ETF Shares | 0.03 | -0.24 | -0.16 | yes / -1.99 | yes / -1.77 | yes / -1.18 |
+| Vanguard Total Stock Market Index Fund; ETF C | 0.03 | -0.24 | -0.16 | yes / -2.00 | yes / -1.78 | yes / -1.19 |
+| Vanguard Total Stock Market Index Fund; Admir | 0.04 | -0.33 | -0.22 | yes / -2.68 | yes / -2.38 | yes / -1.59 |
+| **Average own-price elasticity (per-market mean, all funds)** | | | **-1.614** | **-3.179** | **-6.272** | **-3.931** |
+| **Table 5 funds with abs(e) > 1** | | | **2/15** | **10/15** | **14/15** | **11/15** |
+
+#### The 15 Table 5 funds: own elasticity in the last month (Panel A), all columns
 
 | Fund | p (%) | Table 5 | Logit IV (Table 2) | 10th: cheap? / logit IV / BLP notebook IVs / BLP Hausman² / BLP newproduct_3 / BLP A7 design / BLP σ=0.027 | 15th: cheap? / logit IV / BLP notebook IVs / BLP Hausman² / BLP newproduct_3 / BLP A7 design / BLP σ=0.027 | 20th: cheap? / logit IV / BLP notebook IVs / BLP Hausman² / BLP newproduct_3 / BLP A7 design / BLP σ=0.027 |
 |---|---|---|---|---|---|---|
