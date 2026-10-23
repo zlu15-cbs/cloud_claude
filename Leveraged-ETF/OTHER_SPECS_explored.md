@@ -286,6 +286,50 @@ No interaction (not significant in the paper's A7 logit, and not pursued). Separ
 
 ---
 
+## 5. Instruments for the non-cheap slope (`code/explore/step21_noncheap_iv_screen.py`, `step21b_noncheap_iv_pooled.py`; `logs/explore_step21*.log`, `logs/explore/step21*_*.csv`)
+
+**Why.** In the split-sample diagnostic (main spec, section 4), the Hausman IV has a first-stage F of only 2.6–6.2 for non-cheap funds, so their slope is weakly identified.
+
+**Candidates.** Every instrument in the index data that the coauthor built or listed in the notebooks: 27 with full coverage and within-fund variation.
+- Hausman operating-cost and management-fee variants. The notebook comments out the operating-cost one as "too correlated" with the Hausman IV.
+- Rival-fund counts, five variants.
+- Rivals' log age and tracking error, five variants each, plus the two logged versions used in the 3-RC cell.
+- New-product entry counts and new products' fees, five variants each.
+
+The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they are demand shocks by construction, so they cannot be excluded from demand. Each candidate is run within each group (entry tier; group-specific fund FE, month FE and controls), alone and together with the Hausman IV, with a Hansen J test of agreement.
+
+**Results for non-cheap funds** (slope with the candidate alone; first-stage F in parentheses; Hansen J p-value with the Hausman IV):
+
+| Candidate | 10th pct | 15th pct | 20th pct | Same instrument, cheap funds (20th) |
+|---|---|---|---|---|
+| Hausman IV (main spec) | −12.4 (F 2.6) | −12.9 (F 5.8) | +4.7 (F 6.2) | −47.3 (F 15.8) |
+| Hausman operating cost / mgmt fee | +3.2 (F 25); J p 0.00 | +2.8 (F 36); J p 0.00 | +6.8 (F 34); J p 0.53 | −5.8 (F 39); J p 0.00 |
+| New products, count (1, 4, 5) | −8.2 to −10.9 (F 29–34); J p 0.56–0.87 | −7.7 to −9.0 (F 32–34); J p 0.34–0.51 | −6.6 to −8.3 (F 29–33); J p 0.00 | −4.7 to −6.8 (F 20–57); J p 0.00 |
+| Rival-fund counts (1–5) | −17 to +2 | −13 to +4 | −16 to +2 | −29 to +9 |
+| Rivals' log age (1–5) | −10 to +6 | | −11 to +5 | |
+
+**Reading.**
+1. **No candidate gives a credible, consistent non-cheap slope.**
+   - The rival counts and rival characteristics have very strong first stages (F up to 600), but their implied slopes range from −17 to +6 depending on the variant. They cannot all be valid.
+   - The other cost-side variants (operating cost and management fee) have strong first stages and give *positive* slopes, +3 to +7. They agree with the Hausman IV's +4.7 at the 20th.
+2. **The new-product counts are the most stable** (−7 to −11 at every cutoff, F ≈ 30), but their sign pattern points to an exclusion violation *(inference)*.
+   - More new products in the market go with slightly *higher* incumbent fees (positive first stage) and *lower* incumbent shares (negative reduced form). The slope comes from the share loss.
+   - That share loss is business stealing by the new entrants. A plain logit with one market per month leaves this within-index substitution in the demand error, so a count of entrants is correlated with ξ.
+   - For cheap funds the same instruments give −2 to −7, against −37 to −57 from the Hausman IV, and Hansen J rejects at every cutoff. The Hausman IV has the expected sign pattern there: a higher instrument raises the own fee and lowers the share, with a reduced-form t of −19 to −30.
+3. **Using a new-product count for non-cheap funds inside the pooled model does not help** (`step21b`):
+
+   | Instruments, pooled model, 20th pct | Non-cheap | Cheap total | min F | Hansen J p | Share e > 0 | Table 5 > 1 |
+   |---|---|---|---|---|---|---|
+   | H, H × cheap (main spec) | −8.13 (4.32) | −40.8 | 18.3 | | 0 | 11 |
+   | H × cheap, new products × (1 − cheap) | +0.01 (3.54) | −28.0 | 30.0 | | **0.55** | 6 |
+   | H, H × cheap, new products × (1 − cheap) | −4.05 (3.39) | −34.5 | 14.7 | **0.001** | 0 | 11 |
+
+   At the 15th percentile the pattern is similar (non-cheap −3.5 to −8.2; J p ≤ 0.001). At the 10th the two families agree (J p 0.83–0.96), and the estimates barely differ from the main spec (non-cheap −5.2 to −6.4, cheap total −65 to −69). In the pooled model the non-cheap slope lands near zero instead of the split-sample −7 to −11, because month FE and control coefficients are shared across the groups.
+4. **Bottom line.** With the instruments available, the non-cheap slope cannot be pinned down. Every cost-side instrument says it is close to zero or weakly positive at the 20th. The entry and competition instruments say it is negative but are likely invalid in a plain logit. The cheap slope, which drives the Table 5 question, is identified by the Hausman IV alone and is robust.
+5. **What could help.**
+   - A nested logit with nests by tracked index (`market_m_index`). It keeps the fee linear and models within-index business stealing, which is exactly what makes the rival and new-product counts textbook instruments (for the within-nest share term).
+   - A genuine cost shifter with within-fund variation for higher-fee funds, for example sub-advisory or custody cost changes, or the expiry of fee waivers.
+
 ## Appendix A. Facts about Table 5 and the data found along the way
 
 **Table 5.**
@@ -326,6 +370,7 @@ No interaction (not significant in the paper's A7 logit, and not pursued). Separ
 | First-sample-month fixed-fee-cutoff variants | `code/explore/step2e_cutoff_sweep.py`, `step2f_switcher_composition.py`, `logs/explore/step2e_cutoff_sweep_value.csv` |
 | Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
 | Why the lag-60 slopes are steeper (term-by-term, switchers vs non-switchers, event study, one-slope IV split by group) | `code/explore/step18_lag60_why.py`, `step18b_lag60_collinearity.py`, `step18c_pooled_iv_split.py`, `logs/explore_step18c_pooled_iv_split.log`, `step20_split_sample_iv.py`, `logs/explore_step20_split_sample_iv.log`, `logs/explore_step18_lag60_why.log`, `explore_step18b_lag60_collinearity.log`, `logs/explore/step18_*.csv` |
+| Instruments for the non-cheap slope (screen of 27 candidates; pooled model with new-product counts) | `code/explore/step21_noncheap_iv_screen.py`, `step21b_noncheap_iv_pooled.py`, `logs/explore_step21_noncheap_iv_screen.log`, `explore_step21b_noncheap_iv_pooled.log`, `logs/explore/step21*_*.csv` |
 | Cheap tier plus a second interaction (ETF, share class, broad, Big 3, firms) | `code/explore/step19_cheap_plus_interactions.py`, `logs/explore_step19_cheap_plus_interactions.log`, `logs/explore/step19_*.csv` |
 | Status from the fee 60 months earlier (and 36/48/84), with decomposition | `code/explore/step17_lag60_tier.py`, `step17b_lag60_decompose.py`, `logs/explore_step17_lag60_tier.log`, `explore_step17b_lag60_decompose.log`, `logs/explore/step17*_*.csv` |
 | Log price | `step2_logit_screen.py` (B1), `step4_blp_shortlist.py`, `step5_*`, `step6_logp_blp_strong_iv.py` |
