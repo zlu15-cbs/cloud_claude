@@ -5,7 +5,7 @@ This report is self-contained. It presents the recommended demand specification 
 ## 1. Summary
 
 - **Model.** Logit IV, linear in the fee, with one extra term (expense ratio × cheap). Cheap means the fund's fee in its first month in the full raw data was at or below that month's 20th percentile across all index funds. Controls and fixed effects are as in Table 2. SE clustered by month.
-- **Instrument.** The median expense ratio of the **same fund family's funds of the same share class, outside the fund's asset class**, in the same month. It replaces the paper's Hausman IV, which fails three checks (section 2).
+- **Instrument.** The median expense ratio of the **same fund family's funds of the same share class, outside the fund's asset class**, in the same month. It replaces the paper's Hausman IV, for the reasons in section 2.
 - **Results, 20th percentile, 97,429 fund-months:**
 
   | | Non-cheap slope (SE) | Cheap total | First-stage F | Avg own elasticity | Table 5 funds with \|e\| > 1 |
@@ -19,7 +19,7 @@ This report is self-contained. It presents the recommended demand specification 
 
 ## 2. Why change the instrument
 
-**The paper's Hausman IV.** It arrives precomputed in the data (`BLP_IV_hausman_exp_ratio`), and no notebook builds it. I reverse-engineered it (`step23`): it is the previous-month-AUM-weighted average expense ratio of the same family's funds that track other indices. It matches the data exactly wherever the family identifier `firm_f_old` exists. It fails three checks (`step24b`, `step24c`):
+**The paper's Hausman IV.** It arrives precomputed in the data (`BLP_IV_hausman_exp_ratio`), and no notebook builds it. I reverse-engineered it (`step23`): it is the previous-month-AUM-weighted average expense ratio of the same family's funds that track other indices. It matches the data exactly wherever the family identifier `firm_f_old` exists. Two checks count against it, and a third is mixed (`step24b`, `step24c`, `step27`):
 
 1. **Table 2's −5.6 is driven by 7% of fund-months.** These are 112 funds, mostly variable-annuity and insurance-channel funds, with no family identifier and an unknown instrument construction.
 
@@ -31,7 +31,11 @@ This report is self-contained. It presents the recommended demand specification 
    | Pooled, separate month FE for the two groups | **+7.64 (2.20)** |
 
    Both groups give upward-sloping demand; the negative pooled estimate comes from different time trends in the two groups.
-2. **Lead tests reject.** Demand shocks from 12, 24 and 36 months earlier predict today's instrument (t = 6.7, 10.7, 20.3).
+2. **Lead tests are mixed.** These ask whether the fund's demand shocks from 12, 24 and 36 months earlier predict today's instrument (procedure in section 5).
+   - With the residual of the one-slope Table 2 model on the 97,429 rows, they reject strongly: t = 6.7, 10.7 and 20.3. But that model has upward-sloping demand there (+11.3), so its residual is contaminated.
+   - With the residual of the main model (× cheap) and Table 2's fixed effects, they do not reject: t = −1.9, −0.4 and 2.2.
+   - Under asset-class × month effects they reject: t = −4.1, −4.0 and −3.3.
+   - On the full Table 2 sample they give t = −3.3, −1.5 and 2.1.
 3. **Placebo.** A randomly chosen other family's fees predict the fund's fee about half as strongly as its own family's (median first-stage F 13 against 25).
 
 **The new instrument.** For fund j in month t, it is the median expense ratio of the funds that share j's family, share j's share class, and are in a different asset class. Each construction step addresses a weakness of the paper's IV:
@@ -42,25 +46,25 @@ This report is self-contained. It presents the recommended demand specification 
 
 ## 3. Panel A: index funds, 20th percentile
 
-Columns (1)–(3) use fund and month fixed effects, as Table 2. (2′) and (3′) add asset-class × month effects, which absorb asset-class-wide fee and demand trends and leave only family-specific variation in the instrument. (2p) and (3p) re-estimate with the paper's instrument on the same 97,429 rows for comparison. "Avg" is the per-market mean own elasticity, as in Table 2.
+Columns (1)–(3) use fund and month fixed effects, as Table 2. (2′) and (3′) add asset-class × month effects, which absorb asset-class-wide fee and demand trends and leave only family-specific variation in the instrument. (2p) and (3p) re-estimate with the paper's instrument on the same 97,429 rows for comparison. The first column is the paper's Table 2 Panel A column (2) as published and replicated, on all 108,300 fund-months. Column (2p) is that exact specification restricted to the 97,429 rows where the new instrument is defined; the drop in rows alone turns −5.6 into +11.3 (section 2). "Avg" is the per-market mean own elasticity, as in Table 2.
 
-| | (1) Logit OLS | (2) Logit IV | **(3) Logit IV × cheap (main)** | (2′) Logit IV | **(3′) Logit IV × cheap** | (2p) Paper IV | (3p) Paper IV × cheap |
-|---|---|---|---|---|---|---|---|
-| Fixed effects | fund + month | fund + month | fund + month | fund + month × asset class | fund + month × asset class | fund + month | fund + month |
-| Instrument | — | share-class Hausman | share-class Hausman | share-class Hausman | share-class Hausman | paper's Hausman | paper's Hausman |
-| Expense ratio | −1.724 (0.090) | −1.242 (0.582) | −6.116 (0.845) | −1.281 (0.428) | −3.798 (0.660) | 11.263 (3.142) | −2.721 (2.752) |
-| Expense ratio × cheap |  |  | −22.655 (0.794) |  | −20.238 (0.643) |  | −24.089 (1.447) |
-| Cheap total |  |  | −28.77 |  | −24.04 |  | −26.81 |
-| Past 1-yr return | 0.437 (0.038) | 0.438 (0.037) | 0.432 (0.034) | 0.489 (0.039) | 0.496 (0.037) | 0.468 (0.047) | 0.440 (0.035) |
-| Age (log) | 0.618 (0.007) | 0.619 (0.007) | 0.549 (0.008) | 0.697 (0.009) | 0.644 (0.009) | 0.633 (0.010) | 0.549 (0.010) |
-| Tracking error | −0.192 (0.039) | −0.173 (0.031) | −1.044 (0.135) | −0.163 (0.026) | −0.942 (0.113) | 0.317 (0.127) | −0.953 (0.179) |
-| N | 97,429 | 97,429 | 97,429 | 97,429 | 97,429 | 97,429 | 97,429 |
-| Weakest first-stage F |  | 217.5 | 166.6 | 303.1 | 262.1 | 25.0 | 13.2 |
-| **Avg own-price elasticity** | **−0.45** | **−0.33** | **−2.68** | **−0.34** | **−1.96** | **2.96** | **−1.86** |
-| Share \|e\| > 1 | 0.10 | 0.03 | 0.87 | 0.03 | 0.75 | 0.72 | 0.71 |
-| Share e > 0 (upward-sloping) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 1.00 | 0.00 |
-| Share negative MC (firm Bertrand) | 0.92 | 0.97 | 0.24 | 0.97 | 0.36 | 0.00 | 0.45 |
-| Table 5 funds with \|e\| > 1 | 0/15 | 0/15 | 7/15 | 0/15 | 5/15 | 2/15 | 7/15 |
+| | Table 2 col 2 as published | (1) Logit OLS | (2) Logit IV | **(3) Logit IV × cheap (main)** | (2′) Logit IV | **(3′) Logit IV × cheap** | (2p) Paper IV | (3p) Paper IV × cheap |
+|---|---|---|---|---|---|---|---|---|
+| Fixed effects | fund + month | fund + month | fund + month | fund + month | fund + month × asset class | fund + month × asset class | fund + month | fund + month |
+| Instrument | paper's Hausman | — | share-class Hausman | share-class Hausman | share-class Hausman | share-class Hausman | paper's Hausman | paper's Hausman |
+| Expense ratio | −5.606 (1.310) | −1.724 (0.090) | −1.242 (0.582) | −6.116 (0.845) | −1.281 (0.428) | −3.798 (0.660) | 11.263 (3.142) | −2.721 (2.752) |
+| Expense ratio × cheap |  |  |  | −22.655 (0.794) |  | −20.238 (0.643) |  | −24.089 (1.447) |
+| Cheap total |  |  |  | −28.77 |  | −24.04 |  | −26.81 |
+| Past 1-yr return | 0.413 (0.034) | 0.437 (0.038) | 0.438 (0.037) | 0.432 (0.034) | 0.489 (0.039) | 0.496 (0.037) | 0.468 (0.047) | 0.440 (0.035) |
+| Age (log) | 0.573 (0.011) | 0.618 (0.007) | 0.619 (0.007) | 0.549 (0.008) | 0.697 (0.009) | 0.644 (0.009) | 0.633 (0.010) | 0.549 (0.010) |
+| Tracking error | −0.451 (0.066) | −0.192 (0.039) | −0.173 (0.031) | −1.044 (0.135) | −0.163 (0.026) | −0.942 (0.113) | 0.317 (0.127) | −0.953 (0.179) |
+| N | 108,300 | 97,429 | 97,429 | 97,429 | 97,429 | 97,429 | 97,429 | 97,429 |
+| Weakest first-stage F | 33.6 |  | 217.5 | 166.6 | 303.1 | 262.1 | 25.0 | 13.2 |
+| **Avg own-price elasticity** | **−1.61** | **−0.45** | **−0.33** | **−2.68** | **−0.34** | **−1.96** | **2.96** | **−1.86** |
+| Share \|e\| > 1 | 0.53 | 0.10 | 0.03 | 0.87 | 0.03 | 0.75 | 0.72 | 0.71 |
+| Share e > 0 (upward-sloping) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 1.00 | 0.00 |
+| Share negative MC (firm Bertrand) | 0.52 | 0.92 | 0.97 | 0.24 | 0.97 | 0.36 | 0.00 | 0.45 |
+| Table 5 funds with \|e\| > 1 | 2/15 | 0/15 | 0/15 | 7/15 | 0/15 | 5/15 | 2/15 | 7/15 |
 
 
 **Reading.**
@@ -109,14 +113,31 @@ The funds above 1 under column (3) are EAFE, Russell 1000 Growth, Mid-Cap, SPY, 
 
 With the new instrument both groups have strong first stages and negative slopes. With the paper's instrument the non-cheap group has essentially no first stage under Table 2's fixed effects, and a positive slope under asset-class × month effects.
 
-**Lead tests** on the main model's own residual (regression of ξ̂ from k months earlier on today's instrument, within fund, clustered by month):
+**Lead tests** (`code/explore/step27_lead_tests.py`, `logs/explore_step27_lead_tests.log`, `logs/explore/step27_lead_tests.csv`). The question is whether a fund's past demand shocks predict today's instrument. Under the exclusion restriction they should not. Procedure, for a given instrument Z, demand model and fixed-effect set:
 
-| Fixed effects | k = 12 | k = 24 | k = 36 |
-|---|---|---|---|
-| fund + month | −1.7 | −2.9 | −1.9 |
-| fund + month × asset class | −0.1 | −0.2 | 2.1 |
+1. Estimate the demand model by logit IV in pyblp: fund FE and the time FE absorbed (month, or month × asset class); controls tracking error, past 1-year return and log age; instruments Z, plus Z × cheap in the main model. Take ξ̂ = `res.xi`. With absorbed fixed effects this equals δ − Xβ̂ with the fund and time means removed (verified: correlation 1.0 with a manual two-way demeaning; δ = log share − log outside share).
+2. Residualize the instrument: Z̃ is the residual of Z on fund FE, the same time FE and the three controls (Frisch–Waugh, with `pyhdfe`).
+3. Index months by `month_key = round(12 × month_t)`. For each lag k = 12, 24, 36, pair each fund-month (j, t) with the same fund's residual k months earlier, giving (Z̃_{j,t}, ξ̂_{j,t−k}). Keep pairs where both exist: 79,728 pairs at k = 12 and 58,217 at k = 36 on the 97,429-row sample.
+4. Demean both variables within fund over the paired sample.
+5. Regress ξ̂_{j,t−k} on Z̃_{j,t} by OLS without a constant. Cluster the standard error by the calendar month t of the instrument observation, with no small-sample correction, and report t = b / SE.
 
-The signs change across horizons. With fund + month effects, one test is significant at 1% (t = −2.9 at 24 months); with asset-class × month effects, none is. For the paper's instrument the corresponding one-slope tests are 6.7 / 10.7 / 20.3 (`step24c`).
+| Sample | Instrument | Residual from | Fixed effects | Price coef. | t, k = 12 | t, k = 24 | t, k = 36 |
+|---|---|---|---|---|---|---|---|
+| Table 2 (108,300) | paper's | one slope (Table 2 col 2) | fund + month | −5.61 | −3.3 | −1.5 | 2.1 |
+| Table 2 (108,300) | paper's | main (× cheap) | fund + month | −8.13 | −3.4 | −5.3 | −1.7 |
+| 97,429 rows | paper's | one slope | fund + month | +11.26 | 6.7 | 10.7 | 20.3 |
+| 97,429 rows | paper's | main | fund + month | −2.72 | −1.9 | −0.4 | 2.2 |
+| 97,429 rows | paper's | one slope | fund + month × asset class | −1.33 | 2.1 | 8.4 | 18.2 |
+| 97,429 rows | paper's | main | fund + month × asset class | −9.94 | −4.1 | −4.0 | −3.3 |
+| 97,429 rows | **share-class** | one slope | fund + month | −1.24 | 2.1 | 2.6 | 5.2 |
+| 97,429 rows | **share-class** | **main** | **fund + month** | **−6.12** | **−1.7** | **−2.9** | **−1.9** |
+| 97,429 rows | **share-class** | one slope | fund + month × asset class | −1.28 | 2.4 | 2.8 | 5.8 |
+| 97,429 rows | **share-class** | **main** | **fund + month × asset class** | **−3.80** | **−0.1** | **−0.2** | **2.1** |
+
+How to read it:
+- **The test depends on the model whose residual is used.** A misspecified model leaves part of the omitted fee response in ξ̂. The one-slope residuals ignore the steep cheap-fund slope, and on the 97,429 rows the paper's one-slope model even slopes upward.
+- **With the main model's residual and Table 2's fixed effects, the two instruments look similar** (|t| ≤ 2.9).
+- **Under asset-class × month effects they separate.** The paper's instrument rejects at every lag (t −3.3 to −4.1); the new one does not (|t| ≤ 2.1).
 
 **Placebo** (`step24c`): each family is mapped to a random one of the 30 broadest other families, and the same instrument is rebuilt from that family's funds (20 draws). Under asset-class × month effects:
 - **First stage:** the placebo's median F is 27 for all funds and 18 for non-cheap funds (90th percentiles 156 and 59), on samples about 40% the size. The real instrument has F 303 and 202. Scaled for sample size, it sits near the top of the placebo range, so part, not all, of its variation is family-specific.
