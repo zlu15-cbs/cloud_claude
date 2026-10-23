@@ -156,6 +156,26 @@ The same 9 funds are above 1 at every cutoff: four Vanguard funds (both 500 Inde
 - The **non-cheap** coefficient is imprecise everywhere (SE 2.6–8.2) and not monotone (−6.2, −16.0, −8.1, −6.5, −3.4). Past the 30th percentile the "rest" group is the expensive half of the market and its slope turns positive, so cutoffs above the 30th are not usable.
 - Further checks of the 20th-percentile specification (SPY fee correction, dropping each of the three large firms, adding the broad-based interaction, cutoffs computed among sample funds only) are in `OTHER_SPECS_explored.md`, section 2b. All hold except dropping Vanguard, which flips the sign of the non-cheap slope; the cheap total survives.
 
+### Split-sample diagnostic: Table 2 col 2 run separately on cheap and non-cheap funds (`code/explore/step20_split_sample_iv.py`, `logs/explore_step20_split_sample_iv.log`)
+
+Each group gets its own fund FE, month FE and control coefficients. First stage: fee on the Hausman IV. Reduced form: log share (δ) on the Hausman IV. The IV coefficient is reduced form / first stage. All SEs are clustered by month. In a just-identified model, the reduced-form t-statistic is also the weak-instrument-robust (Anderson–Rubin) test of a zero price coefficient.
+
+| Group | Funds | OLS | First stage (SE) | First-stage F | Reduced form (SE) | IV (SE) |
+|---|---|---|---|---|---|---|
+| All funds (Table 2 col 2) | 1,302 | −0.94 | 0.030 (0.005) | 33.6 | −0.170 (0.032) | −5.61 (1.31) |
+| 10th pct, cheap | 266 | −0.73 | 0.083 (0.021) | 15.3 | **−3.08 (0.10)** | **−37.0 (9.8)** |
+| 10th pct, not cheap | 1,036 | −1.32 | 0.008 (0.005) | **2.6** | −0.10 (0.03) | −12.4 (8.6) |
+| 15th pct, cheap | 399 | −1.08 | 0.033 (0.012) | 6.8 | **−1.86 (0.10)** | **−57.3 (21.8)** |
+| 15th pct, not cheap | 903 | −1.20 | 0.013 (0.005) | **5.8** | −0.16 (0.04) | −12.9 (6.4) |
+| 20th pct, cheap | 501 | −1.29 | 0.046 (0.011) | 15.8 | **−2.16 (0.09)** | **−47.3 (11.9)** |
+| 20th pct, not cheap | 801 | −1.08 | 0.014 (0.006) | **6.2** | +0.06 (0.04) | +4.7 (3.1) |
+
+What this shows:
+- **Cheap funds: the instrument works.** For cheap funds, when the Hausman IV rises their fee rises and their share falls sharply. The reduced form has t ≈ −20 to −34 at every cutoff, so a zero price coefficient is rejected decisively even allowing for a weak first stage. The split-sample IV is −37 to −57, close to the interacted model's cheap total (−41 to −69).
+- **Non-cheap funds: the instrument barely moves their fees.** The first-stage F is 2.6 to 6.2, although the Hausman IV varies more within these funds than within cheap funds. Their own IV slope is −12 to −13 at the 10th and 15th percentiles, with SEs of 6–9, and +4.7 (3.1) at the 20th. By the reduced-form test the non-cheap slope is negative at the 10th and 15th (t −2.9 and −4.2) but not distinguishable from zero at the 20th (t +1.8).
+- **This is why the non-cheap slope has been fragile.** It took the values −8, −19, −28, +6 and +14 depending on the sample and specification, because the Hausman IV identifies it only weakly. The cheap slope, which drives the Table 5 funds, is the well-identified part. In the pooled model (2′), the non-cheap coefficient borrows strength from the common month FE and controls; that is why its Sanderson–Windmeijer F (18.3) looks better than the split-sample F.
+- Table 2's single −5.6 is dominated by the cheap funds: their first-stage coefficient is three to ten times the non-cheap funds'.
+
 ### A second interaction (`OTHER_SPECS_explored.md`, section 1b)
 
 Adding one more price interaction to (2′), each instrumented by Hausman IV × z, at the 20th percentile:
@@ -178,7 +198,7 @@ The tier is fixed at the fund's first raw month, before the estimation window fo
 
 - Add column (2′) at the 20th percentile to Table 2 Panel A as the alternative demand model, with the 10th and 15th (and optionally 25th/30th) percentiles in a robustness table. Panel B unchanged.
 - Footnote: a random coefficient on the expense ratio is not identified once the interaction is included (the GMM objective is flat in σ; the paper's own σ = 0.027 is not rejected, Hansen J p = 0.088), and every estimator that lets σ float gives upward-sloping demand for non-cheap funds, so the column is logit IV. If a random-coefficient column is wanted, a column with σ held at the Table 2 col 3 value exists but is numerically identical to (2′) and should be labelled as a sensitivity exhibit, not an estimated BLP (`OTHER_SPECS_explored.md`, section 4).
-- State the caveats: the non-cheap slope is imprecise and is identified mainly from Vanguard's fee changes (`OTHER_SPECS_explored.md`, section 2b); the tier is set at entry, so repriced funds (AGG, SPDR Portfolio S&P 500) are classified by their launch fee.
+- State the caveats: the non-cheap slope is weakly identified (split-sample first-stage F 2.6–6.2, section 4) and depends mainly on Vanguard's fee changes (`OTHER_SPECS_explored.md`, section 2b); the tier is set at entry, so repriced funds (AGG, SPDR Portfolio S&P 500) are classified by their launch fee.
 - Under this model the cheapest Table 5 funds have |e| of 1.2–3.5 at the 20th percentile instead of 0.16–0.33, so the Lerner-index implication of Table 5 (marginal cost below zero for the cheapest funds) is substantially reduced but not removed for the 0.02% funds (SPDR Portfolio S&P 500 −0.81, Vanguard TSM Inst. Plus −0.78).
 
 ## 6. Code and logs
