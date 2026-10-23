@@ -158,7 +158,7 @@ The same 9 funds are above 1 at every cutoff: four Vanguard funds (both 500 Inde
 
 ### Exogeneity
 
-The tier is fixed at the fund's first raw month, before the estimation window for most funds, so it cannot respond to demand shocks inside the window; fund FE absorb its level. Its interaction with the Hausman IV inherits the paper's exclusion restriction (other markets' fees are uncorrelated with the fund's within-month demand shock). Every time-varying alternative tried (rolling cheap status, lagged AUM tercile, lagged fee tercile, lagged-fee percentile) failed lead tests: past demand shocks predicted the classifier, with ξ̂ persistent within fund (AR(1) ≈ 0.98). Details in `OTHER_SPECS_explored.md`, section 2.
+The tier is fixed at the fund's first raw month, before the estimation window for most funds, so it cannot respond to demand shocks inside the window; fund FE absorb its level. Its interaction with the Hausman IV inherits the paper's exclusion restriction (other markets' fees are uncorrelated with the fund's within-month demand shock). Every time-varying alternative tried (rolling cheap status, lagged AUM tercile, lagged fee tercile, lagged-fee percentile) failed lead tests: past demand shocks predicted the classifier, with ξ̂ persistent within fund (AR(1) ≈ 0.98). Details in `OTHER_SPECS_explored.md`, section 2. The closest to passing is status from the fee 60 months earlier (section 2c). At the 20th percentile it gives 13 of 15 Table 5 funds above 1 and a cheap total of −48, which makes it a useful robustness exhibit. It still carries the classification-date demand shock through a within-fund autocorrelation of 0.12. It also adds a large status main effect (+2.8) and triples the non-cheap slope.
 
 ## 5. How to report it
 

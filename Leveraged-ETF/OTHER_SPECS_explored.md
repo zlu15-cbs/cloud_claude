@@ -29,7 +29,7 @@ Throughout, unless stated: logit IV on the Table 2 Panel A sample (N = 108,300, 
 
 What this shows: fixed characteristics other than the fee level either leave 13 of the 15 funds below 1 or buy the elasticities with upward-sloping demand for part of the market. The fee level itself is the characteristic that matters, and the first-sample-month tercile already shows it (13 of 15). The entry-based tier in the main file is the clean version of that spec.
 
-## 2. Time-varying fee and size classifiers (all fail exogeneity or identification)
+## 2. Time-varying fee and size classifiers (none passes the exogeneity checks)
 
 Each of these makes "cheap" (or "large") depend on information inside the estimation window. Since the classifier varies within fund, its main effect is included as a control and three diagnostics are run: within-fund corr(z, ξ̂), **lead tests** (regress ξ̂ from 1, 3 and 12 months *earlier* on today's z, within fund; a significant coefficient means past demand shocks predict the classifier), and the within-fund AR(1) of ξ̂ (0.975–0.978 throughout, so a 12-month lag does not break the link between past shocks and today's ξ).
 
@@ -43,6 +43,7 @@ Each of these makes "cheap" (or "large") depend on information inside the estima
 | (b) price × 1[pct12 ≤ 0.10] | **+17.21** (6.95); × z +18.44 (13.2) | **11.1** | 0 | 2.2 / 0.9 / −4.9 | weak IVs; positive slopes |
 | (c) price × 1[pct12 ≤ 0.15] | −34.39 (26.3); × z −24.78 (11.3) | **1.6** | 15 | −2.5 / −4.3 / −9.4 | weak IVs; not an estimate |
 | (d) price × 1[pct12 ≤ 0.20] | −9.28 (1.70); × z −14.19 (0.49), total −23.5 | 48.0 | 7 | **−3.8 / −5.1 / −9.8** | works mechanically but fails lead tests; cheap slope flatter than the entry tier's −40.8 |
+| **Fee 60 months earlier, entry fee if the history is shorter** (section 2c), 20th pct | −27.96 (6.15); × z −20.44 (2.14), total −48.4 | 23.1 | 13 | 4.2 / 3.5 / 1.8 | best of the time-varying classifiers; exogeneity still not established (section 2c) |
 | *Entry tier, 20th pct (main file)* | −8.13 (4.32); × cheap −32.64 (4.20) | 18.3 | 11 | n/a (fixed by fund) | |
 
 Notes on the lagged-fee percentile (N = 105,049 fund-months with a fee observed 12 months earlier; baseline logit IV on that sample −4.81, average e −1.39):
@@ -69,6 +70,68 @@ The cutoff grid itself is in the main file. The checks below hold the 20th-perce
 | **Drop Vanguard** | **+6.2 (1.2)** / −22.4 | 73 | **fails for the rest:** 67% of fund-months get positive own elasticities; the cheap total survives |
 
 The last row is the main caveat of the specification. The non-cheap slope is identified mainly from Vanguard funds' fee changes (Vanguard is about a quarter of the sample's fund-months). The robust part of the result is the **gap**: cheap funds respond far more to fees than the rest, at every cutoff and in every subsample. The fragile part is the level and sign of the non-cheap slope. Most Table 5 funds are cheap, so their elasticities rest on the robust coefficient; the 60% of fund-months outside the cheap group rest on the fragile one. Worth checking which Vanguard funds changed fees and whether those changes are plausibly exogenous (Vanguard's at-cost structure passing through scale economies); a Vanguard-specific slope would make this explicit.
+
+### 2c. Cheap status from the fee 60 months earlier, entry fee for young funds (`code/explore/step17_lag60_tier.py`, `step17b_lag60_decompose.py`; `logs/explore_step17*.log`, `logs/explore/step17_*.csv`)
+
+**Idea.** Use a classification date far enough back that today's demand shock no longer carries information from it. cheap_jt = 1 if fund j's fee in month t − 60 was at or below that month's q-th percentile across all raw index funds; if the fund has no raw fee 60 months before t, use its first raw month (the entry tier). 76% of sample fund-months use the lagged fee, 24% the entry fallback. The status changes inside the sample for 15–16% of funds and differs from the entry tier in 10–11% of fund-months. Because it varies within fund, its main effect is a control. Logit IV, Hausman IV and Hausman IV × z, Table 2 Panel A sample (N = 108,300).
+
+**How fast the demand shock decays** (within-fund correlation of the Table 2 logit IV residual ξ̂ with itself k months earlier): 0.98 at 1 month, 0.73 at 12, 0.35 at 36, **0.12 at 60**, 0.06 at 72. So a 60-month lag removes most of the persistence that sank the 12-month classifiers, but not all of it.
+
+| | 10th pct | 15th pct | **20th pct** | 20th, lag 36 | 20th, lag 48 | 20th, lag 84 | *Entry tier, 20th (main file)* |
+|---|---|---|---|---|---|---|---|
+| Expense ratio (non-cheap) | −24.58 (10.89) | −29.83 (10.89) | **−27.96 (6.15)** | −18.25 (4.07) | −21.34 (4.01) | −27.83 (6.20) | −8.13 (4.32) |
+| × cheap | −17.73 (6.27) | −20.15 (4.68) | **−20.44 (2.14)** | −17.24 (1.53) | −17.77 (1.21) | −15.54 (1.41) | −32.64 (4.20) |
+| Cheap total | −42.3 | −50.0 | **−48.4** | −35.5 | −39.1 | −43.4 | −40.8 |
+| Main effect of cheap (utility) | +1.64 (0.38) | +2.28 (0.36) | **+2.82 (0.19)** | +2.36 (0.13) | +2.43 (0.11) | +2.28 (0.15) | absorbed by fund FE |
+| Weakest first-stage F | **8.4** | **8.8** | 23.1 | 32.0 | 31.6 | 24.0 | 18.3 |
+| Avg own-price elasticity | −7.38 | −9.17 | **−8.92** | −5.95 | −6.88 | −8.71 | −3.93 |
+| Share \|e\| > 1 | 0.98 | 0.98 | 0.98 | 0.98 | 0.98 | 0.98 | 0.93 |
+| Share e > 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Share negative MC (firm Bertrand) | 0.06 | 0.03 | 0.03 | 0.08 | 0.06 | 0.05 | 0.13 |
+| Table 5 funds with \|e\| > 1 | 13 | 13 | **13** | 13 | 13 | 13 | 11 |
+| Lead-test t, baseline ξ̂ from 1 / 3 / 12 months earlier | **21.4 / 21.8 / 21.1** | 7.2 / 6.7 / 5.7 | 4.2 / 3.5 / 1.8 | 3.9 / 1.9 / −2.7 | 3.5 / 3.4 / 2.0 | 4.7 / 4.8 / 5.0 | n/a |
+| Lead-test t, ξ̂ from the classification date (60 / 72 months earlier) | −2.9 / −4.7 | −14.0 / −6.7 | **−14.9 / −11.9** | | | | n/a |
+
+**The 15 Table 5 funds, own elasticity in the last month.** "cheap?" is the lag-60 status in Aug 2024; an asterisk marks a fund whose lag-60 status differs from its entry tier at that cutoff.
+
+| Fund | p (%) | Entry tier, 20th (main) | Lag 60, 10th: cheap? / e | Lag 60, 15th | **Lag 60, 20th** | 20th, lag 36 / 48 / 84 |
+|---|---|---|---|---|---|---|
+| iShares Core S&P 500 ETF | 0.03 | −1.18 | yes / −1.23 | yes / −1.45 | **yes / −1.41** | −1.03 / −1.14 / −1.26 |
+| iShares Core MSCI EAFE ETF | 0.07 | −2.83 | yes / −2.94 | yes / −3.47 | **yes / −3.36** | −2.47 / −2.72 / −3.01 |
+| iShares Core US Aggregate Bond ETF | 0.03 | −1.21 | yes* / −1.26 | yes / −1.49 | **yes / −1.44** | −1.06 / −1.16 / −1.29 |
+| iShares Russell 1000 Growth ETF | 0.18 | −7.30 | no / −4.40 | no* / −5.34 | **no* / −5.00** | −3.27 / −3.82 / −4.98 |
+| iShares Core S&P Mid-Cap ETF | 0.05 | −2.03 | yes* / −2.10 | yes / −2.49 | **yes / −2.41** | −1.76 / −1.94 / −2.16 |
+| SPDR S&P 500 ETF Trust | 0.09 | −3.54 | no* / −2.13 | yes / −4.34 | **yes / −4.20** | −3.08 / −3.40 / −3.77 |
+| SPDR Gold Shares | 0.40 | −3.24 | no / −9.79 | no / −11.88 | **no / −11.14** | −7.27 / −8.50 / −11.08 |
+| Technology Select Sector SPDR | 0.08 | −0.65 | no / −1.96 | no / −2.38 | **no / −2.23** | −1.45 / −1.70 / −2.22 |
+| Financial Select Sector SPDR | 0.08 | −0.65 | no / −1.96 | no / −2.38 | **no / −2.23** | −1.46 / −1.70 / −2.22 |
+| SPDR Portfolio S&P 500 ETF | 0.02 | −0.81 | yes* / −0.84 | yes* / −1.00 | **yes / −0.97** | −0.71 / −0.78 / −0.86 |
+| Vanguard Total Stock Market Inst. Plus | 0.02 | −0.78 | yes / −0.81 | yes / −0.96 | **yes / −0.93** | −0.68 / −0.75 / −0.83 |
+| Vanguard 500 Index Admiral | 0.04 | −1.58 | yes / −1.64 | yes / −1.93 | **yes / −1.87** | −1.37 / −1.51 / −1.68 |
+| Vanguard 500 Index ETF | 0.03 | −1.18 | yes / −1.23 | yes / −1.45 | **yes / −1.41** | −1.03 / −1.14 / −1.26 |
+| Vanguard Total Stock Market ETF | 0.03 | −1.19 | yes / −1.24 | yes / −1.46 | **yes / −1.41** | −1.04 / −1.14 / −1.27 |
+| Vanguard Total Stock Market Admiral | 0.04 | −1.59 | yes / −1.65 | yes / −1.95 | **yes / −1.89** | −1.38 / −1.53 / −1.69 |
+
+**Where the identification comes from** (`step17b`, three variants per cutoff):
+
+| | 10th | 15th | 20th |
+|---|---|---|---|
+| **Frozen**: lag-60 status taken at the fund's first sample month and held fixed (predetermined; differs from the entry tier in 4–5% of fund-months). Rest / cheap total (F) | −5.1 (3.5) / −50.3 (F 19.5) | −36.5 (29.1) / −125.3 (**F 4.6**) | −16.8 (9.2) / −62.6 (F 10.9) |
+| Frozen: avg e; Table 5 > 1 | −2.36; 8 | −13.3; not usable | −6.94; 14 |
+| **No switchers**: drop the funds whose lag-60 status changes in the sample. Rest / cheap total (F) | +811 / +1,299 (**F 0.03**) | −419 / −589 (**F 0.14**) | −19.2 (5.2) / −53.8 (F 25.1) |
+| **Full** time-varying (table above) | −24.6 / −42.3 (F 8.4) | −29.8 / −50.0 (F 8.8) | −28.0 / −48.4 (F 23.1) |
+
+**Reading.**
+1. **At the 20th percentile the 60-month lag gives the best elasticities of any specification so far.** 13 of 15 Table 5 funds above |e| = 1 (the two below are the 0.02% funds, −0.97 and −0.93), no upward-sloping demand, 3% negative marginal cost, F = 23. The result is stable across lags of 36 to 84 months (13 of 15 throughout; cheap total −35 to −48).
+2. **The 10th and 15th cutoffs do not work.** Their first stages are weak (F 8.4 and 8.8), and dropping the 16% of funds that switch status collapses them entirely (F 0.03 and 0.14). They are identified from the switchers only. The 20th survives dropping the switchers (F 25), so its result is not driven by them.
+3. **The non-cheap slope is three to four times the entry tier's** (−28 against −8). Average elasticity rises to −8.9 (Table 2: −1.6; entry tier: −3.9), and SPDR Gold reaches −11. A 0.40% index fund with |e| = 11 has a Lerner index of 0.09, i.e. a markup of about 0.04 percentage points. Whether that is plausible for the expensive end of the index market is a question for the authors *(inference)*.
+4. **Exogeneity is better than with any 12-month classifier, but not established.**
+   - The 60-month lag shrinks the persistence channel to a within-fund ξ̂ correlation of 0.12, but the status is strongly correlated with the demand shock at its own classification date (t = −14.9 at 60 months, −11.9 at 72). That is expected: fees are endogenous, which is why the paper instruments them. With the lag, that endogeneity reaches today's ξ only through the 0.12 autocorrelation. It is smaller, not zero.
+   - The short-horizon lead tests with the baseline ξ̂ still reject at the 20th (t = 4.2, 3.5 at 1 and 3 months), fail badly at the 10th (t ≈ 21) and 15th (t ≈ 6–7), and do not improve as the lag lengthens (lag 84: 4.7 / 4.8 / 5.0). These tests are imperfect for this question *(inference)*: the baseline residual omits the steeper cheap slope, which pushes it up for cheap fund-months, so they are biased toward positive t. All lag-60 lead t-statistics are positive, while the 12-month classifiers' were negative. Repeating the tests with the interacted model's own residual is not informative either, since that residual is orthogonal to the status by construction (within-fund correlation exactly 0).
+   - **The main effect of the status is large**: +2.8 (SE 0.19) at the 20th. Holding today's fee fixed, a fund whose fee ranked in the cheapest fifth five years ago has mean utility 2.8 higher, i.e. a market share about 16 times larger. This could be slow adjustment or reputation, or the status could be tracking growth trends in demand. Under the entry tier, this term is absorbed by the fund FE and the question does not arise.
+5. **The frozen variant**, which is predetermined like the entry tier, is fragile. It differs from the entry tier in only 4–5% of fund-months, yet at the 20th it moves the non-cheap slope from −8 to −17 and the cheap total from −41 to −63, with a weaker first stage (F 10.9); at the 15th it is not identified.
+
+**Verdict.** The 60-month lag at the 20th percentile is the most favourable time-varying definition tried. It is a useful robustness exhibit showing that the cheap-fund gap survives when status is allowed to change: the cheap slope is −35 to −48 at every lag from 36 to 84 months. It does not replace the entry tier as the main specification, for three reasons: the classifier still carries the classification-date demand shock through a 0.12 autocorrelation, it adds a large unexplained status main effect, and it triples the non-cheap slope. The 10th and 15th cutoffs are not identified apart from the switchers.
 
 ## 3. Log price (functional form) (`logs/explore_step2_screen.log`, `explore_step4_blp_B1.log`, `explore_step5*`, `explore_step6*`)
 
@@ -176,6 +239,7 @@ No interaction (not significant in the paper's A7 logit, and not pursued). Separ
 | Entry-tier robustness (SPY fix, drop firms, broad, sample-only cutoffs) | `code/explore/step8_raw20_robustness.py`, `logs/explore_step8_raw20_robustness.log`, `logs/explore/step8_robustness.csv` |
 | First-sample-month fixed-fee-cutoff variants | `code/explore/step2e_cutoff_sweep.py`, `step2f_switcher_composition.py`, `logs/explore/step2e_cutoff_sweep_value.csv` |
 | Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
+| Status from the fee 60 months earlier (and 36/48/84), with decomposition | `code/explore/step17_lag60_tier.py`, `step17b_lag60_decompose.py`, `logs/explore_step17_lag60_tier.log`, `explore_step17b_lag60_decompose.log`, `logs/explore/step17*_*.csv` |
 | Log price | `step2_logit_screen.py` (B1), `step4_blp_shortlist.py`, `step5_*`, `step6_logp_blp_strong_iv.py` |
 | BLP with the interaction | `step4_blp_shortlist.py` (env `EXTRA_IV`, `EXTRA_IV_NAME`, `EXTRA_NOINTERACT`), `step9_lognormal_1rc.py`, `step7_lognormal_two_group.py`, `logs/explore_table2_alt_*` |
 | σ profile, Hansen J at fixed σ, σ-fixed exhibit | `step13_sigma_profile.py`, `logs/explore_step13_*`, `logs/explore/step13cal_*` |
