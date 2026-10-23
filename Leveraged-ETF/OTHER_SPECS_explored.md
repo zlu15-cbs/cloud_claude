@@ -330,6 +330,50 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
    - A nested logit with nests by tracked index (`market_m_index`). It keeps the fee linear and models within-index business stealing, which is exactly what makes the rival and new-product counts textbook instruments (for the within-nest share term).
    - A genuine cost shifter with within-fund variation for higher-fee funds, for example sub-advisory or custody cost changes, or the expiry of fee waivers.
 
+### 5b. Nested logit with tracked-index nests (`code/explore/step22_nested_logit.py`, `logs/explore_step22_nested_logit.log`, `logs/explore/step22_*.csv`)
+
+**Model.** ln s_j − ln s_0 = α·p_j [+ α_c·p_j·cheap_j] + controls + ρ·ln s_{j|g} + fund FE + month FE + ξ_j, where the nest g is the tracked index (`market_m_index`). There are 461 nests; 27% of fund-months are alone in their nest, and the S&P 500 nest holds up to 130 funds. The fee stays linear. pyblp estimates ρ by GMM with ρ bounded to [0, 0.99], and elasticities and costs account for the nests.
+
+**Instruments.** The price instruments are the Hausman IV (and × cheap). For the within-nest share, four sets, built from the full raw file so they do not depend on the sample's share filter:
+- the log number of funds tracking the same index that month;
+- the same count 12 months earlier;
+- that count plus entrants in the last 12 months and rivals' mean log age;
+- the coauthor's `rival_funds1` and `newproduct_1`.
+
+**Results** (20th percentile unless noted; SE clustered by month):
+
+| Model | Nest instruments | ρ (SE) | Non-cheap price (SE) | Cheap total | Hansen J p | Share e > 0 | Avg e | Table 5 > 1 |
+|---|---|---|---|---|---|---|---|---|
+| One slope | rivals | 0.00 (0.07) | −5.89 (0.56) | | | 0 | −1.70 | 2 |
+| One slope | rivals + entrants + age | 0.19 (0.06) | −7.33 (0.74) | | 0.000 | 0 | −2.39 | 2 |
+| Cheap tier | rivals | 0.49 (0.06) | **+1.35 (0.75)** | −18.0 | | **0.55** | −1.01 | 6 |
+| Cheap tier | rivals, 12 months earlier | 0.55 (0.05) | **+2.68 (0.79)** | −14.8 | | **0.55** | −0.33 | 7 |
+| Cheap tier | rivals + entrants + age | 0.78 (0.06) | −3.69 (0.81) | −21.0 | **0.000** | 0 | −6.11 | 13 |
+| Cheap tier | coauthor's | 0.54 (0.08) | **+2.70 (0.49)** | −15.0 | 0.57 | **0.55** | −0.32 | 7 |
+| Cheap tier, 15th | rivals | 0.46 (0.09) | −3.09 (0.95) | −26.6 | | 0 | −2.73 | 11 |
+| Cheap tier, 10th | rivals | 0.37 (0.11) | +0.51 (0.96) | −33.8 | | 0.76 | −0.93 | 7 |
+| Split sample, non-cheap only | rivals | 0.00 (0.85) | −7.02 (9.63) | | | 0 | −2.99 | |
+| Split sample, non-cheap only | rivals, 12 months earlier | 0.00 (1.22) | −5.38 (11.56) | | | 0 | −2.29 | |
+| Split sample, non-cheap only | rivals + entrants + age / coauthor's | 0.99 (bound) | −19.1 / −3.7 | | 0.000 / 0.04 | 0 | degenerate | |
+| Split sample, cheap only | rivals / rivals 12 months earlier | 0.93 / 0.92 (0.06) | −12.7 / −13.4 (cheap) | | | 0 | −15.5 / −13.0 | 12 |
+
+**Reading.**
+1. **The nests do not identify the non-cheap slope.**
+   - In the pooled model with the cheap tier, the clean exactly identified nest instruments make the non-cheap price coefficient *positive* at the 10th and 20th percentiles, and 55–76% of fund-months get upward-sloping demand. Only at the 15th percentile is it negative (−3.1).
+   - The overidentified set gives negative slopes, but Hansen J rejects (p < 0.001), and at the 15th percentile ρ runs to the 0.99 bound.
+   - On non-cheap funds alone, ρ is either not identified (0 with SE 0.85–1.2) or runs to the bound, and the price coefficient is as imprecise as with the Hausman IV alone (SE ≈ 10).
+2. **The overidentification tests still reject.** The hope was that modelling within-index substitution would make the rival and entry counts valid alongside the Hausman IV. In every overidentified run except the coauthor's pair at the 20th (p = 0.57, which comes with 55% upward-sloping demand), Hansen J still rejects.
+3. **One by-product is worth noting** *(inference)*.
+   - Among cheap funds alone, the nest parameter is large and consistent across the two exactly identified instrument sets (ρ = 0.92–0.93, SE 0.06): cheap funds tracking the same index are close substitutes.
+   - With ρ that high, own elasticities of the cheap Table 5 funds become very large: −3 to −28 (iShares Core S&P 500 −5.1, SPY −15.3, Vanguard 500 Admiral −6.8, SPDR Portfolio S&P 500 −3.8).
+   - This points to the same conclusion as the cheap tier (cheap funds' demand is very fee-sensitive), through within-index substitution instead of a steeper slope. It would change the paper's markup calculations a lot and is a modelling choice for the authors, not a fix for the non-cheap slope.
+4. **Bottom line.** Neither route identifies the non-cheap slope with the data available. Nested logit with tracked-index nests leaves it unidentified, and there is no cost shifter in the data (`product_mgmt_fee` is in dollars and is part of the fund's own price; `product_exp_ratio_bkpt` is a monthly market-wide value absorbed by the month FE).
+
+**Cost shifters would need outside data** *(inference)*. Candidates with within-fund variation for higher-fee funds:
+- index licensing costs (for example, Vanguard's 2012–13 switch of 22 funds from MSCI to CRSP and FTSE benchmarks, made to cut licensing fees);
+- the expiry of fee waivers or expense caps, from prospectus gross versus net expense ratios;
+- sub-advisory fee schedules from N-CEN or N-SAR filings.
+
 ## Appendix A. Facts about Table 5 and the data found along the way
 
 **Table 5.**
@@ -371,6 +415,7 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
 | Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
 | Why the lag-60 slopes are steeper (term-by-term, switchers vs non-switchers, event study, one-slope IV split by group) | `code/explore/step18_lag60_why.py`, `step18b_lag60_collinearity.py`, `step18c_pooled_iv_split.py`, `logs/explore_step18c_pooled_iv_split.log`, `step20_split_sample_iv.py`, `logs/explore_step20_split_sample_iv.log`, `logs/explore_step18_lag60_why.log`, `explore_step18b_lag60_collinearity.log`, `logs/explore/step18_*.csv` |
 | Instruments for the non-cheap slope (screen of 27 candidates; pooled model with new-product counts) | `code/explore/step21_noncheap_iv_screen.py`, `step21b_noncheap_iv_pooled.py`, `logs/explore_step21_noncheap_iv_screen.log`, `explore_step21b_noncheap_iv_pooled.log`, `logs/explore/step21*_*.csv` |
+| Nested logit, tracked-index nests | `code/explore/step22_nested_logit.py`, `logs/explore_step22_nested_logit.log`, `logs/explore/step22_*.csv` |
 | Cheap tier plus a second interaction (ETF, share class, broad, Big 3, firms) | `code/explore/step19_cheap_plus_interactions.py`, `logs/explore_step19_cheap_plus_interactions.log`, `logs/explore/step19_*.csv` |
 | Status from the fee 60 months earlier (and 36/48/84), with decomposition | `code/explore/step17_lag60_tier.py`, `step17b_lag60_decompose.py`, `logs/explore_step17_lag60_tier.log`, `explore_step17b_lag60_decompose.log`, `logs/explore/step17*_*.csv` |
 | Log price | `step2_logit_screen.py` (B1), `step4_blp_shortlist.py`, `step5_*`, `step6_logp_blp_strong_iv.py` |

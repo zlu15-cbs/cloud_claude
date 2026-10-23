@@ -1,0 +1,47 @@
+<class 'pandas.core.frame.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), object(10)
+memory usage: 95.0+ MB
+N=108,300; nests 461; alone in nest 0.274; within-fund SD of log rivals 0.184
+one slope | rivals                             rho 0.000 (0.068) | price   -5.89 (0.56) | F p/lnsjg 132.7/383.0 | J p nan | avg e -1.70 | e>0 0.000 | negMC 0.52 | 15>1 2 | conv True
+one slope | rivals12                           rho 0.079 (0.051) | price   -4.23 (0.51) | F p/lnsjg 107.8/309.6 | J p nan | avg e -1.28 | e>0 0.000 | negMC 0.57 | 15>1 1 | conv True
+one slope | rivals+entrants+age                rho 0.193 (0.056) | price   -7.33 (0.74) | F p/lnsjg 161.0/522.8 | J p 0.000 | avg e -2.39 | e>0 0.000 | negMC 0.43 | 15>1 2 | conv True
+one slope | coauthor                           rho 0.000 (0.127) | price   -7.62 (1.33) | F p/lnsjg 15.7/39.5 | J p 0.001 | avg e -2.19 | e>0 0.000 | negMC 0.45 | 15>1 2 | conv True
+cheap 20 | rivals                              rho 0.485 (0.064) | price    1.35 (0.75) | x cheap  -19.37 (0.78) total  -18.02 | F p/lnsjg 140.5/279.9 | J p nan | avg e -1.01 | e>0 0.553 | negMC 0.03 | 15>1 6 | conv True
+cheap 20 | rivals12                            rho 0.553 (0.052) | price    2.68 (0.79) | x cheap  -17.50 (0.76) total  -14.82 | F p/lnsjg 130.8/234.5 | J p nan | avg e -0.33 | e>0 0.553 | negMC 0.09 | 15>1 7 | conv True
+cheap 20 | rivals+entrants+age                 rho 0.775 (0.064) | price   -3.69 (0.81) | x cheap  -17.33 (0.79) total  -21.01 | F p/lnsjg 266.2/750.2 | J p 0.000 | avg e -6.11 | e>0 0.000 | negMC 0.11 | 15>1 13 | conv True
+cheap 20 | coauthor                            rho 0.543 (0.080) | price    2.70 (0.49) | x cheap  -17.66 (0.99) total  -14.96 | F p/lnsjg 67.6/118.1 | J p 0.572 | avg e -0.32 | e>0 0.553 | negMC 0.09 | 15>1 7 | conv True
+cheap 15 | rivals                              rho 0.458 (0.092) | price   -3.09 (0.95) | x cheap  -23.55 (1.09) total  -26.64 | F p/lnsjg 135.1/337.5 | J p nan | avg e -2.73 | e>0 0.000 | negMC 0.29 | 15>1 11 | conv True
+cheap 15 | rivals12                            rho 0.513 (0.075) | price   -1.51 (0.99) | x cheap  -20.95 (1.10) total  -22.46 | F p/lnsjg 117.0/248.1 | J p nan | avg e -2.09 | e>0 0.000 | negMC 0.58 | 15>1 10 | conv True
+cheap 15 | rivals+entrants+age                 rho 0.990 (0.004) | price  -10.19 (1.29) | x cheap  -20.52 (1.18) total  -30.71 | F p/lnsjg 196.9/620.8 | J p 0.000 | avg e -225.01 | e>0 0.000 | negMC 0.02 | 15>1 14 | conv True
+cheap 15 | coauthor                            rho 0.747 (0.047) | price    2.51 (0.34) | x cheap  -12.45 (0.66) total   -9.94 | F p/lnsjg 92.5/269.0 | J p 0.001 | avg e 0.43 | e>0 0.630 | negMC 0.08 | 15>1 11 | conv True
+cheap 10 | rivals                              rho 0.369 (0.112) | price    0.51 (0.96) | x cheap  -34.32 (2.64) total  -33.81 | F p/lnsjg 148.3/282.6 | J p nan | avg e -0.93 | e>0 0.758 | negMC 0.00 | 15>1 7 | conv True
+cheap 10 | rivals12                            rho 0.420 (0.096) | price    1.44 (1.04) | x cheap  -30.44 (2.07) total  -29.00 | F p/lnsjg 140.3/224.3 | J p nan | avg e -0.50 | e>0 0.758 | negMC 0.00 | 15>1 7 | conv True
+cheap 10 | rivals+entrants+age                 rho 0.660 (0.101) | price   -6.69 (1.04) | x cheap  -23.43 (2.18) total  -30.12 | F p/lnsjg 269.5/558.3 | J p 0.000 | avg e -5.37 | e>0 0.000 | negMC 0.16 | 15>1 10 | conv True
+cheap 10 | coauthor                            rho 0.623 (0.055) | price    4.08 (0.46) | x cheap  -17.51 (0.97) total  -13.43 | F p/lnsjg 200.9/279.6 | J p 0.064 | avg e 1.35 | e>0 0.758 | negMC 0.03 | 15>1 7 | conv True
+split 20 not cheap | rivals                    rho 0.000 (0.849) | price   -7.02 (9.63) | F p/lnsjg 66.2/173.4 | J p nan | avg e -2.99 | e>0 0.000 | negMC 0.13 | 15>1 1 | conv True
+split 20 not cheap | rivals12                  rho 0.000 (1.216) | price   -5.38 (11.56) | F p/lnsjg 47.3/141.9 | J p nan | avg e -2.29 | e>0 0.000 | negMC 0.17 | 15>1 1 | conv True
+split 20 not cheap | rivals+entrants+age       rho 0.990 (0.074) | price  -19.11 (2.63) | F p/lnsjg 64.6/258.9 | J p 0.000 | avg e -382.72 | e>0 0.000 | negMC 0.00 | 15>1 3 | conv True
+split 20 not cheap | coauthor                  rho 0.990 (0.039) | price   -3.69 (0.68) | F p/lnsjg 19.5/30.7 | J p 0.040 | avg e -74.00 | e>0 0.000 | negMC 0.05 | 15>1 2 | conv True
+split 20 cheap | rivals                        rho 0.933 (0.066) | price  -12.71 (1.00) | F p/lnsjg 173.8/346.6 | J p nan | avg e -15.46 | e>0 0.000 | negMC 0.12 | 15>1 12 | conv True
+split 20 cheap | rivals12                      rho 0.916 (0.062) | price  -13.35 (1.38) | F p/lnsjg 104.1/209.0 | J p nan | avg e -13.02 | e>0 0.000 | negMC 0.11 | 15>1 12 | conv True
+split 20 cheap | rivals+entrants+age           rho 0.926 (0.062) | price  -12.16 (1.00) | F p/lnsjg 73.3/139.1 | J p 0.000 | avg e -13.39 | e>0 0.000 | negMC 0.13 | 15>1 12 | conv True
+split 20 cheap | coauthor                      rho 0.990 (0.019) | price   -5.65 (1.16) | F p/lnsjg 18.0/116.0 | J p 0.000 | avg e -45.08 | e>0 0.000 | negMC 0.18 | 15>1 12 | conv True
+spec                                           one slope | rivals  one slope | rivals12  one slope | rivals+entrants+age  one slope | coauthor  cheap 20 | rivals  cheap 20 | rivals12  cheap 20 | rivals+entrants+age  cheap 20 | coauthor
+short                                  p_last                                                                                                                                                                                              
+iShares Core S&P 500 ETF               0.03                 -0.17                 -0.13                            -0.26                 -0.22              -0.98                -0.93                           -2.57                -0.92
+iShares Core MSCI EAFE ETF             0.07                 -0.41                 -0.32                            -0.61                 -0.53              -2.28                -2.14                           -5.84                -2.11
+iShares Core US Aggregate Bond ETF     0.03                 -0.18                 -0.14                            -0.26                 -0.23              -0.98                -0.92                           -2.52                -0.91
+iShares Russell 1000 Growth ETF        0.18                 -1.05                 -0.81                            -1.57                 -1.36              -5.74                -5.37                          -14.52                -5.31
+iShares Core S&P Mid-Cap ETF           0.05                 -0.29                 -0.22                            -0.42                 -0.38              -1.43                -1.31                           -3.31                -1.30
+SPDR S&P 500 ETF Trust                 0.09                 -0.51                 -0.40                            -0.78                 -0.66              -2.93                -2.76                           -7.66                -2.73
+SPDR Gold Shares                       0.40                 -2.34                 -1.74                            -3.18                 -3.03               0.73                 1.57                           -3.38                 1.56
+Technology Select Sector SPDR Fund     0.08                 -0.47                 -0.34                            -0.60                 -0.61               0.12                 0.25                           -0.42                 0.25
+Financial Select Sector SPDR Fund      0.08                 -0.47                 -0.34                            -0.58                 -0.61               0.11                 0.21                           -0.29                 0.22
+SPDR Portfolio S&P 500 ETF             0.02                 -0.12                 -0.09                            -0.18                 -0.15              -0.70                -0.66                           -1.86                -0.65
+Vanguard Total Stock Market Index Fund 0.03                 -0.17                 -0.13                            -0.26                 -0.22              -0.99                -0.94                           -2.61                -0.93
+                                       0.02                 -0.11                 -0.09                            -0.17                 -0.15              -0.64                -0.60                           -1.66                -0.59
+                                       0.04                 -0.23                 -0.18                            -0.35                 -0.30              -1.33                -1.26                           -3.50                -1.24
+Vanguard 500 Index Fund; Admiral Share 0.04                 -0.23                 -0.18                            -0.35                 -0.29              -1.31                -1.23                           -3.42                -1.22
+Vanguard 500 Index Fund; ETF Shares    0.03                 -0.17                 -0.13                            -0.26                 -0.22              -0.98                -0.93                           -2.58                -0.92
