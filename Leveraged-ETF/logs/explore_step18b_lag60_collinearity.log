@@ -1,0 +1,12 @@
+switching funds: 199 of 1302; 0.225 of fund-months
+within-fund corr after FE+controls: corr(z, p*z) = 0.669; corr(H*z, z) = 0.792; corr(p, p*z) = 0.046; corr(H, H*z) = 0.141
+R2 of p*z on (z, p): 0.461;  R2 of H*z on (z, H): 0.642
+switchers: mean fee by regime {0.0: 0.2, 1.0: 0.148} | non-switchers cheap / not: {0.0: 0.492, 1.0: 0.073}
+non-switchers: Table 2 logit IV (p)                        N=83,890 | prices 14.06 (4.30) | min F 17.2 | avg e 4.52
+non-switchers: entry tier (p, p*e)                         N=83,890 | prices -22.12 (5.72), e*prices -35.40 (1.71) | min F 26.0 | avg e -8.24
+non-switchers: lag-60 status, fixed (p, p*z)               N=83,890 | prices -19.18 (5.17), prices*z -34.66 (1.64) | min F 25.1 | avg e -7.21
+all funds: Table 2 logit IV (p)                            N=108,300 | prices -5.61 (1.31) | min F 33.6 | avg e -1.61
+switchers only: D (p, p*z, z)                              N=24,410 | prices 132.11 (107.46), prices*z 74.52 (63.58), z -7.85 (7.02) | min F 1.6 | avg e 29.01
+switchers only: Table 2 logit IV (p)                       N=24,410 | prices -24.79 (6.33) | min F 14.7 | avg e -4.26
+all funds: D (p, p*z, z)                                   N=108,300 | prices -27.96 (6.15), prices*z -20.44 (2.14), z 2.82 (0.19) | min F 23.1 | avg e -8.92
+D: net effect of z at fee p is 2.82 + (-20.44) p, zero at p = 0.138%; at the switchers' mean cheap-regime fee 0.148%: -0.21; at 0.03%: 2.20

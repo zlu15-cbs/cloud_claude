@@ -156,6 +156,20 @@ The same 9 funds are above 1 at every cutoff: four Vanguard funds (both 500 Inde
 - The **non-cheap** coefficient is imprecise everywhere (SE 2.6–8.2) and not monotone (−6.2, −16.0, −8.1, −6.5, −3.4). Past the 30th percentile the "rest" group is the expensive half of the market and its slope turns positive, so cutoffs above the 30th are not usable.
 - Further checks of the 20th-percentile specification (SPY fee correction, dropping each of the three large firms, adding the broad-based interaction, cutoffs computed among sample funds only) are in `OTHER_SPECS_explored.md`, section 2b. All hold except dropping Vanguard, which flips the sign of the non-cheap slope; the cheap total survives.
 
+### A second interaction (`OTHER_SPECS_explored.md`, section 1b)
+
+Adding one more price interaction to (2′), each instrumented by Hausman IV × z, at the 20th percentile:
+
+| Second interaction | × second term (SE) | × cheap | min F | Table 5 > 1 |
+|---|---|---|---|---|
+| none (main spec) | | −32.64 (4.20) | 18.3 | 11 |
+| **Institutional share class** (Admiral, Institutional, Inst. Plus, class I/K/Y/Z/R6) | **−3.12 (0.77)** | −34.67 (5.40) | 16.5 | 11 |
+| ETF | +5.86 (2.98) | −37.66 (8.04) | 10.3 | 12 |
+| Broad-based | −0.01 (1.20) | −32.65 (3.70) | 35.2 | 11 |
+| Big 3 | +8.27 (2.75) | −36.22 (5.95) | 14.5 | 11 |
+
+Only the institutional share class is significant with a stable sign. It is −3.1 to −3.6 (t −3.0 to −4.1) at the 15th and 20th percentiles, but not significant at the 10th (−0.8). It is small next to the cheap term, and adding it leaves the cheap coefficient unchanged. Among the Table 5 funds it affects only the three Vanguard mutual-fund classes (Vanguard 500 Admiral −1.58 → −1.92, TSM Admiral −1.59 → −1.94, TSM Institutional Plus −0.78 → −0.95). ETF and Big 3 are significant only at the 20th, and broad-based adds nothing once cheap is in. Firm dummies give upward-sloping demand.
+
 ### Exogeneity
 
 The tier is fixed at the fund's first raw month, before the estimation window for most funds, so it cannot respond to demand shocks inside the window; fund FE absorb its level. Its interaction with the Hausman IV inherits the paper's exclusion restriction (other markets' fees are uncorrelated with the fund's within-month demand shock). Every time-varying alternative tried (rolling cheap status, lagged AUM tercile, lagged fee tercile, lagged-fee percentile) failed lead tests: past demand shocks predicted the classifier, with ξ̂ persistent within fund (AR(1) ≈ 0.98). Details in `OTHER_SPECS_explored.md`, section 2. The closest to passing is status from the fee 60 months earlier (section 2c). At the 20th percentile it gives 13 of 15 Table 5 funds above 1 and a cheap total of −48, which makes it a useful robustness exhibit. It still carries the classification-date demand shock through a within-fund autocorrelation of 0.12. It also adds a large status main effect (+2.8) and triples the non-cheap slope.

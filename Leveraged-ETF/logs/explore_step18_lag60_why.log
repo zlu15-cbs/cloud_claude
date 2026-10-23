@@ -1,0 +1,50 @@
+<class 'pandas.core.frame.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), object(10)
+memory usage: 95.0+ MB
+N = 108,300; z = 1 in 0.447 of fund-months; e = 1 in 0.447; z != e in 0.114
+
+=== A: prices + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excl=['demand_instruments0']
+{'spec': 'A', 'avg_e': -1.614, 'min_F': 33.607, 'b[prices]': np.float64(-5.606), 'se[prices]': np.float64(1.31), 'b[product_tracking_err]': np.float64(-0.451), 'se[product_tracking_err]': np.float64(0.066), 'b[product_past_1yr_ret]': np.float64(0.413), 'se[product_past_1yr_ret]': np.float64(0.034), 'b[log_product_fund_age]': np.float64(0.573), 'se[log_product_fund_age]': np.float64(0.011)}
+
+=== B: prices + product_tracking_err + product_past_1yr_ret + log_product_fund_age + z  excl=['demand_instruments0']
+{'spec': 'B', 'avg_e': -1.678, 'min_F': 41.873, 'b[prices]': np.float64(-5.828), 'se[prices]': np.float64(1.188), 'b[product_tracking_err]': np.float64(-0.463), 'se[product_tracking_err]': np.float64(0.063), 'b[product_past_1yr_ret]': np.float64(0.413), 'se[product_past_1yr_ret]': np.float64(0.034), 'b[log_product_fund_age]': np.float64(0.572), 'se[log_product_fund_age]': np.float64(0.012), 'b[z]': np.float64(0.046), 'se[z]': np.float64(0.03)}
+
+=== C: prices + I(prices*z) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excl=['demand_instruments0', 'demand_instruments1']
+{'spec': 'C', 'avg_e': -1.931, 'min_F': 28.122, 'b[prices]': np.float64(-6.428), 'se[prices]': np.float64(1.565), 'b[prices*z]': np.float64(-1.905), 'se[prices*z]': np.float64(0.299), 'b[product_tracking_err]': np.float64(-0.52), 'se[product_tracking_err]': np.float64(0.076), 'b[product_past_1yr_ret]': np.float64(0.416), 'se[product_past_1yr_ret]': np.float64(0.034), 'b[log_product_fund_age]': np.float64(0.593), 'se[log_product_fund_age]': np.float64(0.014)}
+
+=== D: prices + I(prices*z) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + z  excl=['demand_instruments0', 'demand_instruments1']
+{'spec': 'D', 'avg_e': -8.915, 'min_F': 23.083, 'b[prices]': np.float64(-27.961), 'se[prices]': np.float64(6.151), 'b[prices*z]': np.float64(-20.444), 'se[prices*z]': np.float64(2.143), 'b[product_tracking_err]': np.float64(-1.921), 'se[product_tracking_err]': np.float64(0.36), 'b[product_past_1yr_ret]': np.float64(0.444), 'se[product_past_1yr_ret]': np.float64(0.039), 'b[log_product_fund_age]': np.float64(0.746), 'se[log_product_fund_age]': np.float64(0.069), 'b[z]': np.float64(2.817), 'se[z]': np.float64(0.189)}
+
+=== E: prices + I(prices*e) + product_tracking_err + product_past_1yr_ret + log_product_fund_age  excl=['demand_instruments0', 'demand_instruments1']
+{'spec': 'E', 'avg_e': -3.931, 'min_F': 18.31, 'b[prices]': np.float64(-8.132), 'se[prices]': np.float64(4.315), 'b[e*prices]': np.float64(-32.641), 'se[e*prices]': np.float64(4.204), 'b[product_tracking_err]': np.float64(-1.755), 'se[product_tracking_err]': np.float64(0.387), 'b[product_past_1yr_ret]': np.float64(0.471), 'se[product_past_1yr_ret]': np.float64(0.039), 'b[log_product_fund_age]': np.float64(0.652), 'se[log_product_fund_age]': np.float64(0.05)}
+
+=== F: prices + I(prices*e) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + z  excl=['demand_instruments0', 'demand_instruments1']
+{'spec': 'F', 'avg_e': -3.698, 'min_F': 32.33, 'b[prices]': np.float64(-7.576), 'se[prices]': np.float64(3.551), 'b[e*prices]': np.float64(-31.132), 'se[e*prices]': np.float64(2.512), 'b[product_tracking_err]': np.float64(-1.671), 'se[product_tracking_err]': np.float64(0.31), 'b[product_past_1yr_ret]': np.float64(0.468), 'se[product_past_1yr_ret]': np.float64(0.039), 'b[log_product_fund_age]': np.float64(0.65), 'se[log_product_fund_age]': np.float64(0.045), 'b[z]': np.float64(-0.091), 'se[z]': np.float64(0.102)}
+
+First stage / reduced form / OVB:
+                                     spec  first_stage  first_stage_se  reduced_form  reduced_form_se   alpha
+                                        A       0.0304          0.0052       -0.1703           0.0315 -5.6060
+                                        B       0.0342          0.0053       -0.1992           0.0318 -5.8278
+         OVB: gamma_B * cov(H,z)/cov(H,p)       0.1460             NaN        0.0461              NaN  0.2218
+OLS z~ on H~ (instrument co-moves with z)       0.1460          0.0210           NaN              NaN     NaN
+              OLS delta~ on z~ (no price)          NaN             NaN        0.1968           0.0177     NaN
+                             OLS p~ on z~      -0.0259          0.0030           NaN              NaN     NaN
+
+Event study around a single 0->1 switch (28 funds); values relative to the fund's pre-switch mean, net of month means; bins of 6 months:
+      n  delta  price  hausman
+bin                           
+-36  18 -0.099 -0.010    0.001
+-30  19 -0.023 -0.004    0.001
+-24  21 -0.011 -0.004    0.001
+-18  24  0.008  0.000    0.005
+-12  25  0.022  0.003    0.001
+-6   28  0.063  0.010   -0.006
+ 0   28  0.103  0.011   -0.012
+ 6   26  0.164  0.017   -0.012
+ 12  24  0.152  0.020   -0.007
+ 18  20  0.170  0.026   -0.004
+ 24  17  0.309  0.030    0.003
+ 30  16  0.272  0.034    0.013
+ 36  15  0.362  0.035    0.011

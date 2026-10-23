@@ -29,6 +29,44 @@ Throughout, unless stated: logit IV on the Table 2 Panel A sample (N = 108,300, 
 
 What this shows: fixed characteristics other than the fee level either leave 13 of the 15 funds below 1 or buy the elasticities with upward-sloping demand for part of the market. The fee level itself is the characteristic that matters, and the first-sample-month tercile already shows it (13 of 15). The entry-based tier in the main file is the clean version of that spec.
 
+### 1b. The cheap tier plus a second interaction (`code/explore/step19_cheap_plus_interactions.py`, `logs/explore_step19_cheap_plus_interactions.log`, `logs/explore/step19_*.csv`)
+
+Logit IV with price × cheap (entry tier) plus one more price interaction. Each p × z is instrumented by Hausman IV × z, and every z is fixed per fund, so fund FE absorb the main effects. Share class is parsed from mutual-fund names. "Institutional" means Admiral, Institutional, Institutional Plus, class I/K/Y/Z/R6, Premier or Select; "retail" means Investor, class A/C/R/T, service or advisor; ETFs are the base group in the full share-class spec. Among sample funds, 50% are ETFs, 23% institutional classes, 9% retail classes, 19% other mutual-fund classes. Coefficient (SE, t); "total cheap" is price + price × cheap for the base group.
+
+**20th percentile**
+
+| Second interaction | Price (base) | × cheap | × second term | min F | Avg e | Share e > 0 | Neg. MC | Table 5 > 1 |
+|---|---|---|---|---|---|---|---|---|
+| none (main spec) | −8.13 (4.32) | −32.64 (4.20, t −7.8) | | 18.3 | −3.93 | 0 | 0.13 | 11 |
+| ETF | −16.64 (9.86) | −37.66 (8.04) | **+5.86 (2.98, t 2.0)** | 10.3 | −5.73 | 0 | 0.07 | 12 |
+| **Institutional class** | −11.83 (5.94) | −34.67 (5.40) | **−3.12 (0.77, t −4.1)** | 16.5 | −5.23 | 0 | 0.08 | 11 |
+| ETF + institutional (base: non-institutional MF) | −20.97 (12.71) | −40.06 (10.02) | ETF +6.15 (3.53, t 1.7); inst **−3.29 (1.10, t −3.0)** | 10.1 | −7.19 | 0 | 0.03 | 15 |
+| Full share class (base: ETF) | −16.77 (11.25) | −42.30 (12.19) | inst −9.07 (4.50, t −2.0); retail −3.42 (2.25); other MF −6.98 (4.33) | 9.3 | −7.82 | 0 | 0.02 | 15 |
+| Broad-based | −8.14 (3.89) | −32.65 (3.70) | −0.01 (1.20, t 0.0) | 35.2 | −3.93 | 0 | 0.13 | 11 |
+| Big 3 | −11.16 (5.98) | −36.22 (5.95) | **+8.27 (2.75, t 3.0)** | 14.5 | −4.08 | 0 | 0.24 | 11 |
+| Firms (Vanguard, BlackRock, SSGA) | −1.83 (1.80) | −29.67 (2.29) | +10.54 / +6.54 / +4.38 (all t > 4) | 59.4 | −1.21 | **0.23** | 0.32 | 5 |
+| ETF + inst + broad + Big 3 | −19.16 (12.03) | −39.20 (8.42) | ETF +4.64 (n.s.); inst **−3.04 (t −3.0)**; broad +6.17 (n.s.); Big 3 **+8.57 (t 2.9)** | 14.9 | −5.10 | 0.05 | 0.03 | 11 |
+| *Without cheap: ETF alone* | −2.99 (1.20) | | −1.89 (0.22, t −8.6) | 28.6 | −1.15 | 0 | 0.60 | 1 |
+| *Without cheap: institutional alone* | −10.34 (2.48) | | −4.17 (0.41, t −10.3) | 25.7 | −3.16 | 0 | 0.36 | 2 |
+
+**The second term at the other cutoffs** (coefficient, t; the cheap coefficient barely moves in every row):
+
+| Second interaction | 10th pct | 15th pct | 20th pct |
+|---|---|---|---|
+| Institutional class | −0.84 (t −1.1) | **−3.59 (t −3.0)** | **−3.12 (t −4.1)** |
+| ETF | +2.63 (t 0.7) | +1.61 (t 0.6) | +5.86 (t 2.0) |
+| Broad-based | +2.65 (t 1.2) | +3.82 (t 1.7) | −0.01 (t 0.0) |
+| Big 3 | +4.65 (t 1.1) | +4.05 (t 1.2) | **+8.27 (t 3.0)** |
+| Firms | Vanguard +5.9, SSGA +3.1 (t 2.7–2.8); base +2.8: **76% upward-sloping** | Vanguard +7.8 (t 4.8); **63% upward-sloping** | all positive; **23% upward-sloping** |
+
+**Reading.**
+- **The institutional share class is the one extra interaction that is significant, with a stable sign, alongside cheap.** Its coefficient is −3.1 to −3.6 (t −3.0 to −4.1) at the 15th and 20th percentiles and keeps its sign in the kitchen-sink spec. Institutional mutual-fund classes are somewhat more fee-sensitive than ETFs and retail classes, even after cheap is controlled. The term is small next to cheap (−33 to −45), and it is not significant at the 10th percentile (−0.8, t −1.1). The cheap coefficient is unchanged when it is added (−34.7 against −32.6 at the 20th).
+- For the 15 Table 5 funds it matters only for the three Vanguard mutual-fund classes, since the other twelve are ETFs. At the 20th percentile the Vanguard 500 Admiral goes from −1.58 to −1.92, the TSM Admiral from −1.59 to −1.94, and the TSM Institutional Plus from −0.78 to −0.95. The count above 1 stays at 11.
+- **ETF is not robust.** Alone it is significant (−1.89), but once cheap is in, its sign flips to positive and it is significant only at the 20th (t 2.0). The first stage also drops to F ≈ 10. The ETF effect alone was a proxy for low fees: ETFs are disproportionately cheap.
+- **Broad-based adds nothing** at any cutoff once cheap is in. This confirms that the paper's A7 broad effect is a fee-level proxy.
+- **Big 3 is positive** (Big 3 funds are less fee-sensitive, conditional on cheap) but significant only at the 20th. **Firm dummies break the model**: all three are positive, the base slope goes to zero or positive, and 23–76% of fund-months get upward-sloping demand.
+- Adding ETF together with institutional lifts all 15 Table 5 funds above 1 at the 20th percentile. That rests on an ETF coefficient that is not significant (t 1.7) and on a weaker first stage (F 10.1), so I would not use it.
+
 ## 2. Time-varying fee and size classifiers (none passes the exogeneity checks)
 
 Each of these makes "cheap" (or "large") depend on information inside the estimation window. Since the classifier varies within fund, its main effect is included as a control and three diagnostics are run: within-fund corr(z, ξ̂), **lead tests** (regress ξ̂ from 1, 3 and 12 months *earlier* on today's z, within fund; a significant coefficient means past demand shocks predict the classifier), and the within-fund AR(1) of ξ̂ (0.975–0.978 throughout, so a 12-month lag does not break the link between past shocks and today's ξ).
@@ -132,6 +170,44 @@ The last row is the main caveat of the specification. The non-cheap slope is ide
 5. **The frozen variant**, which is predetermined like the entry tier, is fragile. It differs from the entry tier in only 4–5% of fund-months, yet at the 20th it moves the non-cheap slope from −8 to −17 and the cheap total from −41 to −63, with a weaker first stage (F 10.9); at the 15th it is not identified.
 
 **Verdict.** The 60-month lag at the 20th percentile is the most favourable time-varying definition tried. It is a useful robustness exhibit showing that the cheap-fund gap survives when status is allowed to change: the cheap slope is −35 to −48 at every lag from 36 to 84 months. It does not replace the entry tier as the main specification, for three reasons: the classifier still carries the classification-date demand shock through a 0.12 autocorrelation, it adds a large unexplained status main effect, and it triples the non-cheap slope. The 10th and 15th cutoffs are not identified apart from the switchers.
+
+### 2d. Why the lag-60 slopes are so much steeper than Table 2's −5.6 (`code/explore/step18_lag60_why.py`, `step18b_lag60_collinearity.py`; `logs/explore_step18*.log`, `logs/explore/step18_*.csv`)
+
+**Adding the lag-60 terms one at a time** (20th percentile; z = lag-60 status, e = entry tier; logit IV, fund and month FE):
+
+| | Terms | Instruments | Price | × status | Status main effect | min F | Avg e |
+|---|---|---|---|---|---|---|---|
+| A | p (Table 2 col 2) | H | −5.61 (1.31) | | | 33.6 | −1.61 |
+| B | p + z | H | −5.83 (1.19) | | +0.05 (0.03) | 41.9 | −1.68 |
+| C | p + p·z | H, H·z | −6.43 (1.57) | −1.91 (0.30) | | 28.1 | −1.93 |
+| **D** | **p + p·z + z** (section 2c) | H, H·z | **−27.96 (6.15)** | **−20.44 (2.14)** | **+2.82 (0.19)** | 23.1 | −8.92 |
+| E | p + p·e (main spec) | H, H·e | −8.13 (4.32) | −32.64 (4.20) | absorbed by FE | 18.3 | −3.93 |
+| F | p + p·e + z | H, H·e | −7.58 (3.55) | −31.13 (2.51) | −0.09 (0.10) | 32.3 | −3.70 |
+
+Neither lag-60 term moves the price coefficient on its own: the main effect alone gives −5.8 (and is itself about zero), and the interaction alone gives −6.4 / −8.3. Adding the lag-60 main effect to the entry-tier model changes nothing either (F). The jump happens only when the interaction and the main effect enter **together**, and then the main effect jumps from +0.05 to +2.82.
+
+**What the pair of terms does.**
+- 199 of the 1,302 funds (15%; 22.5% of fund-months) switch lag-60 status inside the sample. These are mostly funds that were repriced across the 20th percentile, or funds whose fee stood still while the market got cheaper. For the other 1,103 funds the status is constant, so the fund FE absorb z and z·p only differs from z through within-fund fee changes.
+- For the switchers, z and p·z move together (within-fund correlation 0.67 after FE and controls). With both in the model, the main effect and the extra slope offset each other at the fees the switchers actually charge. The net effect of z, 2.82 − 20.44·p, is −0.21 at the switchers' average cheap-regime fee of 0.148%. In effect, the main effect absorbs the switchers' move from one regime to the other. Their remaining variation cannot identify the model: estimated on the switchers alone, model D has F = 1.6.
+- So model D's slopes are identified essentially from the **non-switching funds' within-fund fee changes**. On those funds any fixed tier gives steep slopes:
+
+  | Sample | Model | Price (non-cheap) | Price × cheap | Cheap total | min F |
+  |---|---|---|---|---|---|
+  | 1,103 non-switchers | Table 2 logit IV (one slope) | **+14.06 (4.30)** | | | 17.2 |
+  | 1,103 non-switchers | entry tier | −22.12 (5.72) | −35.40 (1.71) | −57.5 | 26.0 |
+  | 1,103 non-switchers | lag-60 status (constant for them) | −19.18 (5.17) | −34.66 (1.64) | −53.8 | 25.1 |
+  | 199 switchers | Table 2 logit IV (one slope) | −24.79 (6.33) | | | 14.7 |
+  | All funds | Table 2 logit IV | −5.61 (1.31) | | | 33.6 |
+  | All funds | entry tier (main spec) | −8.13 (4.32) | −32.64 (4.20) | −40.8 | 18.3 |
+  | All funds | lag-60, model D | −27.96 (6.15) | −20.44 (2.14) | −48.4 | 23.1 |
+
+**Answer.** Table 2's −5.6 averages two very different sources of within-fund fee variation.
+- The non-switching funds, fitted with one common slope, give an *upward-sloping* +14. Cheap and expensive funds respond to fees so differently that one line fits neither, and IV with heterogeneous slopes is not a weighted average of the group slopes. Once the slope can differ by tier, the same funds give −19 to −22 for non-cheap and −54 to −57 for cheap.
+- The 199 switchers alone give −24.8.
+
+Pooling them gives −5.6. In the entry-tier model (main spec), the switchers' fee changes are still in the regression, and the non-cheap slope settles at −8. The repricings are part of this *(inference)*: iShares Core cut fees from about 0.20% to 0.03–0.05% in 2012, and those cuts are attributed to the non-cheap slope with a share response far smaller than a −22 slope implies. In the lag-60 model, the status main effect absorbs the switchers' cross-regime shift. That leaves the non-switchers' steeper within-regime slopes, hence −28 / −48.
+
+So the steeper lag-60 slopes are not evidence that exogeneity improved. They come from which funds' fee changes identify the slope, and they are the same fragility as the "drop Vanguard" result (section 2b): the **non-cheap slope depends on whose fee changes identify it** (−8 with the switchers, −19 to −28 without them, +6 without Vanguard). The **cheap slope is the stable part**: −35 to −58 across all of these. The event study of the 28 funds with a single 0 → 1 switch shows their shares rising steadily from three years before the switch to three years after (+0.36 in log share relative to the pre-switch mean), with no jump at the switch month. The status switch itself carries no news; the +2.8 main effect is an artefact of fitting a level and a slope to the same switch.
 
 ## 3. Log price (functional form) (`logs/explore_step2_screen.log`, `explore_step4_blp_B1.log`, `explore_step5*`, `explore_step6*`)
 
@@ -239,6 +315,8 @@ No interaction (not significant in the paper's A7 logit, and not pursued). Separ
 | Entry-tier robustness (SPY fix, drop firms, broad, sample-only cutoffs) | `code/explore/step8_raw20_robustness.py`, `logs/explore_step8_raw20_robustness.log`, `logs/explore/step8_robustness.csv` |
 | First-sample-month fixed-fee-cutoff variants | `code/explore/step2e_cutoff_sweep.py`, `step2f_switcher_composition.py`, `logs/explore/step2e_cutoff_sweep_value.csv` |
 | Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
+| Why the lag-60 slopes are steeper (term-by-term, switchers vs non-switchers, event study) | `code/explore/step18_lag60_why.py`, `step18b_lag60_collinearity.py`, `logs/explore_step18_lag60_why.log`, `explore_step18b_lag60_collinearity.log`, `logs/explore/step18_*.csv` |
+| Cheap tier plus a second interaction (ETF, share class, broad, Big 3, firms) | `code/explore/step19_cheap_plus_interactions.py`, `logs/explore_step19_cheap_plus_interactions.log`, `logs/explore/step19_*.csv` |
 | Status from the fee 60 months earlier (and 36/48/84), with decomposition | `code/explore/step17_lag60_tier.py`, `step17b_lag60_decompose.py`, `logs/explore_step17_lag60_tier.log`, `explore_step17b_lag60_decompose.log`, `logs/explore/step17*_*.csv` |
 | Log price | `step2_logit_screen.py` (B1), `step4_blp_shortlist.py`, `step5_*`, `step6_logp_blp_strong_iv.py` |
 | BLP with the interaction | `step4_blp_shortlist.py` (env `EXTRA_IV`, `EXTRA_IV_NAME`, `EXTRA_NOINTERACT`), `step9_lognormal_1rc.py`, `step7_lognormal_two_group.py`, `logs/explore_table2_alt_*` |
