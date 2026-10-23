@@ -61,10 +61,10 @@ for k in (1, 12, 36, 60, 72):
 rows, fund_rows = [], []
 for q in QS:
     qq = round(q * 100)
-    variants = {f'frozen{qq}': ('A', d), f'noswitch{qq}': ('C', d[~d[f'switch{qq}']].reset_index(drop=True)),
-                f'full{qq}': ('C', d)}
-    for name, (tier, dd0) in variants.items():
-        z = name
+    variants = {f'frozen{qq}': ('A', d, f'frozen{qq}'),
+                f'noswitch{qq}': ('C', d[~d[f'switch{qq}']].reset_index(drop=True), f'full{qq}'),
+                f'full{qq}': ('C', d, f'full{qq}')}
+    for name, (tier, dd0, z) in variants.items():
         if tier == 'A':
             sp = dict(tier='A', z=[z])
         else:
