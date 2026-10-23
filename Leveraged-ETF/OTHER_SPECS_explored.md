@@ -326,7 +326,7 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
 
    At the 15th percentile the pattern is similar (non-cheap −3.5 to −8.2; J p ≤ 0.001). At the 10th the two families agree (J p 0.83–0.96), and the estimates barely differ from the main spec (non-cheap −5.2 to −6.4, cheap total −65 to −69). In the pooled model the non-cheap slope lands near zero instead of the split-sample −7 to −11, because month FE and control coefficients are shared across the groups.
 4. **Bottom line.** With the instruments available, the non-cheap slope cannot be pinned down. Every cost-side instrument says it is close to zero or weakly positive at the 20th. The entry and competition instruments say it is negative but are likely invalid in a plain logit. The cheap slope, which drives the Table 5 question, is identified by the Hausman IV alone and is robust.
-5. **What could help.**
+5. **What could help.** (Both were then examined: the nested logit is in section 5b and does not identify the non-cheap slope; no cost shifter exists in the data.)
    - A nested logit with nests by tracked index (`market_m_index`). It keeps the fee linear and models within-index business stealing, which is exactly what makes the rival and new-product counts textbook instruments (for the within-nest share term).
    - A genuine cost shifter with within-fund variation for higher-fee funds, for example sub-advisory or custody cost changes, or the expiry of fee waivers.
 
