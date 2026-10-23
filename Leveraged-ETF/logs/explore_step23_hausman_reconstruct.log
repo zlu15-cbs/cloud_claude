@@ -1,0 +1,8 @@
+         weight        leave_out  defined  match_0005   corr
+product_L1_mtna   market_m_index   0.8949      0.8580 0.9981
+product_L1_mtna market_m_cluster   0.8900      0.6599 0.9961
+   product_mtna   market_m_index   0.8949      0.3190 0.9978
+   product_mtna market_m_cluster   0.8900      0.2582 0.9957
+estimation sample: N 108,300; reconstruction defined 0.928 (family id missing 0.072); match < 0.0005: 0.834; < 0.005: 0.913; corr 0.9997
+mgmt fee <= 100 x expense ratio (i.e. in basis points): 0.922 | SPY mgmt fee / expense ratio: {'product_mgmt_fee': 4.7, 'product_exp_ratio': 0.09}
+H_op_cost + H_mgmt_fee == H_exp_ratio: 0.9947

@@ -291,7 +291,7 @@ No interaction (not significant in the paper's A7 logit, and not pursued). Separ
 **Why.** In the split-sample diagnostic (main spec, section 4), the Hausman IV has a first-stage F of only 2.6–6.2 for non-cheap funds, so their slope is weakly identified.
 
 **Candidates.** Every instrument in the index data that the coauthor built or listed in the notebooks: 27 with full coverage and within-fund variation.
-- Hausman operating-cost and management-fee variants. The notebook comments out the operating-cost one as "too correlated" with the Hausman IV.
+- Hausman operating-cost and management-fee variants. The notebook comments out the operating-cost one as "too correlated" with the Hausman IV. Note on units (`step23`): `product_mgmt_fee` is in basis points (SPY 4.7 against a 0.09% expense ratio), so the management-fee variant is the family-average management fee in basis points. The operating-cost variant is defined as Hausman expense ratio (percent) minus Hausman management fee (basis points), so it mixes units and is essentially minus the management-fee variant. That is why the two behave as mirror images below.
 - Rival-fund counts, five variants.
 - Rivals' log age and tracking error, five variants each, plus the two logged versions used in the 3-RC cell.
 - New-product entry counts and new products' fees, five variants each.
@@ -303,7 +303,7 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
 | Candidate | 10th pct | 15th pct | 20th pct | Same instrument, cheap funds (20th) |
 |---|---|---|---|---|
 | Hausman IV (main spec) | −12.4 (F 2.6) | −12.9 (F 5.8) | +4.7 (F 6.2) | −47.3 (F 15.8) |
-| Hausman operating cost / mgmt fee | +3.2 (F 25); J p 0.00 | +2.8 (F 36); J p 0.00 | +6.8 (F 34); J p 0.53 | −5.8 (F 39); J p 0.00 |
+| Hausman mgmt fee (op-cost variant is its mirror image) | +3.2 (F 25); J p 0.00 | +2.8 (F 36); J p 0.00 | +6.8 (F 34); J p 0.53 | −5.8 (F 39); J p 0.00 |
 | New products, count (1, 4, 5) | −8.2 to −10.9 (F 29–34); J p 0.56–0.87 | −7.7 to −9.0 (F 32–34); J p 0.34–0.51 | −6.6 to −8.3 (F 29–33); J p 0.00 | −4.7 to −6.8 (F 20–57); J p 0.00 |
 | Rival-fund counts (1–5) | −17 to +2 | −13 to +4 | −16 to +2 | −29 to +9 |
 | Rivals' log age (1–5) | −10 to +6 | | −11 to +5 | |
@@ -311,7 +311,7 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
 **Reading.**
 1. **No candidate gives a credible, consistent non-cheap slope.**
    - The rival counts and rival characteristics have very strong first stages (F up to 600), but their implied slopes range from −17 to +6 depending on the variant. They cannot all be valid.
-   - The other cost-side variants (operating cost and management fee) have strong first stages and give *positive* slopes, +3 to +7. They agree with the Hausman IV's +4.7 at the 20th.
+   - The family-average management fee (and its mirror-image op-cost variant) has a strong first stage and gives *positive* slopes, +3 to +7. They agree with the Hausman IV's +4.7 at the 20th.
 2. **The new-product counts are the most stable** (−7 to −11 at every cutoff, F ≈ 30), but their sign pattern points to an exclusion violation *(inference)*.
    - More new products in the market go with slightly *higher* incumbent fees (positive first stage) and *lower* incumbent shares (negative reduced form). The slope comes from the share loss.
    - That share loss is business stealing by the new entrants. A plain logit with one market per month leaves this within-index substitution in the demand error, so a count of entrants is correlated with ξ.
@@ -367,7 +367,7 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
    - Among cheap funds alone, the nest parameter is large and consistent across the two exactly identified instrument sets (ρ = 0.92–0.93, SE 0.06): cheap funds tracking the same index are close substitutes.
    - With ρ that high, own elasticities of the cheap Table 5 funds become very large: −3 to −28 (iShares Core S&P 500 −5.1, SPY −15.3, Vanguard 500 Admiral −6.8, SPDR Portfolio S&P 500 −3.8).
    - This points to the same conclusion as the cheap tier (cheap funds' demand is very fee-sensitive), through within-index substitution instead of a steeper slope. It would change the paper's markup calculations a lot and is a modelling choice for the authors, not a fix for the non-cheap slope.
-4. **Bottom line.** Neither route identifies the non-cheap slope with the data available. Nested logit with tracked-index nests leaves it unidentified, and there is no cost shifter in the data (`product_mgmt_fee` is in dollars and is part of the fund's own price; `product_exp_ratio_bkpt` is a monthly market-wide value absorbed by the month FE).
+4. **Bottom line.** Neither route identifies the non-cheap slope with the data available. Nested logit with tracked-index nests leaves it unidentified, and there is no cost shifter in the data (`product_mgmt_fee` is in basis points and is part of the fund's own price; `product_exp_ratio_bkpt` is a monthly market-wide value absorbed by the month FE).
 
 **Cost shifters would need outside data** *(inference)*. Candidates with within-fund variation for higher-fee funds:
 - index licensing costs (for example, Vanguard's 2012–13 switch of 22 funds from MSCI to CRSP and FTSE benchmarks, made to cut licensing fees);
@@ -415,6 +415,7 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
 | Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
 | Why the lag-60 slopes are steeper (term-by-term, switchers vs non-switchers, event study, one-slope IV split by group) | `code/explore/step18_lag60_why.py`, `step18b_lag60_collinearity.py`, `step18c_pooled_iv_split.py`, `logs/explore_step18c_pooled_iv_split.log`, `step20_split_sample_iv.py`, `logs/explore_step20_split_sample_iv.log`, `logs/explore_step18_lag60_why.log`, `explore_step18b_lag60_collinearity.log`, `logs/explore/step18_*.csv` |
 | Instruments for the non-cheap slope (screen of 27 candidates; pooled model with new-product counts) | `code/explore/step21_noncheap_iv_screen.py`, `step21b_noncheap_iv_pooled.py`, `logs/explore_step21_noncheap_iv_screen.log`, `explore_step21b_noncheap_iv_pooled.log`, `logs/explore/step21*_*.csv` |
+| Hausman IV reconstruction (definition, units of the variants) | `code/explore/step23_hausman_reconstruct.py`, `logs/explore_step23_hausman_reconstruct.log` |
 | Nested logit, tracked-index nests | `code/explore/step22_nested_logit.py`, `logs/explore_step22_nested_logit.log`, `logs/explore/step22_*.csv` |
 | Cheap tier plus a second interaction (ETF, share class, broad, Big 3, firms) | `code/explore/step19_cheap_plus_interactions.py`, `logs/explore_step19_cheap_plus_interactions.log`, `logs/explore/step19_*.csv` |
 | Status from the fee 60 months earlier (and 36/48/84), with decomposition | `code/explore/step17_lag60_tier.py`, `step17b_lag60_decompose.py`, `logs/explore_step17_lag60_tier.log`, `explore_step17b_lag60_decompose.log`, `logs/explore/step17*_*.csv` |
