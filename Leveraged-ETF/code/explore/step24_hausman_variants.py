@@ -1,6 +1,7 @@
 """Alternative Hausman instruments for the fee, built from the raw index file, and their tests.
 
-Family = firm_f_old (firm_f where missing). Asset class from asset_class.classify (us_equity, intl_equity, bond,
+Family = firm_f_old (the identifier the original Hausman IV uses; the 7% of estimation-sample fund-months without it are
+dropped for every instrument, including the original, so all comparisons use the same rows). Asset class from asset_class.classify (us_equity, intl_equity, bond,
 allocation, real_asset). For fund j (family f, class a) in month t, over the family's OTHER-ASSET-CLASS funds that month:
   Z_orig      the data's BLP_IV_hausman_exp_ratio (family's other-INDEX funds, previous-month-AUM-weighted mean)
   Z_ac_aum    leave out the asset class, previous-month-AUM-weighted mean   (isolates the leave-out change)
@@ -37,7 +38,7 @@ rng = np.random.default_rng(623543)
 raw = pd.read_csv(RAW, usecols=['product_j', 'month_t', 'market_m_index', 'market_m_cluster', 'firm_f_old', 'firm_f',
                                 'product_exp_ratio', 'product_L1_mtna', 'ETF_ind', 'product_fund_name'])
 raw = raw[raw.product_exp_ratio.notna()].copy()
-raw['fam'] = raw.firm_f_old.fillna(raw.firm_f)
+raw['fam'] = raw.firm_f_old  # the original's family id; rows without it (7% of the sample) are dropped for every instrument
 raw = raw[raw.fam.notna()]
 raw['ac'] = classify_by_index(raw)  # one class per tracked index
 nm = raw.product_fund_name.fillna('').str.lower()
@@ -110,6 +111,8 @@ d = add_variables(common.load('index'))
 funds = top15(d)
 d = d.drop(columns=[c for c in ('fam', 'ac', 'veh', 'sc') if c in d]).merge(fund.drop(columns='market_m_index').rename(columns={'product_j': 'product_ids'}), on=['product_ids', 'month_t'], how='left')
 d['Z_orig'] = d[H]
+d = d[d.fam.notna()].reset_index(drop=True)
+print(f'estimation rows with a family id: {len(d):,}', flush=True)
 d['delta'] = np.log(d.shares) - np.log(1 - d.groupby('market_ids').shares.transform('sum'))
 ZS = ['Z_orig', 'Z_idx_aum', 'Z_idx_med', 'Z_idx_sameac_aum', 'Z_ac_aum', 'Z_ac_mean', 'Z_ac_med', 'Z_ac_veh', 'Z_ac_sc']
 print('coverage in estimation sample:', {z: round(float(d[z].notna().mean()), 3) for z in ZS}, flush=True)
