@@ -36,6 +36,19 @@ For each month of the **full raw index file** (Jan 1994 – Dec 2025, all index 
 
 With market shares this small (median 0.037%, max 4.97%), the logit own elasticity is essentially α·p. |e| = 1 at p = 0.03% needs α ≈ −33, and −25 to −52 across the 2–4 basis point funds; the pooled Table 2 estimate is −5.6 (logit IV) to −8.3 (3 RC). Every cutoff below gives the cheap group a slope 4–11 times the rest's: the demand curve is much steeper at the low-fee end, and the tier is the linear model's way of expressing that.
 
+
+### Important: the Hausman IV is fragile (`OTHER_SPECS_explored.md`, section 6)
+
+- **Where Table 2's −5.6 comes from.** It is driven by the 7% of fund-months (112 mostly insurance-channel funds) that have no family identifier, and for which the instrument's construction is unknown. On the other 93% the same instrument gives **+7.2** (upward-sloping demand), and lead tests reject it (t up to 20).
+- **A better-behaved instrument.** The median fee of the same family's same-share-class funds *outside the fund's asset class* has a first-stage F of 150–330, negative slopes in every split, and survives asset-class × month fixed effects.
+- **The main spec re-estimated with it, fund + month FE, 20th percentile, 97,429 fund-months:**
+  - non-cheap −6.12 (0.85);
+  - cheap total −28.8;
+  - Table 5 funds above |e| = 1: 7 of 15;
+  - average own elasticity −2.7;
+  - with asset-class × month FE: −3.80 (0.66) and −24.0, with 5 of 15 above 1.
+- **What survives.** The cheap-fund gap does, and the non-cheap slope is now precisely estimated. But the Table 5 count is lower than the 11 of 15 reported below with the original instrument. Which instrument to adopt is a decision for the authors. The tables below still use the paper's instrument.
+
 ## 2. Table 2 with the interaction (Panel A, index funds)
 
 Columns (1)–(3) are Table 2 as published and replicated. (1′) and (2′) add the interaction. Elasticities are own-price; "Avg" is the per-market mean as in Table 2.

@@ -374,6 +374,59 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
 - the expiry of fee waivers or expense caps, from prospectus gross versus net expense ratios;
 - sub-advisory fee schedules from N-CEN or N-SAR filings.
 
+## 6. The Hausman IV itself: definition, checks, and a better-behaved variant (`code/explore/step23_hausman_reconstruct.py`, `step24_hausman_variants.py`, `step24b_family_split.py`, `step24c_class_month_fe.py`, `asset_class.py`; `logs/explore_step23*`, `explore_step24*`; `logs/explore/step24*_*.csv`)
+
+**Definition** (reverse-engineered; the column arrives precomputed). For fund j in month t, it is the previous-month-AUM-weighted average expense ratio of the same family's (`firm_f_old`) funds that track other indices. It matches the data exactly where the family identifier exists (correlation 1.000). The 7% of estimation-sample fund-months without a family identifier are 112 funds, mostly variable-annuity and insurance-channel funds (Voya, Directed Services, SunAmerica, Nationwide). Their instrument values have an unknown construction, and on those rows the instrument does not move with the fund's own fee (within-fund correlation −0.12).
+
+**Table 2's −5.6 comes from those 7% of rows** (`step24b`):
+
+| Sample | Price coefficient (SE) | First-stage F |
+|---|---|---|
+| All fund-months (Table 2 col 2) | −5.61 (1.31) | 33.6 |
+| With a family identifier (93%; 1,190 funds) | **+7.24 (1.99)** | 26.6 |
+| Without a family identifier (7%; 112 funds) | **+2.32 (0.54)** | 57.2 |
+| Pooled, month FE separate for the two groups | **+7.64 (2.20)** | |
+
+Both subsets give upward-sloping demand. The negative pooled estimate comes from a different time trend between the two groups under common month effects. For the 112 funds without a family identifier the instrument rises from 0.26 to 0.30 over 2016–2024 while their shares fall; for everyone else it falls from 0.35 to 0.15.
+
+**Alternative constructions** (family-identifier rows only, so every instrument uses the same rows). The changes you suggested:
+1. Leave out the fund's whole asset class, not just its index. Asset classes are assigned per tracked index (`asset_class.py`): US equity, international equity, bonds, allocation and real assets.
+2. Use the median instead of the AUM-weighted mean, which also removes the AUM weights that depend on past demand.
+3. Match on vehicle or on share class.
+
+The share-class-matched version is the only one that behaves well (`step24`, `step24c`):
+
+| Instrument | Fixed effects | One slope (SE), F | Main spec: non-cheap (SE) / cheap total, min F | Split: non-cheap IV (F) / cheap IV (F) | Lead t, ξ̂ 12 / 24 / 36 months earlier |
+|---|---|---|---|---|---|
+| Original Hausman IV | fund + month | **+11.26 (3.14)**, F 25 | −2.72 (2.75) / −26.8, F 13 | +93 (F 0.7) / −68 (F 55) | **6.7 / 10.7 / 20.3** |
+| Original Hausman IV | fund + month × asset class | −1.33 (1.25), F 56 | −9.94 (2.46) / −37.6, F 33 | **+7.2** (F 28) / −106 (F 24) | 2.1 / **8.4 / 18.2** |
+| **Median, outside asset class, same share class** | fund + month | **−1.24 (0.58), F 218** | **−6.12 (0.85) / −28.8, F 167** | −2.4 (F 149) / −47.2 (F 48) | 2.1 / 2.6 / 5.2 |
+| **Median, outside asset class, same share class** | fund + month × asset class | **−1.28 (0.43), F 333** | **−3.80 (0.66) / −24.0, F 183** | −1.6 (F 202) / −40.7 (F 63) | 2.4 / 2.8 / 5.8 |
+
+Other variants on the same rows, each with fund + month effects:
+- Outside the asset class with AUM weights or the median, and the vehicle match: the main spec's non-cheap slope comes out positive in five of these six runs, or the first stage collapses.
+- The median outside the own index only: one slope +36.7, F 2.5.
+- The family's other-index funds within the same asset class: one slope +3.21.
+
+Details in `logs/explore/step24_hausman_variants.csv`.
+
+**Placebo** (each family mapped to a random one of the 30 broadest other families, 20 draws). The partner family's fees still have some first-stage power. For the share-class-matched construction with asset-class × month effects, the median F is 27 (10–90% range 0.1–156) on a placebo sample about 40% the size. The placebo slopes centre on zero (pooled −0.8, non-cheap +1.0, cheap −18) with very wide dispersion. Scaled for sample size, the real instrument's first stage (F 333) sits near the top of the placebo range. That means part, not all, of its variation is family-specific. For the original Hausman IV with fund + month effects, the placebo median F (13) is about half the real one (25).
+
+**Reading.**
+1. **The paper's Hausman IV does not pass these checks.**
+   - On the 93% of fund-months where its construction is known, it implies upward-sloping demand.
+   - The lead tests reject strongly: t up to 20, meaning past demand shocks predict today's instrument.
+   - Another family's fees have about half its first-stage power.
+2. **Share-class matching gives a usable instrument.** Its first stage is very strong (F 150–330), slopes are negative in every split, and the estimates survive asset-class × month effects. The lead tests are much weaker (t 2–3 at 12–24 months) but still reject at 36 months (t ≈ 5–6).
+3. **Re-estimating the main spec with it changes the headline.**
+   - The non-cheap slope is now precisely estimated: −6.1 (SE 0.85) with fund + month effects, −3.8 (0.66) with asset-class × month effects.
+   - The cheap total is −29 or −24, against −41 with the original instrument.
+   - The Table 5 funds above |e| = 1 fall from 11 to 7 or 5.
+   - Average elasticity −2.7; negative implied MC 24%; no upward-sloping demand.
+   - The cheap-versus-non-cheap gap survives, at 4–6 times the non-cheap slope.
+
+   15 Table 5 funds with fund + month effects (Aug 2024): iShares Core S&P 500 −0.84, EAFE −2.00, AGG −0.86, Russell 1000 Growth −5.15, Mid-Cap −1.43, SPY −2.50, SPDR Gold −2.44, Technology and Financial Select Sector −0.49, SPDR Portfolio S&P 500 −0.57, Vanguard TSM Inst. Plus −0.55, Vanguard 500 Admiral −1.11, Vanguard 500 ETF −0.84, VTI ETF −0.84, VTSM Admiral −1.12.
+
 ## Appendix A. Facts about Table 5 and the data found along the way
 
 **Table 5.**
@@ -415,6 +468,7 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
 | Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
 | Why the lag-60 slopes are steeper (term-by-term, switchers vs non-switchers, event study, one-slope IV split by group) | `code/explore/step18_lag60_why.py`, `step18b_lag60_collinearity.py`, `step18c_pooled_iv_split.py`, `logs/explore_step18c_pooled_iv_split.log`, `step20_split_sample_iv.py`, `logs/explore_step20_split_sample_iv.log`, `logs/explore_step18_lag60_why.log`, `explore_step18b_lag60_collinearity.log`, `logs/explore/step18_*.csv` |
 | Instruments for the non-cheap slope (screen of 27 candidates; pooled model with new-product counts) | `code/explore/step21_noncheap_iv_screen.py`, `step21b_noncheap_iv_pooled.py`, `logs/explore_step21_noncheap_iv_screen.log`, `explore_step21b_noncheap_iv_pooled.log`, `logs/explore/step21*_*.csv` |
+| Hausman IV variants, family split, asset-class x month FE, placebo | `code/explore/step24_hausman_variants.py`, `step24b_family_split.py`, `step24c_class_month_fe.py`, `asset_class.py`, `logs/explore_step24*.log`, `logs/explore/step24*_*.csv` |
 | Hausman IV reconstruction (definition, units of the variants) | `code/explore/step23_hausman_reconstruct.py`, `logs/explore_step23_hausman_reconstruct.log` |
 | Nested logit, tracked-index nests | `code/explore/step22_nested_logit.py`, `logs/explore_step22_nested_logit.log`, `logs/explore/step22_*.csv` |
 | Cheap tier plus a second interaction (ETF, share class, broad, Big 3, firms) | `code/explore/step19_cheap_plus_interactions.py`, `logs/explore_step19_cheap_plus_interactions.log`, `logs/explore/step19_*.csv` |
