@@ -90,7 +90,7 @@ for q in QS:
                     se = np.sqrt(((pd.Series(x * u).groupby(mm.month_key.to_numpy()).sum()) ** 2).sum()) / (x @ x)
                     info[f'lead{k}_t'] = float(bb / se)
                     info[f'lead{k}_n'] = len(mm)
-        row, fr = summarize(name, sp, dd, res, funds, endog, f, info)
+        row, fr = summarize(name, sp, dd, res, funds[funds.product_ids.isin(dd.product_ids)], endog, f, info)
         b = dict(zip(res.beta_labels, res.beta.flatten()))
         bz = b[next(k for k in b if z in k and 'prices' in k)]
         row['slope_rest'], row['slope_cheap_total'] = b['prices'], b['prices'] + bz
