@@ -1,0 +1,70 @@
+<class 'pandas.core.frame.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), object(10)
+memory usage: 95.0+ MB
+
+=== lag 60, 10th pct   formula: prices + I(prices*lag60_10) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + lag60_10
+{'N': 108300, 'avg_own_elasticity': np.float64(-7.378), 'share_abs_e_gt1': np.float64(0.977), 'share_abs_e_gt1_broad': np.float64(0.969), 'share_abs_e_gt1_big3': np.float64(0.972), 'share_neg_mc_single_product': np.float64(0.023), 'share_neg_mc_bertrand_firm': np.float64(0.057), 'share_months_from_lag': 0.765, 'share_cheap_months': 0.244, 'share_funds_cheap_last': 0.213, 'share_months_differ_from_entry': 0.104, 'share_funds_ever_switch': 0.163, 'n_funds_switch': 212, 'corr_within[lag60_10]': np.float64(0.092), 'lead1_t[lag60_10]': np.float64(21.392), 'lead3_t[lag60_10]': np.float64(21.814), 'lead12_t[lag60_10]': np.float64(21.12), 'xi_AR1_within': 0.972, 'corr_within[lag60_10]_own': np.float64(-0.0), 'lead1_t[lag60_10]_own': np.float64(0.314), 'lead3_t[lag60_10]_own': np.float64(0.507), 'lead12_t[lag60_10]_own': np.float64(-1.444), 'xi_AR1_within_own': 0.945, 'b[prices]': np.float64(-24.576), 'se[prices]': np.float64(10.886), 'b[lag60_10*prices]': np.float64(-17.73), 'se[lag60_10*prices]': np.float64(6.266), 'b[lag60_10]': np.float64(1.644), 'se[lag60_10]': np.float64(0.376), 'F[prices]': 9.018, 'F[px_lag60_10]': 8.382, 'slope_rest': np.float64(-24.576), 'slope_cheap_total': np.float64(-42.306)}
+
+=== lag 60, 15th pct   formula: prices + I(prices*lag60_15) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + lag60_15
+{'N': 108300, 'avg_own_elasticity': np.float64(-9.169), 'share_abs_e_gt1': np.float64(0.983), 'share_abs_e_gt1_broad': np.float64(0.974), 'share_abs_e_gt1_big3': np.float64(0.98), 'share_neg_mc_single_product': np.float64(0.017), 'share_neg_mc_bertrand_firm': np.float64(0.028), 'share_months_from_lag': 0.765, 'share_cheap_months': 0.349, 'share_funds_cheap_last': 0.272, 'share_months_differ_from_entry': 0.108, 'share_funds_ever_switch': 0.164, 'n_funds_switch': 213, 'corr_within[lag60_15]': np.float64(0.033), 'lead1_t[lag60_15]': np.float64(7.182), 'lead3_t[lag60_15]': np.float64(6.703), 'lead12_t[lag60_15]': np.float64(5.703), 'xi_AR1_within': 0.972, 'corr_within[lag60_15]_own': np.float64(0.0), 'lead1_t[lag60_15]_own': np.float64(-0.113), 'lead3_t[lag60_15]_own': np.float64(-0.562), 'lead12_t[lag60_15]_own': np.float64(-3.714), 'xi_AR1_within_own': 0.945, 'b[prices]': np.float64(-29.834), 'se[prices]': np.float64(10.888), 'b[lag60_15*prices]': np.float64(-20.151), 'se[lag60_15*prices]': np.float64(4.681), 'b[lag60_15]': np.float64(2.28), 'se[lag60_15]': np.float64(0.362), 'F[prices]': 9.627, 'F[px_lag60_15]': 8.831, 'slope_rest': np.float64(-29.834), 'slope_cheap_total': np.float64(-49.985)}
+
+=== lag 60, 20th pct   formula: prices + I(prices*lag60_20) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + lag60_20
+{'N': 108300, 'avg_own_elasticity': np.float64(-8.915), 'share_abs_e_gt1': np.float64(0.984), 'share_abs_e_gt1_broad': np.float64(0.974), 'share_abs_e_gt1_big3': np.float64(0.981), 'share_neg_mc_single_product': np.float64(0.016), 'share_neg_mc_bertrand_firm': np.float64(0.031), 'share_months_from_lag': 0.765, 'share_cheap_months': 0.447, 'share_funds_cheap_last': 0.356, 'share_months_differ_from_entry': 0.114, 'share_funds_ever_switch': 0.153, 'n_funds_switch': 199, 'corr_within[lag60_20]': np.float64(0.021), 'lead1_t[lag60_20]': np.float64(4.228), 'lead3_t[lag60_20]': np.float64(3.512), 'lead12_t[lag60_20]': np.float64(1.768), 'xi_AR1_within': 0.972, 'corr_within[lag60_20]_own': np.float64(0.0), 'lead1_t[lag60_20]_own': np.float64(-0.208), 'lead3_t[lag60_20]_own': np.float64(-0.419), 'lead12_t[lag60_20]_own': np.float64(-3.045), 'xi_AR1_within_own': 0.945, 'b[prices]': np.float64(-27.961), 'se[prices]': np.float64(6.151), 'b[lag60_20*prices]': np.float64(-20.444), 'se[lag60_20*prices]': np.float64(2.143), 'b[lag60_20]': np.float64(2.817), 'se[lag60_20]': np.float64(0.189), 'F[prices]': 23.083, 'F[px_lag60_20]': 29.826, 'slope_rest': np.float64(-27.961), 'slope_cheap_total': np.float64(-48.406)}
+
+=== lag 36, 20th pct   formula: prices + I(prices*lag36_20) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + lag36_20
+{'N': 108300, 'avg_own_elasticity': np.float64(-5.948), 'share_abs_e_gt1': np.float64(0.981), 'share_abs_e_gt1_broad': np.float64(0.972), 'share_abs_e_gt1_big3': np.float64(0.978), 'share_neg_mc_single_product': np.float64(0.019), 'share_neg_mc_bertrand_firm': np.float64(0.078), 'share_months_from_lag': 0.881, 'share_cheap_months': 0.441, 'share_funds_cheap_last': 0.346, 'share_months_differ_from_entry': 0.135, 'share_funds_ever_switch': 0.168, 'n_funds_switch': 219, 'corr_within[lag36_20]': np.float64(0.016), 'lead1_t[lag36_20]': np.float64(3.911), 'lead3_t[lag36_20]': np.float64(1.868), 'lead12_t[lag36_20]': np.float64(-2.72), 'xi_AR1_within': 0.972, 'corr_within[lag36_20]_own': np.float64(0.0), 'lead1_t[lag36_20]_own': np.float64(-0.738), 'lead3_t[lag36_20]_own': np.float64(-1.885), 'lead12_t[lag36_20]_own': np.float64(-6.798), 'xi_AR1_within_own': 0.939, 'b[prices]': np.float64(-18.249), 'se[prices]': np.float64(4.072), 'b[lag36_20*prices]': np.float64(-17.242), 'se[lag36_20*prices]': np.float64(1.532), 'b[lag36_20]': np.float64(2.363), 'se[lag36_20]': np.float64(0.127), 'F[prices]': 31.964, 'F[px_lag36_20]': 35.165, 'slope_rest': np.float64(-18.249), 'slope_cheap_total': np.float64(-35.491)}
+
+=== lag 48, 20th pct   formula: prices + I(prices*lag48_20) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + lag48_20
+{'N': 108300, 'avg_own_elasticity': np.float64(-6.876), 'share_abs_e_gt1': np.float64(0.982), 'share_abs_e_gt1_broad': np.float64(0.972), 'share_abs_e_gt1_big3': np.float64(0.978), 'share_neg_mc_single_product': np.float64(0.018), 'share_neg_mc_bertrand_firm': np.float64(0.055), 'share_months_from_lag': 0.824, 'share_cheap_months': 0.445, 'share_funds_cheap_last': 0.359, 'share_months_differ_from_entry': 0.124, 'share_funds_ever_switch': 0.155, 'n_funds_switch': 202, 'corr_within[lag48_20]': np.float64(0.013), 'lead1_t[lag48_20]': np.float64(3.518), 'lead3_t[lag48_20]': np.float64(3.368), 'lead12_t[lag48_20]': np.float64(1.988), 'xi_AR1_within': 0.972, 'corr_within[lag48_20]_own': np.float64(0.0), 'lead1_t[lag48_20]_own': np.float64(-0.378), 'lead3_t[lag48_20]_own': np.float64(-0.85), 'lead12_t[lag48_20]_own': np.float64(-4.08), 'xi_AR1_within_own': 0.934, 'b[prices]': np.float64(-21.34), 'se[prices]': np.float64(4.006), 'b[lag48_20*prices]': np.float64(-17.774), 'se[lag48_20*prices]': np.float64(1.212), 'b[lag48_20]': np.float64(2.432), 'se[lag48_20]': np.float64(0.112), 'F[prices]': 31.564, 'F[px_lag48_20]': 51.016, 'slope_rest': np.float64(-21.34), 'slope_cheap_total': np.float64(-39.114)}
+
+=== lag 84, 20th pct   formula: prices + I(prices*lag84_20) + product_tracking_err + product_past_1yr_ret + log_product_fund_age + lag84_20
+{'N': 108300, 'avg_own_elasticity': np.float64(-8.711), 'share_abs_e_gt1': np.float64(0.983), 'share_abs_e_gt1_broad': np.float64(0.973), 'share_abs_e_gt1_big3': np.float64(0.979), 'share_neg_mc_single_product': np.float64(0.017), 'share_neg_mc_bertrand_firm': np.float64(0.046), 'share_months_from_lag': 0.641, 'share_cheap_months': 0.454, 'share_funds_cheap_last': 0.347, 'share_months_differ_from_entry': 0.089, 'share_funds_ever_switch': 0.141, 'n_funds_switch': 183, 'corr_within[lag84_20]': np.float64(0.021), 'lead1_t[lag84_20]': np.float64(4.749), 'lead3_t[lag84_20]': np.float64(4.803), 'lead12_t[lag84_20]': np.float64(4.961), 'xi_AR1_within': 0.972, 'corr_within[lag84_20]_own': np.float64(-0.0), 'lead1_t[lag84_20]_own': np.float64(-0.073), 'lead3_t[lag84_20]_own': np.float64(0.088), 'lead12_t[lag84_20]_own': np.float64(-1.712), 'xi_AR1_within_own': 0.945, 'b[prices]': np.float64(-27.829), 'se[prices]': np.float64(6.2), 'b[lag84_20*prices]': np.float64(-15.536), 'se[lag84_20*prices]': np.float64(1.407), 'b[lag84_20]': np.float64(2.279), 'se[lag84_20]': np.float64(0.148), 'F[prices]': 24.015, 'F[px_lag84_20]': 36.568, 'slope_rest': np.float64(-27.829), 'slope_cheap_total': np.float64(-43.365)}
+spec                                             L60_q10  L60_q15  L60_q20  L36_q20  L48_q20  L84_q20
+short                                    p_last                                                      
+iShares Core S&P 500 ETF                 0.03      -1.23    -1.45    -1.41    -1.03    -1.14    -1.26
+iShares Core MSCI EAFE ETF               0.07      -2.94    -3.47    -3.36    -2.47    -2.72    -3.01
+iShares Core US Aggregate Bond ETF       0.03      -1.26    -1.49    -1.44    -1.06    -1.16    -1.29
+iShares Russell 1000 Growth ETF          0.18      -4.40    -5.34    -5.00    -3.27    -3.82    -4.98
+iShares Core S&P Mid-Cap ETF             0.05      -2.10    -2.49    -2.41    -1.76    -1.94    -2.16
+SPDR S&P 500 ETF Trust                   0.09      -2.13    -4.34    -4.20    -3.08    -3.40    -3.77
+SPDR Gold Shares                         0.40      -9.79   -11.88   -11.14    -7.27    -8.50   -11.08
+Technology Select Sector SPDR Fund       0.08      -1.96    -2.38    -2.23    -1.45    -1.70    -2.22
+Financial Select Sector SPDR Fund        0.08      -1.96    -2.38    -2.23    -1.46    -1.70    -2.22
+SPDR Portfolio S&P 500 ETF               0.02      -0.84    -1.00    -0.97    -0.71    -0.78    -0.86
+Vanguard Total Stock Market Index Fund;  0.03      -1.24    -1.46    -1.41    -1.04    -1.14    -1.27
+                                         0.02      -0.81    -0.96    -0.93    -0.68    -0.75    -0.83
+                                         0.04      -1.65    -1.95    -1.89    -1.38    -1.53    -1.69
+Vanguard 500 Index Fund; Admiral Shares  0.04      -1.64    -1.93    -1.87    -1.37    -1.51    -1.68
+Vanguard 500 Index Fund; ETF Shares      0.03      -1.23    -1.45    -1.41    -1.03    -1.14    -1.26
+spec                                      L60_q10  L60_q15  L60_q20
+short                                                              
+iShares Core S&P 500 ETF                      1.0      1.0      1.0
+iShares Core MSCI EAFE ETF                    1.0      1.0      1.0
+iShares Core US Aggregate Bond ETF            1.0      1.0      1.0
+iShares Russell 1000 Growth ETF               0.0      0.0      0.0
+iShares Core S&P Mid-Cap ETF                  1.0      1.0      1.0
+SPDR S&P 500 ETF Trust                        0.0      1.0      1.0
+SPDR Gold Shares                              0.0      0.0      0.0
+Technology Select Sector SPDR Fund            0.0      0.0      0.0
+Financial Select Sector SPDR Fund             0.0      0.0      0.0
+SPDR Portfolio S&P 500 ETF                    1.0      1.0      1.0
+Vanguard Total Stock Market Index Fund;       1.0      1.0      1.0
+Vanguard 500 Index Fund; Admiral Shares       1.0      1.0      1.0
+Vanguard 500 Index Fund; ETF Shares           1.0      1.0      1.0
+spec                                      L60_q10  L60_q15  L60_q20
+short                                                              
+iShares Core S&P 500 ETF                      1.0      1.0      1.0
+iShares Core MSCI EAFE ETF                    1.0      1.0      1.0
+iShares Core US Aggregate Bond ETF            0.0      1.0      1.0
+iShares Russell 1000 Growth ETF               0.0      1.0      1.0
+iShares Core S&P Mid-Cap ETF                  0.0      1.0      1.0
+SPDR S&P 500 ETF Trust                        1.0      1.0      1.0
+SPDR Gold Shares                              0.0      0.0      0.0
+Technology Select Sector SPDR Fund            0.0      0.0      0.0
+Financial Select Sector SPDR Fund             0.0      0.0      0.0
+SPDR Portfolio S&P 500 ETF                    0.0      0.0      1.0
+Vanguard Total Stock Market Index Fund;       1.0      1.0      1.0
+Vanguard 500 Index Fund; Admiral Shares       1.0      1.0      1.0
+Vanguard 500 Index Fund; ETF Shares           1.0      1.0      1.0

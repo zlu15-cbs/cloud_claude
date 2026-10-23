@@ -5,7 +5,8 @@ cheap_jt = 1[fee_{j, s} <= q-th percentile of fees across all raw index funds in
   s = the fund's latest raw observation at or before t - L   (if one exists),
   s = the fund's first raw month                              (otherwise; this is the entry tier of the main spec).
 Time-varying for funds with a long history, so the main effect of cheap enters as a control and the time-varying
-diagnostics are run (within-fund corr with xi_hat, lead tests of xi_hat(t-k) on cheap_t, AR(1) of xi_hat).
+diagnostics are run (within-fund corr with xi_hat, lead tests of xi_hat(t-k) on cheap_t, AR(1) of xi_hat), both with the
+baseline (Table 2 col 2) xi_hat and with the interacted model's own xi_hat (keys with suffix _own).
 Instruments: Hausman IV and Hausman IV x cheap; SE clustered by month; Table 2 Panel A sample.
 
     python step17_lag60_tier.py        # from a folder holding the index CSV; writes step17_summary.csv, step17_funds.csv
@@ -67,6 +68,8 @@ for L, q in RUNS:
     res = pyblp.Problem(pyblp.Formulation(formula, absorb='C(product_ids) + C(market_ids)'), dd).solve(se_type='clustered')
     f = first_stage_f(dd, endog, excl, exog)
     diag = tier_c_diagnostics(dd, [z])
+    dd['xi_own'] = res.xi.flatten()  # same diagnostics with the interacted model's own xi_hat
+    diag.update({k + '_own': v for k, v in tier_c_diagnostics(dd, [z], xi_col='xi_own').items()})
     row, fr = summarize(f'L{L}_q{qq}', dict(tier='C'), dd, res, funds, endog, f, {**info, **diag})
     b = dict(zip(res.beta_labels, res.beta.flatten()))
     bz = b[next(k for k in b if z in k and 'prices' in k)]
