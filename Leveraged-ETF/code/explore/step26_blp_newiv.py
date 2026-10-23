@@ -75,7 +75,7 @@ def profile(procs, extra, grid):
         for s in grid:
             t = time.time()
             res = pr.solve(np.array([[s]]), optimization=pyblp.Optimization('return'), method='1s', se_type='clustered')
-            row, _ = describe(res, d, funds, f'{extra}_sigma{s}', dict(objective=float(res.objective)))
+            row, _ = describe(res, d, funds, f'{extra}_sigma{s}', {})  # summarize() already records the objective
             row['secs'] = round(time.time() - t)
             rows.append(row)
             print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()
@@ -111,7 +111,7 @@ def estimate(procs, extra, sigma0):
             opt = pyblp.Optimization('return')
         res = pr.solve(np.array([[sigma0]]), optimization=opt, method='1s', se_type='clustered')
         print(res, flush=True)
-        row, fr = describe(res, d, funds, f'BLP1RC_newiv_{extra}', dict(objective=float(res.objective), converged=bool(res.converged),
+        row, fr = describe(res, d, funds, f'BLP1RC_newiv_{extra}', dict(converged=bool(res.converged),
                                                                          minutes=round((time.time() - t) / 60, 1)))
     pd.DataFrame([row]).to_csv(f'step26_estimate_{extra}.csv', index=False)
     pd.DataFrame(fr).to_csv(f'step26_estimate_{extra}_funds.csv', index=False)
