@@ -6,6 +6,7 @@ What to reproduce and what to look for: see `EXPECTED_RESULTS.md` (Table 2 numbe
 
 | File | Content |
 |---|---|
+| `MAIN_REPORT_sharecl_hausman.md` | **Recommended specification**: the cheap-fund interaction re-estimated with a share-class-matched Hausman instrument (the paper's instrument fails three checks); full table, the 15 Table 5 funds, diagnostics, robustness |
 | `MAIN_SPEC_entry_cheap_tier.md` | The recommended alternative demand model: logit IV with expense ratio × cheap (fee at the fund's first raw month ≤ the 10th/15th/20th percentile), Table 2 with the interaction, the 15 Table 5 funds, robustness |
 | `OTHER_SPECS_explored.md` | Everything else tried and why it was set aside: other interactions, time-varying classifiers, log price, the one-RC BLP with the interaction, Table A7 col 3; appendix on Table 5 and data issues |
 | `RESULTS_table2.md`, `RESULTS_A7_col3.md` | Replication records for Table 2 and Table A7 column (3) |

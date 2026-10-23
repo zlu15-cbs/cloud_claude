@@ -1,0 +1,54 @@
+<class 'pandas.core.frame.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), object(10)
+memory usage: 95.0+ MB
+Table 2 sample 108,300; with a family id and the instrument defined 97,429 (0.900); funds 1164 of 1302; Table 5 funds kept 15 of 15
+instrument: median number of funds behind each value 35.0 | share of values from a single fund 0.022 | corr with the paper IV 0.831
+asset classes (fund-months): {'us_equity': 0.535, 'intl_equity': 0.202, 'bond': 0.174, 'real_asset': 0.057, 'allocation': 0.032} | share classes: {'etf': 0.568, 'inst': 0.236, 'mf_other': 0.127, 'retail': 0.069}
+fund + month | (1) logit OLS                                   price   -1.72 (0.09) | min F nan | avg e -0.45 | |e|>1 0.10 | e>0 0.000 | negMC 0.92 | 15>1 0/15
+fund + month | (2) logit IV                                    price   -1.24 (0.58) | min F 217.5 | avg e -0.33 | |e|>1 0.03 | e>0 0.000 | negMC 0.97 | 15>1 0/15
+fund + month | (3) logit IV x cheap (main)                     price   -6.12 (0.85) | x cheap  -22.66 (0.79) total  -28.77 | min F 166.6 | avg e -2.68 | |e|>1 0.87 | e>0 0.000 | negMC 0.24 | 15>1 7/15
+   lead tests (main model residual): {'lead12_t': -1.748742706389024, 'lead24_t': -2.87438292127421, 'lead36_t': -1.878474388818145}
+fund + month | (2p) paper IV, same rows                        price   11.26 (3.14) | min F 25.0 | avg e 2.96 | |e|>1 0.72 | e>0 1.000 | negMC 0.00 | 15>1 2/15
+fund + month | (3p) paper IV x cheap, same rows                price   -2.72 (2.75) | x cheap  -24.09 (1.45) total  -26.81 | min F 13.2 | avg e -1.86 | |e|>1 0.71 | e>0 0.000 | negMC 0.45 | 15>1 7/15
+fund + month x asset class | (1) logit OLS                     price   -1.69 (0.09) | min F nan | avg e -0.44 | |e|>1 0.09 | e>0 0.000 | negMC 0.92 | 15>1 0/15
+fund + month x asset class | (2) logit IV                      price   -1.28 (0.43) | min F 303.1 | avg e -0.34 | |e|>1 0.03 | e>0 0.000 | negMC 0.97 | 15>1 0/15
+fund + month x asset class | (3) logit IV x cheap (main)       price   -3.80 (0.66) | x cheap  -20.24 (0.64) total  -24.04 | min F 262.1 | avg e -1.96 | |e|>1 0.75 | e>0 0.000 | negMC 0.36 | 15>1 5/15
+   lead tests (main model residual): {'lead12_t': -0.0647478945067522, 'lead24_t': -0.2377691320534252, 'lead36_t': 2.0992746453889075}
+fund + month x asset class | (2p) paper IV, same rows          price   -1.33 (1.25) | min F 68.5 | avg e -0.35 | |e|>1 0.03 | e>0 0.000 | negMC 0.97 | 15>1 0/15
+fund + month x asset class | (3p) paper IV x cheap, same rows  price   -9.94 (2.46) | x cheap  -27.64 (1.57) total  -37.58 | min F 40.1 | avg e -3.93 | |e|>1 0.93 | e>0 0.000 | negMC 0.13 | 15>1 11/15
+cutoff 10 | fund + month                 rest   -6.46 (0.85) | x cheap  -25.28 (1.31) total  -31.74 | min F 171.2 | avg e -2.20 | e>0 0.000 | negMC 0.37 | 15>1 6/15
+cutoff 15 | fund + month                 rest   -9.61 (1.02) | x cheap  -25.58 (1.12) total  -35.19 | min F 173.1 | avg e -3.41 | e>0 0.000 | negMC 0.18 | 15>1 11/15
+cutoff 20 | fund + month                 rest   -6.12 (0.85) | x cheap  -22.66 (0.79) total  -28.77 | min F 166.6 | avg e -2.68 | e>0 0.000 | negMC 0.24 | 15>1 7/15
+cutoff 10 | fund + month x asset class   rest   -4.90 (0.61) | x cheap  -19.98 (0.94) total  -24.88 | min F 298.4 | avg e -1.68 | e>0 0.000 | negMC 0.47 | 15>1 3/15
+cutoff 15 | fund + month x asset class   rest   -6.88 (0.77) | x cheap  -22.28 (0.96) total  -29.16 | min F 290.7 | avg e -2.57 | e>0 0.000 | negMC 0.27 | 15>1 7/15
+cutoff 20 | fund + month x asset class   rest   -3.80 (0.66) | x cheap  -20.24 (0.64) total  -24.04 | min F 262.1 | avg e -1.96 | e>0 0.000 | negMC 0.36 | 15>1 5/15
+drop Vanguard                       N 71,780 rest   -2.22 (0.69) | cheap total  -25.29 | min F 191.8 | e>0 0.000
+drop BlackRock                      N 75,346 rest   -3.45 (0.65) | cheap total  -26.07 | min F 180.0 | e>0 0.000
+drop State Street Global Advisors   N 88,924 rest   -5.18 (0.73) | cheap total  -28.94 | min F 177.3 | e>0 0.000
+                        fe  cutoff     group instrument  funds     N     fs    fs_F     rf    rf_t        iv    iv_se
+              fund + month      10 not cheap        new    906 72394  0.033 120.873 -0.122  -3.797    -3.753    1.040
+              fund + month      10 not cheap      paper    906 72394  0.005   0.550  0.485   7.858    97.956  133.599
+              fund + month      10     cheap        new    258 25035  0.040 107.333 -1.324 -15.901   -32.898    3.128
+              fund + month      10     cheap      paper    258 25035  0.041  27.961 -3.598 -31.128   -86.913   16.256
+              fund + month      15 not cheap        new    779 59682  0.038 128.509 -0.268  -8.631    -6.965    0.941
+              fund + month      15 not cheap      paper    779 59682  0.010   1.723  0.336   5.160    35.028   27.625
+              fund + month      15     cheap        new    385 37747  0.014  30.075 -0.873 -14.759   -62.780   10.537
+              fund + month      15     cheap      paper    385 37747  0.001   0.052 -2.576 -26.800 -2193.315 9638.435
+              fund + month      20 not cheap        new    678 51432  0.043 148.674 -0.105  -3.246    -2.415    0.764
+              fund + month      20 not cheap      paper    678 51432  0.006   0.701  0.592   9.291    93.304  113.134
+              fund + month      20     cheap        new    486 45997  0.022  47.830 -1.039 -18.989   -47.181    5.317
+              fund + month      20     cheap      paper    486 45997  0.041  54.984 -2.799 -31.708   -68.061    9.130
+fund + month x asset class      10 not cheap        new    906 72394  0.041 187.535 -0.156  -5.761    -3.771    0.751
+fund + month x asset class      10 not cheap      paper    906 72394  0.032  30.277  0.179   3.036     5.550    2.183
+fund + month x asset class      10     cheap        new    258 25035  0.038  99.757 -1.132 -15.208   -30.091    3.181
+fund + month x asset class      10     cheap      paper    258 25035  0.010   1.713 -3.761 -33.717  -362.365  274.869
+fund + month x asset class      15 not cheap        new    779 59682  0.047 199.092 -0.233  -8.058    -4.943    0.706
+fund + month x asset class      15 not cheap      paper    779 59682  0.037  34.533  0.015   0.230     0.394    1.714
+fund + month x asset class      15     cheap        new    385 37747  0.012  17.538 -0.918 -19.793   -77.584   17.967
+fund + month x asset class      15     cheap      paper    385 37747 -0.021  15.559 -2.889 -35.474   134.883   34.334
+fund + month x asset class      20 not cheap        new    678 51432  0.051 202.400 -0.080  -2.583    -1.593    0.633
+fund + month x asset class      20 not cheap      paper    678 51432  0.035  28.141  0.250   4.025     7.167    2.337
+fund + month x asset class      20     cheap        new    486 45997  0.025  62.708 -1.017 -24.113   -40.683    4.383
+fund + month x asset class      20     cheap      paper    486 45997  0.029  23.459 -3.018 -39.991  -105.597   21.365

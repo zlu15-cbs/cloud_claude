@@ -47,6 +47,7 @@ With market shares this small (median 0.037%, max 4.97%), the logit own elastici
   - Table 5 funds above |e| = 1: 7 of 15;
   - average own elasticity −2.7;
   - with asset-class × month FE: −3.80 (0.66) and −24.0, with 5 of 15 above 1.
+- **Full report on that specification:** `MAIN_REPORT_sharecl_hausman.md`.
 - **What survives.** The cheap-fund gap does, and the non-cheap slope is now precisely estimated. But the Table 5 count is lower than the 11 of 15 reported below with the original instrument. Which instrument to adopt is a decision for the authors. The tables below still use the paper's instrument.
 
 ## 2. Table 2 with the interaction (Panel A, index funds)
