@@ -1,5 +1,0 @@
-<class 'pandas.core.frame.DataFrame'>
-Index: 108300 entries, 500 to 579513
-Columns: 114 entries, market_m_index to rotator
-dtypes: float64(87), int64(17), object(10)
-memory usage: 95.0+ MB
