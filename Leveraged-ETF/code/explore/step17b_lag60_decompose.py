@@ -62,7 +62,7 @@ rows, fund_rows = [], []
 for q in QS:
     qq = round(q * 100)
     variants = {f'frozen{qq}': ('A', d, f'frozen{qq}'),
-                f'noswitch{qq}': ('C', d[~d[f'switch{qq}']].reset_index(drop=True), f'full{qq}'),
+                f'noswitch{qq}': ('A', d[~d[f'switch{qq}']].reset_index(drop=True), f'full{qq}'),  # constant within fund
                 f'full{qq}': ('C', d, f'full{qq}')}
     for name, (tier, dd0, z) in variants.items():
         if tier == 'A':
