@@ -1,0 +1,23 @@
+all (Table 2 col 2)    N 108,300 funds  1302 | price   -5.61 (1.31) | first-stage F   33.6 | avg e  -1.61
+with family id         N 100,529 funds  1190 | price    7.24 (1.99) | first-stage F   26.6 | avg e   1.91
+without family id      N   7,771 funds   112 | price    2.32 (0.54) | first-stage F   57.2 | avg e   1.39
+pooled, common month FE              price   -5.61 (1.31)
+pooled, month FE x family-id group   price    7.64 (2.20)
+        demand_instruments0        prices         delta       
+has_fam               False  True   False  True   False  True 
+year                                                          
+2010                  0.323  0.348  0.622  0.368 -6.337 -5.543
+2012                  0.289  0.307  0.618  0.330 -6.365 -5.669
+2014                  0.269  0.284  0.664  0.312 -6.140 -5.464
+2016                  0.255  0.233  0.639  0.264 -6.102 -5.525
+2018                  0.263  0.199  0.574  0.234 -6.057 -5.370
+2020                  0.274  0.174  0.567  0.205 -6.087 -5.328
+2022                  0.288  0.166  0.570  0.207 -6.223 -5.322
+2024                  0.295  0.150  0.518  0.185 -6.515 -5.605
+
+rows without a family id:
+  funds 112, fund-months 7,771, share of fund-months by year: {2010: 0.097, 2011: 0.1, 2012: 0.086, 2013: 0.071, 2014: 0.082, 2015: 0.077, 2016: 0.072, 2017: 0.073, 2018: 0.056, 2019: 0.06, 2020: 0.052, 2021: 0.044, 2022: 0.056, 2023: 0.05, 2024: 0.024}
+  corr(H, own fee) levels -0.054; within fund -0.115
+  share of rows with H == own fee: 0.000
+rows with a family id: corr(H, own fee) levels 0.725; within fund 0.285; H == own fee 0.001
+  corr(H, mean fee of other funds tracking the same index) on these rows: 0.269
