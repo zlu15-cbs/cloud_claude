@@ -201,8 +201,20 @@ Neither lag-60 term moves the price coefficient on its own: the main effect alon
   | All funds | entry tier (main spec) | −8.13 (4.32) | −32.64 (4.20) | −40.8 | 18.3 |
   | All funds | lag-60, model D | −27.96 (6.15) | −20.44 (2.14) | −48.4 | 23.1 |
 
-**Answer.** Table 2's −5.6 averages two very different sources of within-fund fee variation.
-- The non-switching funds, fitted with one common slope, give an *upward-sloping* +14. Cheap and expensive funds respond to fees so differently that one line fits neither, and IV with heterogeneous slopes is not a weighted average of the group slopes. Once the slope can differ by tier, the same funds give −19 to −22 for non-cheap and −54 to −57 for cheap.
+**Answer.** Table 2's −5.6 averages very different sources of within-fund fee variation.
+- The non-switching funds, fitted with one common slope, give an *upward-sloping* +14 (a positive fee coefficient: demand rising with the fee). Once the slope can differ by tier, the same funds give −19 to −22 for non-cheap and −54 to −57 for cheap.
+- **Why one slope gives +14** (`code/explore/step18c_pooled_iv_split.py`, `logs/explore_step18c_pooled_iv_split.log`). The one-slope IV coefficient is (how delta moves with the instrument) / (how the fee moves with the instrument), after fund FE, month FE and controls. Both sums split exactly into a cheap part and a non-cheap part. The pooled coefficient is then a first-stage-weighted average of each group's own ratio:
+
+  | Sample | Group | First stage Σh̃p̃ | Reduced form Σh̃ỹ | Own ratio | Weight |
+  |---|---|---|---|---|---|
+  | 1,103 non-switchers | cheap (382 funds) | 2.00 | +2.90 | +1.4 | 0.82 |
+  | 1,103 non-switchers | not cheap (721 funds) | 0.45 | **+31.52** | **+70.3** | 0.18 |
+  | 1,103 non-switchers | pooled | 2.45 | +34.42 | **+14.1** | |
+  | All funds, by entry tier | cheap (501 funds) | 2.49 | −55.01 | −22.1 | 0.51 |
+  | All funds, by entry tier | not cheap (801 funds) | 2.39 | **+27.69** | **+11.6** | 0.49 |
+  | All funds | pooled (Table 2 col 2) | 4.87 | −27.32 | **−5.6** | |
+
+  For non-cheap funds the instrument has the wrong-signed reduced form: a higher Hausman IV goes with a *higher* share, while it should lower the share through a higher own fee. Among the non-switchers the instrument also barely moves the non-cheap funds' fees (within-group correlation of residualized H and fee 0.004), so their ratio is a large positive number over almost nothing (+70). Even with a weight of only 0.18, it pulls the average to +14. On the full sample, Table 2's −5.6 is about half the cheap funds' −22 and half the non-cheap funds' +12. Why the instrument co-moves positively with non-cheap funds' shares is not established; it is the same weakness behind the fragile non-cheap slope. (These group ratios use the pooled residualization of the one-slope model. The interacted model adds Hausman IV × cheap as a separate instrument, so its group slopes differ from these ratios.)
 - The 199 switchers alone give −24.8.
 
 Pooling them gives −5.6. In the entry-tier model (main spec), the switchers' fee changes are still in the regression, and the non-cheap slope settles at −8. The repricings are part of this *(inference)*: iShares Core cut fees from about 0.20% to 0.03–0.05% in 2012, and those cuts are attributed to the non-cheap slope with a share response far smaller than a −22 slope implies. In the lag-60 model, the status main effect absorbs the switchers' cross-regime shift. That leaves the non-switchers' steeper within-regime slopes, hence −28 / −48.
@@ -315,7 +327,7 @@ No interaction (not significant in the paper's A7 logit, and not pursued). Separ
 | Entry-tier robustness (SPY fix, drop firms, broad, sample-only cutoffs) | `code/explore/step8_raw20_robustness.py`, `logs/explore_step8_raw20_robustness.log`, `logs/explore/step8_robustness.csv` |
 | First-sample-month fixed-fee-cutoff variants | `code/explore/step2e_cutoff_sweep.py`, `step2f_switcher_composition.py`, `logs/explore/step2e_cutoff_sweep_value.csv` |
 | Lagged-fee percentile | `code/explore/step16_lagfee_pct.py`, `logs/explore_step16_lagfee_pct.log`, `logs/explore/step16_*.csv` |
-| Why the lag-60 slopes are steeper (term-by-term, switchers vs non-switchers, event study) | `code/explore/step18_lag60_why.py`, `step18b_lag60_collinearity.py`, `logs/explore_step18_lag60_why.log`, `explore_step18b_lag60_collinearity.log`, `logs/explore/step18_*.csv` |
+| Why the lag-60 slopes are steeper (term-by-term, switchers vs non-switchers, event study, one-slope IV split by group) | `code/explore/step18_lag60_why.py`, `step18b_lag60_collinearity.py`, `step18c_pooled_iv_split.py`, `logs/explore_step18c_pooled_iv_split.log`, `logs/explore_step18_lag60_why.log`, `explore_step18b_lag60_collinearity.log`, `logs/explore/step18_*.csv` |
 | Cheap tier plus a second interaction (ETF, share class, broad, Big 3, firms) | `code/explore/step19_cheap_plus_interactions.py`, `logs/explore_step19_cheap_plus_interactions.log`, `logs/explore/step19_*.csv` |
 | Status from the fee 60 months earlier (and 36/48/84), with decomposition | `code/explore/step17_lag60_tier.py`, `step17b_lag60_decompose.py`, `logs/explore_step17_lag60_tier.log`, `explore_step17b_lag60_decompose.log`, `logs/explore/step17*_*.csv` |
 | Log price | `step2_logit_screen.py` (B1), `step4_blp_shortlist.py`, `step5_*`, `step6_logp_blp_strong_iv.py` |

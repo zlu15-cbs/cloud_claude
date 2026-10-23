@@ -1,0 +1,12 @@
+
+=== 1,103 non-switching funds: one-slope logit IV split into groups ===
+          group  funds  fund_months     FS      RF  own_ratio  sd_fee_within  sd_H_within  corr_H_fee
+    z=1 (cheap)    382        34614 1.9995  2.8958     1.4483         0.0175       0.0218      0.1512
+z=0 (not cheap)    721        49276 0.4485 31.5240    70.2897         0.0485       0.0485      0.0039
+         pooled   1103        83890 2.4479 34.4198    14.0607         0.0388       0.0397      0.0189
+
+=== all funds (Table 2 sample), split by entry tier: one-slope logit IV split into groups ===
+              group  funds  fund_months     FS       RF  own_ratio  sd_fee_within  sd_H_within  corr_H_fee
+    raw20=1 (cheap)    501        48459 2.4877 -55.0053   -22.1110         0.0434       0.0276      0.0429
+raw20=0 (not cheap)    801        59841 2.3853  27.6873    11.6074         0.0529       0.0454      0.0166
+             pooled   1302       108300 4.8730 -27.3180    -5.6060         0.0489       0.0385      0.0239
