@@ -57,7 +57,31 @@ The full write-up is `MAIN_REPORT_sharecl_hausman.md` (included). None of the pa
 - Why Z²: the paper's `BLP_IV_newproduct_1` sends σ toward large values with upward-sloping demand, and a differentiation instrument conflicts with Z.
 - Baseline result: σ = 1.81 (0.24); non-cheap mean −4.22 (0.59); cheap total −26.26; average elasticity −1.90; 7 of 15 Table 5 funds above 1; 0.02% of fund-months upward-sloping.
 
-<<BLP_ROBUSTNESS>>
+**BLP robustness.** One warning first: σ is **not credibly identified**, so the BLP version is a sensitivity check and the logit IV is the recommended column.
+
+| BLP variant (20th percentile unless noted) | σ (SE) | Non-cheap (SE) | Cheap total | Avg e | Share e > 0 | Neg. MC | Table 5 > 1 | Objective at optimum | Covariance matrix |
+|---|---|---|---|---|---|---|---|---|---|
+| **1-step, Z² (baseline)** | 1.81 (0.24*) | −4.22 (0.59) | −26.3 | −1.90 | 0.0002 | 0.35 | 7 | 2.11, no root | singular |
+| 2-step (clustered efficient W), Z² | 1.81 (0.24*) | −4.75 (0.53) | −26.8 | −2.03 | 0 | 0.31 | 7 | 5.25, no root | singular |
+| 1-step, Z², 10th percentile | 0.07 (0.04*) | −8.45 (0.49) | −35.7 | −2.76 | 0 | 0.29 | 9 | 2.21, no root | singular |
+| 1-step, Z², 15th percentile | 1.82 (0.42*) | −8.74 (0.43) | −34.2 | −2.91 | 0 | 0.20 | 10 | 0.35, no root | singular |
+| 1-step, Z², fund + month × asset class FE | 6.30 (3.77) | −5.62 (2.11) | −30.8 | −0.86 | **0.30** | 0.37 | 6 (1 positive) | 0, root | regular (4e5) |
+| 2-step, Z² + `newproduct_1` (overidentified) | 11.22 (4.26) | −7.52 (1.52) | −46.7 | −0.12 | **0.39** | 0.20 | 12 (1 positive) | J = 1.11, p = 0.29 | regular (4e5) |
+| 2-step, Z² + Z³ (overidentified) | −0.11 (14.9) | −5.07 (0.53) | −26.5 | −2.35 | 0 | 0.28 | 7 | J = 8.53, **p = 0.004** | regular; reduced Hessian 0 |
+
+\* Not a valid standard error: the Jacobian of the moments is singular at the optimum (see below).
+
+- **Why the covariance is singular.** The baseline is exactly identified (six moments, six parameters) but stops at a non-zero objective with a zero gradient. That can happen only where the Jacobian of the moments is singular. The covariance's smallest eigenvalue is 2.5e-12, in the direction of σ against the two price coefficients. So σ = 1.81 is not a root, and its SE is not valid.
+- **The paper's Table 2 col (3) has the same issue.** It is exactly identified with the Hausman IV and `newproduct_1`, ends at objective 0.576 with a zero gradient, and pyblp reports a covariance condition number of 2.4e17. Its σ SE of 0.013 is affected the same way.
+- **Overidentification does not rescue σ.** With one extra instrument the covariance is regular, but σ goes to 11 (39% upward-sloping, with `newproduct_1`) or to 0 (J p = 0.004, with Z³).
+- **What is stable.** Across the variants with downward-sloping demand: non-cheap −4 to −9, cheap total −26 to −36, and 7–10 of 15 Table 5 funds above 1.
+- **To reproduce:**
+  - Baseline: `python step26_blp_newiv.py estimate 2 zsq 2.0`.
+  - Two-step: prefix `METHOD=2s`.
+  - Cutoffs: prefix `CUTOFF=10` or `CUTOFF=15`.
+  - Asset-class × month FE: prefix `FE=ac`.
+  - Overidentified: use `zsq+np1` or `zsq+z3` with `METHOD=2s`.
+  - Each run writes `step26_estimate_<tag>.csv`, `_funds.csv` and the covariance diagnostics `step26_cov_<tag>.csv` / `step26_coveig_<tag>.csv`.
 
 ---
 

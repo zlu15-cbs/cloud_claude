@@ -15,7 +15,7 @@ This report is self-contained. It presents the recommended demand specification 
 
 - **What it shows.** Cheap funds are 4–6 times as fee-sensitive as the rest, and both slopes are now precisely estimated. No fund-month has upward-sloping demand, and negative implied marginal cost falls from 52% (Table 2) to 24–36%. The result is robust to the cutoff, to asset-class × month fixed effects and to dropping any one of the three largest firms. Lead tests on the model's residual are small and change sign (|t| ≤ 2.9); with asset-class × month effects none rejects at the 1% level.
 - **Compared with the previous main spec** (the same model with the paper's instrument): the cheap slope is smaller (−24 to −29 against −41), so fewer Table 5 funds clear |e| = 1 (5–7 against 11). The previous non-cheap slope (−8.1, SE 4.3) was weakly identified and depended on Vanguard; it is now pinned down.
-- **BLP version** (section 3b). With one random coefficient on the expense ratio and the new IV squared as the extra instrument, σ is estimated at 1.81 (SE 0.24). The means stay close to the logit IV: non-cheap −4.2 (0.6), cheap total −26.3. Average elasticity is −1.90, still 7 of 15 Table 5 funds are above 1, and 0.02% of fund-months slope upward. Caveats: the moments cannot all be set to zero, and the covariance matrix is near-singular.
+- **BLP version** (section 3b). With one random coefficient on the expense ratio, the slopes stay close to the logit IV in every variant that keeps demand downward-sloping: non-cheap −4 to −9, cheap total −26 to −36, and 7–10 of 15 Table 5 funds above 1. σ itself is not credibly identified. The exactly identified estimate (σ = 1.81) is not a root of the moment conditions, so its covariance is singular. Overidentified versions send σ either to 0 (J rejects) or to 11 (39% upward-sloping). The same singular-covariance pattern affects the paper's published Table 2 col (3).
 - **Decision for the authors.** Which instrument to adopt.
 
 ## 2. Why change the instrument
@@ -109,13 +109,38 @@ Columns (1)–(3) use fund and month fixed effects, as Table 2. (2′) and (3′
 | Share negative MC (firm Bertrand) | 0.24 | 0.35 |
 | Table 5 funds with \|e\| > 1 | 7/15 | **7/15** |
 
-**Reading.**
-- **The random coefficient is estimated, and it is sizeable** (σ = 1.81, SE 0.24). With the paper's instrument, σ was either not identified (0.027 in Table 2 col 3) or ran off to values where demand slopes upward. Here a negative price coefficient for a cheap fund at its mean (−26.3) is far from zero relative to σ, while for non-cheap funds (mean −4.2, σ 1.8) a small share of simulated consumers have a positive coefficient. The realized share of upward-sloping fund-months is 0.02%.
-- **The means barely move from the logit IV** (−4.2 against −6.1; cheap total −26.3 against −28.8), and so the 15 Table 5 funds hardly change (section 4). The average elasticity is lower (−1.90 against −2.68) and negative implied MC a bit higher (35%).
-- **Two caveats.**
-  - The model is exactly identified, but the three moment conditions cannot all be set to zero: the objective stops at 2.11 instead of 0, so the extra instrument and the two price instruments do not fully agree.
-  - pyblp reports a covariance-matrix condition number of 1e17, the same near-singularity your coauthors found in the 3-RC model, so the standard errors should be treated as indicative.
-- **The choice of extra instrument matters.** With the paper's `newproduct_1` the objective keeps falling toward large σ, as before. With the differentiation instrument the moments conflict outright. Only Z² gives an interior minimum.
+**Robustness of the BLP version** (`step26_blp_newiv.py` with `METHOD`, `CUTOFF`, `FE` and the overidentified instrument sets; logs `explore_step26_estimate_*_final.log`, tables `logs/explore/step26_estimate_*.csv`, covariance diagnostics `logs/explore/step26_cov*_*.csv`):
+
+| BLP variant (20th percentile unless noted) | σ (SE) | Non-cheap (SE) | Cheap total | Avg e | Share e > 0 | Neg. MC | Table 5 > 1 | Objective at optimum | Covariance matrix |
+|---|---|---|---|---|---|---|---|---|---|
+| **1-step, Z² (baseline)** | 1.81 (0.24*) | −4.22 (0.59) | −26.3 | −1.90 | 0.0002 | 0.35 | 7 | 2.11, no root | singular |
+| 2-step (clustered efficient W), Z² | 1.81 (0.24*) | −4.75 (0.53) | −26.8 | −2.03 | 0 | 0.31 | 7 | 5.25, no root | singular |
+| 1-step, Z², 10th percentile | 0.07 (0.04*) | −8.45 (0.49) | −35.7 | −2.76 | 0 | 0.29 | 9 | 2.21, no root | singular |
+| 1-step, Z², 15th percentile | 1.82 (0.42*) | −8.74 (0.43) | −34.2 | −2.91 | 0 | 0.20 | 10 | 0.35, no root | singular |
+| 1-step, Z², fund + month × asset class FE | 6.30 (3.77) | −5.62 (2.11) | −30.8 | −0.86 | **0.30** | 0.37 | 6 (1 positive) | 0, root | regular (4e5) |
+| 2-step, Z² + `newproduct_1` (overidentified) | 11.22 (4.26) | −7.52 (1.52) | −46.7 | −0.12 | **0.39** | 0.20 | 12 (1 positive) | J = 1.11, p = 0.29 | regular (4e5) |
+| 2-step, Z² + Z³ (overidentified) | −0.11 (14.9) | −5.07 (0.53) | −26.5 | −2.35 | 0 | 0.28 | 7 | J = 8.53, **p = 0.004** | regular; reduced Hessian 0 |
+
+\* Not a valid standard error: the Jacobian of the moments is singular at the optimum (see below).
+
+**Why the covariance matrix is near-singular.** The baseline is exactly identified: six moment conditions for six parameters. In that case the first-order condition G′W ḡ = 0, with a square G and a positive-definite W, forces ḡ = 0 unless the Jacobian G is singular. The optimizer stops at a non-zero objective (2.11) with a zero gradient (projected norm 3e-8), so G is singular there. The parameter covariance inherits this.
+- Its smallest eigenvalue is 2.5e-12 against 5.5 for the next one.
+- The singular direction is almost entirely σ against the cheap and non-cheap price coefficients (weights 0.80, −0.59, −0.13 on σ, price × cheap and price).
+- So σ = 1.81 is not a root of the moment conditions. It is the point where they come closest to zero, and its standard error is not valid.
+- The paper's own Table 2 col (3) has the same structure. It is exactly identified with the Hausman IV and `newproduct_1`, its optimum has a non-zero objective (0.576) with a zero gradient, and pyblp reports a covariance condition number of 2.4e17 (`logs/panelA_index_notebook.log`). Its σ standard error (0.013) is therefore not valid either.
+
+**The standard fix, overidentification, does not rescue σ.** With one extra instrument the covariance matrix is regular and Hansen's J is defined, but σ goes to one of two extremes:
+- With Z² and the paper's `newproduct_1`, σ = 11.2 and 39% of fund-months slope upward.
+- With Z² and Z³, σ is 0 with an undefined curvature (reduced Hessian 0), J rejects (p = 0.004), and the estimates collapse to the logit IV.
+
+The month × asset class FE variant does find a root, but at σ = 6.3, where 30% of fund-months slope upward.
+
+**Conclusion.** The random coefficient on the expense ratio is not credibly identified with these instruments, so the BLP version should be reported as a sensitivity check, not as the main column. What is stable across every variant that keeps demand downward-sloping:
+- the mean coefficients: non-cheap −4 to −9, cheap total −26 to −36;
+- the Table 5 count: 7 to 10 of 15;
+- the conclusion that cheap funds are 4–8 times as fee-sensitive.
+
+Column (3), the logit IV, remains the recommended specification.
 
 ## 4. The 15 Table 5 funds (own elasticity, Aug 2024)
 
