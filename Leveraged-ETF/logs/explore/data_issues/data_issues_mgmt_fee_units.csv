@@ -1,0 +1,16 @@
+product_ids,product_fund_name,prices,product_mgmt_fee,mgmt_fee_if_bp_in_pct
+16416,iShares Trust: iShares Core S&P 500 ETF,0.03,3.0,0.03
+16417,iShares Trust: iShares Core US Aggregate Bond ETF,0.03,2.7,0.027000000000000003
+16437,iShares Trust: iShares Core S&P Mid-Cap ETF,0.05,5.0,0.05
+16448,iShares Trust: iShares Russell 1000 Growth ETF,0.18,18.4,0.184
+27635,SPDR S&P 500 ETF Trust,0.09,4.6,0.046
+28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,0.08,3.9,0.039
+28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,0.08,3.9,0.039
+29218,SPDR Gold Trust: SPDR Gold Shares,0.4,40.0,0.4
+29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,0.02,2.0,0.02
+31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,0.04,3.5,0.035
+31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,0.04,3.6,0.036000000000000004
+31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,0.03,2.4,0.024
+50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,0.03,2.2,0.022000000000000002
+56419,iShares Trust: iShares Core MSCI EAFE ETF,0.07,7.0,0.07
+63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,0.02,1.7,0.017
