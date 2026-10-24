@@ -15,6 +15,7 @@ This report is self-contained. It presents the recommended demand specification 
 
 - **What it shows.** Cheap funds are 4–6 times as fee-sensitive as the rest, and both slopes are now precisely estimated. No fund-month has upward-sloping demand, and negative implied marginal cost falls from 52% (Table 2) to 24–36%. The result is robust to the cutoff, to asset-class × month fixed effects and to dropping any one of the three largest firms. Lead tests on the model's residual are small and change sign (|t| ≤ 2.9); with asset-class × month effects none rejects at the 1% level.
 - **Compared with the previous main spec** (the same model with the paper's instrument): the cheap slope is smaller (−24 to −29 against −41), so fewer Table 5 funds clear |e| = 1 (5–7 against 11). The previous non-cheap slope (−8.1, SE 4.3) was weakly identified and depended on Vanguard; it is now pinned down.
+- **BLP version** (section 3b). With one random coefficient on the expense ratio and the new IV squared as the extra instrument, σ is estimated at 1.81 (SE 0.24). The means stay close to the logit IV: non-cheap −4.2 (0.6), cheap total −26.3. Average elasticity is −1.90, still 7 of 15 Table 5 funds are above 1, and 0.02% of fund-months slope upward. Caveats: the moments cannot all be set to zero, and the covariance matrix is near-singular.
 - **Decision for the authors.** Which instrument to adopt.
 
 ## 2. Why change the instrument
@@ -74,26 +75,68 @@ Columns (1)–(3) use fund and month fixed effects, as Table 2. (2′) and (3′
 - **The paper's instrument on the same rows** gives upward-sloping demand without the interaction (2p: +11.3, every fund-month) and an imprecise non-cheap slope with it (3p: −2.7, SE 2.8, F 13).
 - Panel B (leveraged funds) is unchanged from Table 2. The new instrument is not needed there, and the leveraged interaction is not significant in the paper's A7.
 
+## 3b. BLP with one random coefficient on the expense ratio (`code/explore/step26_blp_newiv.py`, `logs/explore_step26_*`, `logs/explore/step26_*.csv`)
+
+**Setup.** This is the Table 2 column (3) analogue of column (3) above: one random coefficient (σ) on the expense ratio, with the cheap interaction in mean utility. Fund and month FE; Monte Carlo integration with 3000 draws, seed 623543; one-step GMM; SE clustered by month. The instruments are the new IV and new IV × cheap, plus one extra instrument to identify σ. That makes three excluded instruments for three parameters: price, price × cheap and σ. Three candidates were tried for the extra instrument:
+- `BLP_IV_newproduct_1`, the paper's own Table 2 col (3) choice;
+- the square of the new IV;
+- a differentiation instrument: the sum over other funds in the same month and asset class of (Z_j − Z_k)².
+
+**σ profiles** (GMM objective at fixed σ, with β concentrated out; the shares on the right are at the given σ):
+
+| Extra instrument | σ ≈ 0 | 0.5 | 1 | 2 | 3 | 4 | 6 | Shape |
+|---|---|---|---|---|---|---|---|---|
+| `newproduct_1` (paper's) | 3.62 | 3.52 | 3.24 | 2.55 | 2.03 | 1.56 | 0.64 | falls toward large σ; 20% upward-sloping at σ = 6 |
+| **Z² (new IV squared)** | 2.40 | 2.36 | 2.24 | **2.12** | 2.34 | 2.62 | 2.76 | **interior minimum near σ = 2** |
+| Differentiation IV | 98.7 | | | | | | | conflicts with the new IV: non-cheap slope +0.64, 53% upward-sloping (stopped) |
+
+**Estimate with Z² as the extra instrument** (BFGS from σ = 2, gtol 1e-7; converged in 4 iterations; projected gradient 3e-8; positive reduced Hessian):
+
+| | (3) Logit IV × cheap | **(3B) BLP 1 RC × cheap** |
+|---|---|---|
+| Expense ratio (non-cheap mean) | −6.116 (0.845) | **−4.215 (0.591)** |
+| Expense ratio × cheap | −22.655 (0.794) | **−22.048 (0.351)** |
+| Cheap total (mean) | −28.77 | **−26.26** |
+| σ, random coefficient on expense ratio | | **1.808 (0.239)** |
+| Past 1-yr return | 0.432 (0.034) | 0.438 (0.036) |
+| Age (log) | 0.549 (0.008) | 0.551 (0.008) |
+| Tracking error | −1.044 (0.135) | −0.940 (0.110) |
+| N | 97,429 | 97,429 |
+| GMM objective at the optimum | | 2.11 |
+| **Avg own-price elasticity** | **−2.68** | **−1.90** |
+| Share \|e\| > 1 | 0.87 | 0.79 |
+| Share e > 0 (upward-sloping) | 0 | 0.0002 |
+| Share negative MC (firm Bertrand) | 0.24 | 0.35 |
+| Table 5 funds with \|e\| > 1 | 7/15 | **7/15** |
+
+**Reading.**
+- **The random coefficient is estimated, and it is sizeable** (σ = 1.81, SE 0.24). With the paper's instrument, σ was either not identified (0.027 in Table 2 col 3) or ran off to values where demand slopes upward. Here a negative price coefficient for a cheap fund at its mean (−26.3) is far from zero relative to σ, while for non-cheap funds (mean −4.2, σ 1.8) a small share of simulated consumers have a positive coefficient. The realized share of upward-sloping fund-months is 0.02%.
+- **The means barely move from the logit IV** (−4.2 against −6.1; cheap total −26.3 against −28.8), and so the 15 Table 5 funds hardly change (section 4). The average elasticity is lower (−1.90 against −2.68) and negative implied MC a bit higher (35%).
+- **Two caveats.**
+  - The model is exactly identified, but the three moment conditions cannot all be set to zero: the objective stops at 2.11 instead of 0, so the extra instrument and the two price instruments do not fully agree.
+  - pyblp reports a covariance-matrix condition number of 1e17, the same near-singularity your coauthors found in the 3-RC model, so the standard errors should be treated as indicative.
+- **The choice of extra instrument matters.** With the paper's `newproduct_1` the objective keeps falling toward large σ, as before. With the differentiation instrument the moments conflict outright. Only Z² gives an interior minimum.
+
 ## 4. The 15 Table 5 funds (own elasticity, Aug 2024)
 
-| Fund | p (%) | cheap (20th)? | Table 5 (paper) | Table 2 logit IV | Previous main spec (paper IV, 20th) | **(3) new IV, fund + month** | **(3′) new IV, month × asset class** | new IV, 10th / 15th pct |
-|---|---|---|---|---|---|---|---|---|
-| iShares Core S&P 500 ETF | 0.03 | yes | −0.24 | −0.16 | −1.18 | **−0.84** | **−0.70** | −0.92 / −1.02 |
-| iShares Core MSCI EAFE ETF | 0.07 | yes | −0.58 | −0.39 | −2.83 | **−2.00** | **−1.67** | −2.20 / −2.44 |
-| iShares Core US Aggregate Bond ETF | 0.03 | yes | −0.25 | −0.17 | −1.21 | **−0.86** | **−0.72** | −0.19 / −1.05 |
-| iShares Russell 1000 Growth ETF | 0.18 | yes | −1.49 | −1.00 | −7.30 | **−5.15** | **−4.30** | −1.16 / −6.30 |
-| iShares Core S&P Mid-Cap ETF | 0.05 | yes | −0.41 | −0.28 | −2.03 | **−1.43** | **−1.20** | −0.32 / −1.75 |
-| SPDR S&P 500 ETF Trust | 0.09 | yes | −0.72 | −0.49 | −3.54 | **−2.50** | **−2.09** | −2.76 / −3.06 |
-| SPDR Gold Shares | 0.40 | no | −3.33 | −2.23 | −3.24 | **−2.44** | **−1.51** | −2.57 / −3.83 |
-| Technology Select Sector SPDR Fund | 0.08 | no | −0.67 | −0.45 | −0.65 | **−0.49** | **−0.30** | −0.51 / −0.77 |
-| Financial Select Sector SPDR Fund | 0.08 | no | −0.67 | −0.45 | −0.65 | **−0.49** | **−0.30** | −0.51 / −0.77 |
-| SPDR Portfolio S&P 500 ETF | 0.02 | yes | −0.17 | −0.11 | −0.81 | **−0.57** | **−0.48** | −0.13 / −0.19 |
-| Vanguard Total Stock Market Inst. Plus | 0.02 | yes | −0.16 | −0.11 | −0.78 | **−0.55** | **−0.46** | −0.61 / −0.67 |
-| Vanguard 500 Index Admiral | 0.04 | yes | −0.32 | −0.22 | −1.58 | **−1.11** | **−0.93** | −1.23 / −1.36 |
-| Vanguard 500 Index ETF | 0.03 | yes | −0.24 | −0.16 | −1.18 | **−0.84** | **−0.70** | −0.92 / −1.02 |
-| Vanguard Total Stock Market ETF | 0.03 | yes | −0.24 | −0.16 | −1.19 | **−0.84** | **−0.70** | −0.93 / −1.03 |
-| Vanguard Total Stock Market Admiral | 0.04 | yes | −0.33 | −0.22 | −1.59 | **−1.12** | **−0.94** | −1.24 / −1.37 |
-| **Funds with \|e\| > 1** | | | 2/15 | 2/15 | 11/15 | **7/15** | **5/15** | 6/15 / 11/15 |
+| Fund | p (%) | cheap (20th)? | Table 5 (paper) | Table 2 logit IV | Previous main spec (paper IV, 20th) | **(3) new IV, fund + month** | **(3′) new IV, month × asset class** | new IV, 10th / 15th pct | **(3B) BLP 1 RC** |
+|---|---|---|---|---|---|---|---|---|---|
+| iShares Core S&P 500 ETF | 0.03 | yes | −0.24 | −0.16 | −1.18 | **−0.84** | **−0.70** | −0.92 / −1.02 | **−0.77** |
+| iShares Core MSCI EAFE ETF | 0.07 | yes | −0.58 | −0.39 | −2.83 | **−2.00** | **−1.67** | −2.20 / −2.44 | **−1.83** |
+| iShares Core US Aggregate Bond ETF | 0.03 | yes | −0.25 | −0.17 | −1.21 | **−0.86** | **−0.72** | −0.19 / −1.05 | **−0.79** |
+| iShares Russell 1000 Growth ETF | 0.18 | yes | −1.49 | −1.00 | −7.30 | **−5.15** | **−4.30** | −1.16 / −6.30 | **−4.66** |
+| iShares Core S&P Mid-Cap ETF | 0.05 | yes | −0.41 | −0.28 | −2.03 | **−1.43** | **−1.20** | −0.32 / −1.75 | **−1.31** |
+| SPDR S&P 500 ETF Trust | 0.09 | yes | −0.72 | −0.49 | −3.54 | **−2.50** | **−2.09** | −2.76 / −3.06 | **−2.28** |
+| SPDR Gold Shares | 0.40 | no | −3.33 | −2.23 | −3.24 | **−2.44** | **−1.51** | −2.57 / −3.83 | **−1.33** |
+| Technology Select Sector SPDR Fund | 0.08 | no | −0.67 | −0.45 | −0.65 | **−0.49** | **−0.30** | −0.51 / −0.77 | **−0.34** |
+| Financial Select Sector SPDR Fund | 0.08 | no | −0.67 | −0.45 | −0.65 | **−0.49** | **−0.30** | −0.51 / −0.77 | **−0.34** |
+| SPDR Portfolio S&P 500 ETF | 0.02 | yes | −0.17 | −0.11 | −0.81 | **−0.57** | **−0.48** | −0.13 / −0.19 | **−0.53** |
+| Vanguard Total Stock Market Inst. Plus | 0.02 | yes | −0.16 | −0.11 | −0.78 | **−0.55** | **−0.46** | −0.61 / −0.67 | **−0.51** |
+| Vanguard 500 Index Admiral | 0.04 | yes | −0.32 | −0.22 | −1.58 | **−1.11** | **−0.93** | −1.23 / −1.36 | **−1.02** |
+| Vanguard 500 Index ETF | 0.03 | yes | −0.24 | −0.16 | −1.18 | **−0.84** | **−0.70** | −0.92 / −1.02 | **−0.77** |
+| Vanguard Total Stock Market ETF | 0.03 | yes | −0.24 | −0.16 | −1.19 | **−0.84** | **−0.70** | −0.93 / −1.03 | **−0.77** |
+| Vanguard Total Stock Market Admiral | 0.04 | yes | −0.33 | −0.22 | −1.59 | **−1.12** | **−0.94** | −1.24 / −1.37 | **−1.03** |
+| **Funds with \|e\| > 1** | | | 2/15 | 2/15 | 11/15 | **7/15** | **5/15** | 6/15 / 11/15 | **7/15** |
 
 
 The funds above 1 under column (3) are EAFE, Russell 1000 Growth, Mid-Cap, SPY, SPDR Gold, and the Vanguard 500 and Total Stock Market Admiral classes. The 2–3 basis point funds reach −0.55 to −0.86: much higher than Table 5 (−0.16 to −0.25) but still below 1.
@@ -187,6 +230,8 @@ With the paper's instrument, dropping Vanguard turned the non-cheap slope positi
 
 | What | Where |
 |---|---|
+| BLP version (σ profiles, estimate) | `code/explore/step26_blp_newiv.py`, `new_iv.py`, `logs/explore_step26_*_final.log`, `logs/explore/step26_*.csv` |
+| Lead tests | `code/explore/step27_lead_tests.py`, `logs/explore_step27_lead_tests.log`, `logs/explore/step27_lead_tests.csv` |
 | This report's numbers | `code/explore/step25_new_iv_main.py`, `logs/explore_step25_new_iv_main.log`, `logs/explore/step25_*.csv` |
 | Instrument construction (asset class) | `code/explore/asset_class.py` |
 | Paper's Hausman IV reconstructed | `code/explore/step23_hausman_reconstruct.py`, `logs/explore_step23_hausman_reconstruct.log` |
