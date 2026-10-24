@@ -237,6 +237,8 @@ No cutoff produces upward-sloping demand. The gap between cheap and non-cheap fu
 
 With the paper's instrument, dropping Vanguard turned the non-cheap slope positive (+6.2). With the new instrument it stays negative and significant.
 
+**Nested logit with tracked-index nests** (`OTHER_SPECS_explored.md`, section 5c; same instruments plus a nest instrument for the within-index share). With the new IV the non-cheap slope stays negative in every run and no demand curve slopes upward, unlike with the paper's IV (+4.0 to +6.4, 53% upward-sloping). But ρ (0.25–0.60) absorbs much of the fee response: non-cheap −0.4 to −2.5, cheap total −15 to −21, and 41–83% of fund-months imply negative marginal cost. ρ is 0 with one slope and among non-cheap funds alone. So the nests are a sensitivity check, not an improvement on column (3).
+
 ## 7. Caveats
 
 - **Sample.** The instrument is not defined for 10% of the Table 2 fund-months, mostly the insurance-channel funds without a family identifier. Results are for the remaining 90%.

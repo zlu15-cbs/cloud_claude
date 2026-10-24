@@ -374,6 +374,47 @@ The conduct-test shifters (sentiment, BAB, FMAX and the like) are left out: they
 - the expiry of fee waivers or expense caps, from prospectus gross versus net expense ratios;
 - sub-advisory fee schedules from N-CEN or N-SAR filings.
 
+### 5c. Nested logit re-estimated with the share-class-matched Hausman IV (`code/explore/step28_nested_newiv.py`, `logs/explore_step28_nested_newiv.log`, `logs/explore/step28_*.csv`)
+
+Same model and nest instruments as 5b, but the price instruments are the new Z and Z × cheap (`MAIN_REPORT_sharecl_hausman.md`), on the 97,429 fund-months where Z is defined (453 nests; 30% of fund-months alone in their nest). The paper's instrument is re-run on the same rows for comparison. SE clustered by month; first-stage F (Sanderson–Windmeijer) partials out the same fixed effects as the model.
+
+**Pooled model, 20th percentile:**
+
+| Price IV | Time FE | Nest instruments | ρ (SE) | Non-cheap (SE) | Cheap total | J p | Share e > 0 | Neg. MC | Avg e | Table 5 > 1 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| *No nests (main model)* | *month* | | | *−6.12 (0.85)* | *−28.8* | | *0* | *0.24* | *−2.68* | *7* |
+| new | month | rivals | 0.48 (0.04) | −1.14 (0.38) | −18.0 | | 0 | 0.67 | −1.76 | 6 |
+| new | month | rivals, 12 months earlier | 0.54 (0.03) | −0.48 (0.33) | −16.6 | | 0 | 0.78 | −1.61 | 10 |
+| new | month | rivals + entrants + age | 0.60 (0.04) | −1.58 (0.37) | −18.3 | **0.000** | 0 | 0.50 | −2.34 | 10 |
+| new | month | coauthor's | 0.35 (0.08) | −2.49 (0.74) | −21.0 | 0.49 | 0 | 0.41 | −2.03 | 7 |
+| paper's | month | rivals | 0.18 (0.05) | **+3.96 (0.99)** | −15.5 | | **0.53** | 0.19 | +0.08 | 4 |
+| paper's | month | rivals, 12 months earlier | 0.25 (0.05) | **+6.43 (1.29)** | −11.2 | | **0.53** | 0.28 | +0.91 | 4 |
+| paper's | month | coauthor's | 0.10 (0.07) | +0.13 (1.08) | −21.6 | 0.07 | **0.53** | 0.00 | −1.08 | 4 |
+| *No nests (main model)* | *month × asset class* | | | *−3.80 (0.66)* | *−24.0* | | *0* | *0.36* | *−1.96* | *5* |
+| new | month × asset class | rivals | 0.25 (0.05) | −1.98 (0.37) | −19.2 | | 0 | 0.58 | −1.62 | 4 |
+| new | month × asset class | rivals, 12 months earlier | 0.39 (0.03) | −1.01 (0.32) | −16.6 | | 0 | 0.75 | −1.43 | 6 |
+| new | month × asset class | coauthor's | 0.49 (0.06) | −0.39 (0.50) | −14.9 | 0.23 | 0 | 0.83 | −1.31 | 6 |
+
+Three of the 32 fits stopped short of pyblp's convergence test: paper's IV with month FE and rivals; new IV with month × asset class and rivals; new IV at the 15th percentile with month FE and lagged rivals. Their values are close to the neighbouring rows.
+
+**Other cutoffs and the split sample (new IV, rivals):**
+
+| Run | Time FE | ρ (SE) | Non-cheap (SE) | Cheap total | Neg. MC | Table 5 > 1 |
+|---|---|---|---|---|---|---|
+| One slope | month | 0.00 (0.06) | −3.68 (0.50) | | 0.65 | 1 |
+| 15th | month | 0.33 (0.05) | −5.12 (0.52) | −24.8 | 0.27 | 11 |
+| 10th | month | 0.22 (0.05) | −4.00 (0.45) | −25.6 | 0.47 | 5 |
+| 15th | month × asset class | 0.09 (0.05) | −6.00 (0.48) | −26.8 | 0.29 | 7 |
+| 10th | month × asset class | 0.04 (0.05) | −4.59 (0.41) | −24.0 | 0.49 | 3 |
+| Split, non-cheap only | month | 0.00 (0.10) | −4.29 (0.70) | | 0.26 | 1 |
+| Split, cheap only | month | 0.94 (0.06) | −14.70 (0.75) (cheap) | | 0.09 | 12 |
+
+**Reading.**
+1. **The new IV fixes the sign problem of 5b.** With the paper's instrument, the nested model with the cheap tier still gives a positive non-cheap slope and 53% upward-sloping demand on the same rows. With the new instrument the non-cheap slope is negative in every run, and no fund-month has upward-sloping demand.
+2. **It does not beat the plain logit IV.** Pooled, ρ = 0.25–0.60 absorbs much of the fee response. The non-cheap slope shrinks to −0.4 to −2.5, the cheap total to −15 to −21, and 41–83% of fund-months imply negative marginal cost, against 24% in the main model. Hansen J rejects the overidentified set (p < 0.001); the coauthor's pair passes (p = 0.49 / 0.23).
+3. **ρ is not stable.** It moves with the cutoff (0.22–0.48 under month FE; 0.04–0.25 under month × asset class) and with the nest instrument. With one slope, or among non-cheap funds alone, it is 0. Only among cheap funds alone is it large (0.94, as in 5b), so the pooled ρ mostly picks up cheap funds' within-index substitution, which the cheap interaction already captures.
+4. **Bottom line.** Nests by tracked index are a sensitivity check, not an improvement. Under the specification without nests (ρ = 0), the non-cheap slope is −4.3 (0.7) in the split sample and −6.1 (0.9) pooled; the nested model does not reject that. It does, however, imply negative margins for most fund-months.
+
 ## 6. The Hausman IV itself: definition, checks, and a better-behaved variant (`code/explore/step23_hausman_reconstruct.py`, `step24_hausman_variants.py`, `step24b_family_split.py`, `step24c_class_month_fe.py`, `asset_class.py`; `logs/explore_step23*`, `explore_step24*`; `logs/explore/step24*_*.csv`)
 
 **Definition** (reverse-engineered; the column arrives precomputed). For fund j in month t, it is the previous-month-AUM-weighted average expense ratio of the same family's (`firm_f_old`) funds that track other indices. It matches the data exactly where the family identifier exists (correlation 1.000). The 7% of estimation-sample fund-months without a family identifier are 112 funds, mostly variable-annuity and insurance-channel funds (Voya, Directed Services, SunAmerica, Nationwide). Their instrument values have an unknown construction, and on those rows the instrument does not move with the fund's own fee (within-fund correlation −0.12).
@@ -471,6 +512,7 @@ Details in `logs/explore/step24_hausman_variants.csv`.
 | Hausman IV variants, family split, asset-class x month FE, placebo | `code/explore/step24_hausman_variants.py`, `step24b_family_split.py`, `step24c_class_month_fe.py`, `asset_class.py`, `logs/explore_step24*.log`, `logs/explore/step24*_*.csv` |
 | Hausman IV reconstruction (definition, units of the variants) | `code/explore/step23_hausman_reconstruct.py`, `logs/explore_step23_hausman_reconstruct.log` |
 | Nested logit, tracked-index nests | `code/explore/step22_nested_logit.py`, `logs/explore_step22_nested_logit.log`, `logs/explore/step22_*.csv` |
+| Nested logit with the share-class Hausman IV | `code/explore/step28_nested_newiv.py`, `logs/explore_step28_nested_newiv.log`, `logs/explore/step28_*.csv` |
 | Cheap tier plus a second interaction (ETF, share class, broad, Big 3, firms) | `code/explore/step19_cheap_plus_interactions.py`, `logs/explore_step19_cheap_plus_interactions.log`, `logs/explore/step19_*.csv` |
 | Status from the fee 60 months earlier (and 36/48/84), with decomposition | `code/explore/step17_lag60_tier.py`, `step17b_lag60_decompose.py`, `logs/explore_step17_lag60_tier.log`, `explore_step17b_lag60_decompose.log`, `logs/explore/step17*_*.csv` |
 | Log price | `step2_logit_screen.py` (B1), `step4_blp_shortlist.py`, `step5_*`, `step6_logp_blp_strong_iv.py` |
