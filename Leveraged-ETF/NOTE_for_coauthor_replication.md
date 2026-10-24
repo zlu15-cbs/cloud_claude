@@ -1,6 +1,7 @@
 # Note for coauthor: recommended demand specification, how to replicate it, and data issues to clean
 
 This note accompanies the code in this bundle. It covers four things:
+
 1. The demand specification we recommend for the index market (Table 2 Panel A), defined exactly.
 2. How to reproduce every number on a local machine.
 3. The diagnostics behind the change of instrument, with the exact procedures.
@@ -18,7 +19,7 @@ The full write-up is `MAIN_REPORT_sharecl_hausman.md` (included). None of the pa
 
 **Mean utility.**
 
-  δ_jt = α · p_jt + α_c · (p_jt × cheap_j) + β₁ · tracking error_jt + β₂ · past 1-yr return_jt + β₃ · log age_jt + fund FE + month FE + ξ_jt
+    δ_jt = α · p_jt + α_c · (p_jt × cheap_j) + β₁ · tracking error_jt + β₂ · past 1-yr return_jt + β₃ · log age_jt + fund FE + month FE + ξ_jt
 
 - p is `prices` (the expense ratio, in percent).
 - Variant: replace month FE with month × asset-class FE.
@@ -27,16 +28,17 @@ The full write-up is `MAIN_REPORT_sharecl_hausman.md` (included). None of the pa
 
 **Instrument (replaces `BLP_IV_hausman_exp_ratio`).** For fund j in month t:
 
-  Z_jt = median expense ratio of the funds k in the raw file with the same family (`firm_f_old`) as j, the same share class as j, a different asset class from j, and recorded in month t.
+    Z_jt = median expense ratio of the funds k in the raw file with the same family (`firm_f_old`) as j, the same share class as j, a different asset class from j, and recorded in month t.
 
 - *Share class* is parsed from the fund name. ETF if `ETF_ind == 1`. Otherwise *institutional* if the name contains "institutional", "inst", "class I/K/Y/Z/R6", "premier", "select" or "admiral". Otherwise *retail* if it contains "investor", "retail", "class A/C/R/T", "service" or "advisor". Otherwise *other mutual fund*. Code: `new_iv.share_class`.
 - *Asset class* is assigned **per tracked index** (`market_m_index`), so every share class of a portfolio, and every fund tracking the same index, gets the same class. There are five classes: US equity, international equity, bonds, allocation, real assets.
-  - The 18 large `market_m_cluster` codes are mapped directly.
-  - Other indices are classified from keywords in fund names and index codes, using the most common fund-level class among the funds tracking the index.
-  - Code: `asset_class.classify_by_index`.
+    - The 18 large `market_m_cluster` codes are mapped directly.
+    - Other indices are classified from keywords in fund names and index codes, using the most common fund-level class among the funds tracking the index.
+    - Code: `asset_class.classify_by_index`.
 - Coverage: the median value is computed from 35 funds; 2% of values come from a single fund. The correlation with the paper's Hausman IV is 0.83.
 
 **Estimation.**
+
 - Logit IV in pyblp 1.3.0: `pyblp.Problem(pyblp.Formulation('prices + I(prices*cheap) + product_tracking_err + product_past_1yr_ret + log_product_fund_age', absorb='C(product_ids) + C(market_ids)'), data).solve(se_type='clustered')`.
 - Excluded instruments: `demand_instruments0 = Z` and `demand_instruments1 = Z × cheap`. That is exactly identified.
 - SE clustered by month, using the notebook's `clustering_ids`.
@@ -52,6 +54,7 @@ The full write-up is `MAIN_REPORT_sharecl_hausman.md` (included). None of the pa
 | *Paper's Table 2 col 2 (all 108,300 rows)* | *−5.61 (1.31)* | | *33.6* | *−1.61* | *2 / 15* |
 
 **BLP version (Table 2 col 3 analogue).**
+
 - Model: X2 = `0 + prices` (one random coefficient on the expense ratio) with the same X1. Monte Carlo integration, 3000 draws, seed 623543. BFGS, gtol 1e-7. SE clustered by month.
 - Instruments: Z, Z × cheap, and **Z²** as the extra instrument for σ.
 - Why Z²: the paper's `BLP_IV_newproduct_1` sends σ toward large values with upward-sloping demand, and a differentiation instrument conflicts with Z.
@@ -76,12 +79,12 @@ The full write-up is `MAIN_REPORT_sharecl_hausman.md` (included). None of the pa
 - **Overidentification does not rescue σ.** With one extra instrument the covariance is regular, but σ goes to 11 (39% upward-sloping, with `newproduct_1`) or to 0 (J p = 0.004, with Z³).
 - **What is stable.** Across the variants with downward-sloping demand: non-cheap −4 to −9, cheap total −26 to −36, and 7–10 of 15 Table 5 funds above 1.
 - **To reproduce:**
-  - Baseline: `python step26_blp_newiv.py estimate 2 zsq 2.0`.
-  - Two-step: prefix `METHOD=2s`.
-  - Cutoffs: prefix `CUTOFF=10` or `CUTOFF=15`.
-  - Asset-class × month FE: prefix `FE=ac`.
-  - Overidentified: use `zsq+np1` or `zsq+z3` with `METHOD=2s`.
-  - Each run writes `step26_estimate_<tag>.csv`, `_funds.csv` and the covariance diagnostics `step26_cov_<tag>.csv` / `step26_coveig_<tag>.csv`.
+    - Baseline: `python step26_blp_newiv.py estimate 2 zsq 2.0`.
+    - Two-step: prefix `METHOD=2s`.
+    - Cutoffs: prefix `CUTOFF=10` or `CUTOFF=15`.
+    - Asset-class × month FE: prefix `FE=ac`.
+    - Overidentified: use `zsq+np1` or `zsq+z3` with `METHOD=2s`.
+    - Each run writes `step26_estimate_<tag>.csv`, `_funds.csv` and the covariance diagnostics `step26_cov_<tag>.csv` / `step26_coveig_<tag>.csv`.
 
 ---
 
@@ -130,11 +133,12 @@ For BLP, the second argument is the number of worker processes (`pyblp.parallel`
 | All, month FE interacted with the with/without indicator | +7.64 (2.20) |
 
 **(c) Lead tests** (`step27_lead_tests.py`). For an instrument Z, a demand model and a fixed-effect set:
+
 1. Estimate the logit IV; ξ̂ = `res.xi`. In pyblp this is δ − Xβ̂ with the absorbed fund and time means removed (verified against a manual two-way demeaning).
 2. Residualize Z on fund FE, the same time FE and the three controls (Frisch–Waugh with `pyhdfe`).
 3. Index months by `month_key = round(12 × month_t)`. For k = 12, 24, 36, pair each (j, t) with the same fund's ξ̂ from t − k.
 4. Demean both variables within fund over the paired sample.
-5. Regress ξ̂_{j,t−k} on Z̃_{j,t} by OLS without a constant. Cluster by the calendar month t (no small-sample correction) and report t = b / SE.
+5. Regress ξ̂(j, t−k) on Z̃(j, t) by OLS without a constant. Cluster by the calendar month t (no small-sample correction) and report t = b / SE.
 
 | Instrument (97,429 rows) | Residual from | FE | t, k = 12 / 24 / 36 |
 |---|---|---|---|
@@ -148,6 +152,7 @@ For BLP, the second argument is the number of worker processes (`pyblp.parallel`
 The result depends on which model's residual is used. With the main model's residual and Table 2's fixed effects, the two instruments look similar. Under asset-class × month effects only the new one passes.
 
 **(d) Placebo** (`step24c_class_month_fe.py`). Each family is mapped, fixed over time, to a random one of the 30 broadest other families, and the instrument is rebuilt from that family's funds; 20 draws.
+
 - The paper's instrument with fund + month FE: placebo median first-stage F 13, against 25 for the real one.
 - The new instrument with asset-class × month FE: the real F is 303, against a placebo median of 27 on samples about 40% the size. So part, not all, of its variation is family-specific.
 
@@ -159,23 +164,25 @@ The result depends on which model's residual is used. With the main model's resi
 
 1. **SPY's expense ratio** is recorded as **0.04% from Oct 2022 to Sep 2023** (12 months, `month_t` 2022.75 – 2023.67). The actual fee was 0.0945% throughout. List: `data_issues/data_issues_spy_fee.csv` (Oct 2021 – Jun 2024). Correcting it changes the earlier cheap-tier estimates only in the third decimal, but it should be fixed at the source.
 2. **43 temporary fee episodes** in 39 funds: fee changes of at least 0.02 pp that revert to the exact prior fee within 12 months (42 last exactly 12 months, 1 lasts 5). List: `data_issues/step8_fee_reversals.csv`. Likely typos:
-   - SPDR Portfolio Intermediate Term Corporate Bond ETF: 0.15 → **0.55** → 0.15 (from 2012.5).
-   - Vanguard Long-Term Bond Index Institutional: 0.04 → **0.40** → 0.04 (from 2017.0).
-   - BNY Mellon Institutional S&P 500 Stock Index: 0.20 → **0.50** → 0.20 (from 2018.75).
+    - SPDR Portfolio Intermediate Term Corporate Bond ETF: 0.15 → **0.55** → 0.15 (from 2012.5).
+    - Vanguard Long-Term Bond Index Institutional: 0.04 → **0.40** → 0.04 (from 2017.0).
+    - BNY Mellon Institutional S&P 500 Stock Index: 0.20 → **0.50** → 0.20 (from 2018.75).
 
-   Most of the rest look like annual prospectus updates or temporary waivers (iShares country ETFs 0.49 → 0.47 → 0.49). All fee changes in the file occur in January, which suggests annual prospectus values rather than monthly fees.
+    Most of the rest look like annual prospectus updates or temporary waivers (iShares country ETFs 0.49 → 0.47 → 0.49). All fee changes in the file occur in January, which suggests annual prospectus values rather than monthly fees.
+
 3. **`broad_specialized` is inconsistent within the same portfolios.** Funds tracking `market_m_index == 'SPX'` carry both labels: 51 "specialized" and 168 "broad-based", so 22.6% of SPX fund-months are "specialized". That index code also covers S&P 100, Russell 1000/3000 and total-market funds, where "specialized" may be intended. The S&P 500 funds themselves disagree:
-   - **SPDR S&P 500 ETF Trust (SPY): specialized**, while iShares Core S&P 500 and Vanguard 500 ETF and Admiral are broad-based.
-   - SPDR Portfolio S&P 500 is specialized.
-   - The **Vanguard Total Stock Market ETF** class is specialized while its Admiral and Institutional Plus classes are broad-based.
+    - **SPDR S&P 500 ETF Trust (SPY): specialized**, while iShares Core S&P 500 and Vanguard 500 ETF and Admiral are broad-based.
+    - SPDR Portfolio S&P 500 is specialized.
+    - The **Vanguard Total Stock Market ETF** class is specialized while its Admiral and Institutional Plus classes are broad-based.
 
-   30 tracked indices have funds with both labels. Lists: `data_issues/data_issues_broad_label_spx.csv` (the 51 SPX-index funds labelled specialized) and `data_issues_broad_label_mixed.csv`. Table A7 is identified from this label.
+    30 tracked indices have funds with both labels. Lists: `data_issues/data_issues_broad_label_spx.csv` (the 51 SPX-index funds labelled specialized) and `data_issues_broad_label_mixed.csv`. Table A7 is identified from this label.
+
 4. **112 funds (7,771 fund-months, 7.2% of the Table 2 sample) have no `firm_f_old`.** These are mostly variable-annuity and insurance-channel funds (Voya 22, John Hancock 11, Allianz 9, MetLife 8, PGIM 6, Nationwide 6, Vanguard Variable Insurance 6). For these rows `BLP_IV_hausman_exp_ratio` does not follow the construction in 3(a), and it is not correlated with the fund's own fee (within-fund correlation −0.12). List: `data_issues/data_issues_no_family_id.csv`. **Question: how was the Hausman IV built for these funds?** Table 2 col 2's sign depends on them (3b).
 5. **Units of the management fee.** `product_mgmt_fee` is in **basis points** while `product_exp_ratio` is in percent: SPY 4.6 against 0.09, SPDR Gold 40.0 against 0.40 (`data_issues/data_issues_mgmt_fee_units.csv`). As a result `BLP_IV_hausman_op_cost` = Hausman expense ratio (%) − Hausman management fee (bp) mixes units, and is essentially minus the management-fee variant. It is commented out in the notebook, but it should be rebuilt if it is ever used.
 6. **Other sample notes.**
-   - Zero-fee funds (for example Fidelity's) are dropped by the notebook's `prices > 0` filter and sit in the outside option.
-   - The two panels end in different months (index Aug 2024, leveraged Sep 2024).
-   - The leveraged notebook's Bull-only filter is what Table 2 Panel B uses; the paper's note does not say so.
+    - Zero-fee funds (for example Fidelity's) are dropped by the notebook's `prices > 0` filter and sit in the outside option.
+    - The two panels end in different months (index Aug 2024, leveraged Sep 2024).
+    - The leveraged notebook's Bull-only filter is what Table 2 Panel B uses; the paper's note does not say so.
 
 ## 5. Paper issues found during the replication (unchanged in the paper)
 
