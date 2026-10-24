@@ -10,6 +10,10 @@ Monte Carlo 3000 draws, seed 623543; SE clustered by month.
     python step26_blp_newiv.py profile PROCS EXTRA [grid]      # one-step GMM objective at fixed sigma, beta concentrated
     python step26_blp_newiv.py estimate PROCS EXTRA [sigma0]   # BFGS (gtol 1e-7), checkpointed per evaluation; FINALIZE=1
                                                                # evaluates at the best checkpointed sigma
+Options (environment variables): CUTOFF=10|15|20 (cheap tier, default 20); METHOD=1s|2s (two-step GMM re-optimizes with
+the clustered efficient weighting matrix, W_type='clustered'); FE=month|ac (fund + month, or fund + month x asset class).
+Every estimate also writes step26_cov_<tag>.csv: the parameter covariance matrix, its eigenvalues and the correlation
+matrix of the estimates, to diagnose the large covariance condition number pyblp reports.
 """
 import json
 import os
@@ -28,9 +32,15 @@ from step2_logit_screen import summarize, CONTROLS
 pyblp.options.verbose = False
 
 
+CUTOFF = int(os.environ.get('CUTOFF', '20'))
+METHOD = os.environ.get('METHOD', '1s')
+FE = os.environ.get('FE', 'month')
+TAG_SUFFIX = ('' if CUTOFF == 20 else f'_q{CUTOFF}') + ('' if METHOD == '1s' else f'_{METHOD}') + ('' if FE == 'month' else f'_fe{FE}')
+
+
 def data(extra):
     d = load_new_iv_sample()
-    d['cheap'] = d.raw20
+    d['cheap'] = d[f'raw{CUTOFF}']
     d = d.drop(columns=[c for c in d.columns if c.startswith('demand_instruments')])
     d['demand_instruments0'] = d.Z
     d['demand_instruments1'] = d.Z * d.cheap
@@ -48,7 +58,8 @@ def data(extra):
 
 
 def problem(d):
-    X1 = pyblp.Formulation('0 + prices + I(prices*cheap) + ' + ' + '.join(CONTROLS), absorb='C(product_ids) + C(market_ids)')
+    absorb = 'C(product_ids) + C(market_ids)' if FE == 'month' else 'C(product_ids) + C(mkt_ac)'
+    X1 = pyblp.Formulation('0 + prices + I(prices*cheap) + ' + ' + '.join(CONTROLS), absorb=absorb)
     X2 = pyblp.Formulation('0 + prices')
     integ = pyblp.Integration('monte_carlo', size=3000, specification_options={'seed': 623543})
     return pyblp.Problem((X1, X2), d, integration=integ)
@@ -87,11 +98,12 @@ def profile(procs, extra, grid):
 def estimate(procs, extra, sigma0):
     d = data(extra)
     funds = top15(d)
-    ckpt = f'step26_{extra}_ckpt.json'
+    tag = f'{extra}{TAG_SUFFIX}'
+    ckpt = f'step26_{tag}_ckpt.json'
     history = json.load(open(ckpt)) if os.path.exists(ckpt) else []
     if history:
         sigma0 = min(history, key=lambda r: r['obj'])['theta'][0]
-    print(f'{extra}: N={len(d):,}; start sigma {sigma0:.4f} ({len(history)} checkpointed evaluations)', flush=True)
+    print(f'{tag}: N={len(d):,}; cutoff {CUTOFF}, method {METHOD}, FE {FE}; start sigma {sigma0:.4f} ({len(history)} checkpointed evaluations)', flush=True)
 
     def bfgs(initial, bounds, objective_function, iteration_callback, **opts):
         def wrapped(values):
@@ -109,15 +121,35 @@ def estimate(procs, extra, sigma0):
         opt = pyblp.Optimization(bfgs, {'gtol': 1e-7})
         if os.environ.get('FINALIZE') == '1':
             opt = pyblp.Optimization('return')
-        res = pr.solve(np.array([[sigma0]]), optimization=opt, method='1s', se_type='clustered')
+        kw = dict(W_type='clustered') if METHOD == '2s' else {}
+        res = pr.solve(np.array([[sigma0]]), optimization=opt, method=METHOD, se_type='clustered', **kw)
         print(res, flush=True)
-        row, fr = describe(res, d, funds, f'BLP1RC_newiv_{extra}', dict(converged=bool(res.converged),
-                                                                         minutes=round((time.time() - t) / 60, 1)))
-    pd.DataFrame([row]).to_csv(f'step26_estimate_{extra}.csv', index=False)
-    pd.DataFrame(fr).to_csv(f'step26_estimate_{extra}_funds.csv', index=False)
+        row, fr = describe(res, d, funds, f'BLP1RC_newiv_{tag}', dict(converged=bool(res.converged), cutoff=CUTOFF, method=METHOD, fe=FE,
+                                                                       minutes=round((time.time() - t) / 60, 1)))
+        # covariance diagnostics
+        V = np.asarray(res.parameter_covariances, float)
+        labels = ['sigma[prices]'] + [f'beta[{b}]' for b in res.beta_labels]
+        labels = labels[:V.shape[0]] + [f'p{i}' for i in range(len(labels), V.shape[0])]
+        se = np.sqrt(np.clip(np.diag(V), 0, None))
+        C = V / np.outer(se, se)
+        ev, evec = np.linalg.eigh(V)
+        evc = np.linalg.eigvalsh(C)
+        row.update(cov_cond=float(ev.max() / max(ev.min(), 1e-300)), corr_cond=float(evc.max() / max(evc.min(), 1e-300)),
+                   max_abs_offdiag_corr=float(np.max(np.abs(C - np.eye(len(C))))))
+        out = pd.DataFrame(C, index=labels, columns=labels)
+        out['se'] = se
+        out.to_csv(f'step26_cov_{tag}.csv')
+        pd.DataFrame({'eigenvalue': ev, **{f'v[{l}]': evec[i] for i, l in enumerate(labels)}}).to_csv(f'step26_coveig_{tag}.csv', index=False)
+        print('covariance condition number', f"{row['cov_cond']:.3e}", '| correlation-matrix condition number', f"{row['corr_cond']:.3e}",
+              '| largest |correlation| between estimates', round(row['max_abs_offdiag_corr'], 4), flush=True)
+        print(out.round(3).to_string(), flush=True)
+        print('eigenvalues of the covariance matrix:', np.array2string(ev, precision=3), flush=True)
+    pd.DataFrame([row]).to_csv(f'step26_estimate_{tag}.csv', index=False)
+    pd.DataFrame(fr).to_csv(f'step26_estimate_{tag}_funds.csv', index=False)
     print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()
-           if k in ('sigma', 'sigma_se', 'b_rest', 'se[prices]', 'b_x_cheap', 'b_cheap_total', 'avg_own_elasticity', 'share_abs_e_gt1',
-                    'share_pos_e', 'share_neg_mc_bertrand_firm', 'n15_gt1', 'n15_pos', 'objective', 'converged', 'minutes')}, flush=True)
+           if k in ('sigma', 'sigma_se', 'b_rest', 'se[prices]', 'b_x_cheap', 'se_x_cheap', 'b_cheap_total', 'avg_own_elasticity', 'share_abs_e_gt1',
+                    'share_pos_e', 'share_neg_mc_bertrand_firm', 'n15_gt1', 'n15_pos', 'objective', 'converged', 'minutes', 'cov_cond',
+                    'corr_cond', 'max_abs_offdiag_corr')}, flush=True)
     print(pd.DataFrame(fr)[['name', 'p_last', 'e_last']].round(2).to_string(index=False))
 
 
