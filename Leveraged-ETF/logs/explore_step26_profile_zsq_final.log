@@ -1,0 +1,13 @@
+<class 'pandas.core.frame.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), object(10)
+memory usage: 95.0+ MB
+{'avg_own_elasticity': np.float64(-2.1209), 'share_neg_mc_bertrand_firm': np.float64(0.3267), 'objective': 2.4036, 'sigma': 0.001, 'b_rest': np.float64(-4.1758), 'b_cheap_total': np.float64(-25.6927), 'share_pos_e': 0.0, 'n15_gt1': np.int64(6), 'n15_pos': np.int64(0), 'secs': 259}
+{'avg_own_elasticity': np.float64(-2.1137), 'share_neg_mc_bertrand_firm': np.float64(0.3288), 'objective': 2.3951, 'sigma': 0.25, 'b_rest': np.float64(-4.1699), 'b_cheap_total': np.float64(-25.6854), 'share_pos_e': 0.0, 'n15_gt1': np.int64(6), 'n15_pos': np.int64(0), 'secs': 259}
+{'avg_own_elasticity': np.float64(-2.0961), 'share_neg_mc_bertrand_firm': np.float64(0.329), 'objective': 2.3596, 'sigma': 0.5, 'b_rest': np.float64(-4.1622), 'b_cheap_total': np.float64(-25.6935), 'share_pos_e': 0.0, 'n15_gt1': np.int64(6), 'n15_pos': np.int64(0), 'secs': 273}
+{'avg_own_elasticity': np.float64(-2.0346), 'share_neg_mc_bertrand_firm': np.float64(0.339), 'objective': 2.2372, 'sigma': 1.0, 'b_rest': np.float64(-4.1525), 'b_cheap_total': np.float64(-25.7823), 'share_pos_e': 0.0, 'n15_gt1': np.int64(6), 'n15_pos': np.int64(0), 'secs': 271}
+{'avg_own_elasticity': np.float64(-1.8603), 'share_neg_mc_bertrand_firm': np.float64(0.3539), 'objective': 2.1183, 'sigma': 2.0, 'b_rest': np.float64(-4.2504), 'b_cheap_total': np.float64(-26.4509), 'share_pos_e': 0.0009, 'n15_gt1': np.int64(7), 'n15_pos': np.int64(0), 'secs': 282}
+{'avg_own_elasticity': np.float64(-1.6745), 'share_neg_mc_bertrand_firm': np.float64(0.5664), 'objective': 2.336, 'sigma': 3.0, 'b_rest': np.float64(-4.5198), 'b_cheap_total': np.float64(-27.8001), 'share_pos_e': 0.0297, 'n15_gt1': np.int64(6), 'n15_pos': np.int64(0), 'secs': 310}
+{'avg_own_elasticity': np.float64(-1.4838), 'share_neg_mc_bertrand_firm': np.float64(0.5633), 'objective': 2.6159, 'sigma': 4.0, 'b_rest': np.float64(-4.8507), 'b_cheap_total': np.float64(-29.5795), 'share_pos_e': 0.1139, 'n15_gt1': np.int64(6), 'n15_pos': np.int64(0), 'secs': 308}
+{'avg_own_elasticity': np.float64(-1.0881), 'share_neg_mc_bertrand_firm': np.float64(0.3647), 'objective': 2.7611, 'sigma': 6.0, 'b_rest': np.float64(-5.5219), 'b_cheap_total': np.float64(-33.7837), 'share_pos_e': 0.2856, 'n15_gt1': np.int64(10), 'n15_pos': np.int64(1), 'secs': 318}
