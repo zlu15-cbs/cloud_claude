@@ -1,0 +1,72 @@
+<class 'pandas.core.frame.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), object(10)
+memory usage: 95.0+ MB
+zsq_q10: N=97,429; cutoff 10, method 1s, FE month; start sigma 2.0000 (0 checkpointed evaluations)
+  eval 1: sigma 2.00000 obj 2.68121
+  eval 2: sigma 1.82806 obj 2.64797
+  eval 3: sigma 1.14032 obj 2.44269
+  eval 4: sigma -1.61065 obj 2.64121
+  eval 5: sigma 0.27197 obj 2.21641
+  eval 6: sigma -2.02196 obj 2.71102
+  eval 7: sigma 0.11053 obj 2.2068
+  eval 8: sigma 0.06730 obj 2.20636
+  eval 9: sigma 0.06760 obj 2.20636
+Problem Results Summary:
+===========================================================================================
+GMM    Objective     Projected      Reduced    Clipped  Weighting Matrix  Covariance Matrix
+Step     Value     Gradient Norm    Hessian    Shares   Condition Number  Condition Number 
+----  -----------  -------------  -----------  -------  ----------------  -----------------
+ 1    +2.2064E+00   +7.2271E-08   +4.8213E-01     0       +1.8841E+02        +1.4590E+17   
+===========================================================================================
+
+Cumulative Statistics:
+===========================================================================
+Computation  Optimizer  Optimization   Objective   Fixed Point  Contraction
+   Time      Converged   Iterations   Evaluations  Iterations   Evaluations
+-----------  ---------  ------------  -----------  -----------  -----------
+ 00:09:24       Yes          4            10          10248        32217   
+===========================================================================
+
+Nonlinear Coefficient Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+=====================
+Sigma:     prices    
+------  -------------
+prices   +6.7596E-02 
+        (+4.1786E-02)
+=====================
+
+Beta Estimates (Robust SEs Adjusted for 166 Clusters in Parentheses):
+==============================================================================================
+   prices      cheap*prices   product_tracking_err  product_past_1yr_ret  log_product_fund_age
+-------------  -------------  --------------------  --------------------  --------------------
+ -8.4486E+00    -2.7205E+01       -9.0698E-01           +4.0328E-01           +5.8068E-01     
+(+4.8697E-01)  (+1.1905E+00)     (+1.1834E-01)         (+3.2934E-02)         (+7.9053E-03)    
+==============================================================================================
+covariance condition number 2.553e+15 | correlation-matrix condition number 1.069e+16 | largest |correlation| between estimates 0.962
+                            sigma[prices]  beta[prices]  beta[cheap*prices]  beta[product_tracking_err]  beta[product_past_1yr_ret]  beta[log_product_fund_age]       se
+sigma[prices]                       1.000        -0.630              -0.962                      -0.494                       0.108                       0.044   13.043
+beta[prices]                       -0.630         1.000               0.394                       0.107                      -0.192                       0.016  152.001
+beta[cheap*prices]                 -0.962         0.394               1.000                       0.543                      -0.061                      -0.059  371.605
+beta[product_tracking_err]         -0.494         0.107               0.543                       1.000                       0.178                       0.121   36.939
+beta[product_past_1yr_ret]          0.108        -0.192              -0.061                       0.178                       1.000                       0.124   10.280
+beta[log_product_fund_age]          0.044         0.016              -0.059                       0.121                       0.124                       1.000    2.468
+eigenvalues of the covariance matrix: [5.593e-11 5.785e+00 9.563e+01 9.460e+02 1.899e+04 1.428e+05]
+{'avg_own_elasticity': np.float64(-2.759), 'share_abs_e_gt1': np.float64(0.8151), 'share_neg_mc_bertrand_firm': np.float64(0.292), 'objective': 2.2064, 'converged': True, 'minutes': 9.4, 'se[prices]': np.float64(0.487), 'sigma': 0.0676, 'sigma_se': 0.0418, 'b_rest': np.float64(-8.4486), 'b_x_cheap': np.float64(-27.2052), 'b_cheap_total': np.float64(-35.6538), 'share_pos_e': 0.0, 'n15_gt1': np.int64(9), 'n15_pos': np.int64(0), 'cov_cond': 2553165642221957.5, 'corr_cond': 1.0690325951895028e+16, 'max_abs_offdiag_corr': 0.962}
+                                                                                         name  p_last  e_last
+                                                      iShares Trust: iShares Core S&P 500 ETF    0.03   -1.04
+                                                    iShares Trust: iShares Core MSCI EAFE ETF    0.07   -2.48
+                                            iShares Trust: iShares Core US Aggregate Bond ETF    0.03   -0.25
+                                               iShares Trust: iShares Russell 1000 Growth ETF    0.18   -1.51
+                                                  iShares Trust: iShares Core S&P Mid-Cap ETF    0.05   -0.42
+                                                                       SPDR S&P 500 ETF Trust    0.09   -3.10
+                                                            SPDR Gold Trust: SPDR Gold Shares    0.40   -3.37
+                                 Select Sector SPDR Trust: Technology Select Sector SPDR Fund    0.08   -0.67
+                                  Select Sector SPDR Trust: Financial Select Sector SPDR Fund    0.08   -0.67
+                                                SPDR Series Trust: SPDR Portfolio S&P 500 ETF    0.02   -0.17
+Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares    0.02   -0.68
+                                Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares    0.04   -1.38
+                                    Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares    0.03   -1.04
+               Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares    0.03   -1.04
+           Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares    0.04   -1.39

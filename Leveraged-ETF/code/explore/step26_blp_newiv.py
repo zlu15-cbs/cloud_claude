@@ -5,6 +5,7 @@ Instruments: Z (share-class-matched Hausman IV, new_iv.py), Z x cheap, and one e
   newproduct_1   BLP_IV_newproduct_1, the paper's Table 2 col 3 extra instrument (uninteracted)
   zsq            Z squared
   diffz          differentiation IV (Gandhi-Houde): sum over the other funds in the same month and asset class of (Z_j - Z_k)^2
+  zsq+np1, zsq+z3  two extra instruments (overidentified by one): with METHOD=2s the objective is Hansen's J (1 df)
 Monte Carlo 3000 draws, seed 623543; SE clustered by month.
 
     python step26_blp_newiv.py profile PROCS EXTRA [grid]      # one-step GMM objective at fixed sigma, beta concentrated
@@ -52,6 +53,12 @@ def data(extra):
         g = d.groupby(['market_ids', 'ac']).Z
         n, s1, s2 = g.transform('size'), g.transform('sum'), d.Z.pow(2).groupby([d.market_ids, d.ac]).transform('sum')
         d['demand_instruments2'] = n * d.Z ** 2 - 2 * d.Z * s1 + s2
+    elif extra == 'zsq+np1':  # overidentified by one: Z squared and the paper's newproduct_1
+        d['demand_instruments2'] = d.Z ** 2
+        d['demand_instruments3'] = d.BLP_IV_newproduct_1
+    elif extra == 'zsq+z3':  # overidentified by one: Z squared and Z cubed
+        d['demand_instruments2'] = d.Z ** 2
+        d['demand_instruments3'] = d.Z ** 3
     else:
         raise ValueError(extra)
     return d
@@ -124,8 +131,12 @@ def estimate(procs, extra, sigma0):
         kw = dict(W_type='clustered') if METHOD == '2s' else {}
         res = pr.solve(np.array([[sigma0]]), optimization=opt, method=METHOD, se_type='clustered', **kw)
         print(res, flush=True)
+        from scipy import stats
+        n_excl = sum(c.startswith('demand_instruments') for c in d.columns)
+        J_df = n_excl - 3
         row, fr = describe(res, d, funds, f'BLP1RC_newiv_{tag}', dict(converged=bool(res.converged), cutoff=CUTOFF, method=METHOD, fe=FE,
-                                                                       minutes=round((time.time() - t) / 60, 1)))
+                                                                       minutes=round((time.time() - t) / 60, 1), J_df=J_df,
+                                                                       J_p=float(stats.chi2.sf(res.objective, J_df)) if (J_df > 0 and METHOD == '2s') else np.nan))
         # covariance diagnostics
         V = np.asarray(res.parameter_covariances, float)
         labels = ['sigma[prices]'] + [f'beta[{b}]' for b in res.beta_labels]
@@ -149,7 +160,7 @@ def estimate(procs, extra, sigma0):
     print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()
            if k in ('sigma', 'sigma_se', 'b_rest', 'se[prices]', 'b_x_cheap', 'se_x_cheap', 'b_cheap_total', 'avg_own_elasticity', 'share_abs_e_gt1',
                     'share_pos_e', 'share_neg_mc_bertrand_firm', 'n15_gt1', 'n15_pos', 'objective', 'converged', 'minutes', 'cov_cond',
-                    'corr_cond', 'max_abs_offdiag_corr')}, flush=True)
+                    'corr_cond', 'max_abs_offdiag_corr', 'J_df', 'J_p')}, flush=True)
     print(pd.DataFrame(fr)[['name', 'p_last', 'e_last']].round(2).to_string(index=False))
 
 
