@@ -1,11 +1,11 @@
 # Note for coauthor: recommended demand specification, how to replicate it, and data issues to clean
 
-This note accompanies the code in this bundle. It covers four things:
+This note accompanies the code in this bundle (code and documents only; no data). It covers four things:
 
 1. The demand specification we recommend for the index market (Table 2 Panel A), defined exactly.
 2. How to reproduce every number on a local machine.
 3. The diagnostics behind the change of instrument, with the exact procedures.
-4. The data issues found along the way, with lists of the affected rows.
+4. The data issues found along the way, and the scripts that list the affected rows.
 
 The full write-up is `MAIN_REPORT_sharecl_hausman.md` (included). None of the paper's own numbers or notebooks were changed.
 
@@ -170,8 +170,10 @@ The result depends on which model's residual is used. With the main model's resi
 
 ## 4. Data issues to clean before the final runs
 
-1. **SPY's expense ratio** is recorded as **0.04% from Oct 2022 to Sep 2023** (12 months, `month_t` 2022.75 – 2023.67). The actual fee was 0.0945% throughout. List: `data_issues/data_issues_spy_fee.csv` (Oct 2021 – Jun 2024). Correcting it changes the earlier cheap-tier estimates only in the third decimal, but it should be fixed at the source.
-2. **43 temporary fee episodes** in 39 funds: fee changes of at least 0.02 pp that revert to the exact prior fee within 12 months (42 last exactly 12 months, 1 lasts 5). List: `data_issues/step8_fee_reversals.csv`. Likely typos:
+The row lists named below are not included in this bundle, which holds no data. `data_issues.py` and `step8_raw20_robustness.py` write them to the working folder.
+
+1. **SPY's expense ratio** is recorded as **0.04% from Oct 2022 to Sep 2023** (12 months, `month_t` 2022.75 – 2023.67). The actual fee was 0.0945% throughout. List: `data_issues_spy_fee.csv` (Oct 2021 – Jun 2024). Correcting it changes the earlier cheap-tier estimates only in the third decimal, but it should be fixed at the source.
+2. **43 temporary fee episodes** in 39 funds: fee changes of at least 0.02 pp that revert to the exact prior fee within 12 months (42 last exactly 12 months, 1 lasts 5). List: `step8_fee_reversals.csv`. Likely typos:
     - SPDR Portfolio Intermediate Term Corporate Bond ETF: 0.15 → **0.55** → 0.15 (from 2012.5).
     - Vanguard Long-Term Bond Index Institutional: 0.04 → **0.40** → 0.04 (from 2017.0).
     - BNY Mellon Institutional S&P 500 Stock Index: 0.20 → **0.50** → 0.20 (from 2018.75).
@@ -183,10 +185,10 @@ The result depends on which model's residual is used. With the main model's resi
     - SPDR Portfolio S&P 500 is specialized.
     - The **Vanguard Total Stock Market ETF** class is specialized while its Admiral and Institutional Plus classes are broad-based.
 
-    30 tracked indices have funds with both labels. Lists: `data_issues/data_issues_broad_label_spx.csv` (the 51 SPX-index funds labelled specialized) and `data_issues_broad_label_mixed.csv`. Table A7 is identified from this label.
+    30 tracked indices have funds with both labels. Lists: `data_issues_broad_label_spx.csv` (the 51 SPX-index funds labelled specialized) and `data_issues_broad_label_mixed.csv`. Table A7 is identified from this label.
 
-4. **112 funds (7,771 fund-months, 7.2% of the Table 2 sample) have no `firm_f_old`.** These are mostly variable-annuity and insurance-channel funds (Voya 22, John Hancock 11, Allianz 9, MetLife 8, PGIM 6, Nationwide 6, Vanguard Variable Insurance 6). For these rows `BLP_IV_hausman_exp_ratio` does not follow the construction in 3(a), and it is not correlated with the fund's own fee (within-fund correlation −0.12). List: `data_issues/data_issues_no_family_id.csv`. **Question: how was the Hausman IV built for these funds?** Table 2 col 2's sign depends on them (3b).
-5. **Units of the management fee.** `product_mgmt_fee` is in **basis points** while `product_exp_ratio` is in percent: SPY 4.6 against 0.09, SPDR Gold 40.0 against 0.40 (`data_issues/data_issues_mgmt_fee_units.csv`). As a result `BLP_IV_hausman_op_cost` = Hausman expense ratio (%) − Hausman management fee (bp) mixes units, and is essentially minus the management-fee variant. It is commented out in the notebook, but it should be rebuilt if it is ever used.
+4. **112 funds (7,771 fund-months, 7.2% of the Table 2 sample) have no `firm_f_old`.** These are mostly variable-annuity and insurance-channel funds (Voya 22, John Hancock 11, Allianz 9, MetLife 8, PGIM 6, Nationwide 6, Vanguard Variable Insurance 6). For these rows `BLP_IV_hausman_exp_ratio` does not follow the construction in 3(a), and it is not correlated with the fund's own fee (within-fund correlation −0.12). List: `data_issues_no_family_id.csv`. **Question: how was the Hausman IV built for these funds?** Table 2 col 2's sign depends on them (3b).
+5. **Units of the management fee.** `product_mgmt_fee` is in **basis points** while `product_exp_ratio` is in percent: SPY 4.6 against 0.09, SPDR Gold 40.0 against 0.40 (`data_issues_mgmt_fee_units.csv`). As a result `BLP_IV_hausman_op_cost` = Hausman expense ratio (%) − Hausman management fee (bp) mixes units, and is essentially minus the management-fee variant. It is commented out in the notebook, but it should be rebuilt if it is ever used.
 6. **Other sample notes.**
     - Zero-fee funds (for example Fidelity's) are dropped by the notebook's `prices > 0` filter and sit in the outside option.
     - The two panels end in different months (index Aug 2024, leveraged Sep 2024).
@@ -219,5 +221,3 @@ The result depends on which model's residual is used. With the main model's resi
 | `code/explore/step28_nested_newiv.py` | nested logit with tracked-index nests (sensitivity check) |
 | `code/explore/step23_hausman_reconstruct.py`, `step24b_family_split.py`, `step24c_class_month_fe.py`, `step24_hausman_variants.py` | diagnostics of the paper's instrument and of the alternatives |
 | `code/explore/data_issues.py`, `step8_raw20_robustness.py` | data-issue lists |
-| `data_issues/*.csv` | the lists in section 4 |
-| `results_to_check/step25_table.csv`, `step26_estimate_zsq.csv` | our outputs for the logit IV table and the baseline BLP, to compare with yours |
