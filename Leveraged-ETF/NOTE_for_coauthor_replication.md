@@ -86,6 +86,13 @@ The full write-up is `MAIN_REPORT_sharecl_hausman.md` (included). None of the pa
     - Overidentified: use `zsq+np1` or `zsq+z3` with `METHOD=2s`.
     - Each run writes `step26_estimate_<tag>.csv`, `_funds.csv` and the covariance diagnostics `step26_cov_<tag>.csv` / `step26_coveig_<tag>.csv`.
 
+**Nested logit (sensitivity check).** Nests are the tracked index (`market_m_index`). The within-index share ln s_{j|g} is instrumented by the log number of funds tracking the same index (or that count 12 months earlier, or `BLP_IV_rival_funds1` and `BLP_IV_newproduct_1`); the price instruments are Z and Z × cheap.
+
+- With the new IV the non-cheap slope stays negative and no demand curve slopes upward; with the paper's IV on the same rows it is +4.0 to +6.4, with 53% of fund-months upward-sloping.
+- But ρ (0.35–0.60 under month FE) absorbs much of the fee response: non-cheap −0.5 to −2.5, cheap total −17 to −21, and 41–78% of fund-months imply negative marginal cost (24% without nests).
+- ρ is 0 with one slope and among non-cheap funds alone (whose slope is then −4.3 (0.7)), and 0.94 among cheap funds alone.
+- So it is reported as a sensitivity check, not as the main column. Details: `OTHER_SPECS_explored.md` section 5c (in the repository); code `step28_nested_newiv.py`.
+
 ---
 
 ## 2. Replicating on a local machine
@@ -114,6 +121,7 @@ The full write-up is `MAIN_REPORT_sharecl_hausman.md` (included). None of the pa
 | 6 | `python step24c_class_month_fe.py` | asset-class × month FE and the other-family placebo | `step24c_*.csv` | ~30 min |
 | 7 | `python step23_hausman_reconstruct.py` | reconstruction of the paper's Hausman IV | match within 0.0005 pp in 83% of rows | ~3 min |
 | 8 | `python data_issues.py` and `python step8_raw20_robustness.py` | the data-issue lists in section 4 | | ~5 min |
+| 9 | `python step28_nested_newiv.py` | nested logit with tracked-index nests (`step28_*.csv`) | new IV, month FE, rivals: ρ 0.479, non-cheap −1.14, cheap total −18.00 | ~40 min |
 
 For BLP, the second argument is the number of worker processes (`pyblp.parallel`). Set `OPENBLAS_NUM_THREADS=1`. Options are set by environment variable: `CUTOFF=10|15|20`, `METHOD=1s|2s`, `FE=month|ac`. Each evaluation is checkpointed to `step26_<tag>_ckpt.json`, so rerunning the same command resumes. `FINALIZE=1` evaluates at the best checkpointed σ.
 
@@ -208,6 +216,7 @@ The result depends on which model's residual is used. With the main model's resi
 | `code/explore/step25_new_iv_main.py` | recommended spec: Panel A table, cutoffs, drop-firm, split sample, 15 funds |
 | `code/explore/step26_blp_newiv.py` | BLP version: σ profiles, estimates, two-step, cutoffs, FE variant, covariance diagnostics |
 | `code/explore/step27_lead_tests.py` | lead tests |
+| `code/explore/step28_nested_newiv.py` | nested logit with tracked-index nests (sensitivity check) |
 | `code/explore/step23_hausman_reconstruct.py`, `step24b_family_split.py`, `step24c_class_month_fe.py`, `step24_hausman_variants.py` | diagnostics of the paper's instrument and of the alternatives |
 | `code/explore/data_issues.py`, `step8_raw20_robustness.py` | data-issue lists |
 | `data_issues/*.csv` | the lists in section 4 |
