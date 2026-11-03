@@ -80,3 +80,43 @@ The email recommends **founded_1y_p20**: cheap if the launch fee is below the 20
 | Original Table 2 with scale adjustment: Bertrand negative MC ~46% → ~5% | Table 2.0, BLP1: B0 0.463 → 0.059. IV logit: 0.516 → 0.171. At B65, BLP1 is still 0.267. | Right for BLP1 under B0. It does not hold for IV logit or for partial internalization. |
 
 **Why the 20th percentile breaks.** The reference group contains all CRSP share classes, active funds included, so 75% of index fund-months count as "cheap". The non-cheap group is the most expensive quarter of index funds. The paper's Hausman IV does not identify a slope for them (our split-sample first-stage F was 0.2–6), and their estimated slope comes out positive. Our own cutoff grid showed the same thing: once the cheap group passes about half the market, the "rest" slope turns positive (+2.7 at the 40th percentile, +10.7 at the 50th).
+
+## 7. Second PDF: index-fund reference universe (`table2_cheap_index_universe.pdf`, 3 Nov 2026)
+
+The same 12 definitions, but percentiles are computed among index-fund share classes only (6,670 classes). Still the paper's Hausman IV; first-stage F rows added. Cheap shares of index fund-months are now 28–49% at the 10th and 20th percentiles, close to our entry tier (about 42% of funds), against 55–81% in the CRSP-universe PDF.
+
+**The coauthor's claim:** "The first PDF version [CRSP universe] seems to work better to reduce negative MCs."
+
+**Index universe, Panel A, IV logit.** Negative-MC shares are the range over B0–B65.
+
+| Definition | Cheap share | Non-cheap (SE) | Cheap total | Avg e | F: price / × cheap | Demand signs valid | Neg. MC, scale 0 | Neg. MC, scale 0.024 | Conduct (5%) |
+|---|---|---|---|---|---|---|---|---|---|
+| founded 1y, 10th | 0.42 | +0.85 (1.06) | −14.4 | −0.71 | 34 / 1130 | **no** | 0.04 | 0 | PC |
+| founded 1y, 20th (Gene's) | 0.55 | −0.61 (1.59) | −14.4 | −1.44 | 32 / 242 | yes | **0.79–0.87** | **0.58–0.78** | B0 |
+| founded 5y, 10th | 0.28 | −12.37 (3.18) | −47.2 | −4.38 | 24 / 37 | yes | 0.17–0.27 | 0 | all five |
+| founded 5y, 20th | 0.47 | −6.96 (2.49) | −26.8 | −3.01 | 35 / 836 | yes | 0.23–0.33 | 0–0.001 | all five |
+| existing 1y, 10th | 0.31 | −12.13 (2.86) | −40.7 | −4.24 | 27 / 57 | yes | 0.15–0.26 | 0 | all five |
+| existing 1y, 20th | 0.47 | −13.14 (3.96) | −37.0 | −4.98 | 30 / 176 | yes | 0.10–0.19 | 0 | all five |
+| existing 5y, 10th | 0.32 | −17.23 (4.78) | −55.9 | −6.00 | 19 / 23 | yes | 0.06–0.16 | 0 | all five |
+| existing 5y, 20th | 0.49 | −10.97 (3.30) | −32.4 | −4.31 | 33 / 596 | yes | 0.12–0.24 | 0 | all five |
+| all four 50th-percentile definitions | 0.71–0.82 | +3.0 to +11.1 | | | | **no** | | | |
+| *CRSP universe, founded 1y, 20th (first PDF)* | *0.75* | ***+5.85 (1.71)*** | *−14.9* | *−1.35* | | ***no** (25% upward)* | *0.24–0.26* | *0* | *PC* |
+
+**Verdict: the claim holds only for a narrow comparison, and it is misleading.**
+1. **It is true for Gene's definition and for the BLP columns.**
+    - With founded 1y / 20th, the index universe gives far more negative MCs: IV logit 58–78% at scale 0.024, BLP1 18–39%. In the CRSP universe the same definition gives 0. Appendix B.3 even shows a negative *average* MC under B0/B65 (−0.017 / −0.105).
+    - In the other index-universe definitions BLP1 keeps 0.1–6.6% negative MCs at scale 0.024 and BLP3 keeps 8–24%. The CRSP version of Gene's definition has 0.
+2. **But the CRSP-universe zeros come with invalid demand.** In that version the non-cheap coefficient is positive in every column, and 25% of fund-months slope upward. Upward-sloping demand gives negative Bertrand markups and so positive implied MCs. Removing negative MCs this way is not a gain.
+3. **Among definitions with valid demand, the index universe does better.**
+    - IV logit with valid signs: in the index universe, 6 of 7 definitions have **0** negative MCs at scale 0.024, and 6–33% at scale 0.
+    - In the CRSP universe the valid ones (founded 5y 10th/50th, existing 1y 10th/50th, existing 5y 10th/50th) keep 0–26% at scale 0.024 and 22–53% at scale 0.
+4. **Gene's definition is the weak one in the index universe.**
+    - The reference group of funds founded in the prior year is small. 4,493 fund-months are coded not cheap only because that group is unavailable.
+    - The non-cheap slope comes out near zero (−0.6, SE 1.6), and that is what produces the negative MCs.
+    - The 5-year and "existing" reference groups give non-cheap −7 to −17 and cheap −27 to −56, with valid demand.
+5. **Remaining caveats.**
+    - **Instrument:** this is still the paper's Hausman IV.
+    - **BLP1:** σ is now large (|σ| 3–5.6, against 0.027). That leaves small upward-sloping pockets (267–6,749 fund-months), so BLP1 demand signs are flagged invalid in those columns.
+    - **Conduct test:** with valid IV-logit demand it selects "all five", so it cannot tell the models apart.
+
+**Closest to our recommendation:** existing 1y or 5y, 20th percentile (47–49% cheap; IV logit non-cheap −11 to −13, cheap −32 to −37, F 30–33 / 176–596, valid demand, 0 negative MC at scale 0.024). These are steeper than ours with the share-class IV (−6.1 / −28.8). His share-class-IV run will show whether that gap is the instrument.
