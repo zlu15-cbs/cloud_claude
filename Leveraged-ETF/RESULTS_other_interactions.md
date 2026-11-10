@@ -2,9 +2,9 @@
 
 **Short answer: no.** As replacements for cheap they fail; as additions to cheap they change little. Only the cheap interaction separates the low-fee funds, and that separation is what both goals need.
 
-**How I read the two goals** (they are not written down in this repo, so correct me if I have them wrong):
-- **Goal A, demand:** demand slopes down for every fund-month, with a strong first stage and clean lead tests, and the large Table 5 funds get |e| > 1.
-- **Goal B, supply:** few and small negative marginal costs after the scale adjustment, not sitting at Vanguard.
+**The two goals** (Gene's, from the spec-comparison brief):
+- **Goal A:** no upward-sloping demand (share of fund-months with e > 0 equal to 0). The tables below also show the other demand criteria: first-stage F, lead tests and the Table 5 funds.
+- **Goal B:** fewer negative implied marginal costs.
 
 **Code and outputs.** `code/explore/step43_other_interactions.py`; `logs/step43.log`, `logs/step43_{demand,table5,where}.csv`. The script calls V2's own functions (`replicate_V2.py`) and changes only the set of price interactions. Its `cheap` row reproduces V2 exactly (α −3.642, α_x −20.562, F 315.8, 5/15, negative MC 0.053–0.082). The conduct test was not run.
 

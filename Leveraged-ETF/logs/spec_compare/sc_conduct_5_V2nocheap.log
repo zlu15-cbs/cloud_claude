@@ -4,3 +4,5 @@
 [  1015s]    main IV: PC p 1.000 T vs B65 -3.07 | B0 p 0.000 T vs B65 -2.73 | B25 p 0.000 T vs B65 -2.87 | B50 p 0.002 T vs B65 -2.97 | B65 p 0.002 T vs B65 nan | min F 1
 [  1454s] 5_V2nocheap conduct [C: PC eta] main: ['PC (1.00)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)'] | rival3 x csent_index: ['PC (1.00)']
 [  1454s]    main IV: PC p 1.000 T vs B65 -3.07 | B0 p 0.000 T vs B65 -2.74 | B25 p 0.000 T vs B65 -2.88 | B50 p 0.002 T vs B65 -2.97 | B65 p 0.002 T vs B65 nan | min F 1
+[  1892s] 5_V2nocheap conduct [A capped 1/99 by year] main: ['PC (1.00)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)'] | rival3 x csent_index: ['PC (1.00)']
+[  1892s]    main IV: PC p 1.000 T vs B65 -3.07 | B0 p 0.000 T vs B65 -2.74 | B25 p 0.000 T vs B65 -2.88 | B50 p 0.002 T vs B65 -2.97 | B65 p 0.002 T vs B65 nan | min F 1
