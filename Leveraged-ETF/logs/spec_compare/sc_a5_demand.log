@@ -1,0 +1,17 @@
+fund-months where the row-level label differs from the fund-level one: 0
+A5             N 108,300 funds 1302 | p -7.503 (1.770) | xbroad -5.278 (0.372) | minF 53.0 | e>0 0.000 | avg e -2.86 (AUM-w -1.31) | T5 2/15 | leads -5.3/-4.9/-2.4
+A5d            N 96,069 funds 1148 | p -0.227 (0.472) | xbroad -4.824 (0.311) | minF 424.6 | e>0 0.000 | avg e -0.57 (AUM-w -0.32) | T5 0/15 | leads -0.1/2.3/2.7
+x_A5_rowlabel  N 108,300 funds 1302 | p -7.503 (1.770) | xbroad_tv -5.278 (0.372) | minF 53.0 | e>0 0.000 | avg e -2.86 (AUM-w -1.31) | T5 2/15 | leads -5.3/-4.9/-2.4
+x_A5_fam       N 100,529 funds 1190 | p 4.009 (1.588) | xbroad -6.924 (0.428) | minF 49.0 | e>0 0.489 | avg e 0.31 (AUM-w 0.08) | T5 1/15 | leads 4.1/10.9/16.4
+x_A5_nofam     N 7,771 funds 112 | p 0.747 (0.293) | xbroad 4.884 (1.840) | minF 11.3 | e>0 1.000 | avg e 2.60 (AUM-w 2.45) | T5 0/0 | leads -0.9/-2.5/-2.2
+x_T2_all       N 108,300 funds 1302 | p -5.606 (1.310) | minF 33.6 | e>0 0.000 | avg e -1.61 (AUM-w -0.72) | T5 2/15 | leads -3.3/-1.5/2.1
+x_T2_fam       N 100,529 funds 1190 | p 7.244 (1.987) | minF 26.6 | e>0 1.000 | avg e 1.91 (AUM-w 0.89) | T5 2/15 | leads 6.7/11.6/18.9
+x_T2_nofam     N 7,771 funds 112 | p 2.322 (0.538) | minF 57.2 | e>0 1.000 | avg e 1.39 (AUM-w 1.24) | T5 0/0 | leads 0.1/-0.3/-0.2
+x_terc_all     N 108,300 funds 1302 | p -3.714 (6.133) | xfee_t1 -52.700 (7.572) | xfee_t2 -11.994 (0.983) | minF 22.6 | e>0 0.000 | avg e -3.75 (AUM-w -2.97) | T5 13/15 | leads -3.6/-6.2/-2.1
+x_terc_fam     N 100,529 funds 1190 | p -18.677 (8.943) | xfee_t1 -49.360 (5.157) | xfee_t2 -10.611 (1.131) | minF 11.9 | e>0 0.000 | avg e -7.29 (AUM-w -4.57) | T5 14/15 | leads -7.5/-9.9/-13.6
+x_cheap_all    N 108,300 funds 1302 | p -8.132 (4.315) | xcheap -32.641 (4.204) | minF 18.3 | e>0 0.000 | avg e -3.93 (AUM-w -2.92) | T5 11/15 | leads -3.4/-5.3/-1.7
+x_cheap_fam    N 100,529 funds 1190 | p -13.993 (7.073) | xcheap -31.229 (4.550) | minF 7.9 | e>0 0.000 | avg e -5.20 (AUM-w -3.51) | T5 13/15 | leads -6.2/-8.2/-9.9
+x_A5d_fix      N 96,069 funds 1148 | p 4.612 (0.846) | xbroadfix -8.451 (0.509) | minF 414.3 | e>0 0.397 | avg e 0.12 (AUM-w -0.07) | T5 1/15 | leads 0.3/3.2/5.1
+x_A5d_Z        N 96,069 funds 1148 | p 1.202 (0.304) | xbroad -5.707 (0.298) | minF 398.8 | e>0 0.486 | avg e -0.29 (AUM-w -0.19) | T5 0/15 | leads 0.9/1.1/2.9
+x_V2_broad     N 96,069 funds 1148 | p -2.948 (0.418) | xcheap -20.484 (0.642) | xbroad -2.555 (0.308) | minF 344.2 | e>0 0.000 | avg e -2.02 (AUM-w -1.67) | T5 7/15 | leads -2.2/-2.2/-0.4
+x_V2w          N 96,069 funds 1148 | p -2.136 (0.570) | xcheap -22.358 (0.918) | minF 360.8 | e>0 0.000 | avg e -1.62 (AUM-w -1.52) | T5 4/15 | leads -1.9/-0.6/-1.8
