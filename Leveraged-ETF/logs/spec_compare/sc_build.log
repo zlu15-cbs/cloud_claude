@@ -1,0 +1,9 @@
+[     2s] Table 2 Panel A sample: 108,300 fund-months, 1,302 funds
+[    10s] money market funds: 16 in the CSV, 4 in the sample (437 fund-months)
+[    32s] V2 instrument defined on 96,069 non-MMF rows (expected 96,069)
+[    57s] asset classes per tracked index (max): 1; clusters: 785; indices: 1678
+     iv  raw_defined  fallback_rows  fallback_rows_blank_family  equal_to_iv0_1e8  within_0005  corr_with_iv0  corr_with_iv0_blank_family
+iv_ridx       108278             22                           0            0.3146       0.8341         0.9093                     -0.2131
+   iv4p       105808           2492                           0            0.0249       0.0769         0.8693                     -0.0771
+   iv4q       108257             43                           0            0.1896       0.6455         0.9091                     -0.2185
+[    57s] panel cached: 108,300 rows, 129 columns
