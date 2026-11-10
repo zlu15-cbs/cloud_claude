@@ -60,7 +60,8 @@ The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 | Donors: all funds of the parent firm (`firm_f`) | −0.340 (0.049) | 313.5 | 0.9 / 6.0 / 14.8 | +0.791; −1.636; 0.47 |
 
 - With a proper family instrument for these funds, the Table 2 coefficient falls from −5.6 to about −0.3, and the lead tests fail.
-- On these rows the rebuilt instrument tracks the fund's own fee almost one for one (first-stage F in the thousands). I have not looked into why; fee changes may be set for the whole insurance trust at once.
+- **This estimate is not credible either, because the fee data for these funds look wrong.** In 85% of firm-months, every variable-annuity fund of a firm has the same expense ratio in the CSV. Allianz's funds are all at 0.400% in 2010–2016, 0.535% in 2018 and 0.458% in 2020. Mutual of America's funds, including its S&P 500 index fund, are all at 0.13% in 2010, 1.05% in 2012, 1.42% in 2014 and 1.93% in 2022.
+- So a family instrument for these funds is almost the fund's own fee (first-stage F in the thousands on these rows). It cannot identify the slope.
 
 **Why I think this is a problem.**
 - **The sign is fragile.** Demand slopes upward on the rows with a family code and upward on the rows without one. It slopes downward only when the two are pooled. The negative coefficient therefore comes from comparing the two groups through the common month effects, not from fee variation within either group. That last sentence is my reading of the three columns; I have not decomposed it further.
@@ -79,13 +80,13 @@ These keep their sign, but the base slope is not identified in either sample and
 
 **What I am asking you.**
 
-1. **Did you know that the 112 funds with a blank `firm_f_old` are the variable-annuity funds, and was it intended that they share one "family" in IV0?**
-    - If your source panel treats them differently from my index CSV, please tell me how.
-2. **How should the paper treat the variable-annuity funds? I see three options.**
-    - **(a) As now.** They stay in the demand estimation with the pooled blank-family instrument. Table 2 stays at −5.606, but the sign depends on an instrument built from unrelated insurers' funds.
-    - **(b) Keep them, with their true families.** Table 2 becomes about −0.3 and the broad-based table has 47% of fund-months with e > 0.
-    - **(c) Keep them in the market but not in the demand estimation.** They still count in the market shares, the outside good and the supply side; they are only left out when the price coefficient is estimated. This is what V2 does. With the original IV0, Table 2 then gives +7.244, so the paper would need a different instrument or specification.
-    - A fourth possibility is to argue that funds sold only inside insurance contracts are not in the same market, and to move them to the outside good.
+1. **Where do the expense ratios of the variable-annuity funds come from?** They look like one firm-level or trust-level number copied to every fund. Is that an imputation step in your build, or is it what CRSP reports for these funds?
+2. **How should the paper treat these 112 funds?** We know their families, so the choice is ours:
+    - **(a) As now:** pooled as one "family". Table 2 is −5.606, but it rests on an instrument built from unrelated insurers' funds.
+    - **(b) With their true families:** Table 2 is about −0.3. This is the correct construction of the paper's instrument, but with the fee data above it is close to regressing on the fund's own fee.
+    - **(c) In the market but out of the demand estimation.** They still count in the market shares, the outside good and the supply side; they are only left out when the price coefficient is estimated. This is what V2 does. With the original IV0, Table 2 then gives +7.244, so the paper needs a different instrument or specification.
+    - **(d) Out of the inside market,** on the argument that funds sold only inside insurance contracts are not chosen on their expense ratio.
+    - My preference is (c) or (d). Option (a) is not defensible once a referee sees it, and (b) depends on fee data we do not trust.
 
 The split is easy to replicate: drop the 7,771 fund-months with a blank `firm_f_old` from the Table 2 sample and re-estimate, with nothing else changed.
 

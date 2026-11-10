@@ -19,3 +19,11 @@ Table 2 col 2 (one slope), paper sample 108,300; IV0 rebuilt for the blank rows 
   blank rows: donors = same parent firm's other VA funds    all 107,954: -0.217 (0.048) F 344.6, leads 2.1/7.0/15.8 | blank rows only 7,425: +0.208 (0.016) F 380,728
   blank rows: donors = all funds of the parent firm (firm_f) all 108,221: -0.340 (0.049) F 313.5, leads 0.9/6.0/14.8 | blank rows only 7,692: +0.202 (0.018) F 19,516
 Broad-based interaction with the same instruments: specialized -7.503 / +0.809 (0.148) / +0.791 (0.148); x broad -5.278 / -1.460 / -1.636; e > 0 share 0 / 0.47 / 0.47.
+
+--- Fees of the variable-annuity funds in the index CSV (inline check, 10 Nov 2026)
+VA rows (blank firm_f_old) in the raw CSV since 2010: 52,412; 453 funds; 52 parent firms.
+Firm-months with more than one VA fund: 4,881. In 85.4% of them every VA fund of the firm has the same expense ratio.
+Mean within-firm-month SD of the fee: 0.012; SD across all VA rows: 0.461.
+Examples (same value for every fund of the firm): Allianz 0.400 (2010-2016), 0.535 (2018), 0.458 (2020), 0.400 (2022);
+  Mutual of America 0.130 (2010), 1.048 (2012), 1.417 (2014), 1.466 (2016), 1.452 (2018), 1.478 (2020), 1.925 (2022).
+  AIG (VALIC) and Voya funds have fund-specific fees that are constant over time.
