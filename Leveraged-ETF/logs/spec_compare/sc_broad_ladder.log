@@ -1,0 +1,40 @@
+[    49s] built idx/pool/wavg: defined on 0.893 of donor-pool rows
+[    86s] built idx/pool/med: defined on 0.893 of donor-pool rows
+[    86s] built idx/same/wavg: defined on 0.877 of donor-pool rows
+[   130s] built idx/same/med: defined on 0.877 of donor-pool rows
+[   130s] built ac/pool/wavg: defined on 0.818 of donor-pool rows
+[   137s] built ac/pool/med: defined on 0.818 of donor-pool rows
+[   137s] built ac/same/wavg: defined on 0.781 of donor-pool rows
+[   146s] built ac/same/med: defined on 0.781 of donor-pool rows
+rows: all 107,863; with family code 100,092; common to the 8 instruments 96,069; broad share 0.532
+correlation of the instruments on the common rows (within fund and month):
+                IV0  idx/pool/wavg  idx/pool/med  idx/same/wavg  idx/same/med  ac/pool/wavg  ac/pool/med  ac/same/wavg  ac/same/med  prices
+IV0            1.00           0.94          0.46           0.73          0.39          0.68         0.38          0.54         0.33    0.03
+idx/pool/wavg  0.94           1.00          0.54           0.76          0.44          0.75         0.46          0.59         0.40    0.04
+idx/pool/med   0.46           0.54          1.00           0.36          0.63          0.47         0.73          0.31         0.52    0.06
+idx/same/wavg  0.73           0.76          0.36           1.00          0.57          0.59         0.32          0.81         0.52    0.08
+idx/same/med   0.39           0.44          0.63           0.57          1.00          0.40         0.52          0.51         0.78    0.09
+ac/pool/wavg   0.68           0.75          0.47           0.59          0.40          1.00         0.55          0.81         0.48    0.06
+ac/pool/med    0.38           0.46          0.73           0.32          0.52          0.55         1.00          0.40         0.66    0.07
+ac/same/wavg   0.54           0.59          0.31           0.81          0.51          0.81         0.40          1.00         0.59    0.10
+ac/same/med    0.33           0.40          0.52           0.52          0.78          0.48         0.66          0.59         1.00    0.10
+prices         0.03           0.04          0.06           0.08          0.09          0.06         0.07          0.10         0.10    1.00
+IV0            all         N 107,863 | specialized  -5.86 (1.37) | x broad  -5.94 (0.30) | F   72.6 | e>0 0.00 | leads -4.9/-4.5/-1.5 | one slope  -4.26 (0.99) | subsamples: spec  19.95 (5.26, F 16) broad -24.67 (2.71, F 84) | first stage spec 0.028 broad 0.048
+IV0            family code N 100,092 | specialized   4.07 (1.31) | x broad  -6.91 (0.34) | F   72.9 | e>0 0.49 | leads 3.4/8.8/13.2 | one slope   6.41 (1.43) | subsamples: spec  34.10 (12.74, F 7) broad -15.23 (1.83, F 190) | first stage spec 0.019 broad 0.044
+IV0            common      N  96,069 | specialized   3.43 (1.58) | x broad  -6.65 (0.33) | F   49.0 | e>0 0.49 | leads 5.2/12.4/18.2 | one slope   7.83 (2.33) | subsamples: spec  42.60 (23.98, F 4) broad -13.78 (2.13, F 111) | first stage spec 0.017 broad 0.052
+idx/pool/wavg  own         N 100,029 | specialized   7.41 (1.09) | x broad  -6.57 (0.37) | F  106.6 | e>0 1.00 | leads 4.2/9.6/12.9 | one slope   8.70 (1.32) | subsamples: spec  23.82 (5.43, F 22) broad  -9.60 (1.31, F 278) | first stage spec 0.030 broad 0.045
+idx/pool/wavg  common      N  96,069 | specialized   7.25 (1.35) | x broad  -6.55 (0.36) | F   76.2 | e>0 1.00 | leads 5.7/11.6/17.0 | one slope   9.84 (2.00) | subsamples: spec  25.18 (7.42, F 16) broad  -7.92 (1.41, F 145) | first stage spec 0.035 broad 0.054
+idx/pool/med   own         N 100,029 | specialized   7.91 (1.03) | x broad  -6.35 (0.35) | F  176.1 | e>0 1.00 | leads 4.0/6.7/7.7 | one slope   5.75 (0.98) | subsamples: spec  17.76 (3.36, F 31) broad  -4.26 (1.31, F 133) | first stage spec 0.034 broad 0.037
+idx/pool/med   common      N  96,069 | specialized   7.78 (1.15) | x broad  -6.99 (0.35) | F  177.2 | e>0 1.00 | leads 5.5/8.6/10.4 | one slope   5.61 (1.07) | subsamples: spec  22.06 (5.20, F 22) broad  -4.28 (1.29, F 140) | first stage spec 0.032 broad 0.044
+idx/same/wavg  own         N  99,465 | specialized   4.62 (0.53) | x broad  -5.43 (0.30) | F  290.0 | e>0 0.49 | leads 4.4/8.1/8.0 | one slope   5.25 (0.57) | subsamples: spec   9.28 (1.03, F 126) broad  -4.68 (1.09, F 166) | first stage spec 0.083 broad 0.054
+idx/same/wavg  common      N  96,069 | specialized   5.26 (0.52) | x broad  -6.02 (0.28) | F  263.5 | e>0 0.49 | leads 5.9/10.3/10.1 | one slope   6.14 (0.62) | subsamples: spec  11.07 (1.26, F 143) broad  -5.39 (0.97, F 167) | first stage spec 0.088 broad 0.064
+idx/same/med   own         N  99,465 | specialized   4.60 (0.40) | x broad  -6.05 (0.30) | F  437.4 | e>0 0.49 | leads 3.4/4.1/4.6 | one slope   3.41 (0.39) | subsamples: spec   9.46 (0.92, F 141) broad  -4.88 (0.87, F 167) | first stage spec 0.068 broad 0.057
+idx/same/med   common      N  96,069 | specialized   5.29 (0.47) | x broad  -6.77 (0.31) | F  360.6 | e>0 0.49 | leads 5.2/7.8/8.3 | one slope   4.11 (0.42) | subsamples: spec  11.94 (1.33, F 108) broad  -5.35 (0.83, F 219) | first stage spec 0.066 broad 0.072
+ac/pool/wavg   own         N  97,559 | specialized   0.42 (0.70) | x broad  -4.48 (0.36) | F  216.1 | e>0 0.49 | leads 2.2/5.8/8.8 | one slope   0.09 (0.69) | subsamples: spec   3.85 (1.65, F 79) broad  -5.96 (0.73, F 251) | first stage spec 0.046 broad 0.053
+ac/pool/wavg   common      N  96,069 | specialized  -1.17 (0.78) | x broad  -4.23 (0.37) | F  182.3 | e>0 0.00 | leads 2.5/5.5/6.7 | one slope  -1.30 (0.75) | subsamples: spec   1.13 (1.53, F 80) broad  -6.58 (0.80, F 195) | first stage spec 0.052 broad 0.054
+ac/pool/med    own         N  97,559 | specialized   4.33 (1.06) | x broad  -5.09 (0.38) | F  147.4 | e>0 0.49 | leads 0.7/1.2/4.2 | one slope   2.35 (0.88) | subsamples: spec   9.13 (3.14, F 27) broad  -3.27 (0.76, F 147) | first stage spec 0.029 broad 0.041
+ac/pool/med    common      N  96,069 | specialized   1.07 (0.87) | x broad  -4.79 (0.38) | F  206.0 | e>0 0.49 | leads 1.3/1.0/3.6 | one slope  -0.79 (0.71) | subsamples: spec   4.49 (2.34, F 29) broad  -5.17 (0.85, F 211) | first stage spec 0.035 broad 0.049
+ac/same/wavg   own         N  96,069 | specialized  -0.23 (0.47) | x broad  -4.82 (0.31) | F  424.6 | e>0 0.00 | leads -0.1/2.3/2.7 | one slope  -0.49 (0.47) | subsamples: spec   2.17 (0.79, F 275) broad  -6.76 (0.61, F 297) | first stage spec 0.088 broad 0.067
+ac/same/wavg   common      N  96,069 | specialized  -0.23 (0.47) | x broad  -4.82 (0.31) | F  424.6 | e>0 0.00 | leads -0.1/2.3/2.7 | one slope  -0.49 (0.47) | subsamples: spec   2.17 (0.79, F 275) broad  -6.76 (0.61, F 297) | first stage spec 0.088 broad 0.067
+ac/same/med    own         N  96,069 | specialized   1.20 (0.30) | x broad  -5.71 (0.30) | F  398.8 | e>0 0.49 | leads 0.9/1.1/2.9 | one slope  -0.32 (0.29) | subsamples: spec   4.49 (0.67, F 204) broad  -7.37 (0.77, F 231) | first stage spec 0.075 broad 0.058
+ac/same/med    common      N  96,069 | specialized   1.20 (0.30) | x broad  -5.71 (0.30) | F  398.8 | e>0 0.49 | leads 0.9/1.1/2.9 | one slope  -0.32 (0.29) | subsamples: spec   4.49 (0.67, F 204) broad  -7.37 (0.77, F 231) | first stage spec 0.075 broad 0.058
