@@ -1,0 +1,8 @@
+[   457s] A5 conduct [A: eta 0.024] main: ['PC (1.00)', 'B65 (0.08)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)', 'B65 (0.06)'] | rival3 x csent_index: ['PC (1.00)']
+[   457s]    main IV: PC p 1.000 T vs B65 -1.75 | B0 p 0.000 T vs B65 -0.19 | B25 p 0.000 T vs B65 -0.52 | B50 p 0.034 T vs B65 -0.87 | B65 p 0.079 T vs B65 nan | min F 103
+[   893s] A5 conduct [B: own eta] main: ['PC (1.00)', 'B65 (0.08)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)', 'B65 (0.06)'] | rival3 x csent_index: ['PC (1.00)']
+[   893s]    main IV: PC p 1.000 T vs B65 -1.74 | B0 p 0.000 T vs B65 -0.16 | B25 p 0.000 T vs B65 -0.49 | B50 p 0.035 T vs B65 -0.84 | B65 p 0.083 T vs B65 nan | min F 102
+[  1338s] A5 conduct [C: PC eta] main: ['PC (1.00)', 'B65 (0.08)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)', 'B65 (0.06)'] | rival3 x csent_index: ['PC (1.00)']
+[  1338s]    main IV: PC p 1.000 T vs B65 -1.74 | B0 p 0.000 T vs B65 -0.17 | B25 p 0.000 T vs B65 -0.51 | B50 p 0.037 T vs B65 -0.86 | B65 p 0.082 T vs B65 nan | min F 102
+[  1787s] A5 conduct [A capped 1/99 by year] main: ['PC (1.00)', 'B65 (0.08)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)', 'B65 (0.06)'] | rival3 x csent_index: ['PC (1.00)']
+[  1787s]    main IV: PC p 1.000 T vs B65 -1.76 | B0 p 0.000 T vs B65 -0.18 | B25 p 0.000 T vs B65 -0.52 | B50 p 0.035 T vs B65 -0.87 | B65 p 0.079 T vs B65 nan | min F 103
