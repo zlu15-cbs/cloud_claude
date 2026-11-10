@@ -43,15 +43,28 @@ Your note says that blank family strings match one another in the original IV0, 
 
 The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 
-**What the 7,771 rows are.**
-- 112 mutual-fund share classes and no ETFs. Most are insurance and retirement-channel trusts: Voya, Allianz, John Hancock, Nationwide, American General, Principal, Mutual of America. Some are Vanguard classes.
-- Their mean fee is 0.61%, against 0.29% for the sample.
+**What the 7,771 rows are: variable-annuity funds.**
+- All 112 funds are flagged as variable-annuity underlying funds in CRSP (`vau_fund` = Y). None of the other 1,190 funds in the sample is.
+- Examples: VALIC Company I Stock Index Fund, Voya US Stock Index Portfolio, Prudential Series Fund Stock Index Portfolio, Vanguard Variable Insurance Fund Equity Index Portfolio, John Hancock Variable Insurance Trust 500 Index Trust, Allianz AZL S&P 500 Index Fund, Nationwide NVIT Bond Index Fund. The list is in `logs/spec_compare/sc_blank_family_funds.csv`.
+- **Why the family code is blank.** CRSP has no `mgmt_cd` for any of them, in any quarter, and `firm_f_old` is built from `mgmt_cd`. CRSP does have `mgmt_name` and `adv_name` for all 112, and the CSV has the parent firm (`firm_f`) for all of them. So the family can be recovered.
+- They are sold only inside insurance contracts, with no ETFs among them. Their mean fee is 0.61%, against 0.29% for the sample. A few are not plain index funds (Russell Multi-Style Equity, Nationwide Investor Destinations, Transamerica JPMorgan Enhanced Index).
 - Their fees move four times as much within fund as the other funds' fees (standard deviation 0.133 against 0.034, after fund and month effects).
-- Their IV0 is not a family instrument. Because blank families match one another, the donors are other firms' family-less funds. In a typical month there are 12 distinct IV0 values across 46 such rows.
+- Their IV0 is not a family instrument. Because blank families match one another, the donors are other firms' variable-annuity funds. In a typical month there are 12 distinct IV0 values across 46 such rows.
+
+**What happens when their families are recovered.** I rebuilt IV0 for these rows only (benchmark exclusion, lag-AUM weights), and kept your original IV0 for all other rows.
+
+| IV0 for the variable-annuity rows | Table 2 col 2, all rows | First-stage F | Lead t (12/24/36) | Broad-based: specialized; × broad; share e > 0 |
+|---|---|---|---|---|
+| Original (all blank families pooled) | −5.606 (1.310) | 33.6 | −3.3 / −1.5 / 2.1 | −7.503; −5.278; 0 |
+| Donors: the same parent firm's other variable-annuity funds | −0.217 (0.048) | 344.6 | 2.1 / 7.0 / 15.8 | +0.809; −1.460; 0.47 |
+| Donors: all funds of the parent firm (`firm_f`) | −0.340 (0.049) | 313.5 | 0.9 / 6.0 / 14.8 | +0.791; −1.636; 0.47 |
+
+- With a proper family instrument for these funds, the Table 2 coefficient falls from −5.6 to about −0.3, and the lead tests fail.
+- On these rows the rebuilt instrument tracks the fund's own fee almost one for one (first-stage F in the thousands). I have not looked into why; fee changes may be set for the whole insurance trust at once.
 
 **Why I think this is a problem.**
 - **The sign is fragile.** Demand slopes upward on the rows with a family code and upward on the rows without one. It slopes downward only when the two are pooled. The negative coefficient therefore comes from comparing the two groups through the common month effects, not from fee variation within either group. That last sentence is my reading of the three columns; I have not decomposed it further.
-- **It is hard to defend economically.** The paper's identification argument is that a family's fees on other products shift this product's fee. For these rows there is no family, and the instrument averages the fees of unrelated firms. Yet removing them reverses the result.
+- **It is hard to defend economically.** The paper's identification argument is that a family's fees on other products shift this product's fee. For these rows the instrument averages the fees of unrelated insurers' funds. Removing the rows reverses the result, and so does giving them their true families.
 - **The broad-based table inherits it.** With a family code, specialized funds slope upward (+4.0) and 49% of fund-months have e > 0. Estimated on their own, specialized funds slope upward under every instrument I tried, including the original IV0 on all rows (+19.9, SE 5.3).
 - **The stricter exclusions help, which supports your direction.** On the rows with a family code, the one-slope coefficient is +6 to +10 with the benchmark-only exclusion and −1.3 to −0.3 with an asset-class exclusion. The lead-test t-statistics fall from 10–17 to 3–7.
 
@@ -64,15 +77,15 @@ The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 
 These keep their sign, but the base slope is not identified in either sample and the first stage weakens. The interaction coefficients are stable.
 
-**What I am asking you to do.**
+**What I am asking you.**
 
-1. **Can you find out who manages the 112 funds with a blank `firm_f_old`?**
-    - In the index CSV their family code is missing, so the original IV0 treats all of them as one family.
-    - Does your source panel, or CRSP (`mgmt_cd`, `mgmt_name`), have a management company for them?
-    - If it does, please send me the fund-to-family mapping, or rebuild IV0 for these funds with their true families. I will then rerun the table above.
-2. **If their families cannot be recovered, which of these two options do you prefer?**
-    - **(a) Keep them in the demand estimation as now.** Table 2 stays at −5.606, but the negative sign depends on rows whose instrument is built from unrelated firms.
-    - **(b) Keep them in the market but not in the demand estimation.** They still count in the market shares, the outside good and the supply side; they are only left out when the price coefficient is estimated. This is what V2 does. With the original IV0, Table 2 then gives +7.244, so the paper would need a different instrument or specification.
+1. **Did you know that the 112 funds with a blank `firm_f_old` are the variable-annuity funds, and was it intended that they share one "family" in IV0?**
+    - If your source panel treats them differently from my index CSV, please tell me how.
+2. **How should the paper treat the variable-annuity funds? I see three options.**
+    - **(a) As now.** They stay in the demand estimation with the pooled blank-family instrument. Table 2 stays at −5.606, but the sign depends on an instrument built from unrelated insurers' funds.
+    - **(b) Keep them, with their true families.** Table 2 becomes about −0.3 and the broad-based table has 47% of fund-months with e > 0.
+    - **(c) Keep them in the market but not in the demand estimation.** They still count in the market shares, the outside good and the supply side; they are only left out when the price coefficient is estimated. This is what V2 does. With the original IV0, Table 2 then gives +7.244, so the paper would need a different instrument or specification.
+    - A fourth possibility is to argue that funds sold only inside insurance contracts are not in the same market, and to move them to the outside good.
 
 The split is easy to replicate: drop the 7,771 fund-months with a blank `firm_f_old` from the Table 2 sample and re-estimate, with nothing else changed.
 
