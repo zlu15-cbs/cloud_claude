@@ -64,10 +64,19 @@ The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 
 These keep their sign, but the base slope is not identified in either sample and the first stage weakens. The interaction coefficients are stable.
 
-**Questions for you.**
-1. Do you get the same split on your frozen sample? The first column should match your Table 2 and Table A7 numbers.
-2. Do the family-less funds have a manager or family identifier in your source panel that the index CSV lost? If so, their IV0 could be rebuilt properly.
-3. If not, should they stay in the demand estimation? V2 keeps them in the market (shares, outside good, supply side) but does not use them to estimate the slope.
+**What I am asking you to do.**
+
+1. **Please rerun the split on your data and tell me whether you get the same signs.**
+    - Take your Table 2 sample (108,300 fund-months) and drop the 7,771 fund-months where `firm_f_old` is blank. That leaves 100,529.
+    - Re-estimate two models on those 100,529 rows, with nothing else changed: Table 2 col 2 (logit IV, original IV0), and the broad-based interaction (Table A7 col 2).
+    - I get a price coefficient of **+7.244** for Table 2, and **+4.009** (specialized) with **−6.924** (× broad-based) for the interaction. Do you?
+2. **Can you find out who manages the 112 funds with a blank `firm_f_old`?**
+    - In the index CSV their family code is missing, so the original IV0 treats all of them as one family.
+    - Does your source panel, or CRSP (`mgmt_cd`, `mgmt_name`), have a management company for them?
+    - If it does, please send me the fund-to-family mapping, or rebuild IV0 for these funds with their true families. I will then rerun the table above.
+3. **If their families cannot be recovered, which of these two options do you prefer?**
+    - **(a) Keep them in the demand estimation as now.** Table 2 stays at −5.606, but the negative sign depends on rows whose instrument is built from unrelated firms.
+    - **(b) Keep them in the market but not in the demand estimation.** They still count in the market shares, the outside good and the supply side; they are only left out when the price coefficient is estimated. This is what V2 does. With the original IV0, Table 2 then gives +7.244, so the paper would need a different instrument or specification.
 
 Code: `code/spec_compare/sc_a5.py` and `sc_broad_ladder.py`. Logs: `logs/spec_compare/sc_a5_demand.csv`, `sc_broad_ladder.csv`.
 
