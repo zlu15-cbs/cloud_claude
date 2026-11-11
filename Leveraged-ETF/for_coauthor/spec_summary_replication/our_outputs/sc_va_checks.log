@@ -1,0 +1,38 @@
+funds: blank family code x CRSP variable-annuity flag (any quarter)
+vau_any       False  True   All
+blank_family                   
+False          1190     0  1190
+True              0   112   112
+All            1190   112  1302
+funds with the flag in every quarter / in some quarters: 109 / 3
+funds with a blank family code that have a CRSP mgmt_cd: 0
+fund-months: blank & VA 7,771; blank & not VA 0; not blank & VA 0
+VA share of inside-market assets: mean 0.0173, first month 0.0353, last month 0.0081
+as in the paper: blank families pooled, all rows               N 108,300 | price  -5.606 (1.310) | F 33.6
+true families: the parent firm's other VA funds as donors      N 107,954 | price  -0.217 (0.048) | F 344.6
+true families: all funds of the parent firm as donors          N 108,221 | price  -0.340 (0.049) | F 313.5
+VA funds excluded from the sample                              N 100,529 | price   7.244 (1.987) | F 26.6
+VA funds only                                                  N   7,771 | price   2.322 (0.538) | F 57.2
+VA rows in the index CSV since 2010: 52,412; funds 453; parent firms 52
+firm-months with more than one VA fund: 4,881; share where all of them have the same expense ratio: 0.854
+Allianz (fee by calendar year: min, max, distinct values, fund-months)
+          min    max  nunique  size
+month_t                            
+2010.0   0.40  0.400        1    82
+2012.0   0.40  0.400        1   130
+2014.0   0.40  0.400        1   144
+2016.0   0.40  0.400        1   144
+2018.0   0.19  0.535        2   204
+2020.0   0.40  0.523        3   194
+2022.0   0.40  0.400        1   216
+2024.0   0.40  0.400        1   204
+Mutual of America (fee by calendar year: min, max, distinct values, fund-months)
+           min    max  nunique  size
+month_t                             
+2010.0   0.130  0.130        1    46
+2012.0   1.048  1.457        3    48
+2014.0   1.407  1.433        3    48
+2016.0   1.466  1.466        1    48
+2018.0   1.445  1.452        3    48
+2020.0   1.328  1.845        3    48
+2022.0   1.189  1.925        2    81

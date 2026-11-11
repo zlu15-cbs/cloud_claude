@@ -1,0 +1,6 @@
+pyblp==1.3.0
+pyRVtest==0.3.2
+pandas==2.2.3
+numpy==2.4.1
+pyhdfe==0.2.0
+scipy==1.17.1
