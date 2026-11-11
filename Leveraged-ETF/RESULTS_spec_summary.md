@@ -181,6 +181,25 @@ Each row changes one element of V2 (`sc_v2_robust.csv`, `sc_v2_cheap_start.log`)
 - **Two design choices carry V2: the broad-asset-class exclusion and the cheap interaction.** Both have an economic argument, and both should be stated as assumptions in the paper.
 - **One data choice matters: where and when the cheap status is measured.** The 2005 start on the source panel is defensible. The 25th percentile is the cutoff at which the result does not depend on the file (section 3.3).
 
+### 3.5 Entry-fee rank in place of the cheap indicator
+
+Gene's suggestion: interact the fee with the fund's entry-fee rank, so that no cutoff is needed. Rank is the percentile rank of the entry fee in the entry-month cross-section (2005 start), either continuous in (0, 1] or as a quartile 1–4 entering linearly. Instruments: Z and Z × rank (`sc_v2_rank.log`).
+
+| Interaction | File for rank and donors | Fee slope at rank 0 (SE) | × rank (SE) | Min F | Implied slope: low; middle; high rank | Share of fund-months with e > 0 |
+|---|---|---|---|---|---|---|
+| Rank 0–1 | source rank, CSV donors (as V2) | −30.864 (1.240) | +53.748 (1.670) | 205 | −25.5; −4.0; +17.5 (at 0.1; 0.5; 0.9) | 0.111 |
+| Rank 0–1 | source for both | −29.050 (1.278) | +51.547 (1.774) | 204 | −23.9; −3.3; +17.3 | 0.123 |
+| Rank 0–1 | index CSV for both | −32.782 (1.367) | +54.506 (1.745) | 195 | −27.3; −5.5; +16.3 | 0.104 |
+| Quartile 1–4 | source rank, CSV donors | −27.954 (1.148) | +10.394 (0.363) | 190 | −17.6; −7.2; +3.2; +13.6 (quartiles 1–4) | 0.177 |
+| Quartile 1–4 | source for both | −26.090 (1.134) | +9.878 (0.370) | 197 | −16.2; −6.3; +3.6; +13.4 | 0.177 |
+| Quartile 1–4 | index CSV for both | −33.894 (1.314) | +12.427 (0.372) | 199 | −21.5; −9.0; +3.4; +15.8 | 0.190 |
+
+**Reading.**
+- **The rank is stable across the two files.** The coefficients differ by about 10%, against a factor of almost three for the 20th-percentile indicator. The entry-fee ranks from the two files have a correlation of 0.99.
+- **It fails goal A.** A linear interaction forces the slope to keep rising with the rank, so it crosses zero near the 57th percentile (between quartiles 2 and 3). 10–19% of fund-months slope upward.
+- **What the data say is a step, not a line:** very elastic at the bottom and a flat, negative slope above. The indicator fits that shape; a linear rank does not.
+- **Not used.** The marginal-cost numbers for these rows are not meaningful because of the positive slopes.
+
 ## 4. Supply side in detail
 
 **Scale η** (2SLS with the rotator instrument, under each candidate).

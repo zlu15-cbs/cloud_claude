@@ -44,9 +44,16 @@ GRID = [  # label, types, excl, donors, cheap
 FILECHECK = [  # one file for both the cheap indicator and the donors, at each cutoff (SC_GRID=filecheck)
     (f'{f} for cheap and donors, cutoff {q}%', 'csv', 'lipper6', dn_, f'{c}{q}')
     for q in (15, 20, 25) for f, dn_, c in (('source panel', 'source', 'srcboth_q'), ('index CSV', 'csv', 'csvboth_q'))]
-if os.environ.get('SC_GRID') == 'filecheck':
+RANK = [  # price x entry-fee rank in place of the cheap indicator (SC_GRID=rank): continuous percentile rank in (0, 1], or quartile 1-4
+    (f'{kind}: {f}', 'csv', 'lipper6', dn_, f'{c}{k}')
+    for kind, k in (('rank 0-1', 'rank'), ('quartile 1-4', 'q4'))
+    for f, dn_, c in (('rank on source, CSV donors (as V2)', 'csv', 'src'), ('source for both', 'source', 'src'), ('index CSV for both', 'csv', 'csv'))]
+MODE = os.environ.get('SC_GRID', '')
+if MODE == 'filecheck':
     GRID = FILECHECK
-OUT = 'sc_v2_filecheck' if os.environ.get('SC_GRID') == 'filecheck' else 'sc_v2_robust'
+if MODE == 'rank':
+    GRID = RANK
+OUT = {'filecheck': 'sc_v2_filecheck', 'rank': 'sc_v2_rank'}.get(MODE, 'sc_v2_robust')
 START = 2005   # cheap is classified on the fund's first observed-fee month on or after January of this year
 
 
@@ -136,6 +143,20 @@ def main():
         print(f'cutoff {q}%: January {START} cutoff source {k_s:.3f} ({len(j_s)} funds, {int(np.isclose(j_s.product_exp_ratio, k_s).sum())} exactly at it) | '
               f'CSV {k_c:.3f} ({len(j_c)} funds, {int(np.isclose(j_c.product_exp_ratio, k_c).sum())} exactly at it) | Table 2 funds whose status differs {len(diff)} '
               f'(cheap only on source {int((diff[f"cheap_srcboth_q{q}"] == 1).sum())}, only on CSV {int((diff[f"cheap_csvboth_q{q}"] == 1).sum())})', flush=True)
+    # entry-fee rank: percentile rank (average rank for ties) of the fund's fee in its entry-month cross-section
+    def entry_rank(x):
+        x = x.assign(r=x.groupby('month_t').product_exp_ratio.rank(pct=True, method='average'))
+        return x.sort_values('month_t').groupby('product_j').r.first()
+    r_csv_all = entry_rank(cf[['product_j', 'month_t', 'product_exp_ratio']].dropna())
+    r_csv = entry_rank(cobs)
+    r_src = entry_rank(obs[['product_j', 'month_t', 'product_exp_ratio']])
+    d['cheap_csvrank'] = d.product_ids.map(r_csv).fillna(d.product_ids.map(r_csv_all))
+    d['cheap_srcrank'] = d.product_ids.map(r_src).fillna(d.cheap_csvrank)
+    for f in ('src', 'csv'):
+        d[f'cheap_{f}q4'] = np.clip(np.ceil(d[f'cheap_{f}rank'] * 4), 1, 4)
+    fr = d.drop_duplicates('product_ids')
+    print(f'entry-fee rank, Table 2 funds: correlation source vs CSV {fr.cheap_srcrank.corr(fr.cheap_csvrank):.3f}; mean abs difference {(fr.cheap_srcrank - fr.cheap_csvrank).abs().mean():.3f}; '
+          f'quartile differs for {int((fr.cheap_srcq4 != fr.cheap_csvq4).sum())} of {len(fr)} funds; fund-month shares by source quartile {d.cheap_srcq4.value_counts(normalize=True).sort_index().round(3).to_dict()}', flush=True)
     print('funds without an observed-fee entry month (CSV indicator used):', d.loc[~d.product_ids.isin(cheap_obs.index), 'product_ids'].nunique(), flush=True)
     print(f'cheap (source, observed fees): share of Table 2 fund-months {d.cheap_source_obs.mean():.3f}; differs from csv on {int((d.cheap_csv != d.cheap_source_obs).sum()):,} fund-months, {d.loc[d.cheap_csv != d.cheap_source_obs, "product_ids"].nunique()} funds', flush=True)
     assert (d.cheap_csv == d.cheap).all()
@@ -193,6 +214,12 @@ def main():
                 np.save(f'{CACHE}/alpha_{nm}.npy', b['prices'] + b['px_cheap'] * sup.cheap.to_numpy())
                 np.save(f'{CACHE}/rows_{nm}.npy', np.flatnonzero(m_))
             np.save(f'{CACHE}/cheap_V2n.npy', dd0.cheap.to_numpy())
+        if MODE == 'rank':
+            zz = dd.cheap.to_numpy(); al = b['prices'] + b['px_cheap'] * zz
+            pts = (1, 2, 3, 4) if cheap.endswith('q4') else (0.1, 0.25, 0.5, 0.75, 0.9)
+            r['slopes'] = ' '.join(f'{v}:{b["prices"] + b["px_cheap"] * v:.2f}' for v in pts)
+            r['share_alpha_pos'] = float((al > 0).mean())
+            print(f"    implied fee slope at {r['slopes']} | share of fund-months with a positive slope {r['share_alpha_pos']:.3f} | avg e {r['avg_e']:.2f}", flush=True)
         rows.append(r)
         t5s.append(t5.assign(variant=label))
         print(f"{label:58s} N {r['N']:,} | non-cheap {r['alpha']:.3f} ({r['se']:.3f}) | x cheap {r['alpha_x']:.3f} ({r['se_x']:.3f}) | F {r['min_F']:.0f} | e>0 {r['share_pos_e']:.3f} "

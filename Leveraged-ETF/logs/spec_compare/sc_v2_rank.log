@@ -1,0 +1,33 @@
+ETF flag, CSV rule vs CRSP et_flag: differs on 11,165 source fund-months, 110 funds (14 in Table 2)
+cheap classified from 2005: funds in the cross-section in January 2005: 925
+source panel: the fee in a fund's first month is not observed (imputed or backfilled) for 0.297 of funds
+cheap indicator: funds in both 5,532; agree 0.948; cheap share of funds csv 0.192, source 0.181; first CSV month is later than the first source month for 1.000 of funds (median gap 6 months)
+cutoff 15%: January 2005 cutoff source 0.200 (925 funds, 22 exactly at it) | CSV 0.183 (790 funds, 0 exactly at it) | Table 2 funds whose status differs 46 (cheap only on source 36, only on CSV 10)
+cutoff 20%: January 2005 cutoff source 0.250 (925 funds, 36 exactly at it) | CSV 0.230 (790 funds, 6 exactly at it) | Table 2 funds whose status differs 45 (cheap only on source 35, only on CSV 10)
+cutoff 25%: January 2005 cutoff source 0.270 (925 funds, 4 exactly at it) | CSV 0.260 (790 funds, 18 exactly at it) | Table 2 funds whose status differs 23 (cheap only on source 9, only on CSV 14)
+entry-fee rank, Table 2 funds: correlation source vs CSV 0.991; mean abs difference 0.019; quartile differs for 88 of 1302 funds; fund-month shares by source quartile {1.0: 0.516, 2.0: 0.283, 3.0: 0.173, 4.0: 0.028}
+funds without an observed-fee entry month (CSV indicator used): 100
+cheap (source, observed fees): share of Table 2 fund-months 0.462; differs from csv on 4,018 fund-months, 47 funds
+Table 2 fund-months: cheap csv 0.447, source 0.433; differ on 8,166 fund-months, 98 funds (csv-cheap only 55, source-cheap only 43)
+share types of Table 2 fund-months: {'csv': {'etf': 55777, 'inst': 26154, 'retail': 21295, 'mf_other': 4637}, 'crsp': {'etf': 54875, 'inst': 26870, 'retail': 21481, 'mf_other': 4637}, 'danny': {'etf': 54875, 'inst': 27101, 'retail': 25887}}
+Table 2 fund-months, Lipper-6 class (rows) by category10 (columns):
+cat10        -1      1      2     3      4     5     6    7     8     9    10
+asset_class                                                                  
+allocation    88      0    924     0      0     0   207    0  4942     0    0
+bond           0      0      0     0      0  5442  3407  557  8202     0    3
+intl_equity    3      0  15065  5393   1290     0     0    0    18     0  243
+other          0     88      0     0    216     0     0    0     6     0  228
+real_asset     0      0      0     0   3277     0     0    0     0  1451    0
+us_equity    105  45546    165     0  10417     0     0    0   411    60  109
+    implied fee slope at 0.1:-25.49 0.25:-17.43 0.5:-3.99 0.75:9.45 0.9:17.51 | share of fund-months with a positive slope 0.111 | avg e -1.82
+rank 0-1: rank on source, CSV donors (as V2)               N 96,069 | non-cheap -30.864 (1.240) | x cheap 53.748 (1.670) | F 205 | e>0 0.111 | T5 9/15 | neg MC 0.265-0.340 (no VA 0.028-0.030) | min MC -324.05 | Vanguard 0.59
+    implied fee slope at 0.1:-23.90 0.25:-16.16 0.5:-3.28 0.75:9.61 0.9:17.34 | share of fund-months with a positive slope 0.123 | avg e -1.60
+rank 0-1: source for both                                  N 96,224 | non-cheap -29.050 (1.278) | x cheap 51.547 (1.774) | F 204 | e>0 0.123 | T5 9/15 | neg MC 0.023-0.023 (no VA 0.021-0.022) | min MC -64.97 | Vanguard 0.00
+    implied fee slope at 0.1:-27.33 0.25:-19.16 0.5:-5.53 0.75:8.10 0.9:16.27 | share of fund-months with a positive slope 0.104 | avg e -2.04
+rank 0-1: index CSV for both                               N 96,069 | non-cheap -32.782 (1.367) | x cheap 54.506 (1.745) | F 195 | e>0 0.104 | T5 9/15 | neg MC 0.019-0.020 (no VA 0.021-0.021) | min MC -40.83 | Vanguard 0.00
+    implied fee slope at 1:-17.56 2:-7.17 3:3.23 4:13.62 | share of fund-months with a positive slope 0.177 | avg e -1.12
+quartile 1-4: rank on source, CSV donors (as V2)           N 96,069 | non-cheap -27.954 (1.148) | x cheap 10.394 (0.363) | F 190 | e>0 0.177 | T5 6/15 | neg MC 0.000-0.000 (no VA 0.000-0.000) | min MC -0.01 | Vanguard 0.00
+    implied fee slope at 1:-16.21 2:-6.33 3:3.55 4:13.42 | share of fund-months with a positive slope 0.177 | avg e -0.94
+quartile 1-4: source for both                              N 96,224 | non-cheap -26.090 (1.134) | x cheap 9.878 (0.370) | F 197 | e>0 0.177 | T5 6/15 | neg MC 0.000-0.004 (no VA 0.000-0.000) | min MC -0.04 | Vanguard 0.00
+    implied fee slope at 1:-21.47 2:-9.04 3:3.39 4:15.81 | share of fund-months with a positive slope 0.190 | avg e -1.27
+quartile 1-4: index CSV for both                           N 96,069 | non-cheap -33.894 (1.314) | x cheap 12.427 (0.372) | F 199 | e>0 0.190 | T5 5/15 | neg MC 0.000-0.000 (no VA 0.000-0.000) | min MC 0.03 | Vanguard 0.00
