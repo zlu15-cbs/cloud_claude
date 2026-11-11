@@ -48,12 +48,24 @@ RANK = [  # price x entry-fee rank in place of the cheap indicator (SC_GRID=rank
     (f'{kind}: {f}', 'csv', 'lipper6', dn_, f'{c}{k}')
     for kind, k in (('rank 0-1', 'rank'), ('quartile 1-4', 'q4'))
     for f, dn_, c in (('rank on source, CSV donors (as V2)', 'csv', 'src'), ('source for both', 'source', 'src'), ('index CSV for both', 'csv', 'csv'))]
+AGGS = {  # donor aggregation and share-type matching (SC_GRID=agg); V2 is the unweighted median of same-type donors
+    'V2: median, same share type': ('med', True, 'source_obs'),
+    'lag-AUM-weighted mean, same share type': ('wavg', True, 'source_obs'),
+    'unweighted mean, same share type': ('mean', True, 'source_obs'),
+    'median, share types pooled': ('med', False, 'source_obs'),
+    'lag-AUM-weighted mean, share types pooled': ('wavg', False, 'source_obs'),
+    '25th pct: median, same share type': ('med', True, 'source_obs_q25'),
+    '25th pct: lag-AUM-weighted mean, same share type': ('wavg', True, 'source_obs_q25'),
+    '25th pct: lag-AUM-weighted mean, share types pooled': ('wavg', False, 'source_obs_q25'),
+}
 MODE = os.environ.get('SC_GRID', '')
 if MODE == 'filecheck':
     GRID = FILECHECK
 if MODE == 'rank':
     GRID = RANK
-OUT = {'filecheck': 'sc_v2_filecheck', 'rank': 'sc_v2_rank'}.get(MODE, 'sc_v2_robust')
+if MODE == 'agg':
+    GRID = [(k, 'csv', 'lipper6', 'csv', v[2]) for k, v in AGGS.items()]
+OUT = {'filecheck': 'sc_v2_filecheck', 'rank': 'sc_v2_rank', 'agg': 'sc_v2_agg'}.get(MODE, 'sc_v2_robust')
 START = 2005   # cheap is classified on the fund's first observed-fee month on or after January of this year
 
 
@@ -63,7 +75,7 @@ def main():
     nomm = (d.mmf == 0).to_numpy()
     fam_rows = d.firm_f_old.notna().to_numpy()
 
-    src = pd.read_csv(SOURCE, usecols=['crsp_fundno', 'month', 'index', 'exp_ratio', 'fund_name', 'mgmt_cd', 'ETF'])
+    src = pd.read_csv(SOURCE, usecols=['crsp_fundno', 'month', 'index', 'exp_ratio', 'fund_name', 'mgmt_cd', 'ETF', 'L1_mtna1'])
     src = src.rename(columns={'crsp_fundno': 'product_j', 'month': 'month_t', 'index': 'market_m_index', 'exp_ratio': 'product_exp_ratio',
                               'fund_name': 'product_fund_name', 'mgmt_cd': 'firm_f_old', 'ETF': 'etf_src'})
     src['market_m_cluster'] = np.nan
@@ -173,7 +185,7 @@ def main():
         os.remove(tmp)
         raw['mk'] = np.round(raw.month_t * 12).astype(int)
         raw['asset_class'] = raw.market_m_index.map(ac_v2).fillna(raw.asset_class)
-        raw = raw.merge(src[['product_j', 'mk', 'in_csv', 'share_type', 'category10']], on=['product_j', 'mk'], how='left')
+        raw = raw.merge(src[['product_j', 'mk', 'in_csv', 'share_type', 'category10', 'L1_mtna1']], on=['product_j', 'mk'], how='left')
         if typ == 'danny':
             raw['share_class'] = raw.share_type.map({0: 'retail', 1: 'inst', 2: 'etf'})
         raw['cat10'] = raw.category10
@@ -184,18 +196,27 @@ def main():
     print('Table 2 fund-months, Lipper-6 class (rows) by category10 (columns):')
     print(pd.crosstab(x.asset_class, x.cat10.fillna(-1).astype(int)).to_string(), flush=True)
 
-    def build_z(raw, excl, donors):
+    def build_z(raw, excl, donors, agg='med', same_type=True):
         ecol = 'asset_class' if excl == 'lipper6' else 'cat10'
         don = raw[(raw.in_csv if donors == 'csv' else True) & raw[ecol].notna() & raw.share_class.notna() & raw.firm_f_old.notna()]
-        keys = ['firm_f_old', 'month_t', 'share_class']
-        tab = pd.concat([don[don[ecol] != a].groupby(keys).product_exp_ratio.median().rename('z').reset_index().assign(**{ecol: a})
+        keys = ['firm_f_old', 'month_t'] + (['share_class'] if same_type else [])
+        if agg == 'wavg':   # lag-AUM weights, as in the paper's instrument; donors without lagged assets drop out
+            don = don[don.L1_mtna1 > 0].assign(wp=lambda x: x.product_exp_ratio * x.L1_mtna1)
+
+        def one(g):
+            if agg == 'med':
+                return g.product_exp_ratio.median()
+            if agg == 'mean':
+                return g.product_exp_ratio.mean()
+            return g.wp.sum() / g.L1_mtna1.sum()
+        tab = pd.concat([one(don[don[ecol] != a].groupby(keys)).rename('z').reset_index().assign(**{ecol: a})
                          for a in sorted(don[ecol].unique())])
-        z = raw[['product_j', 'mk'] + keys + [ecol]].merge(tab, on=keys + [ecol], how='left')
+        z = raw[['product_j', 'mk', 'firm_f_old', 'month_t', 'share_class', ecol]].merge(tab, on=keys + [ecol], how='left')
         return z[['product_j', 'mk', 'z']].rename(columns={'product_j': 'product_ids'})
 
     rows, t5s = [], []
     for label, typ, excl, donors, cheap in GRID:
-        z = build_z(raws[typ], excl, donors)
+        z = build_z(raws[typ], excl, donors, *AGGS[label][:2]) if MODE == 'agg' else build_z(raws[typ], excl, donors)
         dd0 = d.drop(columns=['Z']).merge(z, on=['product_ids', 'mk'], how='left').rename(columns={'z': 'Z'})
         dd0['cheap'] = dd0[f'cheap_{cheap}']
         dd0['gene_idx'] = dd0.cheap

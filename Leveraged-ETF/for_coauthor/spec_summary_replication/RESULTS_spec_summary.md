@@ -6,35 +6,36 @@
 
 ✓ = desirable, ~ = borderline, ✗ = undesirable, – = not applicable. "No VA" drops the 112 variable-annuity funds (7,771 fund-months) from the sample. Downstream rows give the range over B0–B65 at each candidate's own estimated η; conduct uses η = 0.024. Sources: `logs/spec_compare/`.
 
-| | T2 (paper) | T2, no VA | **T2 alternative** | A5 (paper) | A5, no VA | **A5 alternative** | **V2**, VA funds on the supply side | **V2**, no VA |
-|---|---|---|---|---|---|---|---|---|
-| **Specification** | | | | | | | | |
-| Price interaction | none | none | none | broad-based | broad-based | broad-based | cheap | cheap |
-| Donors exclude the target's | index | index | broad asset class | index | index | broad asset class | broad asset class, other share types | same |
-| Donor aggregation | weighted mean | weighted mean | weighted mean | weighted mean | weighted mean | weighted mean | median | median |
-| Estimation rows | 108,300 | 100,529 | 98,151 | 108,300 | 100,529 | 98,151 | 96,069 | 96,069 |
-| **Demand** | | | | | | | | |
-| Base price coefficient (SE) | −5.606 (1.310) | **+7.244 (1.987)** | −4.123 (0.736) | −7.503 (1.770) | **+4.009 (1.588)** | −3.983 (0.749) | −3.385 (0.541) | −3.385 (0.541) |
-| Interaction (SE) | – | – | – | −5.278 (0.372) | −6.924 (0.428) | −4.413 (0.413) | −20.059 (0.784) | −20.059 (0.784) |
-| Goal A: share of fund-months with e > 0 | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✗ 0.49 | ✓ 0 | ✓ 0 | ✓ 0 |
-| First-stage F (min) | 34 | 27 | 124 | 53 | 49 | 162 | 177 | 177 |
-| Average own elasticity | −1.61 | +1.91 | −1.09 | −2.86 | +0.31 | −1.52 | −1.91 | −1.91 |
-| Table 5 funds with e < −1 | 2/15 | 0/15 | 1/15 | 2/15 | 0/15 | 1/15 | 5/15 | 5/15 |
-| **Downstream** | | | | | | | | |
-| Scale η range (PC–B65) | 0.0205–0.0213 | – | 0.0233–0.0245 | 0.0205–0.0208 | – | 0.0229–0.0233 | 0.0208–0.0223 | 0.0237–0.0253 |
-| Goal B: negative-MC share | 0.21–0.36 | – | 0.32–0.48 | 0.005–0.088 | – | 0.14–0.39 | **0.067–0.087** | **0.054–0.081** |
-| Share of fund-months below −0.20% | 0–0.089 | – | 0.02–0.29 | 0 | – | 0–0.06 | 0–0.001 | 0–0.0001 |
-| Min MC (% of assets) | −0.31 | – | −0.46 | −0.12 | – | −0.33 | −0.23 | −0.21 |
-| Magnitude screen (≤ 2% below −0.20%) | ~ fails at B65 | – | ✗ | ✓ | – | ~ fails at B65 | ✓ | ✓ |
-| Location: Vanguard fund-months negative at B0 | ✗ 0.81 | – | ✗ 0.94 | ✓ low | – | ✗ 0.32 | ~ 0.15 | ~ 0.12 |
-| SPY negative at B65 | ✗ yes | – | ✗ yes | ✓ no | – | ✗ yes | ✓ no | ✓ no |
-| **Conduct, main instrument** | PC | – | PC, B50, B65 | PC, B65 | – | PC, B50, B65 | PC, B50, B65 | PC, B65 |
-| **Overall** | **valid only with the VA funds** | **demand slopes upward** | **fallback: valid sign, flat, MC fails** | **valid only with the VA funds** | **49% slope upward** | **fallback: valid sign, flat, MC fails at B50–B65** | **most sensible** | **most sensible** |
+| | T2 (paper) | T2, no VA | **T2 alternative** | A5 (paper) | A5, no VA | **A5 alternative** | **V2**, VA funds on the supply side | **V2**, no VA | V2 with weighted-mean donors, VA funds on the supply side |
+|---|---|---|---|---|---|---|---|---| --- |
+| **Specification** | | | | | | | | | |
+| Price interaction | none | none | none | broad-based | broad-based | broad-based | cheap | cheap | cheap |
+| Donors exclude the target's | index | index | broad asset class | index | index | broad asset class | broad asset class, other share types | same | broad asset class, other share types |
+| Donor aggregation | weighted mean | weighted mean | weighted mean | weighted mean | weighted mean | weighted mean | median | median | **weighted mean** |
+| Estimation rows | 108,300 | 100,529 | 98,151 | 108,300 | 100,529 | 98,151 | 96,069 | 96,069 | 96,069 |
+| **Demand** | | | | | | | | | |
+| Base price coefficient (SE) | −5.606 (1.310) | **+7.244 (1.987)** | −4.123 (0.736) | −7.503 (1.770) | **+4.009 (1.588)** | −3.983 (0.749) | −3.385 (0.541) | −3.385 (0.541) | −1.943 (0.549) |
+| Interaction (SE) | – | – | – | −5.278 (0.372) | −6.924 (0.428) | −4.413 (0.413) | −20.059 (0.784) | −20.059 (0.784) | −20.722 (0.886) |
+| Goal A: share of fund-months with e > 0 | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✗ 0.49 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 |
+| First-stage F (min) | 34 | 27 | 124 | 53 | 49 | 162 | 177 | 177 | 249 |
+| Average own elasticity | −1.61 | +1.91 | −1.09 | −2.86 | +0.31 | −1.52 | −1.91 | −1.91 | −1.56 |
+| Table 5 funds with e < −1 | 2/15 | 0/15 | 1/15 | 2/15 | 0/15 | 1/15 | 5/15 | 5/15 | 4/15 |
+| **Downstream** | | | | | | | | | |
+| Scale η range (PC–B65) | 0.0205–0.0213 | – | 0.0233–0.0245 | 0.0205–0.0208 | – | 0.0229–0.0233 | 0.0208–0.0223 | 0.0237–0.0253 | not run |
+| Goal B: negative-MC share | 0.21–0.36 | – | 0.32–0.48 | 0.005–0.088 | – | 0.14–0.39 | **0.067–0.087** | **0.054–0.081** | 0.23–0.30 |
+| Share of fund-months below −0.20% | 0–0.089 | – | 0.02–0.29 | 0 | – | 0–0.06 | 0–0.001 | 0–0.0001 | not run |
+| Min MC (% of assets) | −0.31 | – | −0.46 | −0.12 | – | −0.33 | −0.23 | −0.21 | −0.51 |
+| Magnitude screen (≤ 2% below −0.20%) | ~ fails at B65 | – | ✗ | ✓ | – | ~ fails at B65 | ✓ | ✓ | not run |
+| Location: Vanguard fund-months negative at B0 | ✗ 0.81 | – | ✗ 0.94 | ✓ low | – | ✗ 0.32 | ~ 0.15 | ~ 0.12 | ~ 0.19 |
+| SPY negative at B65 | ✗ yes | – | ✗ yes | ✓ no | – | ✗ yes | ✓ no | ✓ no | not run |
+| **Conduct, main instrument** | PC | – | PC, B50, B65 | PC, B65 | – | PC, B50, B65 | PC, B50, B65 | PC, B65 | not run |
+| **Overall** | **valid only with the VA funds** | **demand slopes upward** | **fallback: valid sign, flat, MC fails** | **valid only with the VA funds** | **49% slope upward** | **fallback: valid sign, flat, MC fails at B50–B65** | **most sensible** | **most sensible** | **valid sign; flat non-cheap slope; MC fails** |
 
 **What the scorecard says.**
 1. **T2 and A5 depend on the variable-annuity funds.** Without those 112 funds, T2 slopes upward for every fund-month and A5 for 49% of them (section 1).
 2. **T2 and A5 have a fallback.** Rebuilding their instrument to exclude the target's whole asset class restores downward-sloping demand without the variable-annuity funds. The slope is flat, 14 of the 15 Table 5 funds stay inelastic, and a third or more of marginal costs are negative under T2 (section 2).
-3. **V2 gives the most sensible demand.** No fund-month slopes upward, the first stage is strong, 5 of the 15 Table 5 funds have e < −1, and 5–9% of marginal costs are negative, almost none below −0.20%. It does not use the variable-annuity funds to estimate demand, so excluding them changes only the supply side (section 3).
+3. **V2's non-cheap slope depends on the median.** With the lag-AUM-weighted mean that T2 and A5 use, and nothing else changed, the non-cheap slope falls from −3.4 to −1.9 and negative marginal costs rise from 7–9% to 23–30%. The sign and the cheap interaction do not change (section 3.7).
+4. **V2 gives the most sensible demand.** No fund-month slopes upward, the first stage is strong, 5 of the 15 Table 5 funds have e < −1, and 5–9% of marginal costs are negative, almost none below −0.20%. It does not use the variable-annuity funds to estimate demand, so excluding them changes only the supply side (section 3).
 
 - **Code:** `code/spec_compare/`. Columns T2 and A5: `sc_demand.py`, `sc_a5.py`, `sc_exva.py`. Alternatives: `sc_t2a5_nova_grid.py`. V2: `sc_v2_robust.py`, `sc_v2_final.py`, `sc_v2_cheap_start.py`. Supply side: `sc_downstream.py`.
 - **Validation:** T2 reproduces the paper's −5.606 (1.310) and A5 its −7.503 and −5.278 exactly. Danny's negative-MC share (0.516 at η = 0) and scale under PC (0.0205) are also reproduced.
@@ -178,7 +179,7 @@ Each row changes one element of V2 (`sc_v2_robust.csv`, `sc_v2_cheap_start.log`)
 **The cheap interaction.** With one slope and the same instrument, the estimate is −0.32 and every marginal cost is negative. The fee slope is heterogeneous, and a single slope cannot represent it.
 
 **Reading.**
-- **Two design choices carry V2: the broad-asset-class exclusion and the cheap interaction.** Both have an economic argument, and both should be stated as assumptions in the paper.
+- **Three design choices carry V2: the broad-asset-class exclusion, the cheap interaction, and the median over donors (section 3.7).** Both have an economic argument, and both should be stated as assumptions in the paper.
 - **One data choice matters: where and when the cheap status is measured.** The 2005 start on the source panel is defensible. The 25th percentile is the cutoff at which the result does not depend on the file (section 3.3).
 
 ### 3.5 Entry-fee rank in place of the cheap indicator
@@ -230,6 +231,29 @@ Gene's question: is the upward slope at high ranks an artifact of specialized fu
 - **The linear rank fails for a second reason too.** With specialized funds removed, the linear rank model still has 6% of fund-months sloping upward. The jump from quartile 1 (−24) to quartile 2 (−7) is too large for a line.
 - **What it means for V2.** The non-cheap slope of −3.4 averages a clearly negative slope for mid-fee and broad-based funds with a zero or positive slope for high-fee specialized ETFs. Those funds are 4.7% of assets.
 - **The broad/specialized label is not consistent within an index:** iShares MSCI Emerging Markets is broad-based, while the DFA and SPDR funds on the same index are specialized.
+
+### 3.7 Donor aggregation and share-type matching in V2
+
+The scorecard shows V2 with a median and the other models with a weighted mean. Each row below changes only how V2's donors are aggregated or matched (2005 start, same broad-asset-class exclusion, CSV donors; `sc_v2_agg.csv`).
+
+| Cheap cutoff | Aggregation | Share types | N | Non-cheap α (SE) | × cheap (SE) | Min F | e > 0 | Table 5 e < −1 | Negative MC B0–B65 |
+|---|---|---|---|---|---|---|---|---|---|
+| 20th | **median (V2)** | same type (V2) | 96,069 | −3.385 (0.541) | −20.059 (0.784) | 177 | 0 | 5/15 | 0.067–0.087 |
+| 20th | lag-AUM-weighted mean | same type | 96,069 | −1.943 (0.549) | −20.722 (0.886) | 249 | 0 | 4/15 | 0.228–0.303 |
+| 20th | unweighted mean | same type | 96,069 | −0.687 (0.710) | −19.149 (0.971) | 141 | 0 | 3/15 | 0.575–0.830 |
+| 20th | median | pooled | 97,559 | −2.627 (1.479) | −21.816 (1.305) | 51 | 0 | 5/15 | 0.118–0.132 |
+| 20th | lag-AUM-weighted mean | pooled | 97,559 | −1.499 (1.105) | −22.891 (1.354) | 144 | 0 | 4/15 | 0.377–0.415 |
+| 25th | median | same type | 96,069 | −3.967 (0.607) | −17.409 (0.840) | 144 | 0 | 7/15 | 0.018–0.026 |
+| 25th | lag-AUM-weighted mean | same type | 96,069 | −0.016 (0.490) | −16.440 (0.615) | 309 | 0 | 5/15 | 0.84–0.98 |
+| 25th | lag-AUM-weighted mean | pooled | 97,559 | −1.218 (1.097) | −19.471 (0.837) | 171 | 0 | 6/15 | 0.411–0.427 |
+
+**Reading.**
+- **Yes, the median drives the size of the non-cheap slope.** With a weighted mean it is −1.9 at the 20th percentile and zero at the 25th. With an unweighted mean it is −0.7. Negative marginal costs rise to 23% or more.
+- **It does not drive the sign or the cheap interaction.** No fund-month slopes upward in any row, and the interaction stays between −16 and −23.
+- **Same-type matching is not required for the sign, but it is needed for precision.** With pooled share types and a median the non-cheap slope is −2.6 with a standard error of 1.5 (F of 51, against 177), so it is no longer distinguishable from zero.
+- **The defence of the median is robustness to outliers,** not a result: a family's one expensive fund in another asset class moves a mean and not a median, and asset weights make the instrument follow the family's largest fund. That argument is ours; the data do not choose between the two.
+- **The opposite holds for T2 and A5 alternatives:** they need the weighted mean and fail with the median (section 2). So no aggregation works for every model.
+- **Consequence.** V2's non-cheap slope now depends on three choices: the broad-asset-class exclusion, the cutoff and file for the cheap status, and the median. The robust results are the sign and the high elasticity of cheap funds.
 
 ## 4. Supply side in detail
 
