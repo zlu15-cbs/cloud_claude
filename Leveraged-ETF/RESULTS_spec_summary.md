@@ -2,7 +2,7 @@
 
 ## Scorecard: all 4 models
 
-**Caution.** Column 2 is a proxy for Danny's specification: it uses the Lipper 6 asset groups in place of his category10 labels and our 579,632-row donor file in place of his 675,551-row panel, and it does not reproduce his coefficient (−9.11 against −5.71). "A5" is the broad-based interaction, which is Table A7 in our copy of the paper. The lead tests are reported with two-way clustered standard errors, which differ from the month-clustered ones in our earlier files (section 3). No test here establishes that any instrument satisfies the exclusion restriction.
+**Caution.** Column 2 is a proxy for Danny's specification: it uses the Lipper 6 asset groups in place of his category10 labels and our 579,632-row donor file in place of his 675,551-row panel, and it does not reproduce his coefficient (−9.11 against −5.71). "A5" is the broad-based interaction, which is Table A7 in our copy of the paper. The lead tests are reported with bootstrap p-values; the month-clustered t-statistics in our earlier files overstate them (section 3). No test here establishes that any instrument satisfies the exclusion restriction.
 
 ✓ = desirable, ~ = borderline, ✗ = undesirable, – = not applicable. "With VA" is each specification as written. "No VA" drops the 112 variable-annuity funds (7,771 fund-months) from the sample: they leave the demand estimation and the supply side, and their assets count in the outside good. Downstream rows give the range over B0–B65 at each candidate's own estimated η; conduct uses η scheme A (0.024). Sources: `logs/spec_compare/sc_demand.csv`, `sc_a5_demand.csv`, `sc_exva_demand.csv`, `sc_leadcheck.csv`, `sc_scale.csv`, `sc_mc.csv`, `sc_where.csv` and their `sc_a5_*` and `sc_exva_*` counterparts, `sc_conduct_*.csv`.
 
@@ -23,7 +23,7 @@
 | **Demand screens** | | | | | | | | |
 | Goal A: no upward slope (e > 0 share) | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✗ 0.49 |
 | First-stage F (min) | ✓ 34 | ✓ 27 | ✓ 87 | ✓ 117 | ✓ 316 | ✓ 316 | ✓ 53 | ✓ 49 |
-| Lead tests, max \|t\|, two-way clustered | ✓ 0.4 | ✗ 2.7 | ✓ 0.5 | ✓ 0.8 | ✓ 0.4 | ✓ 0.4 | ✓ 0.8 | ~ 2.0 |
+| Lead tests, smallest bootstrap p (12/24/36) | ✓ 0.74 | ~ 0.06 | ✓ 0.44 | ✓ 0.53 | ✓ 0.46 | ✓ 0.46 | ✓ 0.36 | ✓ 0.27 |
 | **Downstream outcomes** | | | | | | | | |
 | Scale η range (PC–B65; SE about 0.005) | 0.0205–0.0213 | 0.0228–0.0235 | 0.0205–0.0210 | 0.0233–0.0247 | 0.0210–0.0220 | 0.0238–0.0250 | 0.0205–0.0208 | 0.0233–0.0250 |
 | Negative-markup share | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✗ 0.49 |
@@ -114,23 +114,29 @@
 - **What a rejection means:** the family's other fees respond to this fund's past demand, or share a persistent demand shock with it. The IV estimate sets the same-month covariance of Z and ξ to zero by construction, so a problem can show up only at leads and lags.
 - **What a pass means:** less. It is a necessary condition. It does not show that the instrument satisfies the exclusion restriction.
 
-**Is the inference valid? Not as we reported it.** Our earlier files clustered the standard error by month only. ξ and Z are both highly persistent within a fund, so the observations of one fund are not independent, and month clustering overstates the t-statistic. Clustering by fund, or by fund and month, is the valid version (`code/spec_compare/sc_leadcheck.py`, `sc_leadcheck.csv`).
+**Is the inference valid? Not as we reported it.** Two things were checked (`code/spec_compare/sc_leadcheck.py`, `sc_leadboot.py`; `sc_leadcheck.csv`, `sc_leadboot.csv`).
 
-| Specification | t, month-clustered (12/24/36) | t, two-way clustered (12/24/36) |
-|---|---|---|
-| 1 T2, with VA | −3.3 / −1.5 / 2.1 | −0.4 / −0.2 / 0.3 |
-| 1 T2, no VA | 6.7 / 11.6 / 18.9 | 1.0 / 2.0 / **2.7** |
-| 2 Modified T2 (proxy), with VA | −3.5 / −3.1 / −2.5 | −0.5 / −0.5 / −0.3 |
-| 2 Modified T2 (proxy), no VA | 1.3 / 3.3 / 6.9 | 0.2 / 0.5 / 0.8 |
-| 3 V2 | −2.0 / −2.2 / −0.5 | −0.4 / −0.4 / −0.1 |
-| 4 A5, with VA | −5.3 / −4.9 / −2.4 | −0.8 / −0.7 / −0.3 |
-| 4 A5, no VA | 4.1 / 10.9 / 16.4 | 0.5 / 1.3 / **2.0** |
+1. **Clustering.** Our earlier files clustered the standard error by month only. ξ and Z are both highly persistent within a fund, so one fund's observations are not independent and month clustering overstates the t-statistic by a factor of five to eight. Clustering by fund, or by fund and month, gives much smaller values.
+2. **Mechanical correlation from the within-fund demeaning.** I simulated the whole procedure under the null of an instrument unrelated to demand shocks at every lead and lag. Each of 499 draws flips the sign of every fund's entire residual path, which keeps the fund's serial correlation and panel length but breaks any link to the instrument. The model is then re-estimated and the lead regression rerun, demeaning included.
+    - **The lead coefficient is centred on zero under the null** (mean −0.03 to +0.05, against standard deviations of 0.1 to 1.5). Demeaning does not create a mechanical correlation on average.
+    - **The fund-clustered t-statistic is still not reliable.** Under the null it exceeds 1.96 in 27% to 33% of draws for T2 and A5 without the variable-annuity funds, and in 0% to 5% of draws elsewhere. Two persistent series demeaned within a short panel give a noisy coefficient whose spread the clustered standard error does not measure well.
+    - **So the bootstrap p-value is the number to use.**
+
+| Specification | t, month-clustered (12/24/36) | t, fund-clustered (12/24/36) | Bootstrap p (12/24/36) |
+|---|---|---|---|
+| 1 T2, with VA | −3.3 / −1.5 / 2.1 | −0.4 / −0.2 / 0.2 | 0.74 / 0.91 / 0.89 |
+| 1 T2, no VA | 6.7 / 11.6 / 18.9 | 1.0 / 2.0 / 2.7 | 0.46 / 0.27 / **0.06** |
+| 2 Modified T2 (proxy), with VA | −3.5 / −3.1 / −2.5 | −0.5 / −0.5 / −0.3 | 0.44 / 0.57 / 0.76 |
+| 2 Modified T2 (proxy), no VA | 1.3 / 3.3 / 6.9 | 0.2 / 0.5 / 0.8 | 0.81 / 0.63 / 0.53 |
+| 3 V2 | −2.0 / −2.2 / −0.5 | −0.4 / −0.4 / −0.1 | 0.46 / 0.62 / 0.91 |
+| 4 A5, with VA | −5.3 / −4.9 / −2.4 | −0.8 / −0.7 / −0.3 | 0.36 / 0.63 / 0.84 |
+| 4 A5, no VA | 4.1 / 10.9 / 16.4 | 0.5 / 1.3 / 2.0 | 0.71 / 0.53 / 0.27 |
 
 **Reading.**
-- **With valid standard errors the t-statistics are five to eight times smaller.** Fund clustering and two-way clustering give the same numbers.
-- **The test now rejects only where demand slopes upward:** T2 and A5 without the variable-annuity funds.
-- **It no longer separates V2 from the single-slope models.** Earlier statements that V2 has "the cleanest lead tests" or that other specifications "fail the lead tests" used the month-clustered numbers and should not be relied on. This affects `RESULTS_spec_compare.md`, `RESULTS_best_model1.md`, `RESULTS_downstream.md` and the V2 replication note.
-- **The ranking by coefficient is unchanged:** the lead coefficient is smallest for V2 and largest for T2 and A5 without the variable-annuity funds.
+- **No specification is rejected at 5%.** The closest is T2 without the variable-annuity funds at the 36-month lead (p = 0.06).
+- **The lead test does not separate these specifications, and it has little power here.** The bootstrap spread of the coefficient is several times the estimates, so a pass says little.
+- **Earlier statements that V2 has "the cleanest lead tests", or that other specifications "fail the lead tests", used the month-clustered numbers and should not be relied on.** This affects `RESULTS_spec_compare.md`, `RESULTS_best_model1.md`, `RESULTS_downstream.md` and the V2 replication note.
+- **The choice between specifications therefore rests on the sign of demand, the first stage, the Table 5 elasticities and the marginal-cost screens,** not on this test.
 
 ## 4. Scale η by conduct candidate: insensitive to demand, slightly higher without the variable-annuity funds
 
