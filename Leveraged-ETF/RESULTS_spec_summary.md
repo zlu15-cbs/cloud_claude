@@ -2,7 +2,7 @@
 
 ## Scorecard: all 4 models
 
-**Caution.** Column 2 is now Danny's own specification, built from the category10 labels in his handoff zip; it reproduces his coefficient exactly (−5.713, SE 0.747). "A5" is the broad-based interaction, which is Table A7 in our copy of the paper. V2 is shown as originally defined; section 9 reports two robustness checks of it, one of which (a correction to the ETF flag) changes its numbers. No test here establishes that any instrument satisfies the exclusion restriction.
+**Caution.** Column 2 is now Danny's own specification, built from the category10 labels in his handoff zip; it reproduces his coefficient exactly (−5.713, SE 0.747). "A5" is the broad-based interaction, which is Table A7 in our copy of the paper. V2 is shown as originally defined; section 9 reports robustness checks of it, two of which it does not pass (Danny's category10 classes as the exclusion, and a different classification of 37 funds as cheap). No test here establishes that any instrument satisfies the exclusion restriction.
 
 ✓ = desirable, ~ = borderline, ✗ = undesirable, – = not applicable. "With VA" is each specification as written. "No VA" drops the 112 variable-annuity funds (7,771 fund-months) from the sample: they leave the demand estimation and the supply side, and their assets count in the outside good. Downstream rows give the range over B0–B65 at each candidate's own estimated η; conduct uses η scheme A (0.024). Sources: `logs/spec_compare/sc_demand.csv`, `sc_a5_demand.csv`, `sc_exva_demand.csv`, `sc_scale.csv`, `sc_mc.csv`, `sc_where.csv` and their `sc_a5_*` and `sc_exva_*` counterparts, `sc_conduct_*.csv`.
 
@@ -44,7 +44,7 @@
 - **Danny's category10 exclusion barely changes T2.** With the variable-annuity funds in, the coefficient is −5.71 against −5.61, the negative-MC share 20–35% against 21–36%, Vanguard's negative share 79% against 81%, and the conduct result PC alone in both.
 - **V2 is the only specification that survives the exclusion.** The variable-annuity funds were never in its demand estimation. Dropping them from the supply side lowers the negative-MC share slightly (4.1–7.3%) and moves the conduct result toward B65.
 - **So the choice is no longer between column 2 and column 3.** If the variable-annuity funds are excluded, columns 1, 2 and 4 do not deliver downward-sloping demand, and V2 is the remaining candidate.
-- **V2 holds up when its instrument draws donors from Danny's full source panel** (section 9). Correcting an error in the CSV's ETF flag moves V2 to −4.9 and −21.9 and cuts its negative-MC share to 1–4%; whether to adopt that correction is an open decision.
+- **V2 is not robust on every dimension** (section 9). It holds up with donors from Danny's full source panel and with CRSP's own ETF flag. It does not hold up with Danny's category10 classes as the exclusion (the non-cheap slope turns positive), and its low negative-MC share depends on how 37 funds near the cheap cutoff are classified.
 
 - **Code:** `code/spec_compare/sc_build.py`, `sc_demand.py`, `sc_downstream.py` (columns 1 and 3), `sc_danny_cat10.py` (column 2), `sc_a5.py` (column 4), `sc_exva.py` (the "no VA" columns), `sc_v2_source_donors.py` (section 9).
 - **Logs and CSVs:** `logs/spec_compare/`.
@@ -244,27 +244,45 @@ Danny's note counts 675,551 passive source rows; the index CSV has 579,632. The 
 - **The paper's instrument is built before the filter,** so 60,773 of the missing rows (9.5% of all usable donor rows) are donors in IV0 but are absent from any instrument rebuilt from the CSV. This is why our rebuild of IV0 matches the original on only 90% of rows.
 - **V2's instrument draws donors from the CSV only.** Section 9 rebuilds it on the full source panel.
 
-## 9. V2 with donors from the full source panel, and with a corrected ETF flag
+## 9. How robust is V2? Donor pool and ETF flag: yes. Exclusion classes and the cheap cutoff: no
 
-**Are the source-only rows like the variable-annuity funds? No.** Of the 64,008 source-only rows with a fee, 54,945 have a family code and can be donors in V2. 59% of those are a fund's first 12 months, and 93% have a fee that CRSP reports for the fund in that quarter or earlier. Rows without a family code, which is where the imputed fees are (17% observed), cannot be donors in V2 at all.
+All rows are V2's model (price and price × cheap, instruments Z and Z × cheap), changing one element at a time (`code/spec_compare/sc_v2_robust.py`, `sc_v2_source_donors.py`; `logs/spec_compare/sc_v2_robust.csv`). The negative-MC share is at each candidate's own η.
 
-All rows below are V2's model (price and price × cheap), with the cheap indicator held fixed (`code/spec_compare/sc_v2_source_donors.py`; `sc_v2_source_donors_etf_csv.csv`, `sc_v2_source_donors_etf_source.csv`). The negative-MC share is at each candidate's own η, on the supply rows with and without the variable-annuity funds.
+| Variant | N | Non-cheap α (SE) | × cheap (SE) | Min F | e > 0 | Table 5 e < −1 | Negative MC B0–B65, with VA | No VA |
+|---|---|---|---|---|---|---|---|---|
+| **V2 as reported** | 96,069 | **−3.642 (0.419)** | −20.562 (0.646) | 316 | 0 | 5/15 | 0.053–0.082 | 0.041–0.073 |
+| Donors from the full source panel | 96,224 | −3.254 (0.419) | −19.649 (0.612) | 301 | 0 | 5/15 | 0.078–0.103 | 0.065–0.097 |
+| Source-panel donors with observed fees only | 96,197 | −3.575 (0.402) | −19.927 (0.582) | 298 | 0 | 5/15 | 0.057–0.087 | 0.045–0.077 |
+| ETF flag from CRSP (`et_flag`) | 96,814 | −3.575 (0.398) | −21.097 (0.675) | 424 | 0 | 5/15 | 0.057–0.086 | 0.044–0.076 |
+| Danny's approved share types | 96,814 | −3.575 (0.398) | −21.097 (0.675) | 424 | 0 | 5/15 | 0.057–0.086 | 0.044–0.076 |
+| CRSP ETF flag and source-panel donors | 96,969 | −3.282 (0.421) | −20.295 (0.683) | 386 | 0 | 5/15 | 0.077–0.101 | 0.063–0.096 |
+| **Cheap rebuilt on the source panel, observed fees** | 96,069 | **−2.010 (0.412)** | −20.542 (0.576) | 278 | 0 | 4/15 | **0.22–0.32** | 0.21–0.29 |
+| Cheap rebuilt on the source panel, imputed entry fees included | 96,069 | −1.970 (0.360) | −19.265 (0.406) | 329 | 0 | 4/15 | 0.24–0.36 | 0.23–0.33 |
+| **Exclusion by Danny's category10 classes** | 95,912 | **+1.448 (0.646)** | −16.514 (0.649) | 281 | **0.53** | 3/15 | – | – |
+| CRSP ETF flag, source donors, source cheap (observed), category10 | 96,831 | +3.064 (0.684) | −16.851 (0.599) | 259 | 0.54 | 2/15 | – | – |
 
-| Donor pool | ETF flag | N | Non-cheap α (SE) | × cheap (SE) | Min F | e > 0 | Table 5 e < −1 | Negative MC B0–B65, with VA | No VA |
-|---|---|---|---|---|---|---|---|---|---|
-| **Index CSV (V2 as reported)** | CSV | 96,069 | **−3.642 (0.419)** | −20.562 (0.646) | 316 | 0 | 5/15 | 0.053–0.082 | 0.041–0.073 |
-| Full source panel | CSV | 96,224 | −3.254 (0.419) | −19.649 (0.612) | 301 | 0 | 5/15 | 0.078–0.103 | 0.065–0.097 |
-| Full source panel, observed fees only | CSV | 96,197 | −3.575 (0.402) | −19.927 (0.582) | 298 | 0 | 5/15 | 0.057–0.087 | 0.045–0.077 |
-| Index CSV, observed fees only | CSV | 96,060 | −3.616 (0.407) | −20.539 (0.642) | 334 | 0 | 5/15 | 0.054–0.083 | 0.042–0.074 |
-| Index CSV | corrected | 96,192 | **−4.883 (0.469)** | −21.885 (0.788) | 308 | 0 | 7/15 | 0.006–0.035 | 0.001–0.020 |
-| Full source panel | corrected | 96,347 | −4.580 (0.504) | −21.029 (0.778) | 305 | 0 | 5/15 | 0.013–0.043 | 0.005–0.033 |
-| Full source panel, observed fees only | corrected | 96,320 | −4.925 (0.492) | −21.356 (0.760) | 301 | 0 | 7/15 | 0.005–0.034 | 0.001–0.019 |
+**Donor pool.** The rows of the source panel that are not in the CSV are not like the variable-annuity funds. Of the 54,945 that have a family code and can be donors, 59% are a fund's first 12 months, and 93% have a fee that CRSP reports. They are absent from the CSV because they lack a one-year return history, not because their fees are missing.
 
-**The ETF flag.** V2 takes the share type from the CSV's `ETF_ind`. That flag is 1 for 53 share classes that are mutual funds, on 2,515 fund-months of the CSV (139 of them in the Table 2 sample). Examples: BlackRock Russell 1000 Index Fund (Institutional, Class K and Investor A), BlackRock International Index Fund Class K, Merrill Lynch International Index Fund (classes A and D), Stagecoach Bond Index Fund. The source panel's own `ETF` column has 0 for all of them. "Corrected" uses the source panel's column, so these classes become donors for other mutual-fund classes and stop being donors for iShares ETFs.
+**ETF flag.** This is not an error in CRSP. The build script (lines 662–672) sets `ETF_ind` = 1 if CRSP's `et_flag` is F in any quarter, or the fund name contains "ETF", or the name contains "ishares", "spdr", "holdrs", "streettracks" or "exchange traded".
+- The name rules flag 110 funds in the source panel that CRSP never marks as an ETF (103 in the CSV, 14 in the Table 2 sample).
+- They are of two kinds: BlackRock's index mutual funds, which carry the iShares name (for example "iShares Russell 2000 Small-Cap Index Fund; Institutional Shares"), and funds of ETFs (for example "LVIP Vanguard Domestic Equity ETF Fund", "Morningstar Balanced ETF Asset Allocation Portfolio"). 34 of the 110 are variable-annuity funds.
+- No fund that CRSP marks as an ETF is missed. So the error is systematic but one-sided and small.
+- With CRSP's flag, V2 is unchanged (−3.58 and −21.10) and the first stage is stronger. Danny's approved share types give the identical result.
+- **Correction to my earlier message:** the "corrected flag" row I reported before (−4.88) used the source panel's own `ETF` column. That column applies the same name rules quarter by quarter, so it was not a correction. Those numbers should be disregarded.
+
+**Cheap indicator.** `gene_idx` uses a fund's first month in the CSV, which is 6 months (median) after its first month in the source panel, because the CSV needs a one-year return. Rebuilding it on the source panel, using only fees that CRSP reports, changes the status of 37 funds (3,068 fund-months).
+- **Demand still slopes down everywhere,** but the non-cheap slope falls to −2.0 and the negative-MC share rises to 22–32%.
+- **The funds that matter are large Vanguard classes at the cutoff.** Vanguard Total Stock Market Investor and Vanguard 500 Investor charged 0.20% and 0.19% in their first month in each file. That ties the 20th-percentile cutoff of 0.20% in January 1994 (cheap, since ties count), and is above the cutoff of 0.14% in 1993 (not cheap).
+- **Neither date is these funds' true entry.** Both files start in 1993–94, decades after the funds launched. The result shows that V2's marginal-cost numbers depend on a knife-edge classification of a few very large funds.
+- **Including imputed entry fees makes it worse and is not a valid version:** 30% of funds have an imputed or backfilled fee in their first source month (iShares Core US Aggregate Bond shows 0.515% against a true 0.20%).
+
+**Exclusion classes.** Danny's category10 splits equity into US size and style, global developed, emerging, and sector or theme, and bonds into government, credit, municipal and diversified. V2's six classes keep each of those together.
+- **With category10 as the exclusion, V2's non-cheap slope is +1.45 and 53% of fund-months slope upward.**
+- **This is the pattern found before** (`RESULTS_best_model1.md` §5c): the finer the exclusion, the more a fund's same-asset-class siblings act as donors, and the more positive the non-cheap slope (14 Lipper groups −0.25, 783 clusters +0.40).
+- **So V2 rests on excluding the whole broad asset class.** That is an identifying assumption, namely that a family's funds in the same broad asset class share demand shocks, and the data cannot confirm it.
 
 **Reading.**
-- **V2 is robust to the donor pool.** With donors from the full source panel the non-cheap slope is −3.25 against −3.64 and the cheap term −19.6 against −20.6. Demand slopes down everywhere in every row.
-- **Imputed donor fees are not driving it.** Restricting donors to observed fees changes the coefficients by less than 0.1 on the CSV pool.
-- **The ETF flag matters more than the donor pool.** With the corrected flag the non-cheap slope is −4.6 to −4.9, and the negative-MC share falls from 5–8% to about 1–4%. Vanguard's negative share at B0 falls from 13% to 1–3%.
-- **This is a data correction that happens to improve V2's results, so it should be checked before it is adopted.** I verified the misflagged classes by name only. The conduct test has not been rerun for these variants.
-- **Not done:** rebuilding the cheap indicator on the source panel, which could also change with the extra fund-months.
+- **V2 passes the checks on data handling:** donor pool, imputed donor fees, ETF flag, share types.
+- **V2 does not pass two checks on its design:** the exclusion level, which decides the sign of the non-cheap slope, and the cheap classification of a few large funds, which decides how many marginal costs are negative.
+- **The cheap slope is stable throughout** (−16.5 to −21.1 for the interaction). What moves is the non-cheap slope.
+- **Not done:** the conduct test for these variants.

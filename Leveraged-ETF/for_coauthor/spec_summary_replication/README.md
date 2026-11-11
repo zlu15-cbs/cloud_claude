@@ -38,7 +38,7 @@ Memory: about 6 GB for the build step, 2.5 GB per conduct run.
 | Section 6: conduct | the same three scripts with `conduct SPEC` | `sc_conduct_SPEC.csv` |
 | Sections 2 and 7: the variable-annuity funds | `sc_va_checks.py` | `sc_va_checks.csv`, `sc_va_funds.csv`, printed log |
 | Column 2, Danny's category10 specification | `SC_DANNY=<folder with the two classified files> python sc_danny_cat10.py`, then `downstream` and `conduct D10` | `sc_danny_cat10_demand.csv` (rows `D10`, `D10x`) |
-| Section 9: V2 with source-panel donors and the corrected ETF flag | `SC_SOURCE=<path to index_funds_preprocess_oct2026.csv> python sc_v2_source_donors.py`; again with `SC_ETF=source` | `sc_v2_source_donors_etf_csv.csv`, `sc_v2_source_donors_etf_source.csv` |
+| Section 9: V2 robustness grid (donor pool, ETF flag, share types, cheap indicator, category10 exclusion) | `SC_SOURCE=<path to index_funds_preprocess_oct2026.csv> SC_DANNY=<folder with the two classified files> python sc_v2_robust.py`; `sc_v2_source_donors.py` for the observed-fee donor row | `sc_v2_robust.csv`, `sc_v2_source_donors_etf_csv.csv` |
 
 - `replicate_V2.py` is the V2 script sent earlier. The other scripts import its functions (sample filters, cheap indicator, V2 instrument, first-stage F, markups, scale, conduct test).
 - `sc_broad_ladder.py` is included because `sc_a5.py` imports one function from it.

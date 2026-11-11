@@ -1,0 +1,25 @@
+ETF flag, CSV rule vs CRSP et_flag: differs on 11,165 source fund-months, 110 funds (14 in Table 2)
+source panel: the fee in a fund's first month is not observed (imputed or backfilled) for 0.297 of funds
+cheap indicator: funds in both 5,532; agree 0.948; cheap share of funds csv 0.192, source 0.181; first CSV month is later than the first source month for 1.000 of funds (median gap 6 months)
+cheap (source, observed fees): share of Table 2 fund-months 0.442; differs from csv on 3,068 fund-months, 37 funds
+Table 2 fund-months: cheap csv 0.447, source 0.433; differ on 8,166 fund-months, 98 funds (csv-cheap only 55, source-cheap only 43)
+share types of Table 2 fund-months: {'csv': {'etf': 55777, 'inst': 26154, 'retail': 21295, 'mf_other': 4637}, 'crsp': {'etf': 54875, 'inst': 26870, 'retail': 21481, 'mf_other': 4637}, 'danny': {'etf': 54875, 'inst': 27101, 'retail': 25887}}
+Table 2 fund-months, Lipper-6 class (rows) by category10 (columns):
+cat10        -1      1      2     3      4     5     6    7     8     9    10
+asset_class                                                                  
+allocation    88      0    924     0      0     0   207    0  4942     0    0
+bond           0      0      0     0      0  5442  3407  557  8202     0    3
+intl_equity    3      0  15065  5393   1290     0     0    0    18     0  243
+other          0     88      0     0    216     0     0    0     6     0  228
+real_asset     0      0      0     0   3277     0     0    0     0  1451    0
+us_equity    105  45546    165     0  10417     0     0    0   411    60  109
+V2 as reported                                             N 96,069 | non-cheap -3.642 (0.419) | x cheap -20.562 (0.646) | F 316 | e>0 0.000 | T5 5/15 | neg MC 0.053-0.082 (no VA 0.041-0.073) | min MC -0.21 | Vanguard 0.13
+ETF flag from CRSP                                         N 96,814 | non-cheap -3.575 (0.398) | x cheap -21.097 (0.675) | F 424 | e>0 0.000 | T5 5/15 | neg MC 0.057-0.086 (no VA 0.044-0.076) | min MC -0.22 | Vanguard 0.13
+donors from the source panel                               N 96,224 | non-cheap -3.254 (0.419) | x cheap -19.649 (0.612) | F 301 | e>0 0.000 | T5 5/15 | neg MC 0.078-0.103 (no VA 0.065-0.097) | min MC -0.26 | Vanguard 0.16
+cheap rebuilt on the source panel (imputed entry fees included) N 96,069 | non-cheap -1.970 (0.360) | x cheap -19.265 (0.406) | F 329 | e>0 0.000 | T5 4/15 | neg MC 0.238-0.360 (no VA 0.233-0.330) | min MC -0.52 | Vanguard 0.19
+cheap rebuilt on the source panel, observed fees only      N 96,069 | non-cheap -2.010 (0.412) | x cheap -20.542 (0.576) | F 278 | e>0 0.000 | T5 4/15 | neg MC 0.221-0.321 (no VA 0.212-0.289) | min MC -0.50 | Vanguard 0.24
+category10 exclusion                                       N 95,912 | non-cheap 1.448 (0.646) | x cheap -16.514 (0.649) | F 281 | e>0 0.529 | T5 3/15 | neg MC 0.000-0.000 (no VA 0.000-0.000) | min MC 0.06 | Vanguard 0.00
+Danny's share types                                        N 96,814 | non-cheap -3.575 (0.398) | x cheap -21.097 (0.675) | F 424 | e>0 0.000 | T5 5/15 | neg MC 0.057-0.086 (no VA 0.044-0.076) | min MC -0.22 | Vanguard 0.13
+CRSP ETF flag + source donors                              N 96,969 | non-cheap -3.282 (0.421) | x cheap -20.295 (0.683) | F 386 | e>0 0.000 | T5 5/15 | neg MC 0.077-0.101 (no VA 0.063-0.096) | min MC -0.25 | Vanguard 0.16
+CRSP ETF flag + source donors + source cheap (observed fees) N 96,969 | non-cheap -1.803 (0.416) | x cheap -20.541 (0.611) | F 365 | e>0 0.000 | T5 4/15 | neg MC 0.281-0.384 (no VA 0.260-0.353) | min MC -0.57 | Vanguard 0.24
+CRSP ETF flag + source donors + source cheap (observed) + category10 N 96,831 | non-cheap 3.064 (0.684) | x cheap -16.851 (0.599) | F 259 | e>0 0.537 | T5 2/15 | neg MC 0.000-0.000 (no VA 0.000-0.000) | min MC 0.05 | Vanguard 0.00
