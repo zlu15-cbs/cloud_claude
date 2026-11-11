@@ -46,7 +46,7 @@ LIPPER_GROUPS = {   # groups of Lipper classes (matched on lipper_class_name, pe
     'leveraged': r'Leverage|Short Bias',
     'money_market': r'Money Market',
 }
-RULES = {'bd': [], 'full': ['target_date', 'extension', 'long_short_alt', 'leveraged', 'money_market'], 'narrow': ['long_short_alt', 'leveraged', 'money_market'],
+RULES = {'bd': [], 'all': [], 'full': ['target_date', 'extension', 'long_short_alt', 'leveraged', 'money_market'], 'narrow': ['long_short_alt', 'leveraged', 'money_market'],
          'no_target': ['extension', 'long_short_alt', 'leveraged', 'money_market'], 'no_extension': ['target_date', 'long_short_alt', 'leveraged', 'money_market']}
 
 
@@ -74,7 +74,18 @@ def pure_index_funds(ids):
     share = cr.index_fund_flag.isin(['B', 'D']).groupby(cr.crsp_fundno).mean()
     keep = set(share[share > 0.5].index)
     rule = os.environ.get('SC_RULE', 'bd')
+    if rule == 'all':            # no index-fund flag requirement
+        keep = set(ids)
+    if os.environ.get('SC_NOSWITCH') == '1':   # drop funds whose family (Danny's ownership ID, firm_f) changes at any time in the index CSV
+        keep -= family_switchers()
     if RULES[rule]:
         g = lipper_groups(ids)
         keep -= set(g[g.isin(RULES[rule])].index)
     return keep
+
+
+def family_switchers():
+    """Funds with more than one value of firm_f (Danny's ownership family ID) over their months in the index CSV."""
+    cf = pd.read_csv(f'{DATA}/nonLev_funds_product_month_level_v2_patched.csv', usecols=['product_j', 'firm_f']).dropna()
+    n = cf.groupby('product_j').firm_f.nunique()
+    return set(n[n > 1].index)

@@ -1,0 +1,112 @@
+product_ids,name,firms,months,fee,aum,q,bd,sw,w
+27635,SPDR S&P 500 ETF Trust,PDR Services -> State Street Global Advisors,166,0.0863855421686747,239724.70843373495,1.0,True,True,39794301.6
+24697,"Invesco QQQ Trust, Series 1",Invesco,160,0.2,84099.6825,1.0,True,True,13455949.2
+20585,SPDR S&P MidCap 400 ETF,PDR Services -> State Street Global Advisors,166,0.24000000000000002,16130.484337349397,1.0,True,True,2677660.4
+16513,iShares Silver Trust,BlackRock,166,0.5,8362.734337349397,3.0,True,True,1388213.9
+59364,ProShares Trust: ProShares S&P 500 Dividend Aristocrats ETF,ProFunds -> ProShares,112,0.35,5872.243750000001,2.0,True,True,657691.3
+52565,DBX ETF Trust: Xtrackers MSCI EAFE Hedged Equity ETF,DBX Strategic Advisors -> DWS,120,0.3529166666666666,5791.2725,3.0,True,True,694952.7
+13665,GE RSP Program Funds: GE RSP US Equity Fund,GE Asset Management -> Unknown,89,0.1455056179775281,5119.6044943820225,1.0,False,True,455644.8
+61451,Global X Funds: Global X NASDAQ 100 Covered Call ETF,Global X,53,0.6154716981132075,5119.415094339623,3.0,True,True,271329.0
+89589,DBX ETF Trust: Xtrackers USD High Yield Corporate Bond ETF,DBX Strategic Advisors -> DWS,73,0.14164383561643834,4090.280821917808,2.0,True,True,298590.5
+58933,KraneShares Trust: KraneShares CSI China Internet ETF,Krane Funds Advisors -> KraneShares,80,0.708625,3852.05375,3.0,True,True,308164.3
+24698,Invesco DB Commodity Index Tracking Fund,DB Commodity Services -> Invesco,162,0.8661728395061727,3460.2006172839506,4.0,True,True,560552.5
+30710,Victory Portfolios III: Victory 500 Index Fund; Reward Shares,USAA Asset Management Company -> Victory Capital Management,166,0.14493975903614456,3451.606024096385,1.0,True,True,572966.6
+30722,Victory Portfolios III: Victory 500 Index Fund; Member Shares,USAA Asset Management Company -> Victory Capital Management,166,0.24734939759036145,3030.4240963855423,1.0,True,True,503050.4
+29220,SPDR Index Shares Funds: SPDR EURO STOXX 50 ETF,State Street Global Advisors,143,0.29083916083916084,2863.406993006993,2.0,True,True,409467.2
+95077,DBX ETF Trust: Xtrackers MSCI USA ESG Leaders Equity ETF,DBX Strategic Advisors -> DWS,42,0.09,2797.1428571428573,1.0,True,True,117480.00000000001
+86090,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2025 Corporate Bond ETF,Invesco,27,0.09925925925925927,2645.662962962963,2.0,True,True,71432.9
+62690,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2024 Corporate Bond ETF,Invesco,51,0.1,2530.9411764705883,1.0,True,True,129078.0
+13664,GE RSP Program Funds: GE RSP Income Fund,GE Asset Management -> Unknown,104,0.17163461538461539,2485.789423076923,1.0,False,True,258522.09999999998
+63887,ETF Series Solutions: US Global Jets ETF,U.S. Global Investors -> UBS Global Asset Management,42,0.6,2445.0904761904762,3.0,True,True,102693.8
+92480,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco Russell 1000 Dynamic Multifactor ETF,OppenheimerFunds -> Invesco,63,0.29,2366.404761904762,2.0,True,True,149083.5
+7508,Columbia Funds Series Trust: Columbia Large Cap Index Fund; Institutional Class Shares,Columbia Threadneedle Investments,166,0.1927710843373494,2320.6078313253015,1.0,True,True,385220.9
+93350,First Trust Exchange-Traded Fund IV: FT Vest S&P 500 Dividend Aristocrats Target Income ETF,First Trust,10,0.75,2273.44,4.0,True,True,22734.4
+37593,Invesco Exchange-Traded Fund Trust II: Invesco Solar ETF,Guggenheim Investments -> Invesco,46,0.6873913043478261,2186.776086956522,3.0,True,True,100591.7
+88618,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2026 Corporate Bond ETF,Invesco,23,0.1,2129.308695652174,2.0,True,True,48974.1
+20934,AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco Equally-Weighted S&P 500 Fund; Cl Y Shs,Invesco,138,0.2855072463768116,2122.2057971014497,2.0,True,True,292864.4000000001
+30715,Victory Portfolios III: Victory Nasdaq-100 Index Fund; Fund Shares Class,USAA Asset Management Company -> Victory Capital Management,142,0.5129577464788733,2047.754929577465,3.0,True,True,290781.2
+59292,DBX ETF Trust: Xtrackers MSCI Europe Hedged Equity ETF,DBX Strategic Advisors,61,0.4550819672131148,1999.8967213114754,2.0,True,True,121993.7
+7604,Columbia Funds Series Trust: Columbia Mid Cap Index Fund; Institutional Class Shares,Columbia Threadneedle Investments,144,0.2,1988.2236111111113,1.0,True,True,286304.2
+58376,"Empower Funds, Inc: Empower S&P 500 Index Fund; Investor Class Shares",GW Capital Management -> Empower Funds,125,0.54192,1983.7112,3.0,True,True,247963.9
+62689,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2023 Corporate Bond ETF,Invesco,48,0.096875,1914.4166666666667,1.0,True,True,91892.0
+59899,"Empower Funds, Inc: Empower Bond Index Fund; Investor Class Shares",GW Capital Management -> Empower Funds,42,0.4985714285714286,1870.3857142857141,3.0,True,True,78556.2
+20931,AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco Equally-Weighted S&P 500 Fund; Cl A Shs,Morgan Stanley Investment Management -> Invesco,166,0.5444578313253012,1869.1355421686746,3.0,True,True,310276.5
+63524,Lattice Strategies Trust: Hartford Multifactor Developed Markets (ex-US) ETF,Lattice Strategies -> Hartford Funds,63,0.2903174603174603,1802.3873015873014,3.0,True,True,113550.4
+59541,DBX ETF Trust: Xtrackers Harvest CSI 300 China A-Shares ETF,DBX Strategic Advisors -> DWS,80,0.6743750000000001,1787.0412499999998,4.0,True,True,142963.3
+58856,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2022 Corporate Bond ETF,Guggenheim Investments -> Invesco,52,0.10692307692307693,1707.2134615384616,2.0,True,True,88775.1
+5886,BlackRock Funds III: iShares US Aggregate Bond Index Fund; Class K Shares,BlackRock,80,0.04525,1700.2575000000002,1.0,True,True,136020.6
+7625,Columbia Funds Series Trust: Columbia Small Cap Index Fund; Institutional Class Shares,Columbia Threadneedle Investments,150,0.2,1623.2306666666666,1.0,True,True,243484.59999999998
+37162,Invesco Exchange-Traded Fund Trust II: Invesco S&P 500 Revenue ETF,OppenheimerFunds -> Invesco,48,0.38999999999999996,1589.01875,2.0,False,True,76272.9
+47354,abrdn Gold ETF Trust: abrdn Physical Gold Shares ETF,ETF Securities -> abrdn,163,0.30300613496932516,1587.8509202453988,2.0,True,True,258819.7
+10485,Wells Fargo Funds Trust: Wells Fargo Index Fund; Administrator Class Shares,Allspring,97,0.25,1574.381443298969,2.0,True,True,152715.0
+24773,Invesco DB Multi-Sector Commodity Trust: Invesco DB Agriculture Fund,DB Commodity Services -> Invesco,101,0.9215841584158415,1549.580198019802,4.0,True,True,156507.6
+61522,Victory Portfolios II: VictoryShares US EQ Income Enhanced Volatility Wtd Index ETF,Victory Capital Management,26,0.35,1547.0846153846153,3.0,True,True,40224.2
+63509,ProShares Trust: ProShares S&P MidCap 400 Dividend Aristocrats ETF,ProShares,21,0.4,1530.5142857142857,2.0,True,True,32140.8
+59412,Exchange Traded Concepts Trust: ROBO Global Robotics and Automation Index ETF,Exchange Traded Concepts -> ROBO Global,74,0.95,1480.62027027027,4.0,True,True,109565.9
+59349,Invesco Exchange-Traded Fund Trust II: Invesco S&P Ultra Dividend Revenue ETF,OppenheimerFunds -> Invesco,20,0.39,1461.02,2.0,True,True,29220.4
+27825,SSgA Funds: State Street S&P 500 Index Fund; Class N Shares,State Street Global Advisors,156,0.1626923076923077,1423.304487179487,1.0,True,True,222035.49999999997
+32046,Wells Fargo Funds Trust: Wells Fargo Advantage Index Fund; Administrator Class Shares,Allspring,4,0.25,1414.275,1.0,True,True,5657.1
+92874,Strategy Shares: Strategy Shares Nasdaq 7HANDL Index ETF,Strategy Shares,11,0.78,1401.7545454545455,4.0,True,True,15419.3
+58855,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2021 Corporate Bond ETF,Guggenheim Investments -> Invesco,53,0.13735849056603774,1384.5584905660378,2.0,True,True,73381.6
+37164,Invesco Exchange-Traded Fund Trust II: Invesco S&P SmallCap 600 Revenue ETF,Invesco,11,0.39,1379.5,2.0,False,True,15174.5
+93020,DBX ETF Trust: Xtrackers Low Beta High Yield Bond ETF,DWS,9,0.2,1355.7333333333333,2.0,True,True,12201.6
+6563,"BlackRock Index Funds, Inc: iShares MSCI EAFE International Index Fund; Institutional Shares",BlackRock,46,0.0926086956521739,1242.9521739130435,2.0,True,True,57175.799999999996
+52568,DBX ETF Trust: Xtrackers MSCI Japan Hedged Equity ETF,DBX Strategic Advisors,57,0.4559649122807018,1233.7877192982455,4.0,True,True,70325.9
+54875,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2020 Corporate Bond ETF,Guggenheim Investments -> Invesco,55,0.1638181818181818,1210.4963636363636,2.0,True,True,66577.3
+93869,ProShares Trust: ProShares Online Retail ETF,ProFunds,4,0.58,1202.975,3.0,True,True,4811.9
+10275,MainStay Funds Trust: MainStay MacKay S&P 500 Index Fund; Class I Shares,New York Life Investments,93,0.3474193548387096,1177.4032258064517,2.0,True,True,109498.50000000001
+7626,Columbia Funds Series Trust: Columbia Small Cap Index Fund; Class A Shares,Columbia Threadneedle Investments,112,0.45,1135.1714285714286,2.0,True,True,127139.2
+63996,"Great-West Funds, Inc: Great-West S&P 500 Index Fund; Institutional Class Shares",GW Capital Management -> Empower Funds,65,0.1890769230769231,1095.2153846153847,2.0,True,True,71189.0
+24777,Invesco DB US Dollar Index Trust: Invesco DB US Dollar Index Bullish Fund,DB Commodity Services -> Invesco,97,0.7903092783505155,1092.959793814433,3.0,True,True,106017.09999999999
+17662,JPMorgan Trust II: JPMorgan Equity Index Fund; Class I Shares,JPMorgan Asset Management,112,0.2,1085.8178571428573,2.0,True,True,121611.60000000002
+6565,"BlackRock Index Funds, Inc: BlackRock S&P 500 Index Fund; Institutional Shares",BlackRock,36,0.32,1076.7972222222222,2.0,True,True,38764.7
+17670,JPMorgan Trust II: JPMorgan Market Expansion Enhanced Index Fund; Class I Shares,JPMorgan Asset Management,100,0.41859999999999997,1055.502,2.0,True,True,105550.2
+20933,AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco Equally-Weighted S&P 500 Fund; Cl C Shs,Invesco,66,1.2596969696969698,982.8712121212121,4.0,True,True,64869.5
+8641,Deutsche Institutional Funds: Deutsche Equity 500 Index Fund; Institutional Class Shares,DWS,66,0.23606060606060605,974.5560606060606,1.0,True,True,64320.7
+7594,Columbia Funds Series Trust: Columbia Mid Cap Index Fund; Class A Shares,Columbia Threadneedle Investments,117,0.45,973.9495726495727,2.0,True,True,113952.1
+54121,MassMutual Select Funds: MM S&P 500 Index Fund; Class I Shares,MassMutual -> MML Investment Advisers,92,0.11739130434782608,964.341304347826,1.0,True,True,88719.4
+54874,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2019 Corporate Bond ETF,Guggenheim Investments -> Invesco,43,0.18162790697674416,958.6418604651162,2.0,True,True,41221.6
+44043,IndexIQ ETF Trust: IQ Hedge Multi-Strategy Tracker ETF,IndexIQ,80,0.6921250000000001,936.6450000000001,3.0,True,True,74931.6
+61521,Victory Portfolios II: VictoryShares US 500 Enhanced Volatility Wtd Index ETF,Victory Capital Management,16,0.35,934.75,3.0,True,True,14956.0
+48419,IndexIQ ETF Trust: IQ Merger Arbitrage ETF,IndexIQ,17,0.76,912.8352941176471,3.0,True,True,15518.2
+61520,Victory Portfolios II: VictoryShares US 500 Volatility Wtd Index ETF,Victory Capital Management,2,0.35,900.55,3.0,True,True,1801.1
+64005,"Great-West Funds, Inc: Great-West Bond Index Fund; Institutional Class Shares",GW Capital Management -> Empower Funds,53,0.14471698113207548,891.7924528301887,1.0,True,True,47265.0
+20914,AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco S&P 500 Index Fund; Class A Shares,Morgan Stanley Investment Management -> Invesco,166,0.5748192771084337,852.2746987951807,3.0,True,True,141477.6
+20035,MassMutual Select Funds: MM S&P 500 Index Fund; Class R5 Shares,MassMutual -> MML Investment Advisers,94,0.21425531914893617,826.1148936170213,1.0,True,True,77654.8
+54873,Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2018 Corporate Bond ETF,Guggenheim Investments -> Invesco,45,0.23377777777777778,809.1888888888889,2.0,True,True,36413.5
+17694,JPMorgan Trust II: JPMorgan International Research Enhanced Equity Fund; Class I Shares,JPMorgan Asset Management,91,0.52,800.9417582417582,3.0,True,True,72885.7
+7509,Columbia Funds Series Trust: Columbia Large Cap Index Fund; Class A Shares,Columbia Threadneedle Investments,102,0.43941176470588234,759.2931372549019,2.0,True,True,77447.9
+43532,PowerShares Exchange-Traded Fund Trust: PowerShares Multi-Asset Income Portfolio,Guggenheim Investments,70,0.6517142857142858,751.5828571428572,3.0,True,True,52610.8
+6564,"BlackRock Index Funds, Inc: BlackRock S&P 500 Index Fund; Investor A Shares",BlackRock,36,0.5733333333333334,749.2638888888889,3.0,True,True,26973.5
+63967,"Great-West Funds, Inc: Great-West International Index Fund; Institutional Class Shares",GW Capital Management -> Empower Funds,32,0.3315625,692.665625,2.0,True,True,22165.3
+47139,ProShares Trust: ProShares Large Cap Core Plus,ProFunds,36,0.45055555555555554,672.7666666666667,4.0,True,True,24219.6
+43528,Claymore Exchange-Traded Fund Trust: Guggenheim BRIC ETF,Guggenheim Investments,35,0.6388571428571428,656.7828571428572,3.0,True,True,22987.4
+58329,"Empower Funds, Inc: Empower International Index Fund; Investor Class Shares",GW Capital Management -> Empower Funds,22,0.6959090909090908,651.9,3.0,True,True,14341.8
+59413,ETF Series Solutions: Vident International Equity Fund,Exchange Traded Concepts,38,0.6931578947368421,644.3605263157895,3.0,True,True,24485.7
+17659,JPMorgan Trust II: JPMorgan Equity Index Fund; Class A Shares,JPMorgan Asset Management,83,0.45,592.0686746987951,2.0,True,True,49141.7
+12389,"Nuveen Investment Funds, Inc: Nuveen Equity Index Fund; Class I Shares",U.S. Bancorp Asset Management -> Nuveen,67,0.3686567164179104,587.3492537313433,2.0,True,True,39352.4
+19993,MassMutual Select Funds: MM S&P 500 Index Fund; Service Class Shares,MassMutual,76,0.4018421052631579,570.3263157894737,2.0,True,True,43344.8
+24774,PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Oil Fund,DB Commodity Services -> Invesco,54,0.7742592592592593,556.9074074074074,3.0,True,True,30073.0
+30716,USAA Mutual Funds Trust: Extended Market Index Fund,USAA Asset Management Company,100,0.4796,555.602,2.0,True,True,55560.2
+47149,abrdn Silver ETF Trust: abrdn Physical Silver Shares ETF,ETF Securities -> abrdn,38,0.3355263157894737,545.8131578947368,2.0,True,True,20740.9
+58377,"Great-West Fund, Inc: Great-West S&P Mid Cap 400 Index Fund; Initial Class Shares",GW Capital Management,19,0.6,515.3000000000001,3.0,True,True,9790.7
+6681,BLDRS Index Funds Trust: BLDRS Emerging Markets 50 ADR Index Fund,Invesco,35,0.3,510.57714285714286,2.0,True,True,17870.2
+48792,ETFS Palladium Trust: ETFS Physical Palladium Shares,ETF Securities,35,0.6,503.5342857142857,3.0,True,True,17623.7
+10481,Wells Fargo Funds Trust: Wells Fargo Index Fund; Class A Shares,Allspring,83,0.5237349397590362,487.2734939759036,3.0,True,True,40443.7
+19995,MassMutual Select Funds: MM S&P 500 Index Fund; Class R4 Shares,MassMutual,89,0.6373033707865169,480.5584269662921,3.0,True,True,42769.7
+24776,PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Base Metals Fund,DB Commodity Services,36,0.7705555555555557,434.3527777777778,3.0,True,True,15636.7
+19994,MassMutual Select Funds: MM S&P 500 Index Fund; Administrative Class Shares,MassMutual,54,0.4625925925925926,415.537037037037,2.0,True,True,22439.0
+24771,PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Precious Metals Fund,DB Commodity Services,34,0.7729411764705882,399.2323529411765,3.0,True,True,13573.900000000001
+24775,PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Gold Fund,DB Commodity Services,31,0.7645161290322581,371.9225806451613,3.0,True,True,11529.6
+8647,DWS Institutional Funds: DWS US Bond Index Fund; Institutional Class Shares,DWS,34,0.19529411764705884,371.3235294117647,1.0,True,True,12625.0
+24772,PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Silver Fund,DB Commodity Services,4,0.76,370.55,3.0,True,True,1482.2
+24769,PowerShares DB G10 Currency Harvest Fund,DB Commodity Services,37,0.7967567567567567,348.3459459459459,4.0,True,True,12888.8
+10923,American Independence Funds Trust: US Inflation-Indexed Fund; Institutional Class Shares,American Independence Financial Services,18,0.32,322.6,2.0,False,True,5806.8
+8648,DWS Institutional Funds: DWS EAFE Equity Index Fund; Institutional Class Shares,DWS,23,0.5060869565217392,319.82173913043476,2.0,True,True,7355.9
+24770,PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Energy Fund,DB Commodity Services,8,0.78,308.9875,3.0,True,True,2471.9
+6090,BlackRock Funds: BlackRock Index Equity Portfolio; Institutional Shares,BlackRock,29,0.18,293.76206896551724,1.0,False,True,8519.1
+7828,Columbia Funds Series Trust I: Columbia US Treasury Index Fund; Class Z Shares,Columbia Threadneedle Investments,18,0.20500000000000002,277.48333333333335,2.0,True,True,4994.700000000001
+18205,Legg Mason Partners Equity Trust: Legg Mason Batterymarch S&P 500 Index Fund; Class A Shares,Franklin Templeton,13,0.59,244.3692307692308,3.0,True,True,3176.8
+43608,Claymore Exchange-Traded Fund Trust 2: Guggenheim S&P Global Water Index ETF,Guggenheim Investments,7,0.7,234.1142857142857,3.0,True,True,1638.8
+24778,PowerShares DB US Dollar Index Trust: PowerShares DB US Dollar Index Bearish Fund,DB Commodity Services,3,0.8000000000000002,226.79999999999998,3.0,True,True,680.4
+12497,"First American Investment Funds, Inc: Mid Cap Index Fund; Class Y Shares",U.S. Bancorp Asset Management,4,0.49,194.675,2.0,True,True,778.7
