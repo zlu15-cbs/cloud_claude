@@ -1,0 +1,2 @@
+[   409s] T2alt conduct [A: eta 0.024] main: ['PC (1.00)', 'B50 (0.17)', 'B65 (0.18)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)', 'B50 (0.19)', 'B65 (0.27)'] | rival3 x csent_index: ['PC (1.00)']
+[   409s]    main IV: PC p 1.000 T vs B65 -1.34 | B0 p 0.000 T vs B65 0.02 | B25 p 0.001 T vs B65 -0.50 | B50 p 0.168 T vs B65 -1.05 | B65 p 0.179 T vs B65 nan | min F 69

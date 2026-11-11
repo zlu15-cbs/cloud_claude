@@ -63,9 +63,12 @@ def main():
     print(f'donor pool: {len(raw):,} source fund-months with a fee', flush=True)
 
     rows = []
+    only = os.environ.get('SC_ONLY')      # e.g. 'lipper6,pooled,wavg' to run one version and save it as T2alt / A5alt
     for excl in ('index', 'cat20', 'cat10', 'lipper6'):
         for typ in ('pooled', 'same type'):
             for agg in ('wavg', 'med'):
+                if only and only != f'{excl},{typ},{agg}':
+                    continue
                 sub = raw[raw[excl].notna()].copy()
                 sub['iv'] = leave_out(sub, excl, typ == 'same type', agg)
                 dd0 = d.merge(sub[['product_j', 'mk', 'iv']].rename(columns={'product_j': 'product_ids'}), on=['product_ids', 'mk'], how='left')
@@ -80,6 +83,12 @@ def main():
                                   f'{model}_avg_e': o['avg_e'], f'{model}_t5': int((t5.own_elasticity < -1).sum())})
                         if zs:
                             r.update(A5_xbroad=o['b_broad'], A5_xbroad_se=o['se_broad'])
+                        if only and sample == 'no VA':
+                            sup = dd0[base]
+                            np.save(f'{CACHE}/alpha_{model}alt.npy', np.full(len(sup), b['prices']) + sum(b[f'px_{z}'] * sup[z].to_numpy() for z in zs))
+                            np.save(f'{CACHE}/rows_{model}alt.npy', np.flatnonzero(base))
+                            r.update({f'{model}_e_aum': o['e_aum_weighted'], f'{model}_avg_e_mkt': o['avg_e']})
+                            t5.assign(spec=f'{model}alt').to_csv(f'sc_alt_table5_{model}.csv', index=False)
                         if o['share_pos_e'] == 0 and sample == 'no VA':
                             ds = downstream(dd0[base].reset_index(drop=True), zs, b)
                             r.update({f'{model}_negmc_B0': ds['B0'][0], f'{model}_negmc_B65': ds['B65'][0], f'{model}_below020_B65': ds['B65'][2],
@@ -88,7 +97,7 @@ def main():
                     mc = lambda m: (f" negMC {r[f'{m}_negmc_B0']:.2f}-{r[f'{m}_negmc_B65']:.2f}" if f'{m}_negmc_B0' in r else '')
                     print(f"{excl:8s} {typ:9s} {agg:4s} {sample:22s} N {r['N']:>7,} | T2 {r['T2_price']:6.2f} ({r['T2_se']:.2f}) F {r['T2_F']:5.0f} e>0 {r['T2_pos_e']:.2f} T5 {r['T2_t5']}{mc('T2')} "
                           f"| A5 {r['A5_price']:6.2f} ({r['A5_se']:.2f}) x broad {r['A5_xbroad']:6.2f} F {r['A5_F']:5.0f} e>0 {r['A5_pos_e']:.2f} T5 {r['A5_t5']}{mc('A5')}", flush=True)
-                    pd.DataFrame(rows).to_csv('sc_t2a5_nova_grid.csv', index=False)
+                    pd.DataFrame(rows).to_csv('sc_t2a5_alt.csv' if only else 'sc_t2a5_nova_grid.csv', index=False)
 
 
 if __name__ == '__main__':

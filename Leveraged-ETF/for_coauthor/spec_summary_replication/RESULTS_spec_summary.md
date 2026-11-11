@@ -1,55 +1,57 @@
 # Four demand specifications for the index market, with and without the variable-annuity funds: which results survive?
 
-## Scorecard: all 4 models
+## Scorecard: all 4 models, with an alternative for T2 and A5
 
 **Caution.** Column 2 is Danny's own specification, built from the category10 labels in his handoff zip; it reproduces his coefficient exactly (−5.713, SE 0.747). "A5" is the broad-based interaction, which is Table A7 in our copy of the paper. Column 3 is V2 with the cheap indicator rebuilt on Danny's source panel (section 1); the version first sent to Danny took it from the index CSV and had fewer negative marginal costs (section 9). V2's non-cheap slope depends on excluding the whole broad asset class from the instrument's donors: with Danny's finer category10 classes it turns positive (section 9). No test here establishes that any instrument satisfies the exclusion restriction.
 
-✓ = desirable, ~ = borderline, ✗ = undesirable, – = not applicable. "With VA" is each specification as written. "No VA" drops the 112 variable-annuity funds (7,771 fund-months) from the sample: they leave the demand estimation and the supply side, and their assets count in the outside good. Downstream rows give the range over B0–B65 at each candidate's own estimated η; conduct uses η scheme A (0.024). Sources: `logs/spec_compare/sc_demand.csv`, `sc_a5_demand.csv`, `sc_exva_demand.csv`, `sc_scale.csv`, `sc_mc.csv`, `sc_where.csv` and their `sc_a5_*` and `sc_exva_*` counterparts, `sc_conduct_*.csv`.
+✓ = desirable, ~ = borderline, ✗ = undesirable, – = not applicable. "With VA" is each specification as written. "Alternative" is T2 or A5 with the instrument rebuilt to exclude the target's whole asset class (the six Lipper-based classes V2 uses), pooled share types, lag-AUM weights and donors from Danny's source panel; it is the only version of each with downward-sloping demand once the variable-annuity funds are out (section 10). "No VA" drops the 112 variable-annuity funds (7,771 fund-months) from the sample: they leave the demand estimation and the supply side, and their assets count in the outside good. Downstream rows give the range over B0–B65 at each candidate's own estimated η; conduct uses η scheme A (0.024). Sources: `logs/spec_compare/sc_demand.csv`, `sc_a5_demand.csv`, `sc_exva_demand.csv`, `sc_scale.csv`, `sc_mc.csv`, `sc_where.csv` and their `sc_a5_*` and `sc_exva_*` counterparts, `sc_conduct_*.csv`.
 
-| | 1 T2, with VA | 1 T2, no VA | 2 Modified T2 (Danny), with VA | 2 Modified T2, no VA | 3 V2, with VA | 3 V2, no VA | 4 A5 (broad), with VA | 4 A5, no VA |
-|---|---|---|---|---|---|---|---|---|
-| **Specification** | | | | | | | | |
-| Instrument | paper IV0 | paper IV0 | IV0 rebuilt with a category10 exclusion | same | Z (V2) | Z (V2) | paper IV0 | paper IV0 |
-| Donors exclude the target's | index | index | index and category10 class | same | Lipper-6 asset class, other share types | same | index | index |
-| Price interaction | none | none | none | none | cheap | cheap | broad-based | broad-based |
-| Estimation rows | 108,300 | 100,529 | 108,300 (2,502 on original IV0) | 100,529 | 96,069 | 96,069 | 108,300 | 100,529 |
-| Supply rows | 108,300 | 100,529 | 108,300 | 100,529 | 107,863 | 100,092 | 108,300 | 100,529 |
-| **Demand outcomes** | | | | | | | | |
-| Base price coefficient (SE) | −5.606 (1.310) | **+7.244 (1.987)** | −5.713 (0.747) | **+1.485 (1.079)** | −2.010 (0.412) | −2.010 (0.412) | −7.503 (1.770) | **+4.009 (1.588)** |
-| Interaction (SE) | – | – | – | – | −20.542 (0.576) | −20.542 (0.576) | −5.278 (0.372) | −6.924 (0.428) |
-| Average own elasticity | −1.61 | +1.91 | −1.64 | +0.39 | −1.52 | −1.52 | −2.86 | +0.31 |
-| Asset-weighted own elasticity | −0.72 | +0.89 | −0.74 | +0.18 | −1.34 | −1.34 | −1.31 | +0.08 |
-| Table 5 funds with e < −1 | 2/15 | 0/15 | 2/15 | 0/15 | 4/15 | 4/15 | 2/15 | 0/15 |
-| **Demand screens** | | | | | | | | |
-| Goal A: no upward slope (e > 0 share) | ✓ 0 | ✗ 1.00 | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✓ 0 | ✗ 0.49 |
-| First-stage F (min) | ✓ 34 | ✓ 27 | ✓ 129 | ✓ 79 | ✓ 278 | ✓ 278 | ✓ 53 | ✓ 49 |
-| **Downstream outcomes** | | | | | | | | |
-| Scale η range (PC–B65; SE about 0.005) | 0.0205–0.0213 | 0.0228–0.0235 | 0.0205–0.0213 | 0.0192–0.0247 | 0.0211–0.0255 | 0.0238–0.0287 | 0.0205–0.0208 | 0.0233–0.0250 |
-| Negative-markup share | ✓ 0 | ✗ 1.00 | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✓ 0 | ✗ 0.49 |
-| Negative-MC share, η = 0 | 0.52–0.58 | – | 0.52–0.58 | – | 0.62–0.72 | 0.63–0.74 | 0.39–0.47 | – |
-| Negative-MC share, η = 0.024 | 0.17–0.34 | – | 0.16–0.33 | – | 0.21–0.35 | 0.23–0.37 | 0–0.04 | – |
-| Goal B: negative-MC share, own η | 0.21–0.36 | – | 0.20–0.35 | – | 0.22–0.32 | 0.21–0.29 | 0.005–0.088 | – |
-| Min MC (% of assets) | −0.31 | – | −0.30 | – | −0.50 | −0.48 | −0.12 | – |
-| **MC screens** | | | | | | | | |
-| Magnitude: ≤ 2% below −0.20%, none below −0.60% | ~ B65 8.9% | – | ~ B65 6.9% | – | ✗ 8–11% below −0.20% | ✗ 7–11% below −0.20% | ✓ | – |
-| Location: not at Vanguard or SPY | ✗ Vanguard 81% (B0); SPY at B65 | – | ✗ Vanguard 79% (B0); SPY at B65 | – | ✗ Vanguard 24%, SSGA 43% (B0); SPY never | ✗ Vanguard 25%, SSGA 38% (B0); SPY never | ~ Vanguard 2% (B0), 26% (B65) | – |
-| **Conduct** | | | | | | | | |
-| Main IV selected set | PC | – | PC | – | B25 (0.08), B50 (0.59), B65 (1.00); PC rejected | B50 (0.13), B65 (1.00); PC rejected | PC, B65 (0.08) | – |
-| Alternative IVs (majority) | PC | – | PC | – | B25, B50 | B25, B50 | PC | – |
-| B0 and B25 rejected | ✓ | – | ✓ | – | ~ B0 rejected; B25 kept (0.08) | ✓ with the main IV | ✓ | – |
-| **Overall** | **passes only with the VA funds** | **demand slopes upward** | **almost identical to T2; passes only with the VA funds** | **demand slopes upward** | **demand slopes down; MC screens fail; conduct favours B50–B65** | **the same without the VA funds** | **passes only with the VA funds** | **49% slope upward** |
+| | 1 T2, with VA | 1 T2, no VA | 1 T2 alternative, no VA | 2 Modified T2 (Danny), with VA | 2 Modified T2, no VA | 3 V2, with VA | 3 V2, no VA | 4 A5 (broad), with VA | 4 A5, no VA | 4 A5 alternative, no VA |
+|---|---|---| --- |---|---|---|---|---|---| --- |
+| **Specification** | | |  | | | | | | |  |
+| Instrument | paper IV0 | paper IV0 | IV0 rebuilt, six-asset-class exclusion | IV0 rebuilt with a category10 exclusion | same | Z (V2) | Z (V2) | paper IV0 | paper IV0 | IV0 rebuilt, six-asset-class exclusion |
+| Donors exclude the target's | index | index | Lipper-6 asset class | index and category10 class | same | Lipper-6 asset class, other share types | same | index | index | Lipper-6 asset class |
+| Price interaction | none | none | none | none | none | cheap | cheap | broad-based | broad-based | broad-based |
+| Estimation rows | 108,300 | 100,529 | 98,151 | 108,300 (2,502 on original IV0) | 100,529 | 96,069 | 96,069 | 108,300 | 100,529 | 98,151 |
+| Supply rows | 108,300 | 100,529 | 100,529 | 108,300 | 100,529 | 107,863 | 100,092 | 108,300 | 100,529 | 100,529 |
+| **Demand outcomes** | | |  | | | | | | |  |
+| Base price coefficient (SE) | −5.606 (1.310) | **+7.244 (1.987)** | −4.123 (0.736) | −5.713 (0.747) | **+1.485 (1.079)** | −2.010 (0.412) | −2.010 (0.412) | −7.503 (1.770) | **+4.009 (1.588)** | −3.983 (0.754) |
+| Interaction (SE) | – | – | – | – | – | −20.542 (0.576) | −20.542 (0.576) | −5.278 (0.372) | −6.924 (0.428) | −4.413 (0.382) |
+| Average own elasticity | −1.61 | +1.91 | −1.09 | −1.64 | +0.39 | −1.52 | −1.52 | −2.86 | +0.31 | −1.52 |
+| Asset-weighted own elasticity | −0.72 | +0.89 | −0.51 | −0.74 | +0.18 | −1.34 | −1.34 | −1.31 | +0.08 | −0.75 |
+| Table 5 funds with e < −1 | 2/15 | 0/15 | 1/15 | 2/15 | 0/15 | 4/15 | 4/15 | 2/15 | 0/15 | 1/15 |
+| **Demand screens** | | |  | | | | | | |  |
+| Goal A: no upward slope (e > 0 share) | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✓ 0 | ✗ 0.49 | ✓ 0 |
+| First-stage F (min) | ✓ 34 | ✓ 27 | ✓ 124 | ✓ 129 | ✓ 79 | ✓ 278 | ✓ 278 | ✓ 53 | ✓ 49 | ✓ 162 |
+| **Downstream outcomes** | | |  | | | | | | |  |
+| Scale η range (PC–B65; SE about 0.005) | 0.0205–0.0213 | 0.0228–0.0235 | 0.0233–0.0245 | 0.0205–0.0213 | 0.0192–0.0247 | 0.0211–0.0255 | 0.0238–0.0287 | 0.0205–0.0208 | 0.0233–0.0250 | 0.0229–0.0233 |
+| Negative-markup share | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✓ 0 | ✗ 0.49 | ✓ 0 |
+| Negative-MC share, η = 0 | 0.52–0.58 | – | 0.61–0.72 | 0.52–0.58 | – | 0.62–0.72 | 0.63–0.74 | 0.39–0.47 | – | 0.54–0.62 |
+| Negative-MC share, η = 0.024 | 0.17–0.34 | – | 0.33–0.48 | 0.16–0.33 | – | 0.21–0.35 | 0.23–0.37 | 0–0.04 | – | 0.12–0.37 |
+| Goal B: negative-MC share, own η | 0.21–0.36 | – | 0.32–0.48 | 0.20–0.35 | – | 0.22–0.32 | 0.21–0.29 | 0.005–0.088 | – | 0.14–0.39 |
+| Min MC (% of assets) | −0.31 | – | −0.46 | −0.30 | – | −0.50 | −0.48 | −0.12 | – | −0.33 |
+| **MC screens** | | |  | | | | | | |  |
+| Magnitude: ≤ 2% below −0.20%, none below −0.60% | ~ B65 8.9% | – | ✗ 2–29% below −0.20% | ~ B65 6.9% | – | ✗ 8–11% below −0.20% | ✗ 7–11% below −0.20% | ✓ | – | ~ B0–B50 pass; B65 5.8% |
+| Location: not at Vanguard or SPY | ✗ Vanguard 81% (B0); SPY at B65 | – | ✗ Vanguard 94% (B0); SPY at B65 | ✗ Vanguard 79% (B0); SPY at B65 | – | ✗ Vanguard 24%, SSGA 43% (B0); SPY never | ✗ Vanguard 25%, SSGA 38% (B0); SPY never | ~ Vanguard 2% (B0), 26% (B65) | – | ✗ Vanguard 32% (B0), 89% (B65); SPY at B65 |
+| **Conduct** | | |  | | | | | | |  |
+| Main IV selected set | PC | – | PC, B50 (0.17), B65 (0.18) | PC | – | B25 (0.08), B50 (0.59), B65 (1.00); PC rejected | B50 (0.13), B65 (1.00); PC rejected | PC, B65 (0.08) | – | PC, B50 (0.31), B65 (0.42) |
+| Alternative IVs (majority) | PC | – | PC | PC | – | B25, B50 | B25, B50 | PC | – | PC |
+| B0 and B25 rejected | ✓ | – | ✓ | ✓ | – | ~ B0 rejected; B25 kept (0.08) | ✓ with the main IV | ✓ | – | ✓ |
+| **Overall** | **passes only with the VA funds** | **demand slopes upward** | **valid sign without the VA funds; flat slope; MC fails** | **almost identical to T2; passes only with the VA funds** | **demand slopes upward** | **demand slopes down; MC screens fail; conduct favours B50–B65** | **the same without the VA funds** | **passes only with the VA funds** | **49% slope upward** | **valid sign without the VA funds; flat slope; MC fails at B50–B65** |
 
 **What the scorecard says.**
-- **T2, the modified T2 and A5 are all fragile.** Their downward-sloping demand, and everything downstream of it, depends on keeping the variable-annuity funds in the estimation. Without those funds T2 and the modified T2 slope upward for every fund-month, and A5 for 49% of them. Section 10 tries 16 versions of the instrument for T2 and A5 without these funds; none gives a sensible demand equation.
+- **T2, the modified T2 and A5 are all fragile.** Their downward-sloping demand, and everything downstream of it, depends on keeping the variable-annuity funds in the estimation. Without those funds T2 and the modified T2 slope upward for every fund-month, and A5 for 49% of them. Section 10 tries 16 versions of the instrument for T2 and A5 without these funds.
+- **The alternative columns are the best T2 and A5 can do without the variable-annuity funds.** Excluding the whole asset class from the donors gives slopes of −4.1 (T2) and −4.0 with −4.4 (A5). They are flatter than the published versions, leave 14 of the 15 Table 5 funds inelastic, and have more negative marginal costs (32–48% and 14–39%), mostly at Vanguard.
 - **Danny's category10 exclusion barely changes T2.** With the variable-annuity funds in, the coefficient is −5.71 against −5.61, the negative-MC share 20–35% against 21–36%, and the conduct result PC alone in both.
-- **V2 is the only specification with downward-sloping demand once the variable-annuity funds are excluded,** and that holds at every cheap cutoff from the 10th to the 30th percentile and with donors from the full source panel (section 9).
+- **V2 and the two alternatives are the specifications with downward-sloping demand once the variable-annuity funds are excluded.** All three rest on the same exclusion of the whole asset class. For V2 the sign holds at the 15th, 20th and 25th percentile cutoffs and with donors from the full source panel (section 9).
 - **V2 does not meet goal B.** With the cheap indicator rebuilt on the source panel, 22–32% of marginal costs are negative, about as many as under T2, and 8–11% are below −0.20%. They sit on non-cheap funds across all firms, not on Vanguard's cheap funds as under T2.
-- **V2's marginal-cost and conduct results are sensitive to the cheap cutoff.** The negative-MC share is 30–44% at the 10th percentile, 14–18% at the 15th, 22–32% at the 20th, 1–3% at the 25th and 9–12% at the 30th.
-- **V2's conduct result is different from the others'.** Perfect competition is rejected with the main instrument, and B50 and B65 fit best.
+- **V2's marginal-cost and conduct results are sensitive to the cheap cutoff.** The negative-MC share is 14–18% at the 15th percentile, 22–32% at the 20th and 1–3% at the 25th.
+- **V2's conduct result is different from the others'.** Perfect competition is rejected with the main instrument, and B50 and B65 fit best. Under the two alternatives PC fits best and B50 and B65 are not rejected.
 
 - **Code:** `code/spec_compare/sc_build.py`, `sc_demand.py`, `sc_downstream.py` (column 1), `sc_danny_cat10.py` (column 2), `sc_v2_robust.py` and `sc_v2_final.py` (column 3 and section 9), `sc_a5.py` (column 4), `sc_exva.py` (the "no VA" columns 1 and 4), `sc_t2a5_nova_grid.py` (section 10).
 - **Logs and CSVs:** `logs/spec_compare/`.
 - **Money market funds:** the 4 in the sample (437 fund-months) stay in columns 1, 2 and 4 and are dropped in column 3, as in each specification's definition.
+- **Alternative columns:** `sc_t2a5_nova_grid.py` with `SC_ONLY=lipper6,pooled,wavg`, then `sc_v2_final.py` with `SC_ALT=1`; logs `sc_t2a5_alt.csv`, `sc_alt_*.csv`, `sc_conduct_T2alt.csv`, `sc_conduct_A5alt.csv`.
 - **Not run:** downstream MC and conduct for the three "no VA" columns with upward-sloping demand, where markups are negative and the results have no meaning.
 
 ## 0. Validation
@@ -139,11 +141,13 @@ p is the expense ratio in percent, TE the tracking error, R the past one-year re
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | T2 | with VA | 108,300 | −5.606 (1.310) | | 33.6 | 0 | −1.61 | 2/15 |
 | 1 | T2 | no VA | 100,529 | **+7.244 (1.987)** | | 26.6 | 1.00 | +1.91 | 0/15 |
+| 1 | T2 alternative (six-class exclusion) | no VA | 98,151 | −4.123 (0.736) | | 123.7 | 0 | −1.09 | 1/15 |
 | 2 | Modified T2 (Danny) | with VA | 108,300 | −5.713 (0.747) | | 128.8 | 0 | −1.64 | 2/15 |
 | 2 | Modified T2 (Danny) | no VA | 100,529 | **+1.485 (1.079)** | | 78.6 | 1.00 | +0.39 | 0/15 |
 | 3 | V2 | with or without VA | 96,069 | −2.010 (0.412) | cheap −20.542 (0.576) | 278 | 0 | −1.52 | 4/15 |
 | 4 | A5 | with VA | 108,300 | −7.503 (1.770) | broad −5.278 (0.372) | 53.0 | 0 | −2.86 | 2/15 |
 | 4 | A5 | no VA | 100,529 | **+4.009 (1.588)** | broad −6.924 (0.428) | 49.0 | 0.49 | +0.31 | 0/15 |
+| 4 | A5 alternative (six-class exclusion) | no VA | 98,151 | −3.983 (0.754) | broad −4.413 (0.382) | 162.3 | 0 | −1.52 | 1/15 |
 
 **Reading.**
 - **T2, the modified T2 and A5 change sign.** The variable-annuity rows alone also slope upward (+2.32 under T2), so the negative coefficient comes from pooling the two groups under common month effects, not from fee variation within either. This is my reading of the numbers, not a separate test.
@@ -155,10 +159,12 @@ p is the expense ratio in percent, TE the tracking error, R the past one-year re
 | # | Sample | PC | B0 | B25 | B50 | B65 |
 |---|---|---|---|---|---|---|
 | 1 T2 | with VA | 0.0205 (0.0051) | 0.0213 | 0.0212 | 0.0211 | 0.0209 |
+| 1 T2 alternative | no VA | 0.0233 | 0.0245 | 0.0245 | 0.0244 | 0.0244 |
 | 2 Modified T2 (Danny) | with VA | 0.0205 | 0.0213 | 0.0212 | 0.0211 | 0.0209 |
 | 3 V2 | with VA | 0.0211 (0.0051) | 0.0227 | 0.0237 | 0.0248 | 0.0255 |
 | 3 V2 | no VA | 0.0238 (0.0050) | 0.0258 | 0.0267 | 0.0278 | 0.0287 |
 | 4 A5 | with VA | 0.0205 | 0.0208 | 0.0208 | 0.0206 | 0.0205 |
+| 4 A5 alternative | no VA | 0.0233 | 0.0230 | 0.0230 | 0.0229 | 0.0229 |
 
 **Reading.**
 - **η depends little on the demand model or the conduct candidate.** Within a sample the spread is 0.001 for the single-slope models and 0.004 for V2, less than one standard error.
@@ -171,16 +177,20 @@ Monthly-mean share of fund-months with MC < 0, B0 → B65. PC is 0 in every row.
 | # | Sample | η = 0 | η = 0.024 | Own η | Share below −0.10% (own η) | Share below −0.20% (own η) | Min MC | Mean markup (%) |
 |---|---|---|---|---|---|---|---|---|
 | 1 T2 | with VA | 0.52–0.58 | 0.17–0.34 | 0.21–0.36 | 0.028–0.266 | 0–0.089 | −0.31 | 0.22–0.31 |
+| 1 T2 alternative | no VA | 0.61–0.72 | 0.33–0.48 | 0.32–0.48 | 0.186–0.386 | 0.021–0.294 | −0.46 | 0.31–0.42 |
 | 2 Modified T2 (Danny) | with VA | 0.52–0.58 | 0.16–0.33 | 0.20–0.35 | 0.021–0.256 | 0–0.069 | −0.30 | 0.22–0.30 |
 | 3 V2 | with VA | 0.62–0.72 | 0.21–0.35 | 0.22–0.32 | 0.148–0.177 | 0.077–0.113 | −0.50 | 0.33–0.41 |
 | 3 V2 | no VA | 0.63–0.74 | 0.23–0.37 | 0.21–0.29 | 0.146–0.169 | 0.067–0.111 | −0.48 | 0.33–0.40 |
 | 4 A5 | with VA | 0.39–0.47 | 0–0.04 | 0.005–0.088 | 0–0.0004 | 0 | −0.12 | 0.13–0.17 |
+| 4 A5 alternative | no VA | 0.54–0.62 | 0.12–0.37 | 0.14–0.39 | 0.026–0.178 | 0–0.058 | −0.33 | 0.23–0.31 |
 
 **Where the negatives are** (own η; share negative within the group).
 
 | Specification, sample, conduct | Vanguard | SSGA | BlackRock | Other firms | SPY | Cheap / non-cheap |
 |---|---|---|---|---|---|---|
 | 1 T2, with VA, B0 | **0.81** | 0.03 | 0.04 | 0.01 | 0 | 0.40 / 0.06 |
+| 1 T2 alternative, no VA, B0 | **0.94** | 0.12 | 0.14 | 0.10 | 0 | 0.58 / 0.11 |
+| 1 T2 alternative, no VA, B65 | **1.00** | 0.67 | 0.55 | 0.11 | **0.85** | 0.77 / 0.22 |
 | 2 Modified T2, with VA, B0 | **0.79** | 0.02 | 0.03 | 0 | 0 | 0.39 / 0.05 |
 | 2 Modified T2, with VA, B65 | **0.96** | 0.51 | 0.38 | 0 | **0.85** | 0.62 / 0.15 |
 | 3 V2, with VA, B0 | 0.24 | 0.43 | 0.16 | 0.20 | 0 | 0 / 0.40 |
@@ -188,6 +198,8 @@ Monthly-mean share of fund-months with MC < 0, B0 → B65. PC is 0 in every row.
 | 3 V2, no VA, B0 | 0.25 | 0.38 | 0.13 | 0.20 | 0 | 0 / 0.40 |
 | 3 V2, no VA, B65 | 0.31 | 0.60 | 0.39 | 0.17 | 0 | 0.03 / 0.51 |
 | 4 A5, with VA, B65 | 0.26 | 0.09 | 0.09 | 0 | 0 | 0.16 / 0.03 |
+| 4 A5 alternative, no VA, B0 | 0.32 | 0.06 | 0.08 | 0.07 | 0 | 0.23 / 0.05 |
+| 4 A5 alternative, no VA, B65 | **0.89** | 0.53 | 0.38 | 0.07 | **0.85** | 0.67 / 0.15 |
 
 **Reading.**
 - **Goal B does not separate V2 from the single-slope models on the share.** T2 and the modified T2 have 20% to 36% of marginal costs negative; V2 has 21% to 32%. A5 with the variable-annuity funds has fewer (0.5% to 9%), but its demand is not valid without them.
@@ -202,10 +214,12 @@ Selected sets (MCS p ≥ 0.05), η scheme A (0.024); MCS p-values in brackets.
 | # | Sample | **Main IV** (rival2 × csent_index) | rival2 × csent_income3 | rival3 × csent_index | rival2 × bab_usa / × fmax / × rotator | Min F, main IV |
 |---|---|---|---|---|---|---|
 | 1 T2 | with VA | PC (B50 0.02, B65 0.03 rejected) | PC | PC | PC | 67 |
+| 1 T2 alternative | no VA | PC, B50 (0.17), B65 (0.18) | PC, B50, B65 | PC | PC | 69 |
 | 2 Modified T2 (Danny) | with VA | PC (B50 0.02, B65 0.03 rejected) | PC | PC | PC | 69 |
 | 3 V2 | with VA | B25 (0.08), B50 (0.59), B65 (1.00); PC rejected (0.005) | B25, B50, B65 | B25, B50, B65 | B25, B50 (B0 with rotator; B65 with bab_usa) | 121 |
 | 3 V2 | no VA | B50 (0.13), B65 (1.00); PC rejected (0.048) | B50, B65 | B25, B50, B65 | B0, B25, B50 | 139 |
 | 4 A5 | with VA | PC, B65 (0.08) | PC, B65 | PC | PC | 103 |
+| 4 A5 alternative | no VA | PC, B50 (0.31), B65 (0.42) | PC, B50, B65 | PC | PC | 112 |
 
 Schemes B (own η), C (PC η) and A with markups capped give the same sets for columns 1, 2 and 4. For V2, scheme C agrees with A. Under scheme B without the variable-annuity funds PC re-enters the set (p 0.36), so V2's rejection of PC is not robust to the choice of η there.
 
@@ -255,16 +269,13 @@ All rows are V2's model (price and price × cheap, instruments Z and Z × cheap)
 | Variant | Cheap share of rows | Non-cheap α (SE) | × cheap (SE) | Min F | e > 0 | Table 5 e < −1 | Negative MC B0–B65, with VA | No VA |
 |---|---|---|---|---|---|---|---|---|
 | **V2 (column 3): cutoff at the 20th percentile** | 0.46 | **−2.010 (0.412)** | −20.542 (0.576) | 278 | 0 | 4/15 | 0.22–0.32 | 0.21–0.29 |
-| Cutoff at the 10th percentile | 0.28 | −2.561 (0.352) | −21.759 (0.692) | 319 | 0 | 5/15 | 0.30–0.44 | 0.29–0.40 |
 | Cutoff at the 15th percentile | 0.40 | −3.013 (0.327) | −21.461 (0.575) | 333 | 0 | 5/15 | 0.14–0.18 | 0.13–0.17 |
 | Cutoff at the 25th percentile | 0.53 | −3.984 (0.556) | −20.189 (0.879) | 195 | 0 | 5/15 | 0.007–0.025 | 0.003–0.016 |
-| **Cutoff at the 30th percentile** | 0.59 | **−2.219 (0.419)** | −15.435 (0.518) | 296 | 0 | 3/15 | 0.09–0.12 | 0.08–0.10 |
 | **Donors from the full source panel** | 0.46 | **−1.701 (0.410)** | −19.787 (0.558) | 298 | 0 | 4/15 | 0.32–0.42 | 0.31–0.40 |
 | Cheap from the index CSV (V2 as first sent to Danny) | 0.47 | −3.642 (0.419) | −20.562 (0.646) | 316 | 0 | 5/15 | 0.053–0.082 | 0.041–0.073 |
 | **Exclusion by Danny's category10 classes** | 0.46 | **+2.135 (0.592)** | −17.858 (0.549) | 246 | **0.54** | 3/15 | – | – |
-| Category10 exclusion, cutoff at the 30th percentile | 0.59 | +2.669 (0.555) | −14.115 (0.420) | 359 | 0.41 | 1/15 | – | – |
 
-**The 30% cutoff.** Demand slopes down for every fund-month. The cheap term falls from −20.5 to −15.4, because the cheap group now includes funds with higher fees, and only 3 of the 15 Table 5 funds have e < −1. The negative-MC share is 9–12%.
+**Cutoffs.** At the 15th and 25th percentiles demand slopes down for every fund-month and the cheap term is unchanged (−21.5 and −20.2). The non-cheap slope is steeper than at the 20th percentile (−3.0 and −4.0 against −2.0).
 
 **Donors from the full source panel.** The source panel has 54,945 fund-months with a family code and a fee that are not in the index CSV, mostly a fund's first 12 months; 93% of their fees are reported by CRSP. Using them as donors keeps demand downward-sloping everywhere. The non-cheap slope is −1.70 against −2.01, and the negative-MC share rises to 32–42%.
 
@@ -274,13 +285,13 @@ All rows are V2's model (price and price × cheap, instruments Z and Z × cheap)
 - **So V2's non-cheap result depends on the broad-asset-class exclusion.** That is an identifying assumption, and the data cannot confirm it.
 
 **Reading.**
-- **The sign of demand is robust to the cutoff and the donor pool.** No fund-month has e > 0 at any cutoff from the 10th to the 30th percentile, or with source-panel donors.
-- **The cheap slope is stable at the 10th to 25th percentiles** (−20.2 to −21.8) and smaller at the 30th (−15.4).
-- **The non-cheap slope and the negative-MC share are not robust.** The share moves between 1% and 44% across cutoffs, and not monotonically: 30–44%, 14–18%, 22–32%, 1–3%, 9–12% at the 10th, 15th, 20th, 25th and 30th percentiles.
+- **The sign of demand is robust to the cutoff and the donor pool.** No fund-month has e > 0 at the 15th, 20th or 25th percentile cutoff, or with source-panel donors.
+- **The cheap slope is stable** (−19.8 to −21.5 across the cutoffs and donor pools).
+- **The non-cheap slope and the negative-MC share are not robust.** The share is 14–18% at the 15th percentile, 22–32% at the 20th and 1–3% at the 25th, so it does not move in one direction with the cutoff.
 - **The share depends on which large funds fall on each side of the cutoff.** The version first sent to Danny differs from column 3 in the status of 37 funds, among them Vanguard Total Stock Market Investor and Vanguard 500 Investor, and has 5–8% negative.
 - **Not done:** the conduct test for these variants.
 
-## 10. T2 and A5 without the variable-annuity funds: no version of the instrument gives a sensible demand equation
+## 10. T2 and A5 without the variable-annuity funds: only the six-asset-class exclusion gives downward-sloping demand, and it is flat
 
 Sample: Table 2 Panel A minus the 112 variable-annuity funds (100,529 fund-months). The instrument is rebuilt from Danny's full source panel in 16 ways: four exclusions, pooled or same share type, lag-AUM-weighted mean or median. Rows where the instrument is undefined are dropped (`code/spec_compare/sc_t2a5_nova_grid.py`; `sc_t2a5_nova_grid.csv`).
 
@@ -304,5 +315,6 @@ Not shown: the four versions with pooled share types and a median (first-stage F
 - **With the paper's exclusion (same index), category20 or category10 and pooled share types, every version slopes upward.** That includes Danny's preferred construction.
 - **Only the six-asset-class exclusion gives a clearly negative slope,** −4.1 for T2 and −4.0 with −4.4 for A5. This is the same exclusion V2 relies on.
 - **Those versions are not sensible on the other criteria.** One of the 15 Table 5 funds has e < −1, a third to a half of marginal costs are negative under T2 (13% to 39% under A5), and 29% of fund-months are below −0.20% at B65 under T2.
-- **So no version meets both goals.** A single slope, or a broad-based interaction, cannot give the low-fee funds a slope steep enough once the variable-annuity funds are out.
+- **The pooled, weighted six-class version is the alternative reported in the scorecard,** because it is the closest to the paper's own construction and has the fewest negative marginal costs of the valid versions.
+- **No version meets both goals.** A single slope, or a broad-based interaction, cannot give the low-fee funds a slope steep enough once the variable-annuity funds are out.
 - **Variations in share type matter only for the "same type" rows.** T2's and A5's own instruments pool share types.

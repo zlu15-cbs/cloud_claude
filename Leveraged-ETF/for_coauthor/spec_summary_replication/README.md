@@ -40,6 +40,7 @@ Memory: about 6 GB for the build step, 2.5 GB per conduct run.
 | Column 2, Danny's category10 specification | `SC_DANNY=<folder with the two classified files> python sc_danny_cat10.py`, then `downstream` and `conduct D10` | `sc_danny_cat10_demand.csv` (rows `D10`, `D10x`) |
 | Column 3 and section 9: V2 with the cheap indicator rebuilt on the source panel, cutoffs from the 10th to the 30th percentile, source-panel donors, category10 exclusion | `SC_SOURCE=<path to index_funds_preprocess_oct2026.csv> SC_DANNY=<folder with the two classified files> python sc_v2_robust.py`, then `python sc_v2_final.py downstream` and `python sc_v2_final.py conduct V2n` (and `V2nx`) | `sc_v2_robust.csv`; `sc_v2_final_scale.csv`, `sc_v2_final_mc.csv`, `sc_conduct_V2n.csv`, `sc_conduct_V2nx.csv` |
 | Section 10: T2 and A5 without the variable-annuity funds, 16 versions of the instrument | same two environment variables, `python sc_t2a5_nova_grid.py` | `sc_t2a5_nova_grid.csv` |
+| Alternative columns for T2 and A5 (six-asset-class exclusion, no variable-annuity funds) | `SC_ONLY=lipper6,pooled,wavg python sc_t2a5_nova_grid.py`, then `SC_ALT=1 python sc_v2_final.py downstream` and `SC_ALT=1 python sc_v2_final.py conduct T2alt` (and `A5alt`) | `sc_t2a5_alt.csv`, `sc_conduct_T2alt.csv`, `sc_conduct_A5alt.csv` |
 
 - `replicate_V2.py` is the V2 script sent earlier. The other scripts import its functions (sample filters, cheap indicator, V2 instrument, first-stage F, markups, scale, conduct test).
 - `sc_broad_ladder.py` is included because `sc_a5.py` imports one function from it.
