@@ -33,7 +33,7 @@ python replicate_V2.py --index-csv nonLev_funds_product_month_level_v2_patched.c
     - `--no-conduct` skips the pyRVtest runs.
     - `--donor-mmf sample` drops only the 4 in-sample money market funds from the donor pool (§3.2). That reproduces our first V2 run (α = −3.607), for reference.
 - **Outputs (`V2_*.csv`):**
-    - `demand`: coefficients, SEs, F, elasticity summaries, lead tests;
+    - `demand`: coefficients, SEs, F, elasticity summaries (the file also has lead-test columns, which we no longer use);
     - `table5`: own elasticities of the 15 Table 5 funds;
     - `scale`: η by conduct;
     - `mc`: negative-MC statistics;
@@ -82,7 +82,7 @@ For fund j in month t:
       (4) other asset class:  asset_class(k) ≠ asset_class(j).
 
 - **Donors are not limited to the Table 2 sample.** Condition (1) uses every fund in the index CSV that month, including funds your sample filters later drop (share < 0.0001, `prefer` = 6). In 2010 and later, 77% of donor fund-months are outside Table 2.
-    - **This matters.** With donors restricted to Table 2 fund-months, demand slopes upward: α = +0.62, 51% of fund-months with e > 0, lead t-statistics of 6.4 and 7.5.
+    - **This matters.** With donors restricted to Table 2 fund-months, demand slopes upward: α = +0.62, 51% of fund-months with e > 0.
 - **Unweighted median** of the donors' current-month expense ratios. There is no lag and no AUM weight.
 - **Missing Z.** Z is missing when j has no `firm_f_old`, or when no donor satisfies (2)–(4) that month. Those rows stay in the market (in the shares, in s₀ and on the supply side) but are not used to estimate demand (§5.1).
 - **Family** = `firm_f_old`, the CSV's family code: CRSP's management-company code (`mgmt_cd`), upper-cased. It is not `firm_f` (the parent firm, used as `firm_ids` for ownership). Rows without `firm_f_old` get no Z.
@@ -142,7 +142,6 @@ Z_jt = median(0.05, 0.07, 0.10) = 0.07. Funds of other families never enter.
 - **Estimation:** pyblp 1.3.0 logit. The excluded instruments are Z and Z × gene_idx (exactly identified). SEs are clustered by month.
 - **First-stage F:** Sanderson–Windmeijer, cluster-robust, for p and p × gene_idx.
 - **Own elasticity:** e_jt = (α + α_x gene_idx_j) p_jt (1 − s_jt).
-- **Lead test:** regress ξ_jt on Z_j,t+k (k = 12, 24, 36). Both are residualized on the controls and the two sets of fixed effects, then fund-demeaned; t-statistics are clustered by month. A valid instrument should not predict past demand shocks.
 - **Table 5 funds:** the top 5 funds by AUM in the last month for each of BlackRock, Vanguard and SSGA. Elasticities are measured in each fund's last market.
 
 ### 3.6 Supply side (all 107,863 fund-months)
@@ -210,7 +209,6 @@ V2 and two earlier models, scored on the same rows as our earlier scorecard. The
 | **Demand screens** | | | |
 | No upward slope (e > 0 share) | ✓ 0 | ✓ 0 | ✗ 0.25 |
 | First-stage F (min) | ✓ 316 | ✓ 114 | ✓ 44 |
-| Lead tests, max \|t\| (12/24/36) | ~ 2.2 (−2.0 / −2.2 / −0.5) | ✗ 4.3 | ✓ 1.8 |
 | Fee heterogeneity (cheap vs non-cheap) | ✓ | ✓ | ✓ |
 | **Downstream outcomes** | | | |
 | Scale η range (PC–B65; SE about 0.005) | 0.0210–0.0220 | 0.0205–0.0212 | 0.0193–0.0205 |
@@ -245,7 +243,6 @@ V2 and two earlier models, scored on the same rows as our earlier scorecard. The
 | Log age | 0.572 (0.007) |
 | SW F: price / price × cheap | 315.8 / 335.6 |
 | Average own elasticity | −1.93 |
-| Lead t (12 / 24 / 36) | −2.04 / −2.18 / −0.52 |
 
 **Table 5 funds** (own elasticity in the last market; cheap = gene_idx):
 

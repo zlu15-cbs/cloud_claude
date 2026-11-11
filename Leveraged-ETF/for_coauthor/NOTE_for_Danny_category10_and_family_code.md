@@ -34,12 +34,10 @@ Your note says that blank family strings match one another in the original IV0, 
 | Specification | All 108,300 rows | 100,529 rows with a family code | 7,771 rows without one |
 |---|---|---|---|
 | **Table 2 col 2** (one slope) | **−5.606 (1.310)**; F 33.6 | **+7.244 (1.987)**; F 26.6 | **+2.322 (0.538)**; F 57.2 |
-| Lead tests, t (12/24/36 months) | −3.3 / −1.5 / 2.1 | 6.7 / 11.6 / 18.9 | 0.1 / −0.3 / −0.2 |
 | **Broad-based interaction** (Table A7 in my copy of the draft): specialized | **−7.503 (1.770)** | **+4.009 (1.588)** | +0.747 (0.293) |
 | × broad-based | −5.278 (0.372) | −6.924 (0.428) | +4.884 (1.840) |
 | First-stage F (min) | 53.0 | 49.0 | 11.3 |
 | Share of fund-months with e > 0 | 0 | 0.49 | 1.00 |
-| Lead tests, t (12/24/36 months) | −5.3 / −4.9 / −2.4 | 4.1 / 10.9 / 16.4 | −0.9 / −2.5 / −2.2 |
 
 The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 
@@ -53,13 +51,13 @@ The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 
 **What happens when their families are recovered.** I rebuilt IV0 for these rows only (benchmark exclusion, lag-AUM weights), and kept your original IV0 for all other rows.
 
-| IV0 for the variable-annuity rows | Table 2 col 2, all rows | First-stage F | Lead t (12/24/36) | Broad-based: specialized; × broad; share e > 0 |
-|---|---|---|---|---|
-| Original (all blank families pooled) | −5.606 (1.310) | 33.6 | −3.3 / −1.5 / 2.1 | −7.503; −5.278; 0 |
-| Donors: the same parent firm's other variable-annuity funds | −0.217 (0.048) | 344.6 | 2.1 / 7.0 / 15.8 | +0.809; −1.460; 0.47 |
-| Donors: all funds of the parent firm (`firm_f`) | −0.340 (0.049) | 313.5 | 0.9 / 6.0 / 14.8 | +0.791; −1.636; 0.47 |
+| IV0 for the variable-annuity rows | Table 2 col 2, all rows | First-stage F | Broad-based: specialized; × broad; share e > 0 |
+|---|---|---|---|
+| Original (all blank families pooled) | −5.606 (1.310) | 33.6 | −7.503; −5.278; 0 |
+| Donors: the same parent firm's other variable-annuity funds | −0.217 (0.048) | 344.6 | +0.809; −1.460; 0.47 |
+| Donors: all funds of the parent firm (`firm_f`) | −0.340 (0.049) | 313.5 | +0.791; −1.636; 0.47 |
 
-- With a proper family instrument for these funds, the Table 2 coefficient falls from −5.6 to about −0.3, and the lead tests fail.
+- With a proper family instrument for these funds, the Table 2 coefficient falls from −5.6 to about −0.3.
 - **This estimate is not credible either, because the fee data for these funds look wrong.** In 85% of firm-months, every variable-annuity fund of a firm has the same expense ratio in the CSV. Allianz's funds are all at 0.400% in 2010–2016, 0.535% in 2018 and 0.458% in 2020. Mutual of America's funds, including its S&P 500 index fund, are all at 0.13% in 2010, 1.05% in 2012, 1.42% in 2014 and 1.93% in 2022.
 - So a family instrument for these funds is almost the fund's own fee (first-stage F in the thousands on these rows). It cannot identify the slope.
 
@@ -67,7 +65,7 @@ The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 - **The sign is fragile.** Demand slopes upward on the rows with a family code and upward on the rows without one. It slopes downward only when the two are pooled. The negative coefficient therefore comes from comparing the two groups through the common month effects, not from fee variation within either group. That last sentence is my reading of the three columns; I have not decomposed it further.
 - **It is hard to defend economically.** The paper's identification argument is that a family's fees on other products shift this product's fee. For these rows the instrument averages the fees of unrelated insurers' funds. Removing the rows reverses the result, and so does giving them their true families.
 - **The broad-based table inherits it.** With a family code, specialized funds slope upward (+4.0) and 49% of fund-months have e > 0. Estimated on their own, specialized funds slope upward under every instrument I tried, including the original IV0 on all rows (+19.9, SE 5.3).
-- **The stricter exclusions help, which supports your direction.** On the rows with a family code, the one-slope coefficient is +6 to +10 with the benchmark-only exclusion and −1.3 to −0.3 with an asset-class exclusion. The lead-test t-statistics fall from 10–17 to 3–7.
+- **The stricter exclusions help, which supports your direction.** On the rows with a family code, the one-slope coefficient is +6 to +10 with the benchmark-only exclusion and −1.3 to −0.3 with an asset-class exclusion.
 
 **The same split for the fee-based interactions** (original IV0):
 

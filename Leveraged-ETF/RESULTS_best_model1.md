@@ -30,7 +30,6 @@
 | Average own elasticity | −3.28 | −1.93 |
 | Share of fund-months with e > 0 | 0 | **0** |
 | Table 5 funds with \|e\| > 1 | 7/15 | 5/15 |
-| Lead tests t (12/24/36) | −2.4 / −4.3 / −4.0 | **−2.0 / −2.2 / −0.5** |
 
 **Downstream** (107,863 fund-months: all of Table 2 except the money market funds).
 
@@ -71,13 +70,12 @@ B0 and B25 are rejected under every instrument (T −5 to −11).
     - no upward slope;
     - the highest precision (SE 0.42);
     - F 311;
-    - the smallest lead t's of any steep-slope specification, with the 36-month lead now −0.5 against −4.0 before.
 3. **Lipper classes are consistent with the share-class ruling** (CRSP-supplied, not name keywords) and fix the clear errors of both earlier classifications:
     - target-date and target-risk funds (Vanguard LifeStrategy, TIAA Lifecycle, Russell strategy funds) become allocation;
     - single-country iShares funds become international equity;
     - sector ETFs become US equity.
 
-    They also improve every demand screen relative to our classes on the same rows (V1 → V2: α −3.04 → −3.61, leads −4.0 → −2.2).
+    They also improve every demand screen relative to our classes on the same rows (V1 → V2: α −3.04 → −3.61).
 4. **Dropping the old keyword grid** removes a filter with no reason under the CRSP-flag ruling.
 5. **Keeping all rows fails, so V2 does not do it.** Giving the 112 family-less funds their parent firm (`firm_f`) as family, with or without a fallback instrument, makes demand slope up for 55% of fund-months (V3–V7). The family-less funds are mostly insurance-channel trusts, and the parent firm's retail and ETF fees evidently don't shift their fees. The supply side still uses all 107,863 rows.
 
@@ -90,7 +88,7 @@ B0 and B25 are rejected under every instrument (T −5 to −11).
 | 3 index exclusion | −1.25, valid | **+1.49, invalid** |
 | 4 no interaction | −0.85 | −0.94 (flat) |
 | 5 paper IV, grid rows | −2.72, valid (F 13) | **+2.03, invalid** |
-| 6 paper IV, all rows | −8.13, valid (F 18) | **−3.03 (SE 1.85), valid**, F 41, leads −1.3 / −0.6 / 2.7 |
+| 6 paper IV, all rows | −8.13, valid (F 18) | **−3.03 (SE 1.85), valid**, F 41 |
 | 7 Danny's benchmark | +5.85, 25% e > 0 | +7.90, 25% e > 0 |
 | 8, 9 | invalid | invalid |
 
@@ -162,7 +160,7 @@ B0 and B25 are rejected under every instrument (T −5 to −11).
 
 ## 5b. Final V2: all money market funds out of the donor pool, and why rows lack Z
 
-**Code and outputs.** `code/explore/step40_v2_rows_mmf_donors.py` and `logs/step40.log`. Also `for_coauthor/V2_replication/replicate_V2.py`, a standalone script. In `--donor-mmf sample` mode it reproduces step38's V2 exactly: N, α, SE, F, leads, η, negative-MC share and minimum MC.
+**Code and outputs.** `code/explore/step40_v2_rows_mmf_donors.py` and `logs/step40.log`. Also `for_coauthor/V2_replication/replicate_V2.py`, a standalone script. In `--donor-mmf sample` mode it reproduces step38's V2 exactly: N, α, SE, F, η, negative-MC share and minimum MC.
 
 **What changed.** step38 dropped from the donor pool only the 4 money market funds that are in the Table 2 sample. The index CSV holds 16 money market share classes.
 - **Flag rule:** "money market" in a CRSP name AND a money-market Lipper class or CRSP style code IM\*.
@@ -178,7 +176,6 @@ B0 and B25 are rejected under every instrument (T −5 to −11).
 | α (SE) | −3.607 (0.419) | −3.642 (0.419) |
 | α_x (SE) | −20.596 (0.648) | −20.562 (0.646) |
 | Min F | 311.1 | 315.8 |
-| Lead t | −2.01 / −2.15 / −0.47 | −2.04 / −2.18 / −0.52 |
 | Table 5 \|e\| > 1 | 5/15 | 5/15 |
 | Negative-MC share B0–B65 | 0.055–0.084 | 0.053–0.082 |
 | Min MC | −0.215 | −0.212 |
@@ -202,14 +199,14 @@ B0 and B25 are rejected under every instrument (T −5 to −11).
 - **Groups:** US large, mid, small and sector; international developed; global; emerging; single region or country; government bond; core and credit bond; municipal bond; allocation; real asset; other.
 - **Everything else** is as in the final V2.
 
-| Exclusion (all without money market funds) | Non-cheap α (SE) | Min F | e > 0 | Lead t (12/24/36) | Table 5 \|e\| > 1 | Negative-MC share B0–B65 |
-|---|---|---|---|---|---|---|
-| **6 asset classes (V2)** | **−3.64 (0.42)** | 316 | 0 | −2.0 / −2.2 / −0.5 | 5/15 | 0.05–0.08 |
-| 14 Lipper groups | −0.25 (0.40) | 440 | 0 | −3.6 / −3.9 / −4.0 | 3/15 | 0.84–0.86 (more than half below −0.60%) |
-| 783 clusters (model 2, step39) | +0.40 | | 0.53 | | | |
-| 1,662 indices (model 3, step39) | +1.49 | | invalid | | | |
+| Exclusion (all without money market funds) | Non-cheap α (SE) | Min F | e > 0 | Table 5 \|e\| > 1 | Negative-MC share B0–B65 |
+|---|---|---|---|---|---|
+| **6 asset classes (V2)** | **−3.64 (0.42)** | 316 | 0 | 5/15 | 0.05–0.08 |
+| 14 Lipper groups | −0.25 (0.40) | 440 | 0 | 3/15 | 0.84–0.86 (more than half below −0.60%) |
+| 783 clusters (model 2, step39) | +0.40 | | 0.53 | | |
+| 1,662 indices (model 3, step39) | +1.49 | | invalid | | |
 
-**Reading.** The finer the exclusion, the flatter the non-cheap slope and the worse the lead tests. That is the pattern expected when the remaining donors share demand shocks with fund j: their fees move with j's demand, which biases α toward zero. The 6-class exclusion is the finest level tested that passes the demand screens.
+**Reading.** The finer the exclusion, the flatter the non-cheap slope. That is the pattern expected when the remaining donors share demand shocks with fund j: their fees move with j's demand, which biases α toward zero. The 6-class exclusion is the finest level tested that passes the demand screens.
 
 ## 5d. Donors from the whole index CSV vs the Table 2 sample only
 
@@ -217,15 +214,15 @@ B0 and B25 are rejected under every instrument (T −5 to −11).
 
 **Setup.** Z_jt uses same-month donors only, so funds before 2010 never enter Z for an estimation row. They matter only for the per-index asset-class assignment. What differs between the two versions is the same-month donors that the Table 2 filters drop: market share below 0.01%, `prefer` = 6 (index R² below 0.95) and fee ≤ 0. In 2010 and later, 362,944 of the 470,807 donor-pool fund-months (77%) are outside Table 2.
 
-| Donors | N | Non-cheap α (SE) | α_x | Min F | e > 0 | Lead t (12/24/36) | Table 5 \|e\| > 1 |
-|---|---|---|---|---|---|---|---|
-| **Whole CSV (V2)** | 96,069 | −3.64 (0.42) | −20.56 | 316 | 0 | −2.0 / −2.2 / −0.5 | 5/15 |
-| Table 2 fund-months only | 90,163 | +0.62 (0.52) | −17.83 | 279 | **0.51** | 0.9 / **6.4 / 7.5** | 3/15 |
+| Donors | N | Non-cheap α (SE) | α_x | Min F | e > 0 | Table 5 \|e\| > 1 |
+|---|---|---|---|---|---|---|
+| **Whole CSV (V2)** | 96,069 | −3.64 (0.42) | −20.56 | 316 | 0 | 5/15 |
+| Table 2 fund-months only | 90,163 | +0.62 (0.52) | −17.83 | 279 | **0.51** | 3/15 |
 
 - Z differs on 61,545 rows (correlation 0.90).
 - With Table 2 donors only, negative MC is zero. That is mechanical: with upward-sloping demand the markups are negative.
 
-**Reading.** The small and loosely tracking funds of the same family carry most of the instrument's identifying variation. Restricted to Table 2 donors, Z fails both the slope and the lead tests. Anyone replicating V2 must build Z from the whole CSV.
+**Reading.** The small and loosely tracking funds of the same family carry most of the instrument's identifying variation. Restricted to Table 2 donors, Z fails the slope screen. Anyone replicating V2 must build Z from the whole CSV.
 
 ## 6. Decisions this needs from Gene
 

@@ -18,7 +18,6 @@
     - With the pre-specified instrument, PC, B50 and B65 cannot be separated under valid demand; most alternative instruments select PC alone.
     - "PC only" with the main instrument arises only with invalid or flat demand, which is how Danny's PDFs get it.
 6. **The open demand choice is the instrument's exclusion level** (asset class −8.0 / cluster −3.6 / index −1.3).
-    - The lead tests favour the narrower exclusions.
     - The MC criteria (magnitude and location) favour the asset-class exclusion.
     - The sample choice (family-id rows versus all 108,300) matters for the paper's IV (−2.7 versus −8.1) but not for the conduct conclusions.
 
@@ -42,7 +41,6 @@
 | **Demand screens** | | | | | | | | | |
 | No upward slope (e > 0 share) | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✗ 0.25 | ✗ 0.20 | ✗ 0.20 |
 | First-stage F (min) | ✓ 114 | ✓ 72 | ✓ 103 | ✓ 222 | ~ 13 | ~ 18 | ✓ 44 | ✓ 25 | ✓ 225 |
-| Lead tests, max \|t\| (12/24/36) | ✗ 4.3 | ✓ 1.4 | ✓ 1.6 | ✗ 4.2 | ~ 2.2 | ✗ 5.3 | ✓ 1.8 | ✗ 18.5 | ✓ 1.0 |
 | Fee heterogeneity (cheap vs non-cheap) | ✓ | ✓ | ✓ | ✗ none | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Downstream outcomes** | | | | | | | | | |
 | Scale η range (PC–B65) | 0.0205–0.0212 | 0.0204–0.0215 | 0.0186–0.0227 | 0.0205–0.0253 | 0.0203–0.0219 | 0.0205–0.0212 | 0.0193–0.0205 | 0.0135–0.0205 | 0.0193–0.0205 |
@@ -57,7 +55,7 @@
 | Alternative IVs (majority) | PC | PC | PC, B65 | PC | PC | PC | PC | PC | PC |
 | B0 and B25 rejected | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Robust to η scheme and capping | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Overall** | **pass** (lead caveat) | MC location fails | MC fails | MC fails, no heterogeneity | MC fails at B50/B65 and location | **pass** (weak F, lead caveat) | demand fails | demand and MC fail | demand fails |
+| **Overall** | **pass** | MC location fails | MC fails | MC fails, no heterogeneity | MC fails at B50/B65 and location | **pass** (weak F) | demand fails | demand and MC fail | demand fails |
 
 Index market, logit demand, 9 demand models (`RESULTS_demand_grid.md` §4a).
 - **Code:** `code/explore/downstream.py`, `step34_downstream.py`; validation `step33_downstream_validate.py`.

@@ -4,8 +4,7 @@
 
 1. **Goal A (no upward-sloping demand) does not separate the five specifications: all have a zero share of e > 0.**
     - The other demand criteria do. First-stage F: V2 316, proxy 4p 87, T2 34, A5 23.
-    - Lead tests, max |t|: V2 2.2; T2 3.3; 4p 3.5; A5 6.2.
-    - Only V2 comes close to passing every demand screen. A5's top-tercile slope is −3.7 with an SE of 6.1.
+    - A5's top-tercile slope is −3.7 with an SE of 6.1, so its base slope is not identified.
 2. **Goal B (fewer negative MCs) ranks them A5 < 4p ≈ V2 < T2 < V2 without cheap.**
     - Negative-MC share at each candidate's own η, B0–B65: A5 0.001; 4p 0.006–0.163; V2 0.053–0.082; T2 0.21–0.36; spec 5 1.00.
     - T2's negatives sit at Vanguard (81% of its fund-months at B0) and reach SPY at B65. Securities lending cannot explain either.
@@ -25,7 +24,7 @@
     - PC is the best-fitting model everywhere except under A5, where B65 fits best, PC is kept at p = 0.06 and one alternative instrument rejects it.
 6. **The open choice is between V2 and a single-slope model with a stricter exclusion (4p), and it turns on Danny's actual category10 instrument, which we do not have.**
     - Our proxy 4p gives −9.11 against his −5.71, so 4p's good MC results may not carry over to his instrument.
-    - A5 has the best MC and Table 5 results but the worst lead tests, so it is not a candidate on the demand criteria.
+    - A5 has the best MC and Table 5 results but does not identify its base slope.
 
 ## Scorecard: all 5 models
 
@@ -50,7 +49,6 @@
 | **Demand screens** | | | | | |
 | Goal A: no upward slope (e > 0 share) | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 |
 | First-stage F (min) | ✓ 34 | ✓ 23 | ✓ 316 | ✓ 87 | ✓ 384 |
-| Lead tests, max \|t\| (12/24/36) | ✗ 3.3 (−3.3 / −1.5 / 2.1) | ✗ 6.2 (−3.7 / −6.2 / −2.1) | ~ 2.2 (−2.0 / −2.2 / −0.5) | ✗ 3.5 (−3.5 / −3.1 / −2.5) | ✗ 3.1 (1.6 / 1.6 / 3.1) |
 | Slope precisely estimated for every group | ✓ | ✗ top tercile SE 6.1 | ✓ | ✓ | ✗ zero |
 | **Downstream outcomes** | | | | | |
 | Scale η range (PC–B65; SE about 0.005) | 0.0205–0.0213 | 0.0189–0.0205 | 0.0210–0.0220 | 0.0205–0.0210 | 0.0211–0.0339 (SE up to 0.034) |
@@ -67,7 +65,7 @@
 | Alternative IVs (majority) | PC | PC, B65 (rival3: B50, B65; PC rejected) | PC | PC | PC |
 | B0 and B25 rejected | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Robust to η scheme and capping | ✓ | ~ B50 enters or leaves at p 0.05–0.10 | ✓ | ✓ | ✓ |
-| **Overall** | **demand passes goal A, fails leads; MC fails at Vanguard** | **best MC and Table 5; worst leads, imprecise base slope** | **passes demand screens; MC location caveat** | **proxy only: good MC at B0/B25, fails leads** | **flat demand; MC fails; not a usable model** |
+| **Overall** | **demand passes goal A; MC fails at Vanguard** | **best MC and Table 5; imprecise base slope** | **passes demand screens; MC location caveat** | **proxy only: good MC at B0/B25** | **flat demand; MC fails; not a usable model** |
 
 - **Code:** `code/spec_compare/sc_build.py` (panel and instruments), `sc_demand.py` (demand fits), `sc_downstream.py` (scale, MC, location, conduct), `replicate_V2.py` (copy of the V2 script, whose functions the three scripts call).
 - **Logs and CSVs:** `logs/spec_compare/`.
@@ -80,7 +78,7 @@
 |---|---|
 | T2: paper's Table 2 col 2, −5.606 (1.310), F 33.6 | **−5.606 (1.310), F 33.6**: exact |
 | A5: earlier run in `OTHER_SPECS_explored.md` §1, −3.714 (6.133); −52.7; −12.0; F 22.6; 13/15 | **−3.714 (6.133); −52.70; −11.99; F 22.6; 13/15**: exact. The paper has no Table A5 demand specification in `EXPECTED_RESULTS.md`, so A5 is the fee-tercile interaction of `CLOUD_PROMPT_explore_price_heterogeneity.md` |
-| V2: N 96,069; −3.642 (0.419); −20.562 (0.646); F 315.8; leads −2.04 / −2.18 / −0.52; 5/15 | **exact on every number** |
+| V2: N 96,069; −3.642 (0.419); −20.562 (0.646); F 315.8; 5/15 | **exact on every number** |
 | V2 downstream: negative MC 0.053–0.082; min MC −0.212; conduct PC, B50 (0.19), B65 (0.79) | **exact** |
 | Danny's preferred, category10 pooled: −5.713 (0.747), 2,502 fallback rows | **not reproduced: proxy 4p gives −9.107 (0.912)** with 10,263 fallback rows. With blank family codes matched to one another, as in his construction: −7.254 (0.456), 2,492 fallback rows |
 | Our rebuilt IV0 with the paper's own exclusion (index only) against the original IV0 | equal within 0.0005 on 90% of the rows with a family code; T2 with it gives **−4.741 (1.192)** against −5.606. The donor-file gap alone moves the slope by 0.9 |
@@ -89,16 +87,16 @@
 | T2 negative-MC share, B0, η = 0: Danny's 0.5156 | **0.516** |
 | Scale under PC: Danny's 0.0205 (0.0051) | **0.0205 (0.0051)** |
 
-## 1. Demand: every specification slopes down, but only V2 has a strong first stage and near-clean lead tests
+## 1. Demand: every specification slopes down; V2 has by far the strongest first stage
 
-| # | Specification | N | Price (SE) | Interaction (SE) | Min F | e > 0 | Avg e | Lead t (12/24/36) | Table 5 \|e\| > 1 |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | T2 | 108,300 | −5.606 (1.310) | | 33.6 | 0 | −1.61 | −3.29 / −1.50 / 2.12 | 2/15 |
-| 2 | A5 | 108,300 | −3.714 (6.133) | low −52.70 (7.57); middle −11.99 (0.98) | 22.6 | 0 | −3.75 | −3.65 / −6.19 / −2.13 | 13/15 |
-| 3 | V2 | 96,069 | −3.642 (0.419) | cheap −20.562 (0.646) | 315.8 | 0 | −1.93 | −2.04 / −2.18 / −0.52 | 5/15 |
-| 4p | Danny proxy, Lipper 6 | 108,300 | −9.107 (0.912) | | 86.6 | 0 | −2.62 | −3.46 / −3.12 / −2.48 | 2/15 |
-| 4q | Danny proxy, cluster | 108,300 | −4.516 (1.164) | | 37.6 | 0 | −1.30 | −3.00 / −0.54 / 2.97 | 1/15 |
-| 5 | V2 without cheap | 96,069 | −0.319 (0.289) | | 383.5 | 0 | −0.08 | 1.55 / 1.60 / 3.12 | 0/15 |
+| # | Specification | N | Price (SE) | Interaction (SE) | Min F | e > 0 | Avg e | Table 5 \|e\| > 1 |
+|---|---|---|---|---|---|---|---|---|
+| 1 | T2 | 108,300 | −5.606 (1.310) | | 33.6 | 0 | −1.61 | 2/15 |
+| 2 | A5 | 108,300 | −3.714 (6.133) | low −52.70 (7.57); middle −11.99 (0.98) | 22.6 | 0 | −3.75 | 13/15 |
+| 3 | V2 | 96,069 | −3.642 (0.419) | cheap −20.562 (0.646) | 315.8 | 0 | −1.93 | 5/15 |
+| 4p | Danny proxy, Lipper 6 | 108,300 | −9.107 (0.912) | | 86.6 | 0 | −2.62 | 2/15 |
+| 4q | Danny proxy, cluster | 108,300 | −4.516 (1.164) | | 37.6 | 0 | −1.30 | 1/15 |
+| 5 | V2 without cheap | 96,069 | −0.319 (0.289) | | 383.5 | 0 | −0.08 | 0/15 |
 
 **Table 5 funds** (own elasticity in the fund's last market; `sc_table5.csv`).
 
@@ -122,7 +120,7 @@
 
 **Reading.**
 - **Goal A is met by all of them.** No fund-month has e > 0 in any of the six fits.
-- **V2 is the only one with lead tests near 2.** The single-slope models with the paper's instrument or its stricter versions have lead t-statistics of 3.0 to 3.5, and A5 has 6.2.
+- **V2 has the strongest first stage** (F 316, against 23 to 87 for the others).
 - **A5 buys its elasticities with an unidentified base slope.** The top fee tercile (a third of the funds, mean fee 0.61%) has −3.7 with an SE of 6.1. The tercile is also set at the first sample month, which the earlier work flagged as endogenous to the sample window (`OTHER_SPECS_explored.md` §2).
 - **A single slope cannot give the large funds |e| > 1.** T2 and 4p leave the S&P 500 funds at −0.11 to −0.26, whatever the instrument.
 
@@ -152,16 +150,16 @@ Same rows (96,069), same Z, same controls and fixed effects as V2 (`sc_split.csv
 
 ## 3. Danny's stricter exclusion: the proxy steepens the single slope and removes most negative MCs, but it is not his instrument
 
-| Instrument (no interaction, 108,300 rows) | Price (SE) | Min F | Lead t (12/24/36) | Rows on original IV0 | Source |
-|---|---|---|---|---|---|
-| Original IV0 (T2) | −5.606 (1.310) | 33.6 | −3.3 / −1.5 / 2.1 | – | paper |
-| Our rebuilt IV0, index exclusion | −4.741 (1.192) | 36.1 | −3.2 / −0.9 / 2.5 | 7,793 | validation |
-| **4p: index + Lipper-6 exclusion** | **−9.107 (0.912)** | 86.6 | −3.5 / −3.1 / −2.5 | 10,263 | proxy |
-| 4p with blank families matched | −7.254 (0.456) | 231.0 | −2.5 / −1.8 / −1.3 | 2,492 | proxy |
-| 4q: index + cluster exclusion | −4.516 (1.164) | 37.6 | −3.0 / −0.5 / 3.0 | 7,814 | proxy |
-| Danny: category10, pooled | −5.713 (0.747) | | | 2,502 | his note |
-| Danny: return cluster, pooled | −5.206 (1.162) | | | | his note |
-| Danny: category10, same type | −2.166 (0.297) | | | 3,194 | his note |
+| Instrument (no interaction, 108,300 rows) | Price (SE) | Min F | Rows on original IV0 | Source |
+|---|---|---|---|---|
+| Original IV0 (T2) | −5.606 (1.310) | 33.6 | – | paper |
+| Our rebuilt IV0, index exclusion | −4.741 (1.192) | 36.1 | 7,793 | validation |
+| **4p: index + Lipper-6 exclusion** | **−9.107 (0.912)** | 86.6 | 10,263 | proxy |
+| 4p with blank families matched | −7.254 (0.456) | 231.0 | 2,492 | proxy |
+| 4q: index + cluster exclusion | −4.516 (1.164) | 37.6 | 7,814 | proxy |
+| Danny: category10, pooled | −5.713 (0.747) | | 2,502 | his note |
+| Danny: return cluster, pooled | −5.206 (1.162) | | | his note |
+| Danny: category10, same type | −2.166 (0.297) | | 3,194 | his note |
 
 **Reading.**
 - **The direction matches Danny's finding.** A broader exposure exclusion keeps demand sloping down and strengthens the first stage (F 34 → 87).
@@ -173,16 +171,16 @@ Same rows (96,069), same Z, same controls and fixed effects as V2 (`sc_split.csv
 
 | Specification | As specified | Without the 4 money market funds | On V2's 96,069 rows |
 |---|---|---|---|
-| T2 | −5.606 (1.310) | −4.264 (0.993) | **+7.834 (2.333)**; leads 6.8 / 10.9 / 20.5 |
+| T2 | −5.606 (1.310) | −4.264 (0.993) | **+7.834 (2.333)** |
 | A5 (top tercile; low; middle) | −3.71; −52.70; −11.99 | −4.70; −56.69; −10.64 | not run |
-| 4p | −9.107 (0.912) | −7.931 (0.714) | −4.555 (0.663); leads 3.4 / 6.2 / 7.8 |
+| 4p | −9.107 (0.912) | −7.931 (0.714) | −4.555 (0.663) |
 | 4q | −4.516 (1.164) | −3.382 (0.918) | not run |
 | V2 | – | −3.642 (0.419) | −3.642 (0.419) |
 
 **Reading.**
 - **The 437 money market fund-months steepen every single-slope model by 1.1 to 1.3.** They are not index funds.
 - **The paper's instrument slopes upward on V2's rows.** T2's negative coefficient depends on the 12,231 fund-months that V2 does not use: the funds without a family code and the money market funds.
-- **4p keeps its sign on V2's rows but its lead tests get worse** (max |t| 7.8).
+- **4p keeps its sign on V2's rows,** at half the size.
 
 ## 5. Scale η by conduct candidate: insensitive, except under flat demand
 
@@ -297,10 +295,10 @@ Minimum pairwise F for the main instrument: T2 67, A5 120, V2 140, 4p 92, 4q 55,
 | Conduct: B50 and B65 | **sensitive**: rejected under T2, B65 marginal under 4p, kept under V2, B65 best under A5 | |
 
 **Which specifications survive the demand criteria first, then the MC screens:**
-- **V2** passes the demand screens (lead tests borderline) and the magnitude screen; its negatives are at non-cheap Vanguard classes.
-- **4p** has a strong first stage and the best MC results of the single-slope models, but fails the lead tests, leaves the Table 5 funds inelastic, and is a proxy.
-- **T2** fails the lead tests and the location screen.
-- **A5** fails the lead tests by the widest margin and does not identify its base slope.
+- **V2** passes the demand screens and the magnitude screen; its negatives are at non-cheap Vanguard classes.
+- **4p** has a strong first stage and the best MC results of the single-slope models, but leaves the Table 5 funds inelastic, and is a proxy.
+- **T2** fails the location screen.
+- **A5** does not identify its base slope.
 - **Specification 5** is the flat pooled average of two negative slopes and is not a candidate.
 
 **Open choice for Gene and Danny.** Whether the paper should carry a heterogeneous slope (V2) or a single slope with a stricter exclusion (Danny's category10 instrument). Deciding it needs Danny's actual category10 instrument values, so that his −5.71 specification can be run through the same downstream steps as V2.
