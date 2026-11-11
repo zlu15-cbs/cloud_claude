@@ -34,8 +34,9 @@
 **What the scorecard says.**
 1. **T2 and A5 depend on the variable-annuity funds.** Without those 112 funds, T2 slopes upward for every fund-month and A5 for 49% of them (section 1).
 2. **T2 and A5 have a fallback.** Rebuilding their instrument to exclude the target's whole asset class restores downward-sloping demand without the variable-annuity funds. The slope is flat, 14 of the 15 Table 5 funds stay inelastic, and a third or more of marginal costs are negative under T2 (section 2).
-3. **V2's non-cheap slope depends on the median.** With the lag-AUM-weighted mean that T2 and A5 use, and nothing else changed, the non-cheap slope falls from −3.4 to −1.9 and negative marginal costs rise from 7–9% to 23–30%. The sign and the cheap interaction do not change (section 3.7).
-4. **V2 gives the most sensible demand.** No fund-month slopes upward, the first stage is strong, 5 of the 15 Table 5 funds have e < −1, and 5–9% of marginal costs are negative, almost none below −0.20%. It does not use the variable-annuity funds to estimate demand, so excluding them changes only the supply side (section 3).
+3. **A handful of high-fee funds decide the sign.** Dropping one commodity fund turns T2 without the variable-annuity funds from +7.2 to −1.5; dropping the top entry-fee quartile (50 funds, 0.4% of assets) gives downward-sloping demand in every specification and removes V2's dependence on the median (section 3.9).
+4. **V2's non-cheap slope depends on the median.** With the lag-AUM-weighted mean that T2 and A5 use, and nothing else changed, the non-cheap slope falls from −3.4 to −1.9 and negative marginal costs rise from 7–9% to 23–30%. The sign and the cheap interaction do not change (section 3.7).
+5. **V2 gives the most sensible demand.** No fund-month slopes upward, the first stage is strong, 5 of the 15 Table 5 funds have e < −1, and 5–9% of marginal costs are negative, almost none below −0.20%. It does not use the variable-annuity funds to estimate demand, so excluding them changes only the supply side (section 3).
 
 - **Code:** `code/spec_compare/`. Columns T2 and A5: `sc_demand.py`, `sc_a5.py`, `sc_exva.py`. Alternatives: `sc_t2a5_nova_grid.py`. V2: `sc_v2_robust.py`, `sc_v2_final.py`, `sc_v2_cheap_start.py`. Supply side: `sc_downstream.py`.
 - **Validation:** T2 reproduces the paper's −5.606 (1.310) and A5 its −7.503 and −5.278 exactly. Danny's negative-MC share (0.516 at η = 0) and scale under PC (0.0205) are also reproduced.
@@ -254,6 +255,67 @@ The scorecard shows V2 with a median and the other models with a weighted mean. 
 - **The defence of the median is robustness to outliers,** not a result: a family's one expensive fund in another asset class moves a mean and not a median, and asset weights make the instrument follow the family's largest fund. That argument is ours; the data do not choose between the two.
 - **The opposite holds for T2 and A5 alternatives:** they need the weighted mean and fail with the median (section 2). So no aggregation works for every model.
 - **Consequence.** V2's non-cheap slope now depends on three choices: the broad-asset-class exclusion, the cutoff and file for the cheap status, and the median. The robust results are the sign and the high elasticity of cheap funds.
+
+### 3.8 Other instruments for the high-fee funds
+
+Gene's question: can another instrument remove the upward slope for entry-fee quartiles 3 and 4? One fee slope, estimated on those funds alone (`sc_highfee_iv.log`). "Family" instruments use the same family's other funds; "rival" instruments count other families' funds.
+
+| Instrument | All high-fee (SE; F) | Specialized | Broad-based | Big 3 families | Other families |
+|---|---|---|---|---|---|
+| V2's Z | +1.34 (0.44; 168) | +5.66 (0.96; 181) | −12.95 (1.78; 36) | −6.75 (0.87; 59) | +2.51 (0.59; 154) |
+| Z, donors not cheap | +1.02 (0.46; 217) | +2.38 (0.65; 209) | −8.94 (2.64; 32) | −14.2 (4.4; 5) | +1.08 (0.57; 183) |
+| Z, donors high-fee only | +1.27 (0.41; 250) | −0.17 (0.47; 280) | +5.59 (1.62; 64) | +18.0 (7.5; 10) | +2.14 (0.51; 202) |
+| Z, donors specialized only | +5.64 (1.04; 55) | +11.27 (2.09; 61) | −9.60 (2.13; 20) | −7.70 (1.19; 25) | +2.73 (0.60; 83) |
+| Z lagged 12 months | +0.18 (0.51; 220) | +6.96 (1.31; 184) | −28.8 (7.4; 12) | −9.83 (1.03; 54) | +2.62 (0.68; 150) |
+| Paper's IV0 | −17.3 (3.0; 28) | +55 (30; 4) | −0.70 (0.65; 143) | −5.89 (1.69; 31) | −30.9 (10.4; 8) |
+| Rivals on the same index | +5.05 (0.91; 145) | +0.45 (0.22; 421) | −9.11 (1.10; 88) | +0.52 (1.42; 19) | +6.11 (0.87; 143) |
+| Rivals in the same index cluster | +3.06 (0.35; 412) | +0.78 (0.22; 343) | −17.7 (4.3; 21) | −3.27 (0.47; 35) | +4.55 (0.39; 267) |
+| Z with asset class × month effects | +0.01 (0.42) | +5.34 (0.95) | −12.80 (1.74) | +27.1 (9.7) | +0.19 (0.48) |
+
+**Reading.**
+- **No instrument resolves it.** None gives a negative slope in every subgroup with a usable first stage. Restricting donors to high-fee funds brings the specialized slope to zero (−0.17) but turns the broad-based slope positive.
+- **My earlier explanation was wrong.** I had suggested that fee cuts on the Big 3's core funds drive the positive slope. The Big 3's high-fee funds slope downward (−6.7); the positive slope is in the other families (+2.5).
+- **The sign for these funds swings with the instrument and the subgroup,** from −17 to +55 under the paper's instrument. Their fee slope is not identified. Section 3.9 shows why: a few funds dominate.
+
+### 3.9 A handful of funds decide the sign: top entry-fee quartile dropped, and the three most influential funds
+
+**Scorecard specifications without the variable-annuity funds, re-estimated without the top entry-fee quartile** (50 funds, 2,656 fund-months, 0.4% of assets; `sc_q4_*.log`).
+
+| | Base price coefficient (SE), as in the scorecard | Without quartile 4 | Interaction without quartile 4 | Min F | Table 5 e < −1 | Negative MC B0–B65 |
+|---|---|---|---|---|---|---|
+| T2, no VA | **+7.244 (1.987)** | **−5.24 (1.64)** | – | 30 | 1/15 | 0.27–0.49 |
+| A5, no VA | **+4.009 (1.588)** | **−6.48 (1.90)** | −3.90 | 52 | 2/15 | 0.03–0.28 |
+| T2 alternative | −4.123 (0.736) | −9.57 (0.94) | – | 131 | 2/15 | 0.01–0.20 |
+| A5 alternative | −3.983 (0.749) | −9.40 (0.96) | −2.04 | 166 | 2/15 | 0.00–0.13 |
+| V2 (median) | −3.385 (0.541) | −4.767 (0.514) | −19.511 | 175 | 5/15 | 0.019–0.053 |
+| V2, weighted-mean donors | −1.943 (0.549) | −5.483 (0.563) | −20.426 | 236 | 7/15 | 0.002–0.031 |
+| V2, unweighted-mean donors | −0.687 (0.710) | −3.929 (0.729) | −19.010 | 143 | 5/15 | 0.052–0.083 |
+| V2, 25th percentile, median | −3.967 (0.607) | −5.316 (0.611) | −16.576 | 139 | 7/15 | 0.002–0.017 |
+| V2, 25th percentile, weighted mean | −0.016 (0.490) | −3.576 (0.462) | −15.032 | 309 | 6/15 | 0.035–0.047 |
+
+No fund-month slopes upward in any row without quartile 4.
+
+**Which funds do it** (`sc_q4_influence.log`, `sc_q4_dropfunds.log`; exact re-estimation with the paper's instrument).
+
+| Dropped | T2, all rows (paper) | T2, no VA | A5, no VA: specialized; × broad | V2: non-cheap; × cheap |
+|---|---|---|---|---|
+| Nothing | −5.606 (1.310) | +7.244 (1.987) | +4.009; −6.924 | −3.385 (0.541); −20.059 |
+| Invesco DB Commodity Index Tracking Fund | −11.801 (2.054) | −1.462 (1.358) | −3.248; −4.817 | −4.642 (0.546); −20.085 |
+| That fund, PIMCO 0-5 Year High Yield ETF, Invesco DB Agriculture Fund | −17.590 (2.689) | −9.876 (2.047) | −10.493; −2.755 | −5.253 (0.555); −20.124 |
+
+**What happens in those funds.**
+- **Invesco DB Commodity Index Tracking Fund.** Its fee is 0.82–0.90% throughout. Its family code changes from DB Commodity Services to Invesco, and the instrument falls from 0.78 in 2015–2017 to 0.37 in 2018 and 0.25 by 2024. Its assets fall over the same years. The instrument moves because the donor family changed, not because any fee changed.
+- **PIMCO 0-5 Year High Yield ETF.** Fee constant at 0.55%. The instrument falls from 1.01 in 2013 to 0.30 in 2015 and 0.19 in 2016.
+- **Invesco DB Agriculture Fund.** Same family change: the instrument falls from 0.86 in 2014 to 0.37 in 2015, fee 0.88–0.94%.
+
+**Reading.**
+- **Yes: without the top quartile, every specification has downward-sloping demand,** including T2 and A5 with the paper's instrument and no variable-annuity funds.
+- **One fund is enough.** Dropping Invesco DB Commodity alone moves T2 without VA funds from +7.2 to −1.5, and the paper's own T2 from −5.6 to −11.8.
+- **The cause is a jump in the instrument with no change in the fee.** For these funds the first stage is close to zero while the instrument and the fund's assets both trend, so they contribute a large reduced form and nothing to the first stage. This is my reading of the fund-level series; the reason for the PIMCO jump was not traced.
+- **V2 is the least sensitive** (−3.4, −4.6, −5.3). T2 moves by 12 to 17 points.
+- **Without the top quartile, V2 no longer depends on the median or the cutoff:** the non-cheap slope is −3.6 to −5.5 in all five versions, and negative marginal costs are at most 8%.
+- **The upward slope at high fees (sections 3.5 and 3.6) is this same handful of funds,** not a property of specialized funds in general.
+- **What this means for the choice.** The sign of the paper's demand tables turns on single funds, in both directions. A sample rule is needed before specifications are compared: for example dropping commodity pools and funds that are not plain index funds, or the top entry-fee quartile. The rule should be set on economic grounds, not on the coefficient. That decision is Gene's.
 
 ## 4. Supply side in detail
 

@@ -1,0 +1,164 @@
+high-fee funds (entry-fee quartiles 3-4), Table 2 sample: 22,997 fund-months, 355 funds; with V2 Z 18,220
+correlation of the family instruments with V2 Z (after fund and month effects are not removed):
+z_v2                 1.00
+z_noncheap           0.89
+z_highfee            0.81
+z_specialized        0.93
+z_highfee_pool       0.69
+z_niche_idx          0.70
+z_v2_lag12           0.95
+z_paper              0.77
+z_hausman1           0.77
+z_mgmt_fee           0.65
+z_op_cost           -0.65
+z_rivals_cluster     0.38
+z_rivals_index       0.26
+z_newprod_cluster    0.40
+z_newprod_index      0.29
+
+=== all high-fee: 22,997 fund-months
+  v2                             N 18,220 funds  277 | fee slope     1.340 (0.437) | F  167.9
+  noncheap                       N 18,202 funds  277 | fee slope     1.015 (0.463) | F  216.6
+  highfee                        N 17,770 funds  268 | fee slope     1.267 (0.405) | F  249.7
+  specialized                    N 17,666 funds  263 | fee slope     5.642 (1.042) | F   55.2
+  highfee_pool                   N 18,056 funds  274 | fee slope     4.309 (1.189) | F   46.8
+  niche_idx                      N 18,535 funds  279 | fee slope     1.316 (0.371) | F  299.6
+  v2_lag12                       N 17,744 funds  272 | fee slope     0.182 (0.514) | F  219.5
+  paper                          N 22,997 funds  355 | fee slope   -17.305 (3.041) | F   27.7
+  hausman1                       N 22,994 funds  354 | fee slope   -18.134 (3.359) | F   25.1
+  mgmt_fee                       N 22,997 funds  355 | fee slope   -22.419 (3.897) | F   19.7
+  op_cost                        N 22,997 funds  355 | fee slope   -22.457 (3.924) | F   19.5
+  rivals_index                   N 22,997 funds  355 | fee slope     5.051 (0.912) | F  145.4
+  rivals_cluster                 N 22,997 funds  355 | fee slope     3.057 (0.347) | F  411.7
+  newprod_index                  N 22,997 funds  355 | fee slope    -8.422 (16.378) | F    0.2
+  newprod_cluster                N 22,997 funds  355 | fee slope     1.712 (3.715) | F    2.8
+  v2 + asset class x month FE    N 18,220 funds  277 | fee slope     0.007 (0.420) | F    nan
+  v2 + share type x month FE     N 18,220 funds  277 | fee slope     1.063 (0.344) | F    nan
+  v2 + specialized x month FE    N 18,220 funds  277 | fee slope     0.943 (0.421) | F    nan
+  v2 + family x year FE          N 18,220 funds  277 | fee slope     3.265 (1.349) | F    nan
+
+=== specialized: 14,233 fund-months
+  v2                             N 13,017 funds  182 | fee slope     5.664 (0.962) | F  181.0
+  noncheap                       N 13,014 funds  182 | fee slope     2.381 (0.649) | F  209.0
+  highfee                        N 12,705 funds  175 | fee slope    -0.171 (0.472) | F  280.1
+  specialized                    N 12,887 funds  177 | fee slope    11.269 (2.090) | F   61.1
+  highfee_pool                   N 12,856 funds  178 | fee slope     5.714 (1.270) | F   44.2
+  niche_idx                      N 13,091 funds  182 | fee slope     2.575 (0.457) | F  191.1
+  v2_lag12                       N 12,792 funds  180 | fee slope     6.964 (1.306) | F  183.8
+  paper                          N 14,233 funds  203 | fee slope    54.990 (29.742) | F    3.8
+  hausman1                       N 14,230 funds  202 | fee slope    52.600 (27.540) | F    4.0
+  mgmt_fee                       N 14,233 funds  203 | fee slope    22.189 (7.124) | F   15.8
+  op_cost                        N 14,233 funds  203 | fee slope    22.090 (7.097) | F   15.9
+  rivals_index                   N 14,233 funds  203 | fee slope     0.451 (0.223) | F  420.8
+  rivals_cluster                 N 14,233 funds  203 | fee slope     0.782 (0.220) | F  342.8
+  newprod_index                  N 14,233 funds  203 | fee slope     7.787 (9.912) | F    0.8
+  newprod_cluster                N 14,233 funds  203 | fee slope    14.879 (14.064) | F    1.1
+  v2 + asset class x month FE    N 13,017 funds  182 | fee slope     5.335 (0.953) | F    nan
+  v2 + share type x month FE     N 13,017 funds  182 | fee slope     5.356 (0.775) | F    nan
+  v2 + specialized x month FE    N 13,017 funds  182 | fee slope     5.664 (0.962) | F    nan
+  v2 + family x year FE          N 13,017 funds  182 | fee slope     6.045 (1.720) | F    nan
+
+=== broad-based: 8,764 fund-months
+  v2                             N  5,203 funds   95 | fee slope   -12.951 (1.783) | F   35.9
+  noncheap                       N  5,188 funds   95 | fee slope    -8.936 (2.640) | F   32.1
+  highfee                        N  5,065 funds   93 | fee slope     5.585 (1.622) | F   64.2
+  specialized                    N  4,779 funds   86 | fee slope    -9.604 (2.125) | F   19.6
+  highfee_pool                   N  5,200 funds   96 | fee slope     0.714 (1.243) | F   42.4
+  niche_idx                      N  5,444 funds   97 | fee slope    -0.992 (0.504) | F  195.0
+  v2_lag12                       N  4,952 funds   92 | fee slope   -28.845 (7.441) | F   12.3
+  paper                          N  8,764 funds  152 | fee slope    -0.699 (0.654) | F  142.7
+  hausman1                       N  8,764 funds  152 | fee slope    -0.710 (0.671) | F  133.0
+  mgmt_fee                       N  8,764 funds  152 | fee slope    -4.817 (1.338) | F   30.7
+  op_cost                        N  8,764 funds  152 | fee slope    -4.842 (1.349) | F   30.4
+  rivals_index                   N  8,764 funds  152 | fee slope    -9.111 (1.097) | F   88.4
+  rivals_cluster                 N  8,764 funds  152 | fee slope   -17.735 (4.331) | F   21.4
+  newprod_index                  N  8,764 funds  152 | fee slope     2.369 (1.327) | F   16.6
+  newprod_cluster                N  8,764 funds  152 | fee slope  -283.669 (3322.601) | F    0.0
+  v2 + asset class x month FE    N  5,203 funds   95 | fee slope   -12.795 (1.744) | F    nan
+  v2 + share type x month FE     N  5,203 funds   95 | fee slope    -7.706 (0.758) | F    nan
+  v2 + specialized x month FE    N  5,203 funds   95 | fee slope   -12.951 (1.783) | F    nan
+  v2 + family x year FE          N  5,203 funds   95 | fee slope    65.916 (160.196) | F    nan
+
+=== ETFs: 13,988 fund-months
+  v2                             N 13,805 funds  196 | fee slope     7.148 (1.191) | F  237.8
+  noncheap                       N 13,790 funds  196 | fee slope    12.674 (2.272) | F  107.5
+  highfee                        N 13,690 funds  194 | fee slope    92.752 (107.469) | F    0.9
+  specialized                    N 13,570 funds  189 | fee slope    77.566 (48.650) | F    3.4
+  highfee_pool                   N 13,762 funds  195 | fee slope   -36.426 (12.577) | F    6.8
+  niche_idx                      N 13,803 funds  198 | fee slope  -800.017 (7338.707) | F    0.0
+  v2_lag12                       N 13,595 funds  193 | fee slope     3.635 (0.937) | F  195.4
+  paper                          N 13,988 funds  199 | fee slope   -54.334 (8.328) | F   31.6
+  hausman1                       N 13,985 funds  198 | fee slope   -54.591 (8.403) | F   31.3
+  mgmt_fee                       N 13,988 funds  199 | fee slope   -46.602 (5.861) | F   35.6
+  op_cost                        N 13,988 funds  199 | fee slope   -46.549 (5.851) | F   35.5
+  rivals_index                   N 13,988 funds  199 | fee slope   -26.004 (17.269) | F    1.6
+  rivals_cluster                 N 13,988 funds  199 | fee slope    -4.032 (0.668) | F   45.2
+  newprod_index                  N 13,988 funds  199 | fee slope    -7.701 (2.062) | F   12.9
+  newprod_cluster                N 13,988 funds  199 | fee slope    -5.020 (0.789) | F   91.3
+  v2 + asset class x month FE    N 13,805 funds  196 | fee slope     6.819 (1.391) | F    nan
+  v2 + share type x month FE     N 13,805 funds  196 | fee slope     7.148 (1.191) | F    nan
+  v2 + specialized x month FE    N 13,805 funds  196 | fee slope     7.417 (1.260) | F    nan
+  v2 + family x year FE          N 13,805 funds  196 | fee slope    -3.445 (1.146) | F    nan
+
+=== quartile 3 only: 19,487 fund-months
+  v2                             N 15,683 funds  229 | fee slope    -1.176 (0.457) | F  204.9
+  noncheap                       N 15,665 funds  229 | fee slope    -5.006 (0.554) | F  174.5
+  highfee                        N 15,242 funds  221 | fee slope    -2.820 (0.555) | F  191.6
+  specialized                    N 15,138 funds  217 | fee slope     3.617 (0.814) | F  134.4
+  highfee_pool                   N 15,500 funds  225 | fee slope     0.921 (1.153) | F   30.5
+  niche_idx                      N 15,904 funds  230 | fee slope    -2.426 (0.201) | F  290.7
+  v2_lag12                       N 15,339 funds  225 | fee slope     0.121 (0.587) | F  360.0
+  paper                          N 19,487 funds  282 | fee slope    -9.636 (2.963) | F   11.2
+  hausman1                       N 19,484 funds  281 | fee slope    -9.582 (2.940) | F   11.4
+  mgmt_fee                       N 19,487 funds  282 | fee slope   -18.884 (5.059) | F    7.3
+  op_cost                        N 19,487 funds  282 | fee slope   -18.941 (5.093) | F    7.2
+  rivals_index                   N 19,487 funds  282 | fee slope     6.004 (1.056) | F  147.5
+  rivals_cluster                 N 19,487 funds  282 | fee slope     4.033 (0.434) | F  376.2
+  newprod_index                  N 19,487 funds  282 | fee slope    -3.851 (7.012) | F    0.8
+  newprod_cluster                N 19,487 funds  282 | fee slope     0.861 (2.039) | F   16.0
+  v2 + asset class x month FE    N 15,683 funds  229 | fee slope    -0.554 (0.590) | F    nan
+  v2 + share type x month FE     N 15,683 funds  229 | fee slope    -0.971 (0.415) | F    nan
+  v2 + specialized x month FE    N 15,683 funds  229 | fee slope    -1.461 (0.499) | F    nan
+  v2 + family x year FE          N 15,683 funds  229 | fee slope    -9.142 (2.021) | F    nan
+
+=== Big 3 families: 6,949 fund-months
+  v2                             N  6,834 funds   69 | fee slope    -6.747 (0.867) | F   58.8
+  noncheap                       N  6,834 funds   69 | fee slope   -14.215 (4.381) | F    5.3
+  highfee                        N  6,830 funds   69 | fee slope    17.983 (7.480) | F    9.8
+  specialized                    N  6,812 funds   69 | fee slope    -7.704 (1.192) | F   24.5
+  highfee_pool                   N  6,873 funds   71 | fee slope    -2.457 (1.578) | F   77.7
+  niche_idx                      N  6,830 funds   69 | fee slope    -5.355 (0.691) | F   34.1
+  v2_lag12                       N  6,784 funds   68 | fee slope    -9.829 (1.025) | F   54.3
+  paper                          N  6,949 funds   72 | fee slope    -5.894 (1.693) | F   31.0
+  hausman1                       N  6,949 funds   72 | fee slope    -6.068 (1.727) | F   30.6
+  mgmt_fee                       N  6,949 funds   72 | fee slope    15.908 (10.228) | F    3.5
+  op_cost                        N  6,949 funds   72 | fee slope    16.129 (10.448) | F    3.5
+  rivals_index                   N  6,949 funds   72 | fee slope     0.520 (1.419) | F   18.9
+  rivals_cluster                 N  6,949 funds   72 | fee slope    -3.273 (0.466) | F   34.8
+  newprod_index                  N  6,949 funds   72 | fee slope    -7.378 (1.208) | F   25.0
+  newprod_cluster                N  6,949 funds   72 | fee slope    -2.920 (0.899) | F   22.6
+  v2 + asset class x month FE    N  6,834 funds   69 | fee slope    27.134 (9.730) | F    nan
+  v2 + share type x month FE     N  6,834 funds   69 | fee slope    -6.698 (0.851) | F    nan
+  v2 + specialized x month FE    N  6,834 funds   69 | fee slope    -6.034 (0.874) | F    nan
+  v2 + family x year FE          N  6,834 funds   69 | fee slope    -7.266 (0.743) | F    nan
+
+=== other families: 16,048 fund-months
+  v2                             N 11,386 funds  208 | fee slope     2.514 (0.593) | F  154.2
+  noncheap                       N 11,368 funds  208 | fee slope     1.084 (0.572) | F  183.2
+  highfee                        N 10,940 funds  199 | fee slope     2.142 (0.511) | F  202.3
+  specialized                    N 10,854 funds  194 | fee slope     2.727 (0.596) | F   82.5
+  highfee_pool                   N 11,183 funds  203 | fee slope     3.418 (0.708) | F  136.1
+  niche_idx                      N 11,705 funds  210 | fee slope     1.230 (0.399) | F  311.5
+  v2_lag12                       N 10,960 funds  204 | fee slope     2.615 (0.676) | F  150.3
+  paper                          N 16,048 funds  283 | fee slope   -30.923 (10.438) | F    8.0
+  hausman1                       N 16,045 funds  282 | fee slope   -33.708 (12.462) | F    6.7
+  mgmt_fee                       N 16,048 funds  283 | fee slope   -60.600 (30.378) | F    3.5
+  op_cost                        N 16,048 funds  283 | fee slope   -60.908 (30.811) | F    3.4
+  rivals_index                   N 16,048 funds  283 | fee slope     6.111 (0.869) | F  143.4
+  rivals_cluster                 N 16,048 funds  283 | fee slope     4.545 (0.389) | F  266.5
+  newprod_index                  N 16,048 funds  283 | fee slope    -6.814 (2.070) | F   11.8
+  newprod_cluster                N 16,048 funds  283 | fee slope   -56.814 (306.779) | F    0.0
+  v2 + asset class x month FE    N 11,386 funds  208 | fee slope     0.192 (0.476) | F    nan
+  v2 + share type x month FE     N 11,386 funds  208 | fee slope     2.520 (0.502) | F    nan
+  v2 + specialized x month FE    N 11,386 funds  208 | fee slope     2.332 (0.614) | F    nan
+  v2 + family x year FE          N 11,386 funds  208 | fee slope    20.607 (7.241) | F    nan

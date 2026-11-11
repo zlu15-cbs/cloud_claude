@@ -73,6 +73,11 @@ def main():
     d = pd.read_pickle(PANEL)
     d['mk'] = np.round(d.month_t * 12).astype(int)
     nomm = (d.mmf == 0).to_numpy()
+    if os.environ.get('SC_DROPQ4') == '1':   # drop the funds in the top entry-fee quartile from the sample
+        from sc_q4 import entry_quartile
+        keep = (d.product_ids.map(entry_quartile()) < 4).to_numpy()
+        print(f'top entry-fee quartile dropped: {int((nomm & ~keep).sum()):,} fund-months, {d.loc[nomm & ~keep, "product_ids"].nunique()} funds', flush=True)
+        nomm = nomm & keep
     fam_rows = d.firm_f_old.notna().to_numpy()
 
     src = pd.read_csv(SOURCE, usecols=['crsp_fundno', 'month', 'index', 'exp_ratio', 'fund_name', 'mgmt_cd', 'ETF', 'L1_mtna1'])

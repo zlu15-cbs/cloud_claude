@@ -62,6 +62,12 @@ def main():
     raw['index'] = raw.market_m_index.fillna('_none_' + raw.product_j.astype(str))
     print(f'donor pool: {len(raw):,} source fund-months with a fee', flush=True)
 
+    DROPQ4 = os.environ.get('SC_DROPQ4') == '1'   # drop the funds in the top entry-fee quartile from the sample
+    if DROPQ4:
+        from sc_q4 import entry_quartile
+        keep = (d.product_ids.map(entry_quartile()) < 4).to_numpy()
+        print(f'top entry-fee quartile dropped: {int((nova & ~keep).sum()):,} fund-months, {d.loc[nova & ~keep, "product_ids"].nunique()} funds', flush=True)
+        nova = nova & keep
     rows = []
     only = os.environ.get('SC_ONLY')      # e.g. 'lipper6,pooled,wavg' to run one version and save it as T2alt / A5alt
     for excl in ('index', 'cat20', 'cat10', 'lipper6'):
@@ -83,7 +89,7 @@ def main():
                                   f'{model}_avg_e': o['avg_e'], f'{model}_t5': int((t5.own_elasticity < -1).sum())})
                         if zs:
                             r.update(A5_xbroad=o['b_broad'], A5_xbroad_se=o['se_broad'])
-                        if only and sample == 'no VA':
+                        if only and sample == 'no VA' and not DROPQ4:
                             sup = dd0[base]
                             np.save(f'{CACHE}/alpha_{model}alt.npy', np.full(len(sup), b['prices']) + sum(b[f'px_{z}'] * sup[z].to_numpy() for z in zs))
                             np.save(f'{CACHE}/rows_{model}alt.npy', np.flatnonzero(base))

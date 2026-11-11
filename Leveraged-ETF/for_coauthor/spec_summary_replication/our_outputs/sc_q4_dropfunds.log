@@ -1,0 +1,71 @@
+
+nothing dropped
+  T2, all rows (paper)   N 108,300 | price   -5.606 (1.310) | F 34 | e>0 0.000
+  T2, no VA              N 100,529 | price    7.244 (1.987) | F 27 | e>0 1.000
+  A5, all rows (paper)   N 108,300 | price   -7.503 (1.770) | x broad -5.278 (0.372) | F 53 | e>0 0.000
+  A5, no VA              N 100,529 | price    4.009 (1.588) | x broad -6.924 (0.428) | F 49 | e>0 0.489
+  V2                     N  96,069 | price   -3.385 (0.541) | x cheap -20.059 (0.784) | F 177 | e>0 0.000
+
+Invesco DB Commodity Index Tracking Fund dropped
+  T2, all rows (paper)   N 108,138 | price  -11.801 (2.054) | F 35 | e>0 0.000
+  T2, no VA              N 100,367 | price   -1.462 (1.358) | F 29 | e>0 0.000
+  A5, all rows (paper)   N 108,138 | price  -12.785 (2.306) | x broad -3.376 (0.498) | F 55 | e>0 0.000
+  A5, no VA              N 100,367 | price   -3.248 (1.659) | x broad -4.817 (0.309) | F 53 | e>0 0.000
+  V2                     N  95,907 | price   -4.642 (0.546) | x cheap -20.085 (0.817) | F 178 | e>0 0.000
+
+that fund, PIMCO 0-5 Year High Yield ETF and Invesco DB Agriculture dropped
+  T2, all rows (paper)   N 107,916 | price  -17.590 (2.689) | F 40 | e>0 0.000
+  T2, no VA              N 100,145 | price   -9.876 (2.047) | F 36 | e>0 0.000
+  A5, all rows (paper)   N 107,916 | price  -17.895 (2.743) | x broad -1.568 (0.606) | F 65 | e>0 0.000
+  A5, no VA              N 100,145 | price  -10.493 (2.198) | x broad -2.755 (0.356) | F 70 | e>0 0.000
+  V2                     N  95,783 | price   -5.253 (0.555) | x cheap -20.124 (0.834) | F 180 | e>0 0.000
+
+fee, instrument and assets of the three funds, by year (means):
+                                                                                           prices  demand_instruments0  product_mtna
+product_fund_name                                                                    year                                           
+Invesco DB Commodity Index Tracking Fund                                             2015    0.90                0.780      2866.442
+                                                                                     2016    0.89                0.769      2291.833
+                                                                                     2017    0.86                0.717      2106.517
+                                                                                     2018    0.88                0.371      2566.140
+                                                                                     2019    0.87                0.306      1591.742
+                                                                                     2020    0.82                0.315      1076.756
+                                                                                     2021    0.86                0.287      2304.620
+                                                                                     2022    0.84                0.282      3601.408
+                                                                                     2023    0.84                0.268      2102.633
+                                                                                     2024    0.84                0.253      1694.780
+Invesco DB Multi-Sector Commodity Trust: Invesco DB Agriculture Fund                 2018    0.92                0.348       745.200
+                                                                                     2022    0.88                0.286      1682.900
+PIMCO ETF Trust: PIMCO 0-5 Year High Yield Corporate Bond Index Exchange-Traded Fund 2012    0.55                1.013       677.000
+                                                                                     2013    0.55                1.016      2588.140
+                                                                                     2014    0.55                0.846      4138.475
+                                                                                     2015    0.55                0.300      2546.583
+                                                                                     2016    0.55                0.191      1956.392
+                                                                                     2017    0.55                0.200      1842.733
+                                                                                     2018    0.55                0.224      1577.470
+                                                                                     2019    0.55                0.200      1571.983
+                                                                                     2020    0.55                0.200      1337.917
+                                                                                     2021    0.55                0.230      1950.720
+                                                                                     2022    0.55                0.228      1445.183
+                                                                                     2023    0.55                0.230      1306.267
+PIMCO ETF Trust: PIMCO 0-5 Year High Yield Corporate Bond Index Fund                 2012    0.55                0.996       492.100
+PowerShares DB Commodity Index Tracking Fund                                         2010    0.88                0.843      4532.150
+                                                                                     2011    0.87                0.843      5962.583
+                                                                                     2012    0.87                0.839      6257.125
+                                                                                     2013    0.87                0.847      6362.390
+                                                                                     2014    0.88                0.846      5280.950
+PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Agriculture Fund         2010    0.93                0.839      2289.500
+                                                                                     2011    0.92                0.835      3035.125
+                                                                                     2012    0.93                0.841      1891.175
+                                                                                     2013    0.94                0.847      1498.260
+                                                                                     2014    0.93                0.856      1296.492
+                                                                                     2015    0.93                0.367       839.725
+                                                                                     2016    0.92                0.352       749.942
+                                                                                     2017    0.91                0.350       730.630
+                                                                                     firm_f_old               firm_ids market_m_index asset_class
+product_fund_name                                                                                                                                
+Invesco DB Commodity Index Tracking Fund                                                    ICA                Invesco       DBLCDBCE  real_asset
+Invesco DB Multi-Sector Commodity Trust: Invesco DB Agriculture Fund                        ICA                Invesco       DBLCDBAE  real_asset
+PIMCO ETF Trust: PIMCO 0-5 Year High Yield Corporate Bond Index Exchange-Traded Fund        PIM                  PIMCO       BHY5TRUU        bond
+PIMCO ETF Trust: PIMCO 0-5 Year High Yield Corporate Bond Index Fund                        PIM                  PIMCO       BHY5TRUU        bond
+PowerShares DB Commodity Index Tracking Fund                                                DBC  DB Commodity Services       DBLCDBCE  real_asset
+PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Agriculture Fund                DBC  DB Commodity Services       DBLCDBAE  real_asset

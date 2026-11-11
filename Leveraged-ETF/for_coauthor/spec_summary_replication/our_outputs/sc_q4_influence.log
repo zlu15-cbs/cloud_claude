@@ -1,0 +1,65 @@
+T2 without VA funds, paper instrument: slope 7.244 (numerator 26.23, denominator 3.621); rows 100,529
+by entry-fee quartile:
+        num    den  fund_months  funds  slope_without_group  sd_resid_fee  sd_resid_iv
+q                                                                                     
+1.0 -59.703  2.435        52012    548               72.453         0.022        0.028
+2.0 -13.034  1.940        29452    355               23.351         0.047        0.040
+3.0  53.349 -0.599        16409    237               -6.426         0.041        0.052
+4.0  45.620 -0.154         2656     50               -5.135         0.031        0.086
+
+20 funds with the largest effect on the slope (all quartiles):
+                                                       name                               firm    q  months     num    den  fee_min  fee_max  iv_min  iv_max        aum     first      last  slope_without
+product_ids                                                                                                                                                                                               
+24698              Invesco DB Commodity Index Tracking Fund              DB Commodity Services  4.0     162  31.607 -0.126     0.82     0.90   0.249   0.853   3460.201  2010.000  2024.500         -1.434
+52699        PIMCO ETF Trust: PIMCO 0-5 Year High Yield Cor                              PIMCO  3.0     121  19.605 -0.353     0.55     0.55   0.186   1.037   2030.383  2012.667  2023.167          1.668
+24773        Invesco DB Multi-Sector Commodity Trust: Inves              DB Commodity Services  4.0     101  16.174 -0.108     0.88     0.94   0.283   0.858   1549.580  2010.000  2022.833          2.697
+28845        State Farm Mutual Fund Trust: State Farm S&P 5   State Farm Investment Management  3.0      73  -0.498  1.345     0.35     0.80   0.531   1.155    380.886  2010.000  2017.500         11.745
+8298         Dimensional ETF Trust: Dimensional US Small Ca          Dimensional Fund Advisors  2.0      86  -0.471  0.990     0.26     0.53   0.080   0.472   2467.383  2010.000  2023.667         10.150
+53197        FlexShares Trust: FlexShares iBoxx 3-Year Targ    Northern Trust Asset Management  1.0     139  -6.808  0.068     0.18     0.20   0.213   0.409   1723.394  2012.333  2024.583          9.299
+52565        DBX ETF Trust: Xtrackers MSCI EAFE Hedged Equi             DBX Strategic Advisors  3.0     120   6.302 -0.131     0.35     0.36   0.186   0.594   5791.272  2014.167  2024.583          5.312
+16454         iShares Trust: iShares Core S&P US Growth ETF                          BlackRock  1.0     166  -4.523  0.264     0.04     0.25   0.148   0.372   4971.156  2010.000  2024.583          9.160
+16453          iShares Trust: iShares Core S&P US Value ETF                          BlackRock  1.0     166  -4.217  0.265     0.04     0.25   0.148   0.372   4635.327  2010.000  2024.583          9.073
+16411        iShares Trust: iShares Core S&P Total US Stock                          BlackRock  1.0     166  -5.318  0.092     0.03     0.20   0.178   0.391  16346.876  2010.000  2024.583          8.939
+17694        JPMorgan Trust II: JPMorgan International Rese          JPMorgan Asset Management  3.0      91   1.742 -0.779     0.34     0.82   0.085   0.261    800.942  2010.000  2018.083          5.565
+31432        Vanguard Index Funds: Vanguard 500 Index Fund;                           Vanguard  1.0     166  -5.570  0.030     0.14     0.17   0.066   0.147  20102.993  2010.000  2024.583          8.857
+31353        Vanguard World Fund: Vanguard Consumer Discret                           Vanguard  2.0     166   1.590 -0.753     0.09     1.90   0.049   0.122   2561.720  2010.000  2024.583          5.633
+54121        MassMutual Select Funds: MM S&P 500 Index Fund                         MassMutual  1.0      92  -3.410  0.232     0.08     0.12   0.242   0.630    964.341  2013.750  2022.167          8.745
+16514              iShares S&P GSCI Commodity-Indexed Trust                          BlackRock  3.0     131   3.207 -0.353     0.75     0.87   0.161   0.521   1257.234  2010.000  2023.000          5.793
+31320        Vanguard Bond Index Funds: Vanguard Inflation-                           Vanguard  1.0     166  -4.283  0.075     0.20     0.22   0.049   0.121   6596.212  2010.000  2024.583          8.604
+7508         Columbia Funds Series Trust: Columbia Large Ca  Columbia Threadneedle Investments  1.0     166  -2.854  0.229     0.14     0.20   0.196   0.307   2320.608  2010.000  2024.583          8.574
+47354        abrdn Gold ETF Trust: abrdn Physical Gold Shar                     ETF Securities  2.0     163  -5.667 -0.104     0.17     0.39   0.300   0.570   1587.851  2010.250  2024.583          8.562
+26989        T Rowe Price Index Trust, Inc: T Rowe Price Eq                      T. Rowe Price  2.0     166   5.177  0.080     0.16     0.32   0.195   0.666  17149.051  2010.000  2024.583          5.945
+53287        PIMCO Funds: PIMCO International Fundamental I                              PIMCO  4.0      34   4.387  0.011     0.82     0.84   0.481   1.052   2910.412  2012.250  2015.167          6.051
+
+quartile 4 funds, by effect on the slope:
+                                                       name                               firm    q  months     num    den  fee_min  fee_max  iv_min  iv_max       aum     first      last  slope_without
+product_ids                                                                                                                                                                                              
+24698              Invesco DB Commodity Index Tracking Fund              DB Commodity Services  4.0     162  31.607 -0.126     0.82     0.90   0.249   0.853  3460.201  2010.000  2024.500         -1.434
+24773        Invesco DB Multi-Sector Commodity Trust: Inves              DB Commodity Services  4.0     101  16.174 -0.108     0.88     0.94   0.283   0.858  1549.580  2010.000  2022.833          2.697
+53287        PIMCO Funds: PIMCO International Fundamental I                              PIMCO  4.0      34   4.387  0.011     0.82     0.84   0.481   1.052  2910.412  2012.250  2015.167          6.051
+42271        Russell Investment Company: Global Equity Fund                Russell Investments  4.0     104  -2.905  0.030     0.82     1.07   0.760   0.899   970.027  2010.000  2021.500          8.114
+43724        PIMCO Funds: PIMCO EM Fundamental IndexPLUS AR                              PIMCO  4.0      50   1.935 -0.044     1.15     1.25   0.489   0.795  4081.376  2010.000  2014.417          6.628
+41912        Russell Investment Company: International Deve                Russell Investments  4.0     146  -1.383  0.082     0.92     1.02   0.739   0.913  2000.716  2010.000  2022.750          7.801
+59412        Exchange Traded Concepts Trust: ROBO Global Ro           Exchange Traded Concepts  4.0      74  -1.394  0.017     0.95     0.95   0.545   0.837  1480.620  2017.333  2023.917          7.664
+27130        Russell Investment Company: Global Equity Fund                Russell Investments  4.0     104  -0.959  0.073     1.19     1.25   0.782   0.899  1588.091  2010.000  2019.083          7.662
+49966        Russell Investment Company: Russell Investment                Russell Investments  4.0      64  -1.008  0.050     1.03     1.30   0.835   0.909   713.244  2011.083  2016.500          7.629
+16393                 iShares, Inc: iShares MSCI Taiwan ETF                          BlackRock  4.0     166   1.171 -0.018     0.57     0.71   0.148   0.362  3631.992  2010.000  2024.583          6.886
+42269        Russell Investment Company: Russell Investment                Russell Investments  4.0      74  -0.827 -0.006     1.30     1.35   0.779   0.873   500.496  2010.000  2016.667          7.460
+27248        Russell Investment Company: Emerging Markets F                Russell Investments  4.0     129  -0.933 -0.241     1.17     1.53   0.779   0.873  1518.529  2010.000  2021.167          7.034
+47139        ProShares Trust: ProShares Large Cap Core Plus                           ProFunds  4.0      36   0.213 -0.048     0.45     0.46   0.432   0.885   672.767  2014.833  2019.333          7.092
+20933        AIM Counselor Series Trust (Invesco Counselor                             Invesco  4.0      66   0.032 -0.069     1.21     1.29   0.393   0.716   982.871  2014.833  2020.417          7.100
+94470        Morningstar Funds Trust: Morningstar US Equity  Morningstar Investment Management  4.0      54  -0.321  0.017     0.81     0.84   0.685   0.743  1442.761  2019.833  2024.583          7.366
+
+cumulative removal of the most influential funds (largest positive push first):
+   1 funds removed -> slope   -1.434   (last removed: Invesco DB Commodity Index Tracking Fund, quartile 4)
+   2 funds removed -> slope   -6.092   (last removed: PIMCO ETF Trust: PIMCO 0-5 Year High Yield Cor, quartile 3)
+   3 funds removed -> slope   -9.780   (last removed: Invesco DB Multi-Sector Commodity Trust: Inves, quartile 4)
+   4 funds removed -> slope  -10.938   (last removed: DBX ETF Trust: Xtrackers MSCI EAFE Hedged Equi, quartile 3)
+   5 funds removed -> slope   -9.612   (last removed: JPMorgan Trust II: JPMorgan International Rese, quartile 3)
+   6 funds removed -> slope   -8.650   (last removed: Vanguard World Fund: Vanguard Consumer Discret, quartile 2)
+   7 funds removed -> slope   -8.674   (last removed: iShares S&P GSCI Commodity-Indexed Trust, quartile 3)
+   8 funds removed -> slope   -9.629   (last removed: T Rowe Price Index Trust, Inc: T Rowe Price Eq, quartile 2)
+   9 funds removed -> slope  -10.361   (last removed: PIMCO Funds: PIMCO International Fundamental I, quartile 4)
+  10 funds removed -> slope  -11.079   (last removed: Vanguard Tax-Managed Funds: Vanguard Developed, quartile 1)
+  11 funds removed -> slope  -10.903   (last removed: Victory Portfolios III: Victory Nasdaq-100 Ind, quartile 3)
+  12 funds removed -> slope  -11.777   (last removed: Russell Investment Company: Tax-Managed US Lar, quartile 3)
