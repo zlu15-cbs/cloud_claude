@@ -27,7 +27,12 @@ def remap_family(src, mode):
     s['ord'] = np.arange(len(s))
     s = s.merge(cf[['product_j', 'mk', 'firm_f']], on=['product_j', 'mk'], how='left').sort_values(['product_j', 'mk'])
     code_map = cf.dropna(subset=['firm_f_old']).groupby('firm_f_old').firm_f.agg(lambda x: x.value_counts().index[0])
-    if mode == 'parent':
+    if mode == 'refined':        # the rule-based refined ID (sc_family_refined.py) in place of firm_f
+        from sc_family_refined import refined_family
+        fam, _ = refined_family()
+        fam['mk'] = np.round(fam.month_t * 12).astype(int)
+        s = s.drop(columns='firm_f').merge(fam[['product_j', 'mk', 'family']].rename(columns={'family': 'firm_f'}), on=['product_j', 'mk'], how='left').sort_values(['product_j', 'mk'])
+    if mode in ('parent', 'refined'):
         par = s.groupby('product_j').firm_f.transform(lambda x: x.ffill().bfill())
     else:
         last = cf.sort_values('mk').groupby('product_j').firm_f.last()
@@ -85,7 +90,13 @@ def pure_index_funds(ids):
 
 
 def family_switchers():
-    """Funds with more than one value of firm_f (Danny's ownership family ID) over their months in the index CSV."""
+    """Funds to exclude for a change of family. With SC_FAMILY=refined: funds with a real acquisition or transfer in 2010-2024 under
+    the refined ID. Otherwise: funds with more than one value of firm_f anywhere in the index CSV."""
+    import os
+    if os.environ.get('SC_FAMILY') == 'refined':
+        from sc_family_refined import refined_family
+        _, sw = refined_family(2010, 2024 + 8 / 12)
+        return set(sw.product_j)
     cf = pd.read_csv(f'{DATA}/nonLev_funds_product_month_level_v2_patched.csv', usecols=['product_j', 'firm_f']).dropna()
     n = cf.groupby('product_j').firm_f.nunique()
     return set(n[n > 1].index)

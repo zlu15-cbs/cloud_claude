@@ -1,0 +1,122 @@
+prev,firm_f,funds,first_month,last_month,rule
+Directed Services,Voya Investments,54,2018.75,2018.75,alias
+DBX Strategic Advisors,DWS,32,2021.5,2021.5,alias
+MML Investment Advisers,MassMutual,28,2021.5,2021.5,alias
+MassMutual,MML Investment Advisers,28,2013.75,2018.0,alias
+ProFunds,ProShares,28,2019.25,2021.5,alias
+GW Capital Management,Empower Funds,14,2018.75,2018.75,alias
+Banc One Investment Advisors,One Group Mutual Funds,12,2003.25,2003.25,alias
+Crossmark Global Investments,Steward Funds,11,2019.25,2019.25,alias
+Krane Funds Advisors,KraneShares,11,2021.5,2021.5,alias
+Everence Capital Management,Praxis Mutual Funds,8,2021.5,2021.5,alias
+Nations Funds,Columbia Threadneedle Investments,6,2006.0,2006.0,alias
+New York Life Investments,Eclipse Funds,6,2001.5,2001.5,alias
+American General,AIG,5,2021.5,2021.5,alias
+CWM Advisors,Inspire ETFs,5,2021.5,2021.5,alias
+Rafferty Asset Management,Direxion,5,2021.5,2021.5,alias
+Advantus Capital Management,Securian Asset Management,4,2018.25,2018.25,alias
+Empowered Funds,Alpha Architect,4,2021.5,2021.5,alias
+Northwestern Mutual Investment Services,Mason Street Advisors,4,2001.75,2001.75,alias
+Provident Institutional Management,BlackRock,4,2004.75,2004.75,alias
+SRN Advisors,Siren,4,2021.5,2021.5,alias
+Waddell & Reed,Ivy Investments,4,2018.0,2018.0,alias
+CCM Partners,Shelton Capital Management,3,2000.25,2001.0,alias
+David L. Babson & Co.,MassMutual,3,2004.75,2004.75,alias
+FFCM,O'Shares Investment Advisers,3,2018.5,2018.5,alias
+Voya Investments,Directed Services,3,2007.5,2007.5,alias
+Citizens Trust,Citizens Advisers,2,2000.16666666667,2000.16666666667,alias
+ETFis Capital,Virtus Investment Partners,2,2017.5,2017.5,alias
+Eclipse Funds,New York Life Investments,2,2004.25,2004.25,alias
+Factor Advisors,ETF Managers Group,2,2017.75,2017.75,alias
+Mason Street Advisors,Northwestern Mutual Investment Services,2,1999.75,1999.75,alias
+PDR Services,State Street Global Advisors,2,2012.5,2012.5,alias
+Tortoise,TortoiseEcofin,2,2021.5,2021.5,alias
+U.S. Trust Company of Boston,Boston Trust,2,2001.0,2001.0,alias
+American General,SunAmerica Asset Management,1,2002.5,2002.5,alias
+KeyCorp,Victory Capital Management,1,2000.66666666667,2000.66666666667,alias
+Maxim Capital Management,GW Capital Management,1,2005.0,2005.0,alias
+Rational Advisors,Strategy Shares,1,2022.0,2022.0,alias
+State Street Global Advisors,PDR Services,1,2008.25,2008.25,alias
+TortoiseEcofin,Tortoise,1,2025.5,2025.5,alias
+Woodward Funds,First Chicago NBD,1,1996.0,1996.0,alias
+Astor Investment Management,Northern Lights,3,2018.5,2018.5,artifact_back
+Gotham Asset Management,FundVantage Trust,3,2021.5,2021.5,artifact_back
+SP Funds,FolioBeyond,3,2025.0,2025.0,artifact_back
+SoFi,FolioBeyond,2,2025.0,2025.0,artifact_back
+U.S. Global Investors,UBS Global Asset Management,2,2021.5,2021.5,artifact_back
+Gotham Asset Management,FolioBeyond,1,2025.0,2025.0,artifact_back
+SonicShares,FolioBeyond,1,2025.0,2025.0,artifact_back
+BNY Mellon Investment Management,Invesco,5,2008.25,2008.5,artifact_fwd
+BISYS Fund Services,Mississippi Valley Advisors,4,1999.75,1999.75,artifact_fwd
+Exchange Traded Concepts,Vident,4,2019.0,2019.25,artifact_fwd
+First Data Investor Services Group,Fleet Investment Advisers,4,1997.0,1997.0,artifact_fwd
+Exchange Traded Concepts,ROBO Global,3,2021.5,2021.5,artifact_fwd
+FolioBeyond,SP Funds,3,2025.25,2025.25,artifact_fwd
+SEI,U.S. Bancorp Asset Management,3,1998.0,1998.0,artifact_fwd
+Toroso Investments,SoFi,3,2021.5,2021.5,artifact_fwd
+UBS Global Asset Management,U.S. Global Investors,3,2023.0,2023.0,artifact_fwd
+BNY Mellon Investment Management,Wilshire,2,1995.0,1995.0,artifact_fwd
+Exchange Traded Concepts,Capital Link,2,2021.5,2021.5,artifact_fwd
+Exchange Traded Concepts,Loncar,2,2021.5,2021.5,artifact_fwd
+FolioBeyond,SoFi,2,2025.25,2025.25,artifact_fwd
+Toroso Investments,SP Funds,2,2021.5,2021.5,artifact_fwd
+BNY Mellon Investment Management,BlackRock,1,2007.5,2007.5,artifact_fwd
+BNY Mellon Investment Management,PDR Services,1,2008.25,2008.25,artifact_fwd
+Exchange Traded Concepts,Amplify,1,2018.75,2018.75,artifact_fwd
+Exchange Traded Concepts,GraniteShares,1,2017.75,2017.75,artifact_fwd
+Exchange Traded Concepts,Recon Capital Advisors,1,2017.5,2017.5,artifact_fwd
+Exchange Traded Concepts,VanEck,1,2016.25,2016.25,artifact_fwd
+First Data Investor Services Group,Old Kent Bank,1,1995.0,1995.0,artifact_fwd
+FolioBeyond,Gotham Asset Management,1,2025.25,2025.25,artifact_fwd
+Forum Financial Services,Allspring,1,2001.75,2001.75,artifact_fwd
+Russell Investments,State Street Global Advisors,1,2001.5,2001.5,artifact_fwd
+SEI,HighMark Capital Management,1,2009.25,2009.25,artifact_fwd
+Vest Financial,First Trust,1,2021.0,2021.0,artifact_fwd
+Guggenheim Investments,Invesco,32,2018.25,2021.25,real
+Compass Efficient Model Portfolios,Victory Capital Management,28,2015.25,2015.25,real
+MetLife,Brighthouse Investment Advisers,20,2022.5,2022.5,real
+OppenheimerFunds,Invesco,17,2019.25,2019.25,real
+Aetna,Voya Investments,15,2002.25,2002.25,real
+Morgan Stanley Investment Management,Invesco,13,2010.25,2010.25,real
+U.S. Bancorp Asset Management,Nuveen,13,2010.5,2010.75,real
+One Group Mutual Funds,JPMorgan Asset Management,12,2005.25,2005.25,real
+USAA Asset Management Company,Victory Capital Management,12,2019.5,2023.25,real
+DB Commodity Services,Invesco,11,2010.5,2015.0,real
+IndexIQ,New York Life Investments,11,2024.75,2024.75,real
+ETF Managers Group,Amplify,8,2024.0,2024.0,real
+Merrill Lynch Investment Managers,BlackRock,8,2004.75,2007.0,real
+Evergreen Investment Management,Allspring,7,2010.5,2022.75,real
+ETF Securities,abrdn,6,2018.75,2021.5,real
+Delaware Management Company,Ivy Investments,4,2021.5,2021.5,real
+Firstar,U.S. Bancorp Asset Management,4,2001.75,2001.75,real
+Ivy Investments,Delaware Management Company,4,2021.25,2021.25,real
+Lattice Strategies,Hartford Funds,4,2018.75,2018.75,real
+Meeder Investment Management,Munder Capital Management,4,1998.16666666667,1998.16666666667,real
+O'Shares Investment Advisers,SS&C ALPS Advisors,4,2025.5,2025.5,real
+Ziegler Capital Management,Security Benefit,4,2009.0,2009.0,real
+Bankers Trust Company,DWS,3,2001.5,2002.5,real
+Bear Stearns Asset Management,BNY Mellon Investment Management,3,2004.75,2004.75,real
+Emerging Global Shares,Columbia Threadneedle Investments,3,2014.5,2014.5,real
+Fleet Investment Advisers,Columbia Threadneedle Investments,3,2002.75,2002.75,real
+GE Asset Management,State Street Global Advisors,3,2016.5,2016.5,real
+HighMark Capital Management,Nationwide Fund Advisors,3,2013.5,2013.5,real
+Mississippi Valley Advisors,Firstar,3,2001.25,2001.25,real
+Reality Shares,SRN Advisors,3,2021.0,2021.0,real
+Recon Capital Advisors,Global X,3,2018.75,2018.75,real
+XShares Advisors,DBX Strategic Advisors,3,2010.5,2010.5,real
+Ziegler Capital Management,HighMark Capital Management,3,2009.25,2009.25,real
+Fischer Francis Trees & Watts,American Independence Financial Services,2,2008.25,2008.25,real
+GE Asset Management,Unknown,2,2020.5,2020.5,real
+Munder Capital Management,Meeder Investment Management,2,1996.0,1996.0,real
+Munder Capital Management,Victory Capital Management,2,2015.25,2015.25,real
+SS&C ALPS Advisors,Janus Henderson Investors,2,2016.5,2016.5,real
+SS&C ALPS Advisors,Sprott,2,2019.5,2019.5,real
+Salt Financial,Pacer,2,2021.5,2021.5,real
+Smith Barney Fund Management,Franklin Templeton,2,2007.0,2007.0,real
+State Farm Investment Management,BlackRock,2,2018.75,2020.33333333333,real
+UBS Global Asset Management,State Street Global Advisors,2,2004.75,2004.75,real
+Allspring,BlackRock,1,1995.0,1995.0,real
+CSAT Investment Advisory,Arrow Investment Advisors,1,2021.5,2021.5,real
+CSOP Asset Management,Pacer,1,2020.5,2020.5,real
+Elkhorn Investments,Innovator,1,2018.25,2018.25,real
+RS Investment Management,Victory Capital Management,1,2018.75,2018.75,real
