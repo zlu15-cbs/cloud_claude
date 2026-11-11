@@ -1,0 +1,27 @@
+Danny's source panel vs the index CSV, and the origin of the variable-annuity funds' fees (inline checks, 11 Nov 2026).
+Files: Dropbox\P16_LeverageMKT\Data\source_intake\raw data\index_funds_preprocess_oct2026.csv (source panel, written at line 146 of
+       Dropbox\P16_LeverageMKT\Code\5_fund_market_data_for_Matteo_v6_nonlev_etf.R) and Code\python\nonLev_funds_product_month_level_v2_patched.csv.
+
+1. Row counts. Source panel 675,551 fund-months, 6,077 funds. Index CSV 579,632 fund-months, 5,532 funds. Every CSV row is in the source
+   panel (no CSV-only rows); fees and family codes agree on all 579,632 common rows. Source-only rows: 95,919 (545 funds are never exported: 42,763 rows).
+2. The filter (build script, about line 555):
+   regDat=regDat[!is.na(product_mtna + product_L1_mtna + product_exp_ratio + product_fund_age + product_tracking_err + product_past_1yr_ret +
+                        BLP_IV_hausman_exp_ratio + Conduct_IV_vw_ind_resid_1m)]
+   and at export (line 831): product_mtna>0 & product_L1_mtna>0 & !is.na(product_exp_ratio).
+3. The 95,919 source-only rows by first failing condition, in this order:
+   no past 1-year return / tracking error (the fund's first 12 months)        38,713
+   no expense ratio                                                           29,114
+   assets missing or not positive                                              3,350
+   lagged assets missing or not positive                                          80
+   fund-level data complete, but the paper's Hausman IV is undefined
+     (the family has no fund on another index that month)                     23,178
+   index-month absent from the CSV (index-level conduct instrument missing)      426
+   not explained by this reconstruction                                        1,058
+4. Donors. 60,773 source-only rows have a fee and positive lagged assets, so they enter the paper's IV0 as donors (IV0 is built before the
+   filter). That is 9.5% of all usable donor rows in the source panel. They are missing from any instrument rebuilt from the index CSV.
+5. Fee imputation (build script, lines 89-99): fund5 = first five letters of the fund name, lower case. A missing expense ratio is filled
+   forward within the fund, then by the mean fee of funds with the same fund5 on the same date, then by the mean over all dates of that fund5;
+   after the merge it is filled backward and forward within the fund.
+6. CRSP quarterly fund summary, Table 2 funds: share of records with a missing expense ratio: variable-annuity funds 0.968 (7,017 records),
+   other funds 0.056 (80,575 records). Funds with no expense ratio in any CRSP record: 99 of the 112 variable-annuity funds, 1 of the 1,190 others.
+   The 9 Allianz ("allia") variable-annuity funds have no CRSP expense ratio in any record.

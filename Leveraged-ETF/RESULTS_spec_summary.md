@@ -214,7 +214,7 @@ Schemes B (own η), C (PC η) and A with markups capped 1/99 by year give the sa
 - **Without the variable-annuity funds, B65 becomes the best-fitting model under V2** (MCS p of 1.00, with PC at 0.52). With them, PC fits best. The two are not separable in either sample.
 - **This is reported, not used to choose.** The demand criteria come first.
 
-## 7. The fee data for the variable-annuity funds, and a question for Danny
+## 7. The fee data for the variable-annuity funds: imputed, not observed
 
 **Why a result with their true families is not trustworthy either.** Rebuilding the instrument for these funds with their true families gives a Table 2 coefficient of about −0.3 (section 1). On those rows the rebuilt instrument tracks each fund's own fee almost one for one (first-stage F in the thousands). The cause is the fee data (`sc_blank_family_check.log`):
 
@@ -222,6 +222,28 @@ Schemes B (own η), C (PC η) and A with markups capped 1/99 by year give the sa
 - Allianz's funds are all at 0.400% in 2010–2016, then all at 0.535% in 2018 and 0.458% in 2020.
 - Mutual of America's funds, including its S&P 500 index fund, are all at 0.13% in 2010, 1.05% in 2012, 1.42% in 2014 and 1.93% in 2022.
 
-That looks like one firm-level or trust-level number copied to every fund. A family instrument for these funds is then nearly the fund's own fee, so it cannot identify the slope. We have not checked whether this comes from CRSP itself or from a step in Danny's build.
+**Where these fees come from: they are imputed, not observed** (`logs/spec_compare/sc_source_panel_check.log`).
+- CRSP has no expense ratio in 97% of the quarterly records of the variable-annuity funds, against 6% for the other funds in the sample. For 99 of the 112 funds it has none in any record.
+- Danny's build script (`5_fund_market_data_for_Matteo_v6_nonlev_etf.R`, lines 89–99) fills a missing expense ratio with the mean fee of the funds whose names share the same first five letters, first on the same date and then over all dates.
+- So the "price" of a variable-annuity fund is an average of the fees of other funds with a similar name, which are mostly the same firm's funds. A family instrument for these funds is then nearly the fund's own price by construction, and it cannot identify the slope.
 
-**Question for Danny.** Where do the variable-annuity funds' expense ratios come from: an imputation in your build, or CRSP as reported?
+**This settles the question we had for Danny.** The fees are an imputation in the build, not CRSP as reported. It is a further reason to exclude these funds: their prices are not observed.
+
+## 8. Danny's source panel and the index CSV: what the 96,000 missing rows are
+
+Danny's note counts 675,551 passive source rows; the index CSV has 579,632. The source panel is `index_funds_preprocess_oct2026.csv` in the shared Dropbox, and the CSV is that panel after one filter in the build script (`sc_source_panel_check.log`).
+
+| Rows in the source panel but not in the index CSV | Fund-months |
+|---|---|
+| No past one-year return or tracking error (a fund's first 12 months) | 38,713 |
+| No expense ratio | 29,114 |
+| Assets or lagged assets missing or not positive | 3,430 |
+| Fund-level data complete, but the paper's Hausman instrument is undefined (the family has no fund on another index that month) | 23,178 |
+| Index-level conduct instrument missing | 426 |
+| Not explained by this reconstruction | 1,058 |
+| **Total** | **95,919** |
+
+**Reading.**
+- **The CSV is the estimation-ready subset of the source panel.** Every CSV row is in the source panel, with the same fee and family code.
+- **The paper's instrument is built before the filter,** so 60,773 of the missing rows (9.5% of all usable donor rows) are donors in IV0 but are absent from any instrument rebuilt from the CSV. This is why our rebuild of IV0 matches the original on only 90% of rows.
+- **Our instruments, including V2's Z and the proxy in column 2, draw donors from the CSV only.** They could be rebuilt on the full source panel; that has not been done.

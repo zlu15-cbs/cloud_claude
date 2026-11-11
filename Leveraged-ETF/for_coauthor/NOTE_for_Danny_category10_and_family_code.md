@@ -12,7 +12,6 @@ I cannot reproduce it, because the category10 labels are not in the files I have
 
 - **The labels:** category10 and category20 per fund (`crsp_fundno`) or per tracked index.
 - **The instrument:** the rebuilt IV0 per fund-month for category10 pooled, both the raw version and the hybrid with the fallback flag. Your note points to `results/hausman-robustness-v1/` and `results/table2-hausman-only-v1/continuation-20261109/`, but the donor panels and arrays are local and not in the repository.
-- **The donor panel**, if it is easy to share: your source panel has 675,551 passive rows and my index CSV has 579,632.
 
 **Why it matters.** I built a proxy with the Lipper 6 asset groups in place of category10. It does not match your number:
 
@@ -24,7 +23,7 @@ I cannot reproduce it, because the category10 labels are not in the files I have
 | My proxy, original IV0 on the rows without a family code | −9.107 (0.912) | 86.6 | 10,263 |
 | My rebuild of the original IV0 from my donor file (benchmark only) | −4.741 (1.192) | 36.1 | 7,793 |
 
-- The last row shows that the donor file alone moves the coefficient by 0.9, so I cannot tell how much of the gap is the classification and how much is the donors.
+- The last row shows that the donor file alone moves the coefficient by 0.9. I have since found your source panel (`index_funds_preprocess_oct2026.csv`, 675,551 rows) in the shared Dropbox. The index CSV is that panel after the estimation filter, so 60,773 rows that are donors in IV0 are missing from my rebuild. I can redo the proxy on the full panel; what I still need from you are the category10 labels.
 - With your instrument values I can run your specification through the same downstream steps as V2 (scale, marginal costs, conduct) and compare them on equal terms.
 
 ## 2. The Table 2 results depend on the 7,771 fund-months without a family code
@@ -58,8 +57,9 @@ The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 | Donors: all funds of the parent firm (`firm_f`) | −0.340 (0.049) | 313.5 | +0.791; −1.636; 0.47 |
 
 - With a proper family instrument for these funds, the Table 2 coefficient falls from −5.6 to about −0.3.
-- **This estimate is not credible either, because the fee data for these funds look wrong.** In 85% of firm-months, every variable-annuity fund of a firm has the same expense ratio in the CSV. Allianz's funds are all at 0.400% in 2010–2016, 0.535% in 2018 and 0.458% in 2020. Mutual of America's funds, including its S&P 500 index fund, are all at 0.13% in 2010, 1.05% in 2012, 1.42% in 2014 and 1.93% in 2022.
-- So a family instrument for these funds is almost the fund's own fee (first-stage F in the thousands on these rows). It cannot identify the slope.
+- **This estimate is not credible either, because the fees of these funds are imputed.** In 85% of firm-months, every variable-annuity fund of a firm has the same expense ratio in the CSV. Allianz's funds are all at 0.400% in 2010–2016, 0.535% in 2018 and 0.458% in 2020.
+- **CRSP does not report their fees.** It has no expense ratio in 97% of these funds' quarterly records (6% for the other funds), and none at all for 99 of the 112.
+- **The build script fills them in** (`5_fund_market_data_for_Matteo_v6_nonlev_etf.R`, lines 89–99): a missing expense ratio becomes the mean fee of funds whose names share the same first five letters. The "price" of a variable-annuity fund is therefore close to the average fee of its firm's other funds, and a family instrument is nearly that same number.
 
 **Why I think this is a problem.**
 - **The sign is fragile.** Demand slopes upward on the rows with a family code and upward on the rows without one. It slopes downward only when the two are pooled. The negative coefficient therefore comes from comparing the two groups through the common month effects, not from fee variation within either group. That last sentence is my reading of the three columns; I have not decomposed it further.
@@ -78,13 +78,11 @@ These keep their sign, but the base slope is not identified in either sample and
 
 **What I am asking you.**
 
-1. **Where do the expense ratios of the variable-annuity funds come from?** They look like one firm-level or trust-level number copied to every fund. Is that an imputation step in your build, or is it what CRSP reports for these funds?
+1. **Please confirm my reading of the fee imputation** (lines 89–99 of the build script), and tell me if the variable-annuity funds' fees were meant to be handled differently.
 2. **How should the paper treat these 112 funds?** We know their families, so the choice is ours:
-    - **(a) As now:** pooled as one "family". Table 2 is −5.606, but it rests on an instrument built from unrelated insurers' funds.
-    - **(b) With their true families:** Table 2 is about −0.3. This is the correct construction of the paper's instrument, but with the fee data above it is close to regressing on the fund's own fee.
-    - **(c) In the market but out of the demand estimation.** They still count in the market shares, the outside good and the supply side; they are only left out when the price coefficient is estimated. This is what V2 does. With the original IV0, Table 2 then gives +7.244, so the paper needs a different instrument or specification.
-    - **(d) Out of the inside market,** on the argument that funds sold only inside insurance contracts are not chosen on their expense ratio.
-    - My preference is (c) or (d). Option (a) is not defensible once a referee sees it, and (b) depends on fee data we do not trust.
+    - **(a) As now:** pooled as one "family". Table 2 is −5.606, but it rests on an instrument built from unrelated insurers' funds and on imputed prices.
+    - **(b) With their true families:** Table 2 is about −0.3, which is close to regressing an imputed fee on itself.
+    - **(c) Excluded from the sample.** Gene's proposal, and mine. They are sold inside insurance contracts and their prices are not observed. With the original IV0, Table 2 then gives +7.244, so the paper needs a different instrument or specification. `RESULTS_spec_summary.md` compares the candidates with and without these funds.
 
 The split is easy to replicate: drop the 7,771 fund-months with a blank `firm_f_old` from the Table 2 sample and re-estimate, with nothing else changed.
 
