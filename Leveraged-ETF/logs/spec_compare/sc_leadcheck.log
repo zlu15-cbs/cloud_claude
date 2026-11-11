@@ -1,0 +1,35 @@
+1 T2                   k   12 | b   -0.149 | t month  -3.29 | t fund  -0.41 | t two-way  -0.41 | n 88,645 funds 1171
+1 T2                   k   24 | b   -0.087 | t month  -1.50 | t fund  -0.20 | t two-way  -0.20 | n 76,038 funds 1073
+1 T2                   k   36 | b    0.125 | t month   2.12 | t fund   0.24 | t two-way   0.25 | n 64,991 funds 984
+1 T2                   k  -12 | b    0.047 | t month   1.11 | t fund   0.13 | t two-way   0.13 | n 88,645 funds 1171
+1 T2                   k  -24 | b    0.018 | t month   0.50 | t fund   0.06 | t two-way   0.06 | n 76,038 funds 1073
+1 T2, no VA            k   12 | b    0.387 | t month   6.70 | t fund   0.97 | t two-way   0.97 | n 82,453 funds 1075
+1 T2, no VA            k   24 | b    0.948 | t month  11.57 | t fund   1.99 | t two-way   1.98 | n 70,802 funds 993
+1 T2, no VA            k   36 | b    1.482 | t month  18.94 | t fund   2.67 | t two-way   2.67 | n 60,549 funds 919
+1 T2, no VA            k  -12 | b    0.028 | t month   0.60 | t fund   0.07 | t two-way   0.07 | n 82,453 funds 1075
+1 T2, no VA            k  -24 | b    0.056 | t month   1.24 | t fund   0.15 | t two-way   0.16 | n 70,802 funds 993
+2 Danny proxy          k   12 | b   -0.127 | t month  -3.46 | t fund  -0.48 | t two-way  -0.48 | n 88,645 funds 1171
+2 Danny proxy          k   24 | b   -0.153 | t month  -3.12 | t fund  -0.50 | t two-way  -0.50 | n 76,038 funds 1073
+2 Danny proxy          k   36 | b   -0.102 | t month  -2.48 | t fund  -0.29 | t two-way  -0.29 | n 64,991 funds 984
+2 Danny proxy          k  -12 | b   -0.053 | t month  -1.75 | t fund  -0.20 | t two-way  -0.21 | n 88,645 funds 1171
+2 Danny proxy          k  -24 | b   -0.071 | t month  -2.25 | t fund  -0.29 | t two-way  -0.30 | n 76,038 funds 1073
+2 Danny proxy, no VA   k   12 | b    0.040 | t month   1.25 | t fund   0.17 | t two-way   0.17 | n 82,453 funds 1075
+2 Danny proxy, no VA   k   24 | b    0.135 | t month   3.34 | t fund   0.50 | t two-way   0.49 | n 70,802 funds 993
+2 Danny proxy, no VA   k   36 | b    0.232 | t month   6.87 | t fund   0.77 | t two-way   0.77 | n 60,549 funds 919
+2 Danny proxy, no VA   k  -12 | b   -0.046 | t month  -1.88 | t fund  -0.19 | t two-way  -0.19 | n 82,453 funds 1075
+2 Danny proxy, no VA   k  -24 | b   -0.095 | t month  -3.62 | t fund  -0.41 | t two-way  -0.41 | n 70,802 funds 993
+3 V2                   k   12 | b   -0.078 | t month  -2.04 | t fund  -0.36 | t two-way  -0.36 | n 78,575 funds 1032
+3 V2                   k   24 | b   -0.108 | t month  -2.18 | t fund  -0.43 | t two-way  -0.43 | n 67,309 funds 956
+3 V2                   k   36 | b   -0.028 | t month  -0.52 | t fund  -0.11 | t two-way  -0.10 | n 57,399 funds 882
+3 V2                   k  -12 | b   -0.054 | t month  -1.79 | t fund  -0.27 | t two-way  -0.27 | n 78,575 funds 1032
+3 V2                   k  -24 | b   -0.213 | t month  -5.68 | t fund  -1.05 | t two-way  -1.05 | n 67,309 funds 956
+4 A5                   k   12 | b   -0.311 | t month  -5.30 | t fund  -0.75 | t two-way  -0.75 | n 88,645 funds 1171
+4 A5                   k   24 | b   -0.368 | t month  -4.91 | t fund  -0.71 | t two-way  -0.71 | n 76,038 funds 1073
+4 A5                   k   36 | b   -0.198 | t month  -2.43 | t fund  -0.31 | t two-way  -0.31 | n 64,991 funds 984
+4 A5                   k  -12 | b    0.026 | t month   0.45 | t fund   0.07 | t two-way   0.07 | n 88,645 funds 1171
+4 A5                   k  -24 | b   -0.017 | t month  -0.36 | t fund  -0.05 | t two-way  -0.05 | n 76,038 funds 1073
+4 A5, no VA            k   12 | b    0.175 | t month   4.14 | t fund   0.49 | t two-way   0.49 | n 82,453 funds 1075
+4 A5, no VA            k   24 | b    0.554 | t month  10.87 | t fund   1.30 | t two-way   1.31 | n 70,802 funds 993
+4 A5, no VA            k   36 | b    0.969 | t month  16.36 | t fund   1.97 | t two-way   1.98 | n 60,549 funds 919
+4 A5, no VA            k  -12 | b    0.053 | t month   1.24 | t fund   0.15 | t two-way   0.15 | n 82,453 funds 1075
+4 A5, no VA            k  -24 | b    0.014 | t month   0.35 | t fund   0.04 | t two-way   0.04 | n 70,802 funds 993
