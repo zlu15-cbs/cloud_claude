@@ -1,30 +1,21 @@
-# Two points on your 10 Nov note: the category10 labels, and the rows without a family code
+# Two points on your 10 Nov notes: your category10 specification, and the variable-annuity funds
 
 Danny,
 
-Two things came out of running your preferred specification next to V2. The first is a request. The second is a result on the Table 2 sample that I think we need to settle before choosing between specifications.
+Thank you for the handoff zip. It had what I needed, so the request I was going to make is gone. Two results came out of running your preferred specification next to V2, and I think we need to settle the second before choosing between specifications.
 
-## 1. Where are the category10 labels and the rebuilt IV0 saved?
+## 1. Your category10 specification reproduces, and it behaves like Table 2
 
-Your preferred specification is Table 2 unchanged except for IV0, which excludes donors on the target's exact benchmark and in its category10 class (pooled share types, lag-AUM weights, original IV0 where undefined). Your result is −5.713 (0.747).
+From `classified_donors.csv` and `classified_targets.csv` in your zip I rebuilt your preferred instrument: donors outside the target's exact benchmark and its category10 class, donors with an unknown category left out, pooled share types, lag-AUM weights, and the original IV0 on the 2,502 rows where it is undefined.
 
-I cannot reproduce it, because the category10 labels are not in the files I have. Could you tell me where these are saved, or send them?
+| Table 2 specification, 108,300 rows | Price coefficient (SE) | First-stage F | Negative-MC share (B0–B65, own scale) | Vanguard fund-months negative (B0) | Conduct, main instrument |
+|---|---|---|---|---|---|
+| Original IV0 | −5.606 (1.310) | 33.6 | 0.21–0.36 | 0.81 | PC |
+| Yours: benchmark + category10, pooled | **−5.713 (0.747)** | 128.8 | 0.20–0.35 | 0.79 | PC |
 
-- **The labels:** category10 and category20 per fund (`crsp_fundno`) or per tracked index.
-- **The instrument:** the rebuilt IV0 per fund-month for category10 pooled, both the raw version and the hybrid with the fallback flag. Your note points to `results/hausman-robustness-v1/` and `results/table2-hausman-only-v1/continuation-20261109/`, but the donor panels and arrays are local and not in the repository.
-
-**Why it matters.** I built a proxy with the Lipper 6 asset groups in place of category10. It does not match your number:
-
-| IV0 construction (Table 2 specification, 108,300 rows) | Price coefficient (SE) | First-stage F | Rows on original IV0 |
-|---|---|---|---|
-| Original IV0 | −5.606 (1.310) | 33.6 | – |
-| Yours: benchmark + category10, pooled | −5.713 (0.747) | | 2,502 |
-| My proxy: benchmark + Lipper 6, pooled, blank families matched | −7.254 (0.456) | 231.0 | 2,492 |
-| My proxy, original IV0 on the rows without a family code | −9.107 (0.912) | 86.6 | 10,263 |
-| My rebuild of the original IV0 from my donor file (benchmark only) | −4.741 (1.192) | 36.1 | 7,793 |
-
-- The last row shows that the donor file alone moves the coefficient by 0.9. I have since found your source panel (`index_funds_preprocess_oct2026.csv`, 675,551 rows) in the shared Dropbox. The index CSV is that panel after the estimation filter, so 60,773 rows that are donors in IV0 are missing from my rebuild. I can redo the proxy on the full panel; what I still need from you are the category10 labels.
-- With your instrument values I can run your specification through the same downstream steps as V2 (scale, marginal costs, conduct) and compare them on equal terms.
+- **The coefficient matches yours exactly** (−5.713, SE 0.747, 2,502 rows on the original IV0). The original IV0 also rebuilds exactly from your donor file.
+- **Downstream, your specification is almost the same as Table 2.** The stricter exclusion raises the first-stage F but leaves the slope, the marginal costs and the conduct result where they were.
+- **Your matched comparison and this note are about the same thing.** You report that the original IV gives +5.247 on the V2-supported rows. Section 2 shows which rows make that difference: the variable-annuity funds.
 
 ## 2. The Table 2 results depend on the 7,771 fund-months without a family code
 
@@ -66,6 +57,14 @@ The first column reproduces the paper exactly (−5.606; −7.503 and −5.278).
 - **It is hard to defend economically.** The paper's identification argument is that a family's fees on other products shift this product's fee. For these rows the instrument averages the fees of unrelated insurers' funds. Removing the rows reverses the result, and so does giving them their true families.
 - **The broad-based table inherits it.** With a family code, specialized funds slope upward (+4.0) and 49% of fund-months have e > 0. Estimated on their own, specialized funds slope upward under every instrument I tried, including the original IV0 on all rows (+19.9, SE 5.3).
 - **The stricter exclusions help, which supports your direction.** On the rows with a family code, the one-slope coefficient is +6 to +10 with the benchmark-only exclusion and −1.3 to −0.3 with an asset-class exclusion.
+
+**Your category10 instrument on the same split.**
+
+| | All 108,300 rows | 100,529 rows without the variable-annuity funds |
+|---|---|---|
+| Table 2 col 2 with your category10 instrument | −5.713 (0.747) | **+1.485 (1.079)** |
+
+The stricter exclusion does not protect the result: without these funds the slope is positive, though not significantly different from zero.
 
 **The same split for the fee-based interactions** (original IV0):
 

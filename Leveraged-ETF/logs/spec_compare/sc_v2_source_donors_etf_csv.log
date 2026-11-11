@@ -1,0 +1,18 @@
+ETF flag: source panel differs from the index CSV on 2,515 common fund-months; the CSV flag is used
+source panel: 675,551 fund-months, 6,077 funds; money market funds 16
+asset class: 1,083 donor-pool rows reset to V2's class for their index
+donor-pool rows (fee present, not money market): 640,982; with a family code 572,190; in the index CSV 576,974; source-only 64,008 (with a family code 54,945)
+fee observed (CRSP reports one for the fund in that quarter or earlier): all 0.903; with a family code 0.991; without 0.169; source-only rows with a family code 0.930
+source-only donor rows with a family code: 54,945; within the fund's first 12 months 0.587; since 2010 31,888
+check: Z_csv rebuilt through the source panel equals V2's Z on 1.0000 of V2's rows; defined on 96,069 (V2: 96,069)
+Table 2 fund-months whose own fee is not observed: 6,825 of 108,300; among rows with a family code 103
+rows where the instrument changes relative to Z_csv (V2 rows): {'Z_src': 19318, 'Z_csv_obs': 2736, 'Z_src_obs': 18070}
+paper IV0 rebuilt on the source panel: defined on 108,300 of 108,300 Table 2 rows; equal to the original within 1e-8 on 1.0000, within 0.0005 on 1.0000 (from the index CSV: 0.34 and 0.90)
+Z_csv      own rows    N 96,069 | non-cheap -3.642 (0.419) | x cheap -20.562 (0.646) | F 315.8 | e>0 0.000 | avg e -1.93 | T5 5/15 | neg MC B0-B65 0.053-0.082 (no VA 0.041-0.073) | min MC -0.21 | Vanguard B0 0.13
+Z_csv      common rows N 96,060 | non-cheap -3.649 (0.419) | x cheap -20.571 (0.648) | F 315.2 | e>0 0.000 | avg e -1.94 | T5 5/15
+Z_src      own rows    N 96,224 | non-cheap -3.254 (0.419) | x cheap -19.649 (0.612) | F 301.2 | e>0 0.000 | avg e -1.79 | T5 5/15 | neg MC B0-B65 0.078-0.103 (no VA 0.065-0.097) | min MC -0.26 | Vanguard B0 0.16
+Z_src      common rows N 96,060 | non-cheap -3.214 (0.417) | x cheap -19.602 (0.598) | F 292.7 | e>0 0.000 | avg e -1.78 | T5 5/15
+Z_csv_obs  own rows    N 96,060 | non-cheap -3.616 (0.407) | x cheap -20.539 (0.642) | F 333.9 | e>0 0.000 | avg e -1.93 | T5 5/15 | neg MC B0-B65 0.054-0.083 (no VA 0.042-0.074) | min MC -0.21 | Vanguard B0 0.13
+Z_csv_obs  common rows N 96,060 | non-cheap -3.616 (0.407) | x cheap -20.539 (0.642) | F 333.9 | e>0 0.000 | avg e -1.93 | T5 5/15
+Z_src_obs  own rows    N 96,197 | non-cheap -3.575 (0.402) | x cheap -19.927 (0.582) | F 297.6 | e>0 0.000 | avg e -1.89 | T5 5/15 | neg MC B0-B65 0.057-0.087 (no VA 0.045-0.077) | min MC -0.22 | Vanguard B0 0.13
+Z_src_obs  common rows N 96,060 | non-cheap -3.511 (0.401) | x cheap -19.858 (0.583) | F 290.4 | e>0 0.000 | avg e -1.87 | T5 5/15

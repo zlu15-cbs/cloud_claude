@@ -1,0 +1,4 @@
+original IV0 rebuilt from the donor file: max abs difference from the stored IV0 2.2e-13
+category10 instrument: fallback rows 2,502 (Danny: 2,502); variable-annuity rows 7,771
+D10   N 108,300 | price -5.713 (0.747) | F 128.8 | e>0 0.000 | avg e -1.64 (AUM-w -0.74) | Table 5 e<-1 2/15
+D10x  N 100,529 | price 1.485 (1.079) | F 78.6 | e>0 1.000 | avg e 0.39 (AUM-w 0.18) | Table 5 e<-1 0/15
