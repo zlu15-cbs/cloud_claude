@@ -1,8 +1,8 @@
-# Two points on your 10 Nov notes: your category10 specification, and the variable-annuity funds
+# Three points on your 10 Nov notes: your category10 specification, the variable-annuity funds, and V2 as now defined
 
 Danny,
 
-Thank you for the handoff zip. It had what I needed, so the request I was going to make is gone. Two results came out of running your preferred specification next to V2, and I think we need to settle the second before choosing between specifications.
+Thank you for the handoff zip. It had what I needed, so the request I was going to make is gone. Two results came out of running your preferred specification next to V2, and I think we need to settle the second before choosing between specifications. Section 3 gives the current definition of V2.
 
 ## 1. Your category10 specification reproduces, and it behaves like Table 2
 
@@ -85,6 +85,27 @@ These keep their sign, but the base slope is not identified in either sample and
 
 The split is easy to replicate: drop the 7,771 fund-months with a blank `firm_f_old` from the Table 2 sample and re-estimate, with nothing else changed.
 
-Code: `code/spec_compare/sc_a5.py` and `sc_broad_ladder.py`. Logs: `logs/spec_compare/sc_a5_demand.csv`, `sc_broad_ladder.csv`.
+## 3. V2 as now defined
+
+The cheap indicator in V2 has changed since the replication note I sent you.
+
+- **Cheap:** a fund is cheap if its expense ratio in its entry month is at or below the 20th percentile of that month's expense ratios across all index funds; ties count as cheap. The entry month is the fund's first month on or after January 2005 with a fee that CRSP reports. It is measured on your source panel (`index_funds_preprocess_oct2026.csv`), which has each fund's first year; the index CSV does not.
+- **Why 2005:** the status is fixed five years before the estimation window opens, on a cross-section of 925 funds.
+- **Everything else is unchanged:** Z is the median fee of same-family, same-share-type funds in another of the six broad asset classes; money market funds are dropped.
+
+| | Non-cheap α (SE) | × cheap (SE) | Min F | Share e > 0 | Negative MC B0–B65 (own η) |
+|---|---|---|---|---|---|
+| **V2 now** (2005 start, source panel, 20th percentile) | −3.385 (0.541) | −20.059 (0.784) | 177 | 0 | 0.067–0.087 |
+| 15th percentile | −7.527 (0.880) | −29.120 (1.972) | 128 | 0 | 0.000–0.001 |
+| 25th percentile | −3.967 (0.607) | −17.409 (0.840) | 144 | 0 | 0.018–0.026 |
+| V2 as first sent (cheap from a fund's first month in the index CSV) | −3.642 (0.419) | −20.562 (0.646) | 316 | 0 | 0.053–0.082 |
+
+- **V2 does not use the variable-annuity funds to estimate demand** (they have no family donors), so excluding them changes only the supply side: negative MC 0.054–0.081.
+- **With your category10 classes as the exclusion, V2's non-cheap slope turns positive** (+1.562, SE 0.751; 51% of fund-months slope upward). V2 therefore rests on excluding the whole broad asset class. The argument is that a family's funds in the same broad asset class share demand shocks; I would like your view on it.
+- **The size of the non-cheap slope depends on round-number fees at the cutoff.** With the index CSV for both the cheap status and the donors it is −8.4 at the 20th percentile (−3.0 with the source panel for both), because the source cutoff in January 2005 is exactly 0.25%. At the 25th percentile the two files agree (−3.6 and −4.2).
+
+Details: `RESULTS_spec_summary.md`, section 3.
+
+Code: `code/spec_compare/sc_a5.py`, `sc_broad_ladder.py`, `sc_v2_robust.py`. Logs: `logs/spec_compare/sc_a5_demand.csv`, `sc_broad_ladder.csv`.
 
 Gene

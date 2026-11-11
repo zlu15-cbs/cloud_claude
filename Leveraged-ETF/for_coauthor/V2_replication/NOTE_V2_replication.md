@@ -4,6 +4,24 @@ Danny,
 
 Please replicate **V2**, our preferred demand specification for the index market (Table 2 Panel A sample), on your data, together with its downstream results. Everything V2 needs is in this zip: one Python script that reads only your own files, and below the definitions and the numbers you should get.
 
+> **Update, 11 November 2026: the cheap indicator has changed.** This note and `replicate_V2.py` describe V2 as first sent, with cheap measured in a fund's first month in the index CSV (§3.3). Everything else below is current.
+>
+> The current definition:
+
+- **Cheap:** a fund is cheap if its expense ratio in its entry month is at or below the 20th percentile of that month's expense ratios across all index funds; ties count as cheap. The entry month is the fund's first month on or after January 2005 with a fee that CRSP reports. It is measured on your source panel (`index_funds_preprocess_oct2026.csv`), which has each fund's first year; the index CSV does not.
+- **Why 2005:** the status is fixed five years before the estimation window opens, on a cross-section of 925 funds.
+- **Everything else is unchanged:** Z is the median fee of same-family, same-share-type funds in another of the six broad asset classes; money market funds are dropped.
+
+| | Non-cheap α (SE) | × cheap (SE) | Min F | Share e > 0 | Negative MC B0–B65 (own η) |
+|---|---|---|---|---|---|
+| **V2 now** (2005 start, source panel, 20th percentile) | −3.385 (0.541) | −20.059 (0.784) | 177 | 0 | 0.067–0.087 |
+| 15th percentile | −7.527 (0.880) | −29.120 (1.972) | 128 | 0 | 0.000–0.001 |
+| 25th percentile | −3.967 (0.607) | −17.409 (0.840) | 144 | 0 | 0.018–0.026 |
+| V2 as first sent (cheap from a fund's first month in the index CSV) | −3.642 (0.419) | −20.562 (0.646) | 316 | 0 | 0.053–0.082 |
+
+- `replicate_V2.py` still reproduces the last row. The current V2 is produced by `sc_v2_robust.py` and `sc_v2_final.py` in `for_coauthor/spec_summary_replication/`, which need your source panel as a second input.
+- Results, robustness and the supply side for the current V2 are in `RESULTS_spec_summary.md`, section 3. Where the numbers in §5 below differ from that file, that file is current.
+
 ## 1. What we ask
 
 1. Run `replicate_V2.py` on your index CSV and your CRSP quarterly fund summary (§2). It takes about 40 minutes, mostly the conduct tests.

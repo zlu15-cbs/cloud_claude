@@ -41,6 +41,12 @@ GRID = [  # label, types, excl, donors, cheap
     ('cheap from the index CSV (V2 as first sent to Danny)', 'csv', 'lipper6', 'csv', 'csv'),
     ('category10 exclusion', 'csv', 'cat10', 'csv', 'source_obs'),
 ]
+FILECHECK = [  # one file for both the cheap indicator and the donors, at each cutoff (SC_GRID=filecheck)
+    (f'{f} for cheap and donors, cutoff {q}%', 'csv', 'lipper6', dn_, f'{c}{q}')
+    for q in (15, 20, 25) for f, dn_, c in (('source panel', 'source', 'srcboth_q'), ('index CSV', 'csv', 'csvboth_q'))]
+if os.environ.get('SC_GRID') == 'filecheck':
+    GRID = FILECHECK
+OUT = 'sc_v2_filecheck' if os.environ.get('SC_GRID') == 'filecheck' else 'sc_v2_robust'
 START = 2005   # cheap is classified on the fund's first observed-fee month on or after January of this year
 
 
@@ -113,6 +119,23 @@ def main():
     d['cheap_source_obs_1993'] = d.product_ids.map(cheap_obs_1993).fillna(d.product_ids.map(cheap_csv))
     for q in (15, 25):
         d[f'cheap_source_obs_q{q}'] = d.product_ids.map(cheap_q(q / 100)).fillna(d.product_ids.map(cheap_csv))
+    # the same rule on the index CSV, entry month on or after START
+    cobs = cf[['product_j', 'month_t', 'product_exp_ratio']].dropna()
+    cobs = cobs[cobs.month_t >= START - 1e-9]
+    for q in (15, 20, 25):
+        cs = cheap_q(q / 100)
+        cut_c = cobs.groupby('month_t').product_exp_ratio.quantile(q / 100)
+        ec = cobs.sort_values('month_t').groupby('product_j').first()
+        cc = (ec.product_exp_ratio <= ec.month_t.map(cut_c) + 1e-9).astype(float)
+        d[f'cheap_srcboth_q{q}'] = d.product_ids.map(cs).fillna(d.product_ids.map(cheap_csv))
+        d[f'cheap_csvboth_q{q}'] = d.product_ids.map(cc)
+        j_s, j_c = obs[np.isclose(obs.month_t, START)], cobs[np.isclose(cobs.month_t, START)]
+        k_s, k_c = float(j_s.product_exp_ratio.quantile(q / 100)), float(j_c.product_exp_ratio.quantile(q / 100))
+        fd = d.drop_duplicates('product_ids')
+        diff = fd[fd[f'cheap_srcboth_q{q}'] != fd[f'cheap_csvboth_q{q}']]
+        print(f'cutoff {q}%: January {START} cutoff source {k_s:.3f} ({len(j_s)} funds, {int(np.isclose(j_s.product_exp_ratio, k_s).sum())} exactly at it) | '
+              f'CSV {k_c:.3f} ({len(j_c)} funds, {int(np.isclose(j_c.product_exp_ratio, k_c).sum())} exactly at it) | Table 2 funds whose status differs {len(diff)} '
+              f'(cheap only on source {int((diff[f"cheap_srcboth_q{q}"] == 1).sum())}, only on CSV {int((diff[f"cheap_csvboth_q{q}"] == 1).sum())})', flush=True)
     print('funds without an observed-fee entry month (CSV indicator used):', d.loc[~d.product_ids.isin(cheap_obs.index), 'product_ids'].nunique(), flush=True)
     print(f'cheap (source, observed fees): share of Table 2 fund-months {d.cheap_source_obs.mean():.3f}; differs from csv on {int((d.cheap_csv != d.cheap_source_obs).sum()):,} fund-months, {d.loc[d.cheap_csv != d.cheap_source_obs, "product_ids"].nunique()} funds', flush=True)
     assert (d.cheap_csv == d.cheap).all()
@@ -174,8 +197,8 @@ def main():
         t5s.append(t5.assign(variant=label))
         print(f"{label:58s} N {r['N']:,} | non-cheap {r['alpha']:.3f} ({r['se']:.3f}) | x cheap {r['alpha_x']:.3f} ({r['se_x']:.3f}) | F {r['min_F']:.0f} | e>0 {r['share_pos_e']:.3f} "
               f"| T5 {r['t5_lt_m1']}/{r['t5_n']} | neg MC {r['negmc_B0']:.3f}-{r['negmc_B65']:.3f} (no VA {r['negmc_B0_noVA']:.3f}-{r['negmc_B65_noVA']:.3f}) | min MC {r['minmc_B65']:.2f} | Vanguard {r['vanguard_B0']:.2f}", flush=True)
-        pd.DataFrame(rows).to_csv('sc_v2_robust.csv', index=False)
-    pd.concat(t5s).to_csv('sc_v2_robust_table5.csv', index=False)
+        pd.DataFrame(rows).to_csv(f'{OUT}.csv', index=False)
+    pd.concat(t5s).to_csv(f'{OUT}_table5.csv', index=False)
 
 
 if __name__ == '__main__':

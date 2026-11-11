@@ -129,23 +129,31 @@ Rows without Z are the variable-annuity funds (7,771) and funds with no same-fam
 
 ### 3.3 What V2 is robust to
 
-Each row changes one element of V2 (`sc_v2_robust.csv`, `sc_v2_cheap_start.csv`, `sc_v2_csv_both.log`).
+Each row changes one element of V2 (`sc_v2_robust.csv`, `sc_v2_cheap_start.log`).
 
 | Variant | Non-cheap α (SE) | × cheap (SE) | e > 0 | Table 5 e < −1 | Negative MC B0–B65 |
 |---|---|---|---|---|---|
 | **V2** | −3.385 (0.541) | −20.059 (0.784) | 0 | 5/15 | 0.067–0.087 |
 | Variable-annuity funds dropped from the supply side | unchanged | unchanged | 0 | 5/15 | 0.054–0.081 |
 | Donors from the full source panel | −2.993 (0.544) | −19.031 (0.771) | 0 | 5/15 | 0.092–0.107 |
-| Cheap and donors both from the index CSV (2005 start) | −8.447 (0.921) | −28.317 (1.670) | 0 | 11/15 | 0.000 |
 | Cheap from a fund's first month in the index CSV (the version first sent to Danny) | −3.642 (0.419) | −20.562 (0.646) | 0 | 5/15 | 0.053–0.082 |
 | Cutoff at the 15th; 25th percentile | −7.5; −4.0 | −29.1; −17.4 | 0 | 11/15; 7/15 | 0–0.03 |
 
+**One file for both the cheap status and the donors, at each cutoff** (2005 start; `sc_v2_filecheck.csv`).
+
+| Cutoff | Source panel for both: non-cheap; × cheap | Index CSV for both: non-cheap; × cheap | Negative MC, source; CSV | January 2005 cutoff, source; CSV | Table 2 funds whose status differs |
+|---|---|---|---|---|---|
+| 15th | −7.369 (0.969); −28.473 | −13.495 (1.226); −39.669 | 0–0.002; 0 | 0.20%; 0.183% | 46 |
+| 20th | −2.993 (0.544); −19.031 | −8.447 (0.921); −28.317 | 0.092–0.107; 0 | 0.25%; 0.23% | 45 |
+| **25th** | **−3.625 (0.614); −16.504** | **−4.158 (0.625); −18.086** | 0.026–0.034; 0.012–0.022 | 0.27%; 0.26% | 23 |
+
 **Reading.**
 - **The sign of demand is robust to all of these.** No fund-month slopes upward in any row.
-- **The cheap funds are always strongly fee-sensitive** (interaction of −17 to −29).
-- **Where the donors come from does not matter** (−3.4 against −3.0).
-- **Where the cheap status is measured does.** With the index CSV for both the cheap indicator and the donors, the non-cheap slope is −8.4. The index CSV drops each fund's first 12 months, so its January 2005 cross-section has 790 funds against 925, and its 20th-percentile cutoff is 0.23% against 0.25%. 24 funds charging exactly 0.25% (Select Sector SPDRs and iShares Russell style ETFs among them) are cheap under one and not under the other; 42 funds change status in all.
-- **So the size of the non-cheap slope is known only within a range of about −3 to −8.** The qualitative results (downward everywhere, cheap funds much more elastic, few negative marginal costs) hold across the range. The source panel is the better file for the cheap status because it has each fund's first year.
+- **The cheap funds are always strongly fee-sensitive** (interaction of −16 to −40).
+- **Where the donors come from does not matter** (−3.4 against −3.0 at the 20th percentile).
+- **Where the cheap status is measured matters at the 15th and 20th percentiles and not at the 25th.** The index CSV drops each fund's first 12 months, so its January 2005 cross-section has 790 funds against 925 and its cutoffs are lower. At the 20th percentile the source cutoff is exactly 0.25%, a fee that 36 funds charge that month (Select Sector SPDRs and iShares Russell style ETFs among them); the CSV cutoff is 0.23% and leaves them out. At the 15th the source cutoff is exactly 0.20%, with 22 funds on it.
+- **At the 25th percentile the two files agree:** −3.6 against −4.2, with 1–3% negative marginal costs in both. The cutoffs (0.27% and 0.26%) fall between the round-number fees, and half as many funds change status.
+- **So at the 20th percentile the size of the non-cheap slope is known only within about −3 to −8,** and at the 25th within −3.6 to −4.2. The qualitative results hold at every cutoff. This is an argument for reporting the 25th percentile next to the 20th, or for making it the baseline; the choice is Gene's.
 
 ### 3.4 What breaks V2, and why we do not make those choices
 
@@ -171,7 +179,7 @@ Each row changes one element of V2 (`sc_v2_robust.csv`, `sc_v2_cheap_start.csv`,
 
 **Reading.**
 - **Two design choices carry V2: the broad-asset-class exclusion and the cheap interaction.** Both have an economic argument, and both should be stated as assumptions in the paper.
-- **One data choice matters: where and when the cheap status is measured.** The 2005 start on the source panel is defensible; the result should be shown with the 15th and 25th percentile cutoffs next to it.
+- **One data choice matters: where and when the cheap status is measured.** The 2005 start on the source panel is defensible. The 25th percentile is the cutoff at which the result does not depend on the file (section 3.3).
 
 ## 4. Supply side in detail
 
@@ -219,7 +227,7 @@ Each row changes one element of V2 (`sc_v2_robust.csv`, `sc_v2_cheap_start.csv`,
 | V2, VA funds on the supply side | PC (1.00), B50 (0.11), B65 (0.74) | PC, B50, B65 | PC | 138 |
 | V2, no VA | PC (0.55), B65 (1.00); B50 rejected (0.04) | PC, B50 (0.05), B65 | PC | 154 |
 
-For the two alternatives the selection is the same under all four scale schemes. For V2 the table shows η = 0.024 only; the runs with each candidate's own η, with PC's η and with the capped η had not finished when this file was written. Cells marked – are in the logs (`sc_conduct_*.csv`, `sc_mc.csv`, `sc_where.csv`) and are not repeated here.
+For the two alternatives the selection is the same under all four scale schemes. For V2 the table shows η = 0.024. With each candidate's own η the selection is PC, B50 (0.05), B65 with the variable-annuity funds on the supply side and PC, B65 without them. The runs with PC's η and with the capped η had not finished when this file was written. Cells marked – are in the logs (`sc_conduct_*.csv`, `sc_mc.csv`, `sc_where.csv`) and are not repeated here.
 
 **Reading.**
 - **η does not depend on the demand model:** about 0.021 with the variable-annuity funds and 0.024 without.
