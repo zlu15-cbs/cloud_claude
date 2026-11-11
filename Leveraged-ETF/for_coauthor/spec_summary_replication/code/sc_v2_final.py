@@ -14,7 +14,7 @@ import sc_downstream  # noqa: E402
 
 if __name__ == '__main__':
     pd.set_option('display.width', 250, 'display.max_columns', 40)
-    sc_downstream.SPECS = ['T2alt', 'A5alt'] if os.environ.get('SC_ALT') else ['V2n', 'V2nx']
+    sc_downstream.SPECS = os.environ['SC_SPECS'].split(',') if os.environ.get('SC_SPECS') else (['T2alt', 'A5alt'] if os.environ.get('SC_ALT') else ['V2n', 'V2nx'])
     if sys.argv[1] == 'downstream':
         sc_downstream.downstream()
     else:

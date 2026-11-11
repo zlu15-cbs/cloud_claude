@@ -1,6 +1,6 @@
 # Index-market demand: two sample exclusions and a refined family ID give downward-sloping demand in every specification
 
-**Caution.** "A5" is the broad-based interaction, which is Table A7 in our copy of the paper. No test here establishes that any instrument satisfies the exclusion restriction. Sections 2 and 3 have demand results and negative-MC shares only; scale, the sec-lending screens and the conduct test have not been re-run on the recommended sample.
+**Caution.** "A5" is the broad-based interaction, which is Table A7 in our copy of the paper. No test here establishes that any instrument satisfies the exclusion restriction. Conduct tests use η = 0.024 throughout; on the recommended sample the estimated η is about 0.013, and the conduct test has not been re-run at that value.
 
 ✓ = desirable, ✗ = undesirable, – = not applicable. Negative-MC shares are the range over B0–B65 at each candidate's own η. Sources: `logs/spec_compare/`.
 
@@ -18,7 +18,10 @@
 | Share of fund-months with e > 0 | ✓ 0 | ✓ 0 | ✓ 0 |
 | First-stage F (min) | 34 | 53 | 177 |
 | Table 5 funds with e < −1 | 2/15 | 2/15 | 5/15 |
+| Scale η (PC–B65) | 0.0205–0.0213 | 0.0205–0.0208 | 0.0208–0.0223 |
 | Negative-MC share | 0.21–0.36 | 0.005–0.088 | 0.067–0.087 |
+| Share of fund-months below −0.20% | 0–0.089 | 0 | 0–0.001 |
+| Vanguard fund-months negative at B0 | 0.81 | low | 0.15 |
 | Conduct, main instrument | PC | PC, B65 | PC, B50, B65 |
 
 - **Validation:** T2 and A5 reproduce the paper exactly.
@@ -34,17 +37,26 @@
 - **Their instrument is not a family instrument.** Blank family codes match one another, so their donors are other insurers' funds.
 - **They are not bought in the open market.** They are chosen from an insurer's menu inside a contract.
 
-**What happens** (paper's instrument and family code; `sc_a5_demand.csv`).
+**What happens** (paper's instrument and family code; same rows as the baseline table).
 
-| | All 108,300 rows | 100,529 rows without VA funds |
-|---|---|---|
-| T2: price coefficient (SE) | −5.606 (1.310) | **+7.244 (1.987)** |
-| A5: specialized; × broad-based | −7.503; −5.278 | **+4.009 (1.588)**; −6.924 |
-| A5: share of fund-months with e > 0 | 0 | 0.49 |
-| V2: non-cheap; × cheap | −3.385; −20.059 | unchanged |
+| | T2, all rows | T2, no VA | A5, all rows | A5, no VA | V2, all rows | V2, no VA |
+|---|---|---|---|---|---|---|
+| Rows | 108,300 | 100,529 | 108,300 | 100,529 | 96,069 est.; 107,863 supply | 96,069 est.; 100,092 supply |
+| Base price coefficient (SE) | −5.606 (1.310) | **+7.244 (1.987)** | −7.503 (1.770) | **+4.009 (1.588)** | −3.385 (0.541) | −3.385 (0.541) |
+| Interaction (SE) | – | – | −5.278 (0.372) | −6.924 (0.428) | −20.059 (0.784) | −20.059 (0.784) |
+| Share of fund-months with e > 0 | ✓ 0 | ✗ 1.00 | ✓ 0 | ✗ 0.49 | ✓ 0 | ✓ 0 |
+| First-stage F (min) | 34 | 27 | 53 | 49 | 177 | 177 |
+| Table 5 funds with e < −1 | 2/15 | 0/15 | 2/15 | 0/15 | 5/15 | 5/15 |
+| Scale η (PC–B65) | 0.0205–0.0213 | – | 0.0205–0.0208 | – | 0.0208–0.0223 | 0.0237–0.0253 |
+| Negative-MC share | 0.21–0.36 | – | 0.005–0.088 | – | 0.067–0.087 | 0.054–0.081 |
+| Share of fund-months below −0.20% | 0–0.089 | – | 0 | – | 0–0.001 | 0–0.0001 |
+| Vanguard fund-months negative at B0 | 0.81 | – | low | – | 0.15 | 0.12 |
+| Conduct, main instrument | PC | – | PC, B65 | – | PC, B50, B65 | PC, B65 |
+
+Downstream rows are – where demand slopes upward: markups are then negative and the supply side is not defined.
 
 - **T2 and A5 slope upward without these funds.** Each group alone slopes upward; only the pooled sample slopes downward.
-- **V2 is unchanged** because these funds have no family donors and never entered its estimation.
+- **V2's demand is unchanged** because these funds have no family donors and never entered its estimation. Only its supply side changes, and little.
 - Details: appendix A1.
 
 ## 2. Drop funds with a real acquisition or transfer, using a refined family ID
@@ -93,26 +105,43 @@
 - **With both exclusions, no fund-month slopes upward in any specification.**
 - **The refined ID alone does not do it:** with only the VA funds dropped, T2, A5 and one V2 version still fail.
 
+**The sample with both exclusions, in the baseline format** (1,140 funds, 97,315 fund-months; refined family ID for the instrument and for ownership; `sc_refined_family/rec_*`).
+
+| | T2, paper's exclusion | A5, paper's exclusion | T2, broad-asset-class exclusion | A5, broad-asset-class exclusion | V2, median | V2, weighted mean |
+|---|---|---|---|---|---|---|
+| Base price coefficient (SE) | −7.49 (2.90) | −10.69 (3.40) | −12.73 (1.81) | −13.33 (1.87) | −10.350 (0.812) | −6.877 (0.564) |
+| Interaction (SE) | – | −3.75 | – | −2.63 | −26.89 (1.26) | −23.53 (0.95) |
+| Share of fund-months with e > 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 |
+| First-stage F (min) | 17 | 33 | 94 | 140 | 302 | 557 |
+| Table 5 funds with e < −1 | 2/15 | 3/15 | 5/15 | 6/15 | 11/15 | 7/15 |
+| Scale η (PC–B65) | 0.0126–0.0135 | 0.0126–0.0131 | 0.0126–0.0131 | 0.0126–0.0131 | 0.0127–0.0137 | 0.0127–0.0140 |
+| Negative-MC share, own η | 0.23–0.36 | 0.010–0.144 | 0.008–0.151 | 0.000–0.062 | 0.000–0.001 | 0.006–0.031 |
+| Negative-MC share, η = 0 | 0.48–0.57 | 0.35–0.44 | 0.36–0.43 | 0.31–0.40 | 0.12–0.23 | 0.20–0.32 |
+| Share of fund-months below −0.20% | 0–0.006 | 0 | 0 | 0 | 0 | 0 |
+| Min MC (% of assets) | −0.23 | −0.10 | −0.08 | −0.06 | −0.02 | −0.09 |
+| Vanguard fund-months negative at B0; B65 | ✗ 0.76; 0.93 | 0.04; 0.43 | 0.03; 0.46 | 0.00; 0.18 | ✓ 0; 0 | ✓ 0.00; 0.07 |
+| SPY negative at B65 | ✗ yes | ✓ no | ✓ no | ✓ no | ✓ no | ✓ no |
+| Conduct, main instrument (η = 0.024) | PC, B50 (0.46), B65 (0.75) | PC, B50 (0.26), B65 | PC, B50 (0.33), B65 | PC, B50 (0.24), B65 | PC (0.84), B65; B50 rejected (0.03) | PC (0.95), B65; B50 rejected (0.02) |
+| Conduct, min F | 136 | 149 | 148 | 149 | 151 | 149 |
+
+V2 is at the 20th-percentile cutoff. Ownership uses the refined ID, so SPY counts as State Street in 2010–2012.
+
+- **Marginal costs:** every specification except the paper-type T2 has almost no fund-month below −0.20%. V2 with the median has essentially no negative marginal costs.
+- **Conduct:** B0 and B25 are rejected in every column and PC is never rejected. B65 cannot be separated from PC in any column. B50 is rejected only under V2.
+- **The scale estimate changes with the sample.** η under PC is 0.0233 without the VA funds and 0.0126 once the 50 real switchers are also dropped. Dropping only the 11 DB funds leaves it at 0.0224; dropping the other 39 gives 0.0141. So the scale estimate is as sensitive to these funds as the demand slope was.
+- **The conduct test here still uses η = 0.024,** as in the baseline. It has not been re-run at the sample's own η of about 0.013.
+
 ## 3. Recommendation: both exclusions, with the refined family ID
 
 **Sample:** Table 2 Panel A without the 112 variable-annuity funds and without the 50 funds with a real acquisition or transfer. 1,140 funds, 97,315 fund-months.
 
-| | Base coefficient (SE) | Interaction | Min F | e > 0 | Table 5 e < −1 | Negative MC B0–B65 |
-|---|---|---|---|---|---|---|
-| T2, paper's exclusion | −7.49 (2.90) | – | 17 | 0 | 2/15 | 0.24–0.38 |
-| A5, paper's exclusion | −10.69 (3.40) | −3.75 | 33 | 0 | 3/15 | 0.01–0.17 |
-| T2, broad-asset-class exclusion | −12.73 (1.81) | – | 94 | 0 | 5/15 | 0.01–0.17 |
-| A5, broad-asset-class exclusion | −13.33 (1.87) | −2.63 | 140 | 0 | 6/15 | 0.00–0.08 |
-| V2, 20th percentile, median | −10.350 (0.812) | −26.89 | 302 | 0 | 11/15 | 0.000–0.002 |
-| V2, 20th percentile, weighted mean | −6.877 (0.564) | −23.53 | 557 | 0 | 7/15 | 0.007–0.034 |
-| V2, 25th percentile, median | −4.969 (0.535) | −15.74 | 428 | 0 | 7/15 | 0.024–0.041 |
-| V2, 25th percentile, weighted mean | −2.058 (0.389) | −14.99 | 702 | 0 | 5/15 | 0.21–0.40 |
+The full results for this sample are the last table of section 2. V2 at the 25th-percentile cutoff on the same sample: non-cheap −4.969 (0.535) with the median and −2.058 (0.389) with the weighted mean, no fund-month sloping upward.
 
 **Reading.**
-- **Every specification now has downward-sloping demand.**
-- **T2 and A5 with the paper's exclusion remain weakly identified** (F of 17 and 33). T2 still has 24–38% negative marginal costs.
-- **T2 and A5 with the broad-asset-class exclusion become usable:** first-stage F of 94 and 140, and 0–17% negative marginal costs.
-- **V2 has the strongest first stage and the fewest negative marginal costs** at the 20th percentile, and no longer needs the median for its sign.
+- **Every specification has downward-sloping demand.**
+- **T2 and A5 with the paper's exclusion remain weakly identified** (F of 17 and 33). T2 still has 23–36% negative marginal costs, at 76% of Vanguard's fund-months.
+- **T2 and A5 with the broad-asset-class exclusion become usable:** first-stage F of 94 and 140, and 0–15% negative marginal costs, none large.
+- **V2 has the strongest first stage and the fewest negative marginal costs,** and no longer needs the median for its sign.
 - **V2's size still depends on the cutoff:** −10.4 and −6.9 at the 20th percentile, −5.0 and −2.1 at the 25th.
 - **The base slope ranges from −2 to −13 across specifications.** The exclusions fix the sign; they do not pin down the magnitude.
 
@@ -131,14 +160,27 @@
 
 - **No.** T2 and A5 move by less than 0.2 and V2 by less than 1.
 - **It does not reduce V2's sensitivity to the cutoff:** the gap between the 20th and 25th percentiles is the same with and without it.
+
+**Do the high-fee funds still slope upward on their own?** Entry-fee quartiles 3 and 4 estimated alone, one fee slope (17,500 fund-months, 261 funds; `sc_refined_family/q34_*.log`).
+
+| Instrument | Earlier sample and family code (appendix A3.6, A3.8) | Recommended sample | Min F |
+|---|---|---|---|
+| V2's: median of same-type family funds in another broad asset class | +1.34 (0.44) | **−2.32 (0.62)** | 72 |
+| Broad-asset-class exclusion, pooled types, weighted mean | – | +13.7 (5.5) | 8 |
+| Paper's exclusion, pooled types, weighted mean | −17.3 (3.0) | −44.8 (55.2) | 1 |
+
+- **No, with V2's instrument.** The high-fee funds have a modest negative slope (−2.3). With a broad-based interaction on the same subsample: specialized −2.20 (0.93), broad-based −12.26.
+- **The two weighted-mean instruments have no first stage on this subsample** (F of 1 and 8), so their signs carry no information.
+
 - **So no further sample restriction is recommended.** The index-fund flag and Lipper-class restrictions we also tried are in appendix A6; they do not improve on this sample and turn the paper-type T2 and A5 upward again.
 
 **Open decisions.**
 - The cutoff for V2's cheap status (20th or 25th percentile) and the donor aggregation (median or weighted mean).
+- Which η the conduct test should use, now that the estimate is 0.013 on this sample against 0.021–0.024 before.
 - Whether T2 and A5 are reported with the paper's exclusion or the broad-asset-class exclusion.
 - The alias and artifact tables of the refined family ID need a second pair of eyes.
 
-**Not yet done on the recommended sample:** scale η, the sec-lending screens and the conduct test.
+**Not yet done on the recommended sample:** the conduct test at the sample's own η (about 0.013) and under the other scale schemes; the supply side for V2 at the 25th percentile.
 
 ---
 
