@@ -23,6 +23,8 @@ SPECS = ['1_T2', '2_A5', '3_V2', '4p', '4q', '5_V2nocheap']
 
 def supply(d_all, spec):
     rows = np.load(f'{CACHE}/rows_{spec}.npy')
+    if spec in ('V2n', 'V2nx'):   # the new V2 uses the cheap indicator rebuilt on the source panel (location tables group by it)
+        d_all = d_all.assign(cheap=np.load(f'{CACHE}/cheap_V2n.npy'))
     d = d_all.iloc[rows].reset_index(drop=True)
     return d, np.load(f'{CACHE}/alpha_{spec}.npy')
 

@@ -1,151 +1,166 @@
 firm,product_ids,name,month_t,price,share,cheap,own_elasticity,variant
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.7026009783250771,V2 as reported
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.6812143347147646,V2 as reported
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.7208434482098911,V2 as reported
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.33059445755378,V2 as reported
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.2034511091292504,V2 as reported
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.1017569795461606,V2 as reported
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.4503246716370242,V2 as reported
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.29007084041100933,V2 as reported
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.2904947764157754,V2 as reported
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.482741504365526,V2 as reported
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4630145074471208,V2 as reported
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.9355687776587982,V2 as reported
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.7031827389314738,V2 as reported
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.7066872163627622,V2 as reported
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9443765015386321,V2 as reported
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.7161834223157385,ETF flag from CRSP
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.7137150004439758,ETF flag from CRSP
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.734778549445711,ETF flag from CRSP
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.414312041901886,ETF flag from CRSP
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.2267158181027757,ETF flag from CRSP
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.142387433156857,ETF flag from CRSP
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.4238075328609425,ETF flag from CRSP
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.28476730467139366,ETF flag from CRSP
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.28518348960490625,ETF flag from CRSP
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.49207369951937135,ETF flag from CRSP
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4719653469823235,ETF flag from CRSP
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.953654876189795,ETF flag from CRSP
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.7167764293210104,ETF flag from CRSP
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.720348654122279,ETF flag from CRSP
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9626328680026003,ETF flag from CRSP
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6648586186856902,donors from the source panel
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.590902766685124,donors from the source panel
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.6821211385272453,donors from the source panel
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.09796333617537,donors from the source panel
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.1388040534455903,donors from the source panel
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.9888546776084015,donors from the source panel
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.296094191952937,donors from the source panel
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.2592241164092315,donors from the source panel
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.25960297019575423,donors from the source panel
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.45680956855459626,donors from the source panel
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.43814226758776004,donors from the source panel
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.8853118404168995,donors from the source panel
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.6654091282424754,donors from the source panel
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.6687253519541703,donors from the source panel
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.8936464304803394,donors from the source panel
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6164323109314186,cheap rebuilt on the source panel (imputed entry fees included)
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.4750261805638314,cheap rebuilt on the source panel (imputed entry fees included)
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,0.0,-0.05867208356540867,cheap rebuilt on the source panel (imputed entry fees included)
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-3.7994799772987884,cheap rebuilt on the source panel (imputed entry fees included)
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.0558569816711636,cheap rebuilt on the source panel (imputed entry fees included)
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.8439924678249429,cheap rebuilt on the source panel (imputed entry fees included)
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-0.7846030976234559,cheap rebuilt on the source panel (imputed entry fees included)
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.15692381462409308,cheap rebuilt on the source panel (imputed entry fees included)
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.15715315741128988,cheap rebuilt on the source panel (imputed entry fees included)
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.4235369296352852,cheap rebuilt on the source panel (imputed entry fees included)
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4062292988842742,cheap rebuilt on the source panel (imputed entry fees included)
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.8208283811706608,cheap rebuilt on the source panel (imputed entry fees included)
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.6169427230231651,cheap rebuilt on the source panel (imputed entry fees included)
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.6200174029456523,cheap rebuilt on the source panel (imputed entry fees included)
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.8285559046908171,cheap rebuilt on the source panel (imputed entry fees included)
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6546602431603677,"cheap rebuilt on the source panel, observed fees only"
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.56649964791229,"cheap rebuilt on the source panel, observed fees only"
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.6716579703754763,"cheap rebuilt on the source panel, observed fees only"
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.035104003654517,"cheap rebuilt on the source panel, observed fees only"
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.121335751072138,"cheap rebuilt on the source panel, observed fees only"
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.9583473091281065,"cheap rebuilt on the source panel, observed fees only"
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-0.8006845713711784,"cheap rebuilt on the source panel, observed fees only"
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.16014017486140752,"cheap rebuilt on the source panel, observed fees only"
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.16037421833105478,"cheap rebuilt on the source panel, observed fees only"
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.44980249157198937,"cheap rebuilt on the source panel, observed fees only"
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.43142153139995315,"cheap rebuilt on the source panel, observed fees only"
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.8717318967238569,"cheap rebuilt on the source panel, observed fees only"
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.655202308360665,"cheap rebuilt on the source panel, observed fees only"
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.6584676639723046,"cheap rebuilt on the source panel, observed fees only"
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.8799386411417299,"cheap rebuilt on the source panel, observed fees only"
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.43737080271943685,category10 exclusion
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.0465599761482363,category10 exclusion
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.44872678419860657,category10 exclusion
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-2.6958054892948002,category10 exclusion
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-0.7491512165101549,category10 exclusion
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.308348786329143,category10 exclusion
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,0.5765130352988049,category10 exclusion
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,0.11530495476455575,category10 exclusion
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,0.11547347195085189,category10 exclusion
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.3005077501794345,category10 exclusion
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.2882276470432064,category10 exclusion
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.5823938194042024,category10 exclusion
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.43773295009932917,category10 exclusion
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.43991449574831004,category10 exclusion
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.587876648751576,category10 exclusion
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.7161834223157385,Danny's share types
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.7137150004439758,Danny's share types
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.734778549445711,Danny's share types
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.414312041901886,Danny's share types
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.2267158181027757,Danny's share types
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.142387433156857,Danny's share types
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.4238075328609425,Danny's share types
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.28476730467139366,Danny's share types
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.28518348960490625,Danny's share types
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.49207369951937135,Danny's share types
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4719653469823235,Danny's share types
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.953654876189795,Danny's share types
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.7167764293210104,Danny's share types
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.720348654122279,Danny's share types
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9626328680026003,Danny's share types
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6844099467779856,CRSP ETF flag + source donors
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.6376860392188983,CRSP ETF flag + source donors
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.7021801011445908,CRSP ETF flag + source donors
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.218471100448843,CRSP ETF flag + source donors
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.172292574246847,CRSP ETF flag + source donors
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.047340420647556,CRSP ETF flag + source donors
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.307318897644419,CRSP ETF flag + source donors
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.2614691032573277,CRSP ETF flag + source donors
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.2618512380725598,CRSP ETF flag + source donors
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.4702428512097361,CRSP ETF flag + source donors
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.45102660567702874,CRSP ETF flag + source donors
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.9113459802618513,CRSP ETF flag + source donors
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.6849766450291191,CRSP ETF flag + source donors
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.6883903880870217,CRSP ETF flag + source donors
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9199256634928691,CRSP ETF flag + source donors
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6486269107659478,CRSP ETF flag + source donors + source cheap (observed fees)
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.552062826415431,CRSP ETF flag + source donors + source cheap (observed fees)
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.6654679873530248,CRSP ETF flag + source donors + source cheap (observed fees)
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-3.9979165862812285,CRSP ETF flag + source donors + source cheap (observed fees)
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.1110015488922336,CRSP ETF flag + source donors + source cheap (observed fees)
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.9402992294056394,CRSP ETF flag + source donors + source cheap (observed fees)
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-0.7181543286263012,CRSP ETF flag + source donors + source cheap (observed fees)
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.14363379022871028,CRSP ETF flag + source donors + source cheap (observed fees)
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.14384370976109995,CRSP ETF flag + source donors + source cheap (observed fees)
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.4456571230822347,CRSP ETF flag + source donors + source cheap (observed fees)
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.42744556137849576,CRSP ETF flag + source donors + source cheap (observed fees)
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.8636980374102635,CRSP ETF flag + source donors + source cheap (observed fees)
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.649163980306944,CRSP ETF flag + source donors + source cheap (observed fees)
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.6523992424831002,CRSP ETF flag + source donors + source cheap (observed fees)
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.871829148677252,CRSP ETF flag + source donors + source cheap (observed fees)
-BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.4002170613747131,CRSP ETF flag + source donors + source cheap (observed) + category10
-BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-0.9576568797051602,CRSP ETF flag + source donors + source cheap (observed) + category10
-BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.41060837581170917,CRSP ETF flag + source donors + source cheap (observed) + category10
-BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-2.4668024117180956,CRSP ETF flag + source donors + source cheap (observed) + category10
-BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-0.6855123765298876,CRSP ETF flag + source donors + source cheap (observed) + category10
-State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.197207274152944,CRSP ETF flag + source donors + source cheap (observed) + category10
-State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,1.2201717450793694,CRSP ETF flag + source donors + source cheap (observed) + category10
-State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,0.24403931785938818,CRSP ETF flag + source donors + source cheap (observed) + category10
-State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,0.2443959791951934,CRSP ETF flag + source donors + source cheap (observed) + category10
-State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.27498024090622497,CRSP ETF flag + source donors + source cheap (observed) + category10
-Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.263743307027691,CRSP ETF flag + source donors + source cheap (observed) + category10
-Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.532920673980753,CRSP ETF flag + source donors + source cheap (observed) + category10
-Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.4005484450868034,CRSP ETF flag + source donors + source cheap (observed) + category10
-Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.40254467296361024,CRSP ETF flag + source donors + source cheap (observed) + category10
-Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.5379377483619904,CRSP ETF flag + source donors + source cheap (observed) + category10
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6546602431603677,"V2 (cheap on the source panel, 20th percentile)"
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.56649964791229,"V2 (cheap on the source panel, 20th percentile)"
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.6716579703754763,"V2 (cheap on the source panel, 20th percentile)"
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.035104003654517,"V2 (cheap on the source panel, 20th percentile)"
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.121335751072138,"V2 (cheap on the source panel, 20th percentile)"
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.9583473091281065,"V2 (cheap on the source panel, 20th percentile)"
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-0.8006845713711784,"V2 (cheap on the source panel, 20th percentile)"
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.16014017486140752,"V2 (cheap on the source panel, 20th percentile)"
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.16037421833105478,"V2 (cheap on the source panel, 20th percentile)"
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.44980249157198937,"V2 (cheap on the source panel, 20th percentile)"
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.43142153139995315,"V2 (cheap on the source panel, 20th percentile)"
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.8717318967238569,"V2 (cheap on the source panel, 20th percentile)"
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.655202308360665,"V2 (cheap on the source panel, 20th percentile)"
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.6584676639723046,"V2 (cheap on the source panel, 20th percentile)"
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.8799386411417299,"V2 (cheap on the source panel, 20th percentile)"
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.705966790909247,cutoff 10th percentile
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.6892681982006357,cutoff 10th percentile
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,0.0,-0.07627761306945222,cutoff 10th percentile
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.351340186312824,cutoff 10th percentile
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.2092162461166718,cutoff 10th percentile
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.1118254541268353,cutoff 10th percentile
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.0200362396691844,cutoff 10th percentile
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.20401140177568272,cutoff 10th percentile
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.20430956266104766,cutoff 10th percentile
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,0.0,-0.051082339409481786,cutoff 10th percentile
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.46523258015680274,cutoff 10th percentile
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.9400506233469542,cutoff 10th percentile
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.7065513384419794,cutoff 10th percentile
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.7100726040853582,cutoff 10th percentile
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9489005406605963,cutoff 10th percentile
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.7104674213987446,cutoff 15th percentile
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.7000375035782564,cutoff 15th percentile
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.7289141371575312,cutoff 15th percentile
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.37908054827443,cutoff 15th percentile
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.2169251576062043,cutoff 15th percentile
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.1252886171958787,cutoff 15th percentile
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.200184339110247,cutoff 15th percentile
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.24004175527186403,cutoff 15th percentile
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.24039257420479362,cutoff 15th percentile
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,0.0,-0.06010396629070508,cutoff 15th percentile
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4681984986134835,cutoff 15th percentile
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.9460435688389901,cutoff 15th percentile
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.7110556954983386,cutoff 15th percentile
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.7145994096700623,cutoff 15th percentile
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9549499055312832,cutoff 15th percentile
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.7017020023706085,cutoff 25th percentile
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.67906322575272,cutoff 25th percentile
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.7199211310670633,cutoff 25th percentile
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.325053474256013,cutoff 25th percentile
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.2019112968561951,cutoff 25th percentile
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.0990677874655392,cutoff 25th percentile
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.5865537653260078,cutoff 25th percentile
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.3173172139076352,cutoff 25th percentile
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.31778097024976487,cutoff 25th percentile
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.4821238379829896,cutoff 25th percentile
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.46242208170106325,cutoff 25th percentile
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.9343717200673447,cutoff 25th percentile
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.7022830186159632,cutoff 25th percentile
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.7057830120783404,cutoff 25th percentile
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9431681744895122,cutoff 25th percentile
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.5124768459585031,cutoff 30th percentile
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.2262769996261107,cutoff 30th percentile
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.5257828955050737,cutoff 30th percentile
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-3.1587337012014576,cutoff 30th percentile
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-0.8777967120712845,cutoff 30th percentile
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.5330206206327488,cutoff 30th percentile
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-0.8836816245961391,cutoff 30th percentile
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.17673992349109013,cutoff 30th percentile
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.1769982273486627,cutoff 30th percentile
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.35211144191724186,cutoff 30th percentile
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.3377225790023657,cutoff 30th percentile
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.6824034567882414,cutoff 30th percentile
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.5129011818900866,cutoff 30th percentile
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.5154573461940429,cutoff 30th percentile
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.688827806729756,cutoff 30th percentile
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.7026009783250771,cheap from the index CSV (V2 as first reported)
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.6812143347147646,cheap from the index CSV (V2 as first reported)
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.7208434482098911,cheap from the index CSV (V2 as first reported)
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.33059445755378,cheap from the index CSV (V2 as first reported)
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.2034511091292504,cheap from the index CSV (V2 as first reported)
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.1017569795461606,cheap from the index CSV (V2 as first reported)
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-1.4503246716370242,cheap from the index CSV (V2 as first reported)
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.29007084041100933,cheap from the index CSV (V2 as first reported)
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.2904947764157754,cheap from the index CSV (V2 as first reported)
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.482741504365526,cheap from the index CSV (V2 as first reported)
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4630145074471208,cheap from the index CSV (V2 as first reported)
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.9355687776587982,cheap from the index CSV (V2 as first reported)
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.7031827389314738,cheap from the index CSV (V2 as first reported)
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.7066872163627622,cheap from the index CSV (V2 as first reported)
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9443765015386321,cheap from the index CSV (V2 as first reported)
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6237696910629533,donors from the source panel
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.4925833844917205,donors from the source panel
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.6399653699124225,donors from the source panel
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-3.8447051032391744,donors from the source panel
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.068424823917055,donors from the source panel
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.8659414692906102,donors from the source panel
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-0.6775388424109421,donors from the source panel
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.13551052758925375,donors from the source panel
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.13570857504410488,donors from the source panel
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.42857828031948536,donors from the source panel
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4110646372233322,donors from the source panel
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.8305986831950651,donors from the source panel
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.6242861785785128,donors from the source panel
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.6273974563479559,donors from the source panel
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.838418187256373,donors from the source panel
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6771719802258944,ETF flag from CRSP
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.6203667164497064,ETF flag from CRSP
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.6947542066064489,ETF flag from CRSP
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.173858726140501,ETF flag from CRSP
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.159895012695311,ETF flag from CRSP
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.0256888044558954,ETF flag from CRSP
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-0.8249352549238387,ETF flag from CRSP
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.16499041032676834,ETF flag from CRSP
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.16523154237326956,ETF flag from CRSP
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.4652698053847312,ETF flag from CRSP
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4462567809522976,ETF flag from CRSP
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.9017080552819885,ETF flag from CRSP
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.6777326853686487,ETF flag from CRSP
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.681110326440911,ETF flag from CRSP
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9101970042088865,ETF flag from CRSP
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.6771719802258944,Danny's share types
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.6203667164497064,Danny's share types
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.6947542066064489,Danny's share types
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-4.173858726140501,Danny's share types
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-1.159895012695311,Danny's share types
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-2.0256888044558954,Danny's share types
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,-0.8249352549238387,Danny's share types
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,-0.16499041032676834,Danny's share types
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,-0.16523154237326956,Danny's share types
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.4652698053847312,Danny's share types
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.4462567809522976,Danny's share types
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.9017080552819885,Danny's share types
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.6777326853686487,Danny's share types
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.681110326440911,Danny's share types
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.9101970042088865,Danny's share types
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.4564242395839454,category10 exclusion
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-1.092151872787147,category10 exclusion
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.46827492824247546,category10 exclusion
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-2.8132444206772944,category10 exclusion
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-0.7817869235966711,category10 exclusion
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-1.3653451400913987,category10 exclusion
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,0.8501782553687649,category10 exclusion
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,0.17003911321154402,category10 exclusion
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,0.17028762389330276,category10 exclusion
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.3135989428464774,category10 exclusion
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.3007838744854539,category10 exclusion
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.607764977696669,category10 exclusion
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.45680216339929147,category10 exclusion
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.4590787449812415,category10 exclusion
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.6134866587052863,category10 exclusion
+BlackRock,16416,iShares Trust: iShares Core S&P 500 ETF,2024.58333333333,0.03,0.03237926357147326,1.0,-0.33225836076725906,cutoff 30th percentile + category10 exclusion
+BlackRock,56419,iShares Trust: iShares Core MSCI EAFE ETF,2024.58333333333,0.07,0.007700629821238626,1.0,-0.7950423301179854,cutoff 30th percentile + category10 exclusion
+BlackRock,16417,iShares Trust: iShares Core US Aggregate Bond ETF,2024.58333333333,0.03,0.007255768602395734,1.0,-0.34088518214562313,cutoff 30th percentile + category10 exclusion
+BlackRock,16448,iShares Trust: iShares Russell 1000 Growth ETF,2024.58333333333,0.18,0.005985586066961772,1.0,-2.0479279989685146,cutoff 30th percentile + category10 exclusion
+BlackRock,16437,iShares Trust: iShares Core S&P Mid-Cap ETF,2024.58333333333,0.05,0.005565647306065412,1.0,-0.5691092172060994,cutoff 30th percentile + category10 exclusion
+State Street Global Advisors,27635,SPDR S&P 500 ETF Trust,2024.58333333333,0.09,0.03515475635954088,1.0,-0.9939159641079429,cutoff 30th percentile + category10 exclusion
+State Street Global Advisors,29218,SPDR Gold Trust: SPDR Gold Shares,2024.58333333333,0.4,0.004326054527234319,0.0,1.0630242699991455,cutoff 30th percentile + category10 exclusion
+State Street Global Advisors,28279,Select Sector SPDR Trust: Technology Select Sector SPDR Fund,2024.58333333333,0.08,0.00430578136468055,0.0,0.2126091828996506,cutoff 30th percentile + category10 exclusion
+State Street Global Advisors,28277,Select Sector SPDR Trust: Financial Select Sector SPDR Fund,2024.58333333333,0.08,0.0028505829434298073,0.0,0.21291990936718297,cutoff 30th percentile + category10 exclusion
+State Street Global Advisors,29250,SPDR Series Trust: SPDR Portfolio S&P 500 ETF,2024.58333333333,0.02,0.0027539719507822737,1.0,-0.22828732931339488,cutoff 30th percentile + category10 exclusion
+Vanguard,63885,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Institutional Plus Class Shares,2024.58333333333,0.02,0.043505946132233166,1.0,-0.21895847856998263,cutoff 30th percentile + category10 exclusion
+Vanguard,31461,Vanguard Index Funds: Vanguard 500 Index Fund; Admiral Shares,2024.58333333333,0.04,0.033652338725936634,1.0,-0.44242828865819944,cutoff 30th percentile + category10 exclusion
+Vanguard,50485,Vanguard Index Funds: Vanguard 500 Index Fund; ETF Shares,2024.58333333333,0.03,0.03157806396635921,1.0,-0.33253347399852884,cutoff 30th percentile + category10 exclusion
+Vanguard,31466,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; ETF Class Shares,2024.58333333333,0.03,0.0267517042864393,1.0,-0.3341907331862994,cutoff 30th percentile + category10 exclusion
+Vanguard,31462,Vanguard Index Funds: Vanguard Total Stock Market Index Fund; Admiral Class Shares,2024.58333333333,0.04,0.02455485324365635,1.0,-0.44659344069852336,cutoff 30th percentile + category10 exclusion

@@ -1,0 +1,33 @@
+donor pool: 644,228 source fund-months with a fee
+index    pooled    wavg no VA                  N 100,529 | T2   7.24 (1.99) F    27 e>0 1.00 T5 0 | A5   4.01 (1.59) x broad  -6.92 F    49 e>0 0.49 T5 0
+index    pooled    wavg no VA, no money market N 100,092 | T2   6.41 (1.43) F    46 e>0 1.00 T5 0 | A5   4.07 (1.31) x broad  -6.91 F    73 e>0 0.49 T5 0
+index    pooled    med  no VA                  N 100,529 | T2  75.12 (80.57) F     1 e>0 1.00 T5 0 | A5  46.13 (34.20) x broad -14.37 F     2 e>0 1.00 T5 0
+index    pooled    med  no VA, no money market N 100,092 | T2  10.03 (1.93) F    57 e>0 1.00 T5 0 | A5   8.95 (1.68) x broad  -6.27 F    69 e>0 1.00 T5 0
+index    same type wavg no VA                  N 100,101 | T2   4.68 (0.82) F   157 e>0 1.00 T5 0 | A5   3.12 (0.78) x broad  -5.86 F   187 e>0 0.49 T5 0
+index    same type wavg no VA, no money market N  99,664 | T2   4.42 (0.70) F   230 e>0 1.00 T5 0 | A5   3.18 (0.69) x broad  -5.85 F   230 e>0 0.49 T5 0
+index    same type med  no VA                  N 100,101 | T2   5.16 (0.54) F   156 e>0 1.00 T5 0 | A5   4.96 (0.55) x broad  -6.93 F   189 e>0 0.49 T5 0
+index    same type med  no VA, no money market N  99,664 | T2   4.09 (0.39) F   331 e>0 1.00 T5 0 | A5   4.19 (0.41) x broad  -6.59 F   328 e>0 0.49 T5 0
+cat20    pooled    wavg no VA                  N  99,196 | T2   4.82 (1.46) F    70 e>0 1.00 T5 0 | A5   3.13 (1.26) x broad  -6.63 F   112 e>0 0.49 T5 0
+cat20    pooled    wavg no VA, no money market N  98,759 | T2   4.29 (1.10) F   114 e>0 1.00 T5 0 | A5   3.07 (1.03) x broad  -6.60 F   164 e>0 0.48 T5 0
+cat20    pooled    med  no VA                  N  99,196 | T2 338.75 (1436.93) F     0 e>0 1.00 T5 0 | A5 100.81 (139.41) x broad -30.01 F     1 e>0 1.00 T5 0
+cat20    pooled    med  no VA, no money market N  98,759 | T2  11.94 (2.48) F    51 e>0 1.00 T5 0 | A5  10.86 (2.17) x broad  -6.63 F    64 e>0 1.00 T5 0
+cat20    same type wavg no VA                  N  98,621 | T2   2.67 (0.74) F   220 e>0 1.00 T5 0 | A5   1.81 (0.73) x broad  -5.92 F   284 e>0 0.49 T5 0
+cat20    same type wavg no VA, no money market N  98,184 | T2   2.63 (0.64) F   317 e>0 1.00 T5 0 | A5   1.96 (0.65) x broad  -5.97 F   349 e>0 0.48 T5 0
+cat20    same type med  no VA                  N  98,621 | T2   6.78 (1.03) F   134 e>0 1.00 T5 0 | A5   7.27 (1.05) x broad  -8.01 F   188 e>0 0.49 T5 0
+cat20    same type med  no VA, no money market N  98,184 | T2   4.96 (0.62) F   310 e>0 1.00 T5 0 | A5   5.54 (0.64) x broad  -7.20 F   336 e>0 0.48 T5 0
+cat10    pooled    wavg no VA                  N  98,027 | T2   3.93 (1.46) F    73 e>0 1.00 T5 0 | A5   2.62 (1.27) x broad  -6.08 F   123 e>0 0.49 T5 0
+cat10    pooled    wavg no VA, no money market N  97,590 | T2   3.59 (1.11) F   122 e>0 1.00 T5 0 | A5   2.64 (1.04) x broad  -6.08 F   179 e>0 0.49 T5 0
+cat10    pooled    med  no VA                  N  98,027 | T2  78.35 (68.21) F     1 e>0 1.00 T5 0 | A5 111.95 (120.04) x broad -45.56 F     1 e>0 1.00 T5 0
+cat10    pooled    med  no VA, no money market N  97,590 | T2  11.56 (1.94) F    69 e>0 1.00 T5 0 | A5  13.61 (2.06) x broad  -9.19 F    74 e>0 1.00 T5 0
+cat10    same type wavg no VA                  N  97,341 | T2  -0.15 (0.64) F   228 e>0 0.00 T5 0 negMC 1.00-1.00 | A5  -0.99 (0.61) x broad  -5.56 F   307 e>0 0.00 T5 0 negMC 0.65-0.73
+cat10    same type wavg no VA, no money market N  96,904 | T2   0.11 (0.57) F   303 e>0 1.00 T5 0 | A5  -0.59 (0.56) x broad  -5.76 F   356 e>0 0.00 T5 0
+cat10    same type med  no VA                  N  97,341 | T2   8.97 (1.14) F   162 e>0 1.00 T5 0 | A5  11.18 (1.55) x broad -11.19 F   204 e>0 0.49 T5 0
+cat10    same type med  no VA, no money market N  96,904 | T2   6.60 (0.67) F   337 e>0 1.00 T5 0 | A5   8.37 (0.90) x broad  -9.81 F   358 e>0 0.49 T5 0
+lipper6  pooled    wavg no VA                  N  98,151 | T2  -4.12 (0.74) F   124 e>0 0.00 T5 1 negMC 0.32-0.48 | A5  -3.98 (0.75) x broad  -4.41 F   162 e>0 0.00 T5 1 negMC 0.13-0.39
+lipper6  pooled    wavg no VA, no money market N  97,714 | T2  -3.45 (0.62) F   183 e>0 0.00 T5 1 | A5  -3.26 (0.64) x broad  -4.78 F   224 e>0 0.00 T5 1
+lipper6  pooled    med  no VA                  N  98,151 | T2   9.54 (6.41) F     6 e>0 1.00 T5 0 | A5   9.13 (5.56) x broad  -8.08 F     7 e>0 1.00 T5 0
+lipper6  pooled    med  no VA, no money market N  97,714 | T2   2.16 (1.14) F    71 e>0 1.00 T5 0 | A5   2.54 (1.15) x broad  -5.77 F    75 e>0 0.49 T5 0
+lipper6  same type wavg no VA                  N  97,479 | T2  -2.55 (0.42) F   296 e>0 0.00 T5 1 negMC 0.59-0.73 | A5  -2.50 (0.42) x broad  -5.43 F   324 e>0 0.00 T5 0 negMC 0.29-0.53
+lipper6  same type wavg no VA, no money market N  97,042 | T2  -2.19 (0.38) F   371 e>0 0.00 T5 0 | A5  -2.09 (0.39) x broad  -5.66 F   386 e>0 0.00 T5 0
+lipper6  same type med  no VA                  N  97,479 | T2  -0.92 (0.43) F   190 e>0 0.00 T5 0 negMC 0.98-0.98 | A5   0.57 (0.48) x broad  -6.71 F   215 e>0 0.49 T5 0
+lipper6  same type med  no VA, no money market N  97,042 | T2  -0.80 (0.33) F   329 e>0 0.00 T5 0 | A5   0.58 (0.35) x broad  -6.72 F   349 e>0 0.49 T5 0

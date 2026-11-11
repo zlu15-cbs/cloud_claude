@@ -32,16 +32,17 @@ DANNY = os.environ.get('SC_DANNY', f'{DATA}/danny_zip/x/V2_comparison_handoff/ou
 CSVP = f'{DATA}/nonLev_funds_product_month_level_v2_patched.csv'
 
 GRID = [  # label, types, excl, donors, cheap
-    ('V2 as reported', 'csv', 'lipper6', 'csv', 'csv'),
-    ('ETF flag from CRSP', 'crsp', 'lipper6', 'csv', 'csv'),
-    ('donors from the source panel', 'csv', 'lipper6', 'source', 'csv'),
-    ('cheap rebuilt on the source panel (imputed entry fees included)', 'csv', 'lipper6', 'csv', 'source'),
-    ('cheap rebuilt on the source panel, observed fees only', 'csv', 'lipper6', 'csv', 'source_obs'),
-    ('category10 exclusion', 'csv', 'cat10', 'csv', 'csv'),
-    ("Danny's share types", 'danny', 'lipper6', 'csv', 'csv'),
-    ('CRSP ETF flag + source donors', 'crsp', 'lipper6', 'source', 'csv'),
-    ('CRSP ETF flag + source donors + source cheap (observed fees)', 'crsp', 'lipper6', 'source', 'source_obs'),
-    ('CRSP ETF flag + source donors + source cheap (observed) + category10', 'crsp', 'cat10', 'source', 'source_obs'),
+    ('V2 (cheap on the source panel, 20th percentile)', 'csv', 'lipper6', 'csv', 'source_obs'),
+    ('cutoff 10th percentile', 'csv', 'lipper6', 'csv', 'source_obs_q10'),
+    ('cutoff 15th percentile', 'csv', 'lipper6', 'csv', 'source_obs_q15'),
+    ('cutoff 25th percentile', 'csv', 'lipper6', 'csv', 'source_obs_q25'),
+    ('cutoff 30th percentile', 'csv', 'lipper6', 'csv', 'source_obs_q30'),
+    ('cheap from the index CSV (V2 as first reported)', 'csv', 'lipper6', 'csv', 'csv'),
+    ('donors from the source panel', 'csv', 'lipper6', 'source', 'source_obs'),
+    ('ETF flag from CRSP', 'crsp', 'lipper6', 'csv', 'source_obs'),
+    ("Danny's share types", 'danny', 'lipper6', 'csv', 'source_obs'),
+    ('category10 exclusion', 'csv', 'cat10', 'csv', 'source_obs'),
+    ('cutoff 30th percentile + category10 exclusion', 'csv', 'cat10', 'csv', 'source_obs_q30'),
 ]
 
 
@@ -91,6 +92,11 @@ def main():
     # the same rule using only fund-months whose fee CRSP reports for the fund in that quarter or earlier (no name-based imputation)
     obs = src[src.product_exp_ratio.notna() & ((np.floor(np.round(src.month_t * 12) / 3) / 4) >= src.product_j.map(first_fee_q))]
     cheap_obs = v2.gene_idx(obs[['product_j', 'month_t', 'product_exp_ratio']])
+
+    def cheap_q(q):   # the same rule at another percentile
+        cut = obs.groupby('month_t').product_exp_ratio.quantile(q)
+        e = obs.sort_values('month_t').groupby('product_j').first()
+        return (e.product_exp_ratio <= e.month_t.map(cut) + 1e-9).astype(float)
     e0 = src[src.product_exp_ratio.notna()].sort_values('month_t').groupby('product_j').first()
     imputed0 = ~((np.floor(np.round(e0.month_t * 12) / 3) / 4) >= e0.index.to_series().map(first_fee_q))
     print(f'source panel: the fee in a fund\'s first month is not observed (imputed or backfilled) for {float(imputed0.mean()):.3f} of funds', flush=True)
@@ -103,6 +109,9 @@ def main():
     d['cheap_csv'] = d.product_ids.map(cheap_csv)
     d['cheap_source'] = d.product_ids.map(cheap_src)
     d['cheap_source_obs'] = d.product_ids.map(cheap_obs).fillna(d.product_ids.map(cheap_csv))
+    for q in (10, 15, 25, 30):
+        d[f'cheap_source_obs_q{q}'] = d.product_ids.map(cheap_q(q / 100)).fillna(d.product_ids.map(cheap_csv))
+    print('funds without an observed-fee entry month (CSV indicator used):', d.loc[~d.product_ids.isin(cheap_obs.index), 'product_ids'].nunique(), flush=True)
     print(f'cheap (source, observed fees): share of Table 2 fund-months {d.cheap_source_obs.mean():.3f}; differs from csv on {int((d.cheap_csv != d.cheap_source_obs).sum()):,} fund-months, {d.loc[d.cheap_csv != d.cheap_source_obs, "product_ids"].nunique()} funds', flush=True)
     assert (d.cheap_csv == d.cheap).all()
     print(f'Table 2 fund-months: cheap csv {d.cheap_csv.mean():.3f}, source {d.cheap_source.mean():.3f}; differ on {int((d.cheap_csv != d.cheap_source).sum()):,} fund-months, '
@@ -153,6 +162,12 @@ def main():
         for tag, m_ in (('', nomm), ('_noVA', nomm & fam_rows)):
             ds = downstream(dd0[m_].reset_index(drop=True), ['cheap'], b)
             r.update({f'negmc_B0{tag}': ds['B0'][0], f'negmc_B65{tag}': ds['B65'][0], f'minmc_B65{tag}': ds['B65'][1], f'vanguard_B0{tag}': ds['B0'][3]})
+        if label.startswith('V2 (cheap on the source panel'):   # save the new V2 for the conduct test, with and without VA funds
+            for nm, m_ in (('V2n', nomm), ('V2nx', nomm & fam_rows)):
+                sup = dd0[m_]
+                np.save(f'{CACHE}/alpha_{nm}.npy', b['prices'] + b['px_cheap'] * sup.cheap.to_numpy())
+                np.save(f'{CACHE}/rows_{nm}.npy', np.flatnonzero(m_))
+            np.save(f'{CACHE}/cheap_V2n.npy', dd0.cheap.to_numpy())
         rows.append(r)
         t5s.append(t5.assign(variant=label))
         print(f"{label:58s} N {r['N']:,} | non-cheap {r['alpha']:.3f} ({r['se']:.3f}) | x cheap {r['alpha_x']:.3f} ({r['se_x']:.3f}) | F {r['min_F']:.0f} | e>0 {r['share_pos_e']:.3f} "
