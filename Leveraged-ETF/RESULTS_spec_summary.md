@@ -19,7 +19,7 @@
 | Interaction (SE) | – | – | – | – | −20.562 (0.646) | −20.562 (0.646) | −5.278 (0.372) | −6.924 (0.428) |
 | Average own elasticity | −1.61 | +1.91 | −2.62 | −0.92 | −1.93 | −1.93 | −2.86 | +0.31 |
 | Asset-weighted own elasticity | −0.72 | +0.89 | −1.17 | −0.43 | −1.61 | −1.61 | −1.31 | +0.08 |
-| Table 5 funds with e < −1 | 2/15 | 0/15 | 2/15 | 1/15 | 5/15 | 5/15 | 2/15 | 1/15 |
+| Table 5 funds with e < −1 | 2/15 | 0/15 | 2/15 | 1/15 | 5/15 | 5/15 | 2/15 | 0/15 |
 | **Demand screens** | | | | | | | | |
 | Goal A: no upward slope (e > 0 share) | ✓ 0 | ✗ 1.00 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✓ 0 | ✗ 0.49 |
 | First-stage F (min) | ✓ 34 | ✓ 27 | ✓ 87 | ✓ 117 | ✓ 316 | ✓ 316 | ✓ 53 | ✓ 49 |
@@ -98,7 +98,7 @@
 | 2 | Modified T2 (proxy) | no VA | 100,529 | −3.491 (0.644) | | 117.0 | 0 | −0.92 | 1/15 |
 | 3 | V2 | with or without VA | 96,069 | −3.642 (0.419) | cheap −20.562 (0.646) | 315.8 | 0 | −1.93 | 5/15 |
 | 4 | A5 | with VA | 108,300 | −7.503 (1.770) | broad −5.278 (0.372) | 53.0 | 0 | −2.86 | 2/15 |
-| 4 | A5 | no VA | 100,529 | **+4.009 (1.588)** | broad −6.924 (0.428) | 49.0 | 0.49 | +0.31 | 1/15 |
+| 4 | A5 | no VA | 100,529 | **+4.009 (1.588)** | broad −6.924 (0.428) | 49.0 | 0.49 | +0.31 | 0/15 |
 
 **Reading.**
 - **T2 and A5 change sign.** The variable-annuity rows alone also slope upward (+2.32), so the negative coefficient comes from pooling the two groups under common month effects, not from fee variation within either. This is my reading of the three numbers, not a separate test.
