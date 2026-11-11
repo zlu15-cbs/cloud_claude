@@ -64,7 +64,8 @@ if MODE == 'filecheck':
 if MODE == 'rank':
     GRID = RANK
 if MODE == 'agg':
-    GRID = [(k, 'csv', 'lipper6', 'csv', v[2]) for k, v in AGGS.items()]
+    CH = {'source_obs': 'csvboth_q20', 'source_obs_q25': 'csvboth_q25'} if os.environ.get('SC_CHEAP') == 'csv' else {}   # cheap from the index CSV (2005 start)
+    GRID = [(k, 'csv', 'lipper6', 'csv', CH.get(v[2], v[2])) for k, v in AGGS.items()]
 OUT = {'filecheck': 'sc_v2_filecheck', 'rank': 'sc_v2_rank', 'agg': 'sc_v2_agg'}.get(MODE, 'sc_v2_robust')
 START = 2005   # cheap is classified on the fund's first observed-fee month on or after January of this year
 
@@ -73,10 +74,10 @@ def main():
     d = pd.read_pickle(PANEL)
     d['mk'] = np.round(d.month_t * 12).astype(int)
     nomm = (d.mmf == 0).to_numpy()
-    if os.environ.get('SC_PURE') == '1':   # keep only funds that CRSP flags as pure index funds in most quarters
+    if os.environ.get('SC_PURE') == '1':   # keep only funds that CRSP flags B or D (index-based or pure index) in most quarters
         from sc_q4 import pure_index_funds
         keepp = d.product_ids.isin(pure_index_funds(d.product_ids)).to_numpy()
-        print(f'not flagged as pure index funds, dropped: {int((nomm & ~keepp).sum()):,} fund-months, {d.loc[nomm & ~keepp, "product_ids"].nunique()} funds', flush=True)
+        print(f'not flagged B or D by CRSP, dropped: {int((nomm & ~keepp).sum()):,} fund-months, {d.loc[nomm & ~keepp, "product_ids"].nunique()} funds', flush=True)
         nomm = nomm & keepp
     if os.environ.get('SC_DROPQ4') == '1':   # drop the funds in the top entry-fee quartile from the sample
         from sc_q4 import entry_quartile

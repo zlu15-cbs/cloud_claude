@@ -1,0 +1,51 @@
+product_ids,name,firm,q,va,months,fee,aum,label,asset,bd,crsp_flag_quarters
+16393,"iShares, Inc: iShares MSCI Taiwan ETF",BlackRock,4.0,False,166,0.6037349397590361,3631.99156626506,specialized,intl_equity,True,D:91/none:12
+24698,Invesco DB Commodity Index Tracking Fund,Invesco,4.0,False,162,0.8661728395061727,3460.2006172839506,specialized,real_asset,True,D:78/B:2
+93350,First Trust Exchange-Traded Fund IV: FT Vest S&P 500 Dividend Aristocrats Target Income ETF,First Trust,4.0,False,10,0.75,2273.44,broad-based,us_equity,True,B:18/D:14
+93525,Global X Funds: Global X Artificial Intelligence & Technology ETF,Global X,4.0,False,4,0.68,2081.175,specialized,intl_equity,True,D:30/B:1
+88613,Global X Funds: Global X Robotics & Artificial Intelligence ETF,Global X,4.0,False,77,0.6841558441558442,1924.4415584415585,specialized,us_equity,True,B:19/D:19
+59541,DBX ETF Trust: Xtrackers Harvest CSI 300 China A-Shares ETF,DWS,4.0,False,80,0.6743750000000001,1787.0412499999998,specialized,intl_equity,True,D:49
+24773,Invesco DB Multi-Sector Commodity Trust: Invesco DB Agriculture Fund,Invesco,4.0,False,101,0.9215841584158415,1549.580198019802,specialized,real_asset,True,D:74/B:2
+36970,WisdomTree Trust: WisdomTree India Earnings Fund,WisdomTree,4.0,False,125,0.83328,1482.692,broad-based,intl_equity,True,D:47/B:24/none:1
+59412,Exchange Traded Concepts Trust: ROBO Global Robotics and Automation Index ETF,ROBO Global,4.0,False,74,0.95,1480.62027027027,specialized,intl_equity,True,D:49
+62778,Exchange Traded Concepts Trust: EMQQ The Emerging Markets Internet & Ecommerce ETF,Exchange Traded Concepts,4.0,False,9,0.86,1459.8666666666666,specialized,us_equity,True,D:27/B:18
+87385,Amplify ETF Trust: Amplify Online Retail ETF,Amplify,4.0,False,8,0.65,1408.7375,specialized,us_equity,True,D:21/B:18
+92874,Strategy Shares: Strategy Shares Nasdaq 7HANDL Index ETF,Strategy Shares,4.0,False,11,0.78,1401.7545454545455,specialized,allocation,True,B:18/D:14
+93415,Global X Funds: Global X Autonomous & Electric Vehicles ETF,Global X,4.0,False,5,0.68,1356.22,specialized,intl_equity,True,D:30/B:1
+95211,Global X Funds: Global X Cloud Computing ETF,Global X,4.0,False,15,0.68,1347.3733333333332,specialized,intl_equity,True,D:25/B:2
+88614,Global X Funds: Global X FinTech ETF,Global X,4.0,False,9,0.68,1272.5777777777778,specialized,us_equity,True,D:37/B:1
+52568,DBX ETF Trust: Xtrackers MSCI Japan Hedged Equity ETF,DBX Strategic Advisors,4.0,False,57,0.4559649122807018,1233.7877192982455,specialized,intl_equity,True,D:57/none:2
+64937,iShares Trust: iShares MSCI Saudi Arabia ETF,BlackRock,4.0,False,9,0.74,1156.7333333333333,broad-based,intl_equity,True,D:42
+20933,AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco Equally-Weighted S&P 500 Fund; Cl C Shs,Invesco,4.0,False,66,1.2596969696969698,982.8712121212121,broad-based,us_equity,True,B:97/none:15
+52746,First Trust Exchange-Traded AlphaDEX Fund II: First Trust Europe AlphaDEX Fund,First Trust,4.0,False,21,0.8,761.9857142857143,specialized,intl_equity,True,D:41/B:18
+47628,iShares Trust: iShares India 50 ETF,BlackRock,4.0,False,82,0.9323170731707318,722.2585365853658,broad-based,intl_equity,True,D:65
+47139,ProShares Trust: ProShares Large Cap Core Plus,ProFunds,4.0,False,36,0.45055555555555554,672.7666666666667,broad-based,us_equity,True,D:48/B:18
+55586,Global X Funds: Global X Guru Index ETF,Global X,4.0,False,11,0.75,496.37272727272733,broad-based,us_equity,True,D:37/B:18
+5914,BlackRock Funds III: LifePath 2020 Portfolio; Investor A Class Shares,BlackRock,4.0,False,19,0.994736842105263,371.37894736842105,specialized,allocation,True,B:39/none:35
+24769,PowerShares DB G10 Currency Harvest Fund,DB Commodity Services,4.0,False,37,0.7967567567567567,348.3459459459459,specialized,other,True,D:53/E:7/B:6/none:1
+36483,PowerShares Exchange-Traded Fund Trust II: PowerShares DWA Emerging Markets Momentum Portfolio,Invesco,4.0,False,18,0.9022222222222224,341.2888888888889,broad-based,intl_equity,True,D:54/B:19
+43724,PIMCO Funds: PIMCO EM Fundamental IndexPLUS AR Strategy Fund; Institutional Class Shares,PIMCO,4.0,False,50,1.2329999999999999,4081.3759999999997,broad-based,intl_equity,False,E:46/none:22
+55982,Russell Investment Company: US Strategic Equity Fund; Class S Shares,Russell Investments,4.0,False,130,0.7553076923076922,2944.736153846154,broad-based,us_equity,False,none:54
+53287,PIMCO Funds: PIMCO International Fundamental IndexPLUS AR Strategy Fund; Institutional Class Shares,PIMCO,4.0,False,34,0.8297058823529411,2910.4117647058824,specialized,intl_equity,False,E:33/none:24
+41912,Russell Investment Company: International Developed Markets Fund; Class S Shares,Russell Investments,4.0,False,146,0.9673972602739727,2000.7164383561642,broad-based,intl_equity,False,none:70
+90708,Russell Investment Company: Tax-Managed US Large Cap Fund; Class M Shares,Russell Investments,4.0,False,37,0.8175675675675675,1786.9378378378378,broad-based,us_equity,False,none:36
+27130,Russell Investment Company: Global Equity Fund; Class S Shares,Russell Investments,4.0,False,104,1.2377884615384613,1588.0913461538462,specialized,allocation,False,none:76
+64252,Russell Investment Company: Tax-Managed International Equity Fund; Class S Shares,Russell Investments,4.0,False,96,1.0545833333333334,1541.5697916666668,broad-based,intl_equity,False,none:43
+27248,Russell Investment Company: Emerging Markets Fund; Class S Shares,Russell Investments,4.0,False,129,1.4548062015503875,1518.5286821705427,specialized,intl_equity,False,none:112
+94470,Morningstar Funds Trust: Morningstar US Equity Fund; Institutional Class Shares,Morningstar Investment Management,4.0,False,54,0.8287037037037037,1442.7611111111112,broad-based,us_equity,False,none:29
+41909,Russell Investment Company: US Small Cap Equity Fund; Class S Shares,Russell Investments,4.0,False,130,0.9842307692307692,1103.0023076923076,broad-based,us_equity,False,none:70
+42271,Russell Investment Company: Global Equity Fund; Class Y Shares,Russell Investments,4.0,False,104,1.040769230769231,970.0269230769231,broad-based,allocation,False,none:70
+42264,USAA Mutual Funds Trust: Global Managed Volatility Fund; Institutional Class Shares,USAA Asset Management Company,4.0,False,10,0.716,771.7,specialized,allocation,False,none:56/B:14
+49966,Russell Investment Company: Russell Investments Commodity Strategies Fund; Class S Shares,Russell Investments,4.0,False,64,1.22875,713.24375,specialized,real_asset,False,none:43
+56024,Russell Investment Company: Russell US Dynamic Equity Fund; Class Y Shares,Russell Investments,4.0,False,35,0.9082857142857144,572.6714285714286,broad-based,us_equity,False,none:35
+53286,PIMCO Funds: PIMCO Small Company Fundamental IndexPLUS AR Strategy Fund; Institutional Class Shares,PIMCO,4.0,False,25,0.84,506.69199999999995,specialized,us_equity,False,none:47/E:10
+42269,Russell Investment Company: Russell Investments Emerging Markets Fund; Class Y Shares,Russell Investments,4.0,False,74,1.3221621621621622,500.4959459459459,broad-based,intl_equity,False,none:70
+3620,AdvisorOne Funds: CLS Global Diversified Equity Fund; Class N Shares,AdvisorOne Funds,4.0,False,53,1.15,498.81698113207545,specialized,us_equity,False,none:67/B:29
+49967,Russell Investment Company: Russell Commodity Strategies Fund; Class Y Shares,Russell Investments,4.0,False,30,1.0306666666666666,476.9633333333333,specialized,real_asset,False,none:43
+28874,State Farm Mutual Fund Trust: State Farm LifePath 2020 Fund; Class A Shares,State Farm Investment Management,4.0,False,22,1.13,437.74090909090904,specialized,allocation,False,none:33/B:17
+42270,Russell Investment Company: Russell Global Real Estate Securities Fund; Class Y Shares,Russell Investments,4.0,False,36,0.9186111111111112,407.03055555555557,specialized,real_asset,False,none:70
+54546,Russell Investment Company: Russell US Large Cap Equity Fund; Class S Shares,Russell Investments,4.0,False,11,0.87,393.89090909090913,broad-based,us_equity,False,none:25
+28831,State Farm Mutual Fund Trust: State Farm LifePath 2020 Fund; Legacy Class A Shares,State Farm Investment Management,4.0,False,22,1.13,352.40000000000003,specialized,allocation,False,none:45/B:17
+28838,State Farm Mutual Fund Trust: State Farm LifePath Retirement Fund; Legacy Class A Shares,State Farm Investment Management,4.0,False,22,1.17,260.1227272727273,specialized,allocation,False,none:47/B:15
+28870,State Farm Mutual Fund Trust: State Farm LifePath 2040 Fund; Class A Shares,State Farm Investment Management,4.0,False,22,1.1045454545454545,253.8227272727273,specialized,us_equity,False,none:32/B:18
+9747,Dreyfus Manager Funds I: Dreyfus S&P STARS Fund; Class A Shares,BNY Mellon Investment Management,4.0,False,4,1.47,220.05,specialized,us_equity,False,none:19/B:12

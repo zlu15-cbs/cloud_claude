@@ -40,10 +40,11 @@ def remap_family(src, mode):
 
 
 def pure_index_funds(ids):
-    """Funds that CRSP flags as a pure index fund (index_fund_flag == 'D') in most of their quarters."""
+    """Funds that CRSP flags as an index fund, pure (index_fund_flag 'D') or index-based ('B'), in most of their quarters.
+    Enhanced index funds ('E') and funds with no flag are left out. B and D are pooled because 458 funds switch between them."""
     from sc_build import CRSP
     cr = pd.read_csv(CRSP, usecols=['crsp_fundno', 'index_fund_flag'], encoding='latin-1', dtype=str)
     cr['crsp_fundno'] = cr.crsp_fundno.astype(float).astype(int)
     cr = cr[cr.crsp_fundno.isin(set(ids))]
-    share_d = (cr.index_fund_flag == 'D').groupby(cr.crsp_fundno).mean()
-    return set(share_d[share_d > 0.5].index)
+    share = cr.index_fund_flag.isin(['B', 'D']).groupby(cr.crsp_fundno).mean()
+    return set(share[share > 0.5].index)

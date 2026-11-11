@@ -64,13 +64,19 @@ def main():
     dn = pd.read_csv(f'{DANNY}/classified_donors.csv', usecols=['fund_id', 'month_key', 'category10', 'category20'])
     raw = raw.merge(dn.rename(columns={'fund_id': 'product_j', 'month_key': 'mk', 'category10': 'cat10', 'category20': 'cat20'}), on=['product_j', 'mk'], how='left')
     raw['index'] = raw.market_m_index.fillna('_none_' + raw.product_j.astype(str))
+    if os.environ.get('SC_DONORS') == 'csv':   # donors only from fund-months that are in the index CSV (no fill of the family ID needed)
+        keys = pd.read_csv(CSVP, usecols=['product_j', 'month_t'])
+        keys['mk'] = np.round(keys.month_t * 12).astype(int)
+        raw = raw.merge(keys[['product_j', 'mk']].drop_duplicates().assign(in_csv=True), on=['product_j', 'mk'], how='left')
+        raw = raw[raw.in_csv == True].reset_index(drop=True)
+        print(f'donors restricted to the index CSV: {len(raw):,} fund-months', flush=True)
     print(f'donor pool: {len(raw):,} source fund-months with a fee', flush=True)
 
     DROPQ4 = os.environ.get('SC_DROPQ4') == '1'   # drop the funds in the top entry-fee quartile from the sample
-    if os.environ.get('SC_PURE') == '1':   # keep only funds that CRSP flags as pure index funds in most quarters
+    if os.environ.get('SC_PURE') == '1':   # keep only funds that CRSP flags B or D (index-based or pure index) in most quarters
         from sc_q4 import pure_index_funds
         keepp = d.product_ids.isin(pure_index_funds(d.product_ids)).to_numpy()
-        print(f'not flagged as pure index funds, dropped: {int((nova & ~keepp).sum()):,} fund-months, {d.loc[nova & ~keepp, "product_ids"].nunique()} funds', flush=True)
+        print(f'not flagged B or D by CRSP, dropped: {int((nova & ~keepp).sum()):,} fund-months, {d.loc[nova & ~keepp, "product_ids"].nunique()} funds', flush=True)
         nova = nova & keepp
     if DROPQ4:
         from sc_q4 import entry_quartile
@@ -98,7 +104,7 @@ def main():
                                   f'{model}_avg_e': o['avg_e'], f'{model}_t5': int((t5.own_elasticity < -1).sum())})
                         if zs:
                             r.update(A5_xbroad=o['b_broad'], A5_xbroad_se=o['se_broad'])
-                        if only and sample == 'no VA' and not DROPQ4 and not os.environ.get('SC_FAMILY') and not os.environ.get('SC_PURE'):
+                        if only and sample == 'no VA' and not DROPQ4 and not os.environ.get('SC_FAMILY') and not os.environ.get('SC_PURE') and not os.environ.get('SC_DONORS'):
                             sup = dd0[base]
                             np.save(f'{CACHE}/alpha_{model}alt.npy', np.full(len(sup), b['prices']) + sum(b[f'px_{z}'] * sup[z].to_numpy() for z in zs))
                             np.save(f'{CACHE}/rows_{model}alt.npy', np.flatnonzero(base))
