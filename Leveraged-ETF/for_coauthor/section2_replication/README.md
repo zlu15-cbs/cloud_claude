@@ -58,5 +58,6 @@ SC_DATA=... SC_SOURCE=... SC_DANNY=... sh run_section2.sh conduct     # the same
 - **The scale estimate is 0.013 on this sample,** against 0.021-0.024 on the paper's sample. The conduct row above uses eta = 0.024 and has not been re-run at 0.013.
 - **V2's size depends on the cheap cutoff** (non-cheap slope -10.4 at the 20th percentile, -5.0 at the 25th, with the median). The 25th-percentile rows print from `sc_v2_robust.py`.
 - **T2 and A5 with the paper's exclusion have a weak first stage** (F of 17 and 33).
+- `NOTE_refined_family_ID.md` explains the refined family ID, with examples of false switchers and the full alias and artifact tables.
 - `RESULTS_spec_summary.md` has the full report; sections 1 and 2 explain the two exclusions.
 - `code/replicate_V2.py` is the V2 script sent earlier; the other scripts import its functions.
