@@ -200,6 +200,37 @@ Gene's suggestion: interact the fee with the fund's entry-fee rank, so that no c
 - **What the data say is a step, not a line:** very elastic at the bottom and a flat, negative slope above. The indicator fits that shape; a linear rank does not.
 - **Not used.** The marginal-cost numbers for these rows are not meaningful because of the positive slopes.
 
+### 3.6 Who the high-fee funds are, and where the upward slope comes from
+
+Gene's question: is the upward slope at high ranks an artifact of specialized funds? Funds are sorted into quartiles of the entry-fee rank (`sc_v2_highfee.log`; rank from the index CSV, V2's instrument).
+
+| Entry-fee quartile | Fund-months | Funds | Mean fee (%) | Share of inside assets | Specialized | ETF | International equity or real asset | Fee slope, quartile dummies | Fee slope, estimated alone (SE; F) |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 (lowest) | 49,509 | 531 | 0.11 | 0.809 | 0.40 | 0.44 | 0.15 | −23.9 | −47.4 (8.9; 21) |
+| 2 | 28,340 | 340 | 0.30 | 0.144 | 0.50 | 0.69 | 0.29 | −6.8 | −0.04 (0.58; 131) |
+| 3 | 15,683 | 229 | 0.56 | 0.043 | 0.74 | 0.81 | 0.51 | −0.9 | −1.18 (0.46; 205) |
+| 4 (highest) | 2,537 | 48 | 0.93 | 0.004 | 0.54 | 0.43 | 0.60 | +30.6 | +76 (63; 2) |
+
+**The top half (quartiles 3 and 4), estimated alone on subgroups.**
+
+| Subgroup | Fund-months | Fee slope (SE) | First-stage F |
+|---|---|---|---|
+| Broad-based | 5,203 | −12.95 (1.78) | 36 |
+| Specialized | 13,017 | **+5.66 (0.96)** | 181 |
+| ETFs | 13,805 | **+7.15 (1.19)** | 238 |
+| Mutual funds | 4,415 | −1.14 (0.27) | 150 |
+| US equity | 7,276 | +0.96 (1.10) | 23 |
+| Not US equity | 10,944 | **+3.96 (0.48)** | 218 |
+
+**Reading.**
+- **Gene's conjecture holds for the top half.** High-fee broad-based funds slope downward (−13). High-fee specialized funds slope upward (+5.7), and they are three quarters of the fund-months there.
+- **Who they are.** Country ETFs (iShares MSCI Taiwan, Brazil, Japan, India, China Large-Cap), thematic ETFs (Global X robotics, cloud, electric vehicles; ROBO; KraneShares China Internet), and commodity funds (Invesco DB Commodity, iShares Silver, VanEck Gold Miners).
+- **The top quartile is tiny and partly not index funds.** It has 48 funds and 0.4% of assets, no first stage on its own (F of 2), and includes PIMCO IndexPLUS and Russell Investment Company funds, which are actively managed against an index.
+- **A possible reason, not tested:** for a country or theme fund the fee is not the margin of competition. Demand follows the theme, and there are few close substitutes on the same exposure.
+- **The linear rank fails for a second reason too.** With specialized funds removed, the linear rank model still has 6% of fund-months sloping upward. The jump from quartile 1 (−24) to quartile 2 (−7) is too large for a line.
+- **What it means for V2.** The non-cheap slope of −3.4 averages a clearly negative slope for mid-fee and broad-based funds with a zero or positive slope for high-fee specialized ETFs. Those funds are 4.7% of assets.
+- **The broad/specialized label is not consistent within an index:** iShares MSCI Emerging Markets is broad-based, while the DFA and SPDR funds on the same index are specialized.
+
 ## 4. Supply side in detail
 
 **Scale η** (2SLS with the rotator instrument, under each candidate).

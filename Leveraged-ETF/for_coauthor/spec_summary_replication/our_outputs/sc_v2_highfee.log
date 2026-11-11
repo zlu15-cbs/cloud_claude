@@ -1,0 +1,95 @@
+1. Who is in each entry-fee quartile (estimation fund-months)
+     fund_months  funds  mean_fee  specialized    etf  retail   inst  us_equity  aum_share  within_fund_fee_sd
+q                                                                                                             
+1.0        49509    531     0.106        0.396  0.441   0.215  0.340      0.516      0.809               0.025
+2.0        28340    340     0.303        0.498  0.688   0.190  0.122      0.571      0.144               0.051
+3.0        15683    229     0.561        0.742  0.811   0.089  0.099      0.422      0.043               0.045
+4.0         2537     48     0.934        0.544  0.429   0.351  0.220      0.261      0.004               0.035
+asset class by quartile:
+asset_class  allocation  bond  intl_equity  other  real_asset  us_equity
+q                                                                       
+1.0                0.06  0.27         0.12   0.00        0.03       0.52
+2.0                0.03  0.10         0.24   0.01        0.05       0.57
+3.0                0.03  0.02         0.44   0.02        0.07       0.42
+4.0                0.12  0.00         0.45   0.01        0.15       0.26
+
+2. A separate fee slope per quartile (base = quartile 1)
+quartile dummies                                               N 96,069 | base  -23.856 (1.751) | x q2 17.073 (0.942) | x q3 22.936 (1.116) | x q4 54.423 (7.378) | F 145 | e>0 0.026
+   implied slope by quartile: {1: -23.86, 2: -6.78, 3: -0.92, 4: 30.57}
+quartile 2; top half broad; top half specialized               N 96,069 | base  -25.856 (1.688) | x q2 17.828 (0.962) | x q34b 19.722 (1.354) | x q34s 27.816 (1.050) | F 199 | e>0 0.135
+   implied slope: {'q1': -25.86, 'q2': -8.03, 'top half broad': -6.13, 'top half specialized': 1.96}
+
+3. Subsamples estimated alone (one slope, own fund and month effects)
+quartile 1                                                     N 49,509 | base  -47.365 (8.893) |  | F 21 | e>0 0.000
+quartile 2                                                     N 28,340 | base   -0.042 (0.583) |  | F 131 | e>0 0.000
+quartile 3                                                     N 15,683 | base   -1.176 (0.457) |  | F 205 | e>0 0.000
+quartile 4                                                     N  2,537 | base   76.342 (63.012) |  | F 2 | e>0 1.000
+top half (3-4)                                                 N 18,220 | base    1.340 (0.437) |  | F 168 | e>0 1.000
+top half, broad-based                                          N  5,203 | base  -12.951 (1.783) |  | F 36 | e>0 0.000
+top half, specialized                                          N 13,017 | base    5.664 (0.962) |  | F 181 | e>0 1.000
+top half, ETF                                                  N 13,805 | base    7.148 (1.191) |  | F 238 | e>0 1.000
+top half, mutual funds                                         N  4,415 | base   -1.140 (0.272) |  | F 150 | e>0 0.000
+top half, US equity                                            N  7,276 | base    0.960 (1.098) |  | F 23 | e>0 1.000
+top half, not US equity                                        N 10,944 | base    3.959 (0.477) |  | F 218 | e>0 1.000
+
+4. Linear rank model with specialized funds removed, and with a separate line for them
+rank 0-1, broad-based funds only                               N 49,359 | base  -38.000 (2.555) | x rank 61.938 (4.995) | F 161 | e>0 0.063
+rank 0-1, specialized funds only                               N 46,710 | base  -25.547 (1.733) | x rank 47.849 (1.914) | F 75 | e>0 0.235
+
+5. The 25 largest funds in quartile 4 and in quartile 3 (by mean assets)
+quartile 4
+                                                                                                            name                               firm    type        asset        label     index  entry_fee  fee_first  fee_last  mean_aum  months
+product_ids                                                                                                                                                                                                                                      
+43724                   PIMCO Funds: PIMCO EM Fundamental IndexPLUS AR Strategy Fund; Institutional Class Shares                              PIMCO    inst  intl_equity  broad-based   M1CXOFE       1.25       1.25      1.15   4081.38      50
+16393                                                                      iShares, Inc: iShares MSCI Taiwan ETF                          BlackRock     etf  intl_equity  specialized     FTTWN       1.03       0.71      0.59   3631.99     166
+24698                                                                   Invesco DB Commodity Index Tracking Fund              DB Commodity Services     etf   real_asset  specialized  DBLCDBCE       0.92       0.88      0.84   3460.20     162
+53287        PIMCO Funds: PIMCO International Fundamental IndexPLUS AR Strategy Fund; Institutional Class Shares                              PIMCO    inst  intl_equity  specialized  NDUVEAFF       0.84       0.84      0.82   3336.13      25
+55982                                       Russell Investment Company: US Strategic Equity Fund; Class S Shares                Russell Investments  retail    us_equity  broad-based       SPX       0.85       0.85      0.74   2944.74     130
+93350                First Trust Exchange-Traded Fund IV: FT Vest S&P 500 Dividend Aristocrats Target Income ETF                        First Trust     etf    us_equity  broad-based     SPATI       0.75       0.75      0.75   2273.44      10
+93525                                          Global X Funds: Global X Artificial Intelligence & Technology ETF                           Global X     etf  intl_equity  specialized      IAIQ       0.68       0.68      0.68   2081.18       4
+41912                           Russell Investment Company: International Developed Markets Fund; Class S Shares                Russell Investments  retail  intl_equity  broad-based      MXEA       1.00       0.99      0.93   2000.72     146
+88613                                            Global X Funds: Global X Robotics & Artificial Intelligence ETF                           Global X     etf    us_equity  specialized   IBOTZNT       0.69       0.70      0.68   1924.44      77
+59541                                                DBX ETF Trust: Xtrackers Harvest CSI 300 China A-Shares ETF             DBX Strategic Advisors     etf  intl_equity  specialized  CSIN0301       0.80       0.80      0.65   1787.04      80
+90708                                  Russell Investment Company: Tax-Managed US Large Cap Fund; Class M Shares                Russell Investments  retail    us_equity  broad-based       SPX       0.84       0.82      0.81   1786.94      37
+27130                                             Russell Investment Company: Global Equity Fund; Class S Shares                Russell Investments  retail   allocation  specialized      MXWO       1.30       1.24      1.19   1588.09     104
+24773                                       Invesco DB Multi-Sector Commodity Trust: Invesco DB Agriculture Fund              DB Commodity Services     etf   real_asset  specialized  DBLCDBAE       0.84       0.93      0.88   1549.58     101
+64252                          Russell Investment Company: Tax-Managed International Equity Fund; Class S Shares                Russell Investments  retail  intl_equity  broad-based     MXWDU       1.09       1.09      1.07   1541.57      96
+27248                                          Russell Investment Company: Emerging Markets Fund; Class S Shares                Russell Investments  retail  intl_equity  specialized      MXEF       1.73       1.53      1.17   1518.53     129
+59412                              Exchange Traded Concepts Trust: ROBO Global Robotics and Automation Index ETF           Exchange Traded Concepts     etf  intl_equity  specialized    ROBOTR       0.95       0.95      0.95   1485.72      46
+36970                                                           WisdomTree Trust: WisdomTree India Earnings Fund                         WisdomTree     etf  intl_equity  broad-based   NDEUSIA       0.88       0.88      0.84   1482.69     125
+62778                         Exchange Traded Concepts Trust: EMQQ The Emerging Markets Internet & Ecommerce ETF           Exchange Traded Concepts     etf    us_equity  specialized   EMQQITR       0.86       0.86      0.86   1459.87       9
+94470                            Morningstar Funds Trust: Morningstar US Equity Fund; Institutional Class Shares  Morningstar Investment Management    inst    us_equity  broad-based       RIY       0.81       0.81      0.84   1442.76      54
+87385                                                               Amplify ETF Trust: Amplify Online Retail ETF                            Amplify     etf    us_equity  specialized    IBUYXT       0.65       0.65      0.65   1408.74       8
+93415                                                Global X Funds: Global X Autonomous & Electric Vehicles ETF                           Global X     etf  intl_equity  specialized   SOLDRIV       0.68       0.68      0.68   1356.22       5
+95211                                                               Global X Funds: Global X Cloud Computing ETF                           Global X     etf  intl_equity  specialized     ICLOU       0.68       0.68      0.68   1347.37      15
+88614                                                                       Global X Funds: Global X FinTech ETF                           Global X     etf    us_equity  specialized   IFINXNT       0.68       0.68      0.68   1272.58       9
+52568                                                      DBX ETF Trust: Xtrackers MSCI Japan Hedged Equity ETF             DBX Strategic Advisors     etf  intl_equity  specialized  M0JPHUSD       1.03       0.48      0.47   1233.79      57
+64937                                                               iShares Trust: iShares MSCI Saudi Arabia ETF                          BlackRock     etf  intl_equity  broad-based   M1SA5IM       0.74       0.74      0.74   1156.73       9
+quartile 3
+                                                                                                                     name                          firm  type        asset        label     index  entry_fee  fee_first  fee_last  mean_aum  months
+product_ids                                                                                                                                                                                                                                        
+16418                                                                     iShares, Inc: iShares MSCI Emerging Markets ETF                     BlackRock   etf  intl_equity  broad-based      MXEF       0.77       0.69      0.72  31053.51     166
+8293              DFA Investment Dimensions Group Inc: Emerging Markets Core Equity Portfolio; Institutional Class Shares     Dimensional Fund Advisors  inst  intl_equity  specialized      MXEF       0.61       0.61      0.62  15433.97      18
+89648                                                                       Pacer Funds Trust: Pacer US Cash Cows 100 ETF                         Pacer   etf    us_equity  broad-based    COWZTR       0.49       0.49      0.49  12751.42      30
+16403                                                                                iShares, Inc: iShares MSCI Japan ETF                     BlackRock   etf  intl_equity  specialized      MXJP       0.57       0.54      0.49  12202.07     166
+36536                                                       iShares Trust: iShares JPMorgan USD Emerging Markets Bond ETF                     BlackRock   etf         bond  specialized  JPEICORE       0.60       0.60      0.39   9929.00     166
+43521                                                                            VanEck ETF Trust: VanEck Gold Miners ETF                        VanEck   etf   real_asset  specialized   MVGDXTR       0.55       0.53      0.51   9657.11     166
+8309         DFA Investment Dimensions Group Inc: DFA International Small Cap Value Portfolio; Institutional Class Shares     Dimensional Fund Advisors  inst  intl_equity  specialized  NCUDEAFE       0.75       0.70      0.69   9540.97      62
+16513                                                                                                iShares Silver Trust                     BlackRock   etf   real_asset  specialized    SLVRLN       0.50       0.50      0.50   8362.73     166
+8305               DFA Investment Dimensions Group Inc: International Small Company Portfolio; Institutional Class Shares     Dimensional Fund Advisors  inst  intl_equity  specialized    ISCFUN       0.64       0.56      0.54   7102.22      62
+16388                                                                             iShares, Inc: iShares MSCI Eurozone ETF                     BlackRock   etf  intl_equity  specialized      SX5U       0.58       0.54      0.50   6510.78     166
+16386                                                                               iShares, Inc: iShares MSCI Brazil ETF                     BlackRock   etf  intl_equity  specialized  M1BR2550       0.74       0.61      0.59   6444.31     166
+61425                                      First Trust Exchange-Traded Fund VI: First Trust Rising Dividend Achievers ETF                   First Trust   etf    us_equity  broad-based  NQDVRIST       0.50       0.50      0.48   5951.06      56
+52565                                                                DBX ETF Trust: Xtrackers MSCI EAFE Hedged Equity ETF        DBX Strategic Advisors   etf  intl_equity  broad-based  M0EFHUSD       0.57       0.35      0.35   5791.27     120
+16414                                                                          iShares Trust: iShares China Large-Cap ETF                     BlackRock   etf  intl_equity  specialized   TXINOUU       0.74       0.72      0.73   5289.60     166
+61451                                                                Global X Funds: Global X NASDAQ 100 Covered Call ETF                      Global X   etf        other  specialized      BXNT       0.60       0.67      0.60   5119.42      53
+91614                                                            iShares, Inc: iShares MSCI Emerging Markets ex China ETF                     BlackRock   etf  intl_equity  broad-based   M1CXBRV       0.41       0.25      0.25   5054.81      35
+16459                                                                            iShares Trust: iShares US Technology ETF                     BlackRock   etf    us_equity  specialized  SPGITCUN       0.60       0.47      0.38   4848.09     166
+87924                                                                         iShares, Inc: iShares ESG Aware MSCI EM ETF                     BlackRock   etf  intl_equity  broad-based      MXEF       0.42       0.25      0.25   4712.21      52
+90738                                                          Global X Funds: Global X US Infrastructure Development ETF                      Global X   etf    us_equity  specialized     IPAVE       0.47       0.47      0.47   4630.21      40
+91438                                                                      Pacer Funds Trust: Pacer US Small Cap Cash ETF                         Pacer   etf    us_equity  broad-based    CALFTR       0.59       0.59      0.59   4592.30      21
+12685                                         First Trust Exchange-Traded Fund: First Trust Dow Jones Internet Index Fund                   First Trust   etf    us_equity  specialized   DJINETT       0.60       0.60      0.49   4556.23     162
+43563                                                        SPDR Index Shares Funds: SPDR Portfolio Emerging Markets ETF  State Street Global Advisors   etf  intl_equity  specialized      MXEF       0.59       0.60      0.07   4488.34      82
+54509                                                                               iShares Trust: iShares MSCI India ETF                     BlackRock   etf  intl_equity  specialized   NDEUSIA       0.67       0.67      0.61   4394.25     127
+16460                                                                           iShares Trust: iShares US Real Estate ETF                     BlackRock   etf   real_asset  specialized  DJUSRCUT       0.60       0.47      0.38   4196.66     166
+58933                                                               KraneShares Trust: KraneShares CSI China Internet ETF          Krane Funds Advisors   etf  intl_equity  specialized    H11137       0.71       0.75      0.70   4148.12      72
