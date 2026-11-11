@@ -2,3 +2,5 @@
 [   437s]    main IV: PC p 1.000 T vs B65 -2.13 | B0 p 0.000 T vs B65 -0.77 | B25 p 0.000 T vs B65 -1.13 | B50 p 0.019 T vs B65 -1.49 | B65 p 0.034 T vs B65 nan | min F 69
 [   880s] D10 conduct [B: own eta] main: ['PC (1.00)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)'] | rival3 x csent_index: ['PC (1.00)']
 [   880s]    main IV: PC p 1.000 T vs B65 -2.13 | B0 p 0.000 T vs B65 -0.75 | B25 p 0.000 T vs B65 -1.11 | B50 p 0.018 T vs B65 -1.47 | B65 p 0.033 T vs B65 nan | min F 68
+[  1331s] D10 conduct [C: PC eta] main: ['PC (1.00)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)'] | rival3 x csent_index: ['PC (1.00)']
+[  1331s]    main IV: PC p 1.000 T vs B65 -2.11 | B0 p 0.000 T vs B65 -0.76 | B25 p 0.000 T vs B65 -1.12 | B50 p 0.019 T vs B65 -1.48 | B65 p 0.034 T vs B65 nan | min F 68
