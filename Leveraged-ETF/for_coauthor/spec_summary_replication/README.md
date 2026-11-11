@@ -72,3 +72,14 @@ Memory: about 6 GB for the build step, 2.5 GB per conduct run.
 | Negative-MC share at own η, B0–B65: V2 | 0.067–0.087 | 0.054–0.081 |
 
 The run script `run_all.sh` covers the paper's T2 and A5 columns and V2 as first sent. The other rows need the two extra inputs and are run with the commands in the table in section 3.
+
+## Sections 2 and 3 of the report (refined family ID and the recommended sample)
+
+`sc_family_refined.py` builds the refined family ID from `firm_f` in the index CSV and writes `family_transitions.csv` (every transition and its rule) and `family_real_switches_table2.csv` (the 50 excluded funds).
+
+All runs set `SC_FAMILY=refined SC_DONORS=csv SC_CHEAP=csv` plus the two extra inputs (`SC_SOURCE`, `SC_DANNY`). Sample switches: `SC_PURE=1 SC_RULE=all SC_NOSWITCH=1` drops the real switchers (the recommended sample); `SC_RULE=bd` adds the B/D flag; `SC_RULE=narrow` adds the Lipper exclusions; `SC_DROPQ4=1` drops the top entry-fee quartile.
+
+- T2 and A5: `SC_ONLY=index,pooled,wavg python sc_t2a5_nova_grid.py` (paper's exclusion) and `SC_ONLY=lipper6,pooled,wavg` (broad-asset-class exclusion).
+- V2: `SC_GRID=agg python sc_v2_robust.py`.
+
+Our outputs are in `our_outputs/sc_refined_family/`, one set of files per sample: `all_noswitch0` (VA dropped), `all_noswitch1` (recommended), `B_noq4`, `bd_noswitch1`, `narrow_noswitch1`.

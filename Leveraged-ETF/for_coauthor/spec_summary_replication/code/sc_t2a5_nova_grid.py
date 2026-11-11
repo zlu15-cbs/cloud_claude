@@ -40,6 +40,10 @@ def main():
     src = pd.read_csv(SOURCE, usecols=['crsp_fundno', 'month', 'index', 'exp_ratio', 'fund_name', 'mgmt_cd', 'L1_mtna1'])
     src = src.rename(columns={'crsp_fundno': 'product_j', 'month': 'month_t', 'index': 'market_m_index', 'exp_ratio': 'product_exp_ratio',
                               'fund_name': 'product_fund_name', 'mgmt_cd': 'firm_f_old', 'L1_mtna1': 'product_L1_mtna'})
+    if os.environ.get('SC_FAMILY'):   # coarser family definition (see sc_q4.remap_family)
+        from sc_q4 import remap_family
+        src['firm_f_old'] = remap_family(src, os.environ['SC_FAMILY'])
+        print('family definition:', os.environ['SC_FAMILY'], '| distinct families', src.firm_f_old.nunique(), '| funds with more than one family', int((src.dropna(subset=['firm_f_old']).groupby('product_j').firm_f_old.nunique() > 1).sum()), flush=True)
     src['market_m_cluster'] = np.nan
     crsp = pd.read_csv(CRSP, usecols=['crsp_fundno', 'fund_name', 'lipper_class', 'crsp_obj_cd', 'et_flag'], encoding='latin-1', dtype=str)
     crsp['crsp_fundno'] = crsp.crsp_fundno.astype(float).astype(int)
@@ -60,9 +64,20 @@ def main():
     dn = pd.read_csv(f'{DANNY}/classified_donors.csv', usecols=['fund_id', 'month_key', 'category10', 'category20'])
     raw = raw.merge(dn.rename(columns={'fund_id': 'product_j', 'month_key': 'mk', 'category10': 'cat10', 'category20': 'cat20'}), on=['product_j', 'mk'], how='left')
     raw['index'] = raw.market_m_index.fillna('_none_' + raw.product_j.astype(str))
+    if os.environ.get('SC_DONORS') == 'csv':   # donors only from fund-months that are in the index CSV (no fill of the family ID needed)
+        keys = pd.read_csv(CSVP, usecols=['product_j', 'month_t'])
+        keys['mk'] = np.round(keys.month_t * 12).astype(int)
+        raw = raw.merge(keys[['product_j', 'mk']].drop_duplicates().assign(in_csv=True), on=['product_j', 'mk'], how='left')
+        raw = raw[raw.in_csv == True].reset_index(drop=True)
+        print(f'donors restricted to the index CSV: {len(raw):,} fund-months', flush=True)
     print(f'donor pool: {len(raw):,} source fund-months with a fee', flush=True)
 
     DROPQ4 = os.environ.get('SC_DROPQ4') == '1'   # drop the funds in the top entry-fee quartile from the sample
+    if os.environ.get('SC_PURE') == '1':   # keep only funds that CRSP flags B or D (index-based or pure index) in most quarters
+        from sc_q4 import pure_index_funds
+        keepp = d.product_ids.isin(pure_index_funds(d.product_ids)).to_numpy()
+        print(f'index-fund restriction ({os.environ.get("SC_RULE", "bd")}), dropped: {int((nova & ~keepp).sum()):,} fund-months, {d.loc[nova & ~keepp, "product_ids"].nunique()} funds', flush=True)
+        nova = nova & keepp
     if DROPQ4:
         from sc_q4 import entry_quartile
         keep = (d.product_ids.map(entry_quartile()) < 4).to_numpy()
@@ -89,7 +104,7 @@ def main():
                                   f'{model}_avg_e': o['avg_e'], f'{model}_t5': int((t5.own_elasticity < -1).sum())})
                         if zs:
                             r.update(A5_xbroad=o['b_broad'], A5_xbroad_se=o['se_broad'])
-                        if only and sample == 'no VA' and not DROPQ4:
+                        if only and sample == 'no VA' and not DROPQ4 and not os.environ.get('SC_FAMILY') and not os.environ.get('SC_PURE') and not os.environ.get('SC_DONORS'):
                             sup = dd0[base]
                             np.save(f'{CACHE}/alpha_{model}alt.npy', np.full(len(sup), b['prices']) + sum(b[f'px_{z}'] * sup[z].to_numpy() for z in zs))
                             np.save(f'{CACHE}/rows_{model}alt.npy', np.flatnonzero(base))

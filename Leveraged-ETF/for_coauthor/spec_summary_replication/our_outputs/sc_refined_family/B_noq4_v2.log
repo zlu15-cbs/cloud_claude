@@ -1,0 +1,32 @@
+index-fund restriction (all), dropped: 3,466 fund-months, 64 funds
+top entry-fee quartile dropped: 2,898 fund-months, 56 funds
+family definition: refined | distinct families 355 | funds with more than one family 300
+ETF flag, CSV rule vs CRSP et_flag: differs on 11,165 source fund-months, 110 funds (14 in Table 2)
+cheap classified from 2005: funds in the cross-section in January 2005: 925
+source panel: the fee in a fund's first month is not observed (imputed or backfilled) for 0.297 of funds
+cheap indicator: funds in both 5,532; agree 0.948; cheap share of funds csv 0.192, source 0.181; first CSV month is later than the first source month for 1.000 of funds (median gap 6 months)
+cutoff 15%: January 2005 cutoff source 0.200 (925 funds, 22 exactly at it) | CSV 0.183 (790 funds, 0 exactly at it) | Table 2 funds whose status differs 46 (cheap only on source 36, only on CSV 10)
+cutoff 20%: January 2005 cutoff source 0.250 (925 funds, 36 exactly at it) | CSV 0.230 (790 funds, 6 exactly at it) | Table 2 funds whose status differs 45 (cheap only on source 35, only on CSV 10)
+cutoff 25%: January 2005 cutoff source 0.270 (925 funds, 4 exactly at it) | CSV 0.260 (790 funds, 18 exactly at it) | Table 2 funds whose status differs 23 (cheap only on source 9, only on CSV 14)
+entry-fee rank, Table 2 funds: correlation source vs CSV 0.991; mean abs difference 0.019; quartile differs for 88 of 1302 funds; fund-month shares by source quartile {1.0: 0.516, 2.0: 0.283, 3.0: 0.173, 4.0: 0.028}
+funds without an observed-fee entry month (CSV indicator used): 100
+cheap (source, observed fees): share of Table 2 fund-months 0.462; differs from csv on 4,018 fund-months, 47 funds
+Table 2 fund-months: cheap csv 0.447, source 0.433; differ on 8,166 fund-months, 98 funds (csv-cheap only 55, source-cheap only 43)
+share types of Table 2 fund-months: {'csv': {'etf': 55777, 'inst': 26154, 'retail': 21295, 'mf_other': 4637}, 'crsp': {'etf': 54875, 'inst': 26870, 'retail': 21481, 'mf_other': 4637}, 'danny': {'etf': 54875, 'inst': 27101, 'retail': 25887}}
+Table 2 fund-months, Lipper-6 class (rows) by category10 (columns):
+cat10        -1      1      2     3      4     5     6    7     8     9    10
+asset_class                                                                  
+allocation    88      0    924     0      0     0   207    0  4942     0    0
+bond           0      0      0     0      0  5442  3407  557  8202     0    3
+intl_equity    3      0  15065  5393   1290     0     0    0    18     0  243
+other          0     88      0     0    216     0     0    0     6     0  228
+real_asset     0      0      0     0   3277     0     0    0     0  1451    0
+us_equity    105  45546    165     0  10417     0     0    0   411    60  109
+V2: median, same share type                                N 92,621 | non-cheap -9.719 (0.872) | x cheap -25.935 (1.300) | F 303 | e>0 0.000 | T5 11/15 | neg MC 0.001-0.022 (no VA 0.001-0.024) | min MC -0.07 | Vanguard 0.00
+lag-AUM-weighted mean, same share type                     N 92,621 | non-cheap -7.807 (0.616) | x cheap -23.269 (0.966) | F 469 | e>0 0.000 | T5 7/15 | neg MC 0.015-0.059 (no VA 0.014-0.062) | min MC -0.11 | Vanguard 0.02
+unweighted mean, same share type                           N 92,621 | non-cheap -5.299 (0.849) | x cheap -20.667 (1.329) | F 264 | e>0 0.000 | T5 7/15 | neg MC 0.062-0.190 (no VA 0.065-0.177) | min MC -0.19 | Vanguard 0.13
+median, share types pooled                                 N 93,793 | non-cheap -8.684 (2.557) | x cheap -28.131 (2.497) | F 21 | e>0 0.000 | T5 11/15 | neg MC 0.007-0.034 (no VA 0.006-0.037) | min MC -0.08 | Vanguard 0.00
+lag-AUM-weighted mean, share types pooled                  N 93,793 | non-cheap -9.790 (1.518) | x cheap -26.764 (1.548) | F 110 | e>0 0.000 | T5 11/15 | neg MC 0.001-0.019 (no VA 0.001-0.021) | min MC -0.07 | Vanguard 0.00
+25th pct: median, same share type                          N 92,621 | non-cheap -4.378 (0.535) | x cheap -15.349 (0.479) | F 514 | e>0 0.000 | T5 6/15 | neg MC 0.040-0.200 (no VA 0.041-0.160) | min MC -0.22 | Vanguard 0.07
+25th pct: lag-AUM-weighted mean, same share type           N 92,621 | non-cheap -2.892 (0.415) | x cheap -14.355 (0.474) | F 586 | e>0 0.000 | T5 6/15 | neg MC 0.106-0.359 (no VA 0.101-0.356) | min MC -0.37 | Vanguard 0.16
+25th pct: lag-AUM-weighted mean, share types pooled        N 93,793 | non-cheap -2.426 (1.199) | x cheap -17.869 (0.611) | F 150 | e>0 0.000 | T5 6/15 | neg MC 0.160-0.428 (no VA 0.147-0.431) | min MC -0.43 | Vanguard 0.11

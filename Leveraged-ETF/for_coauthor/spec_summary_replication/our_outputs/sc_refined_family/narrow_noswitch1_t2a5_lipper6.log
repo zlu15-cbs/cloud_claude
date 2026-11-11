@@ -1,0 +1,6 @@
+family definition: refined | distinct families 355 | funds with more than one family 300
+donors restricted to the index CSV: 579,632 fund-months
+donor pool: 579,632 source fund-months with a fee
+index-fund restriction (narrow), dropped: 12,623 fund-months, 207 funds
+lipper6  pooled    wavg no VA                  N  87,051 | T2  -7.59 (1.28) F    74 e>0 0.00 T5 2 negMC 0.39-0.48 | A5  -8.99 (1.52) x broad  -4.39 F    95 e>0 0.00 T5 2 negMC 0.17-0.28
+lipper6  pooled    wavg no VA, no money market N  87,051 | T2  -7.59 (1.28) F    74 e>0 0.00 T5 2 | A5  -8.99 (1.52) x broad  -4.39 F    95 e>0 0.00 T5 2

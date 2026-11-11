@@ -1,0 +1,79 @@
+transitions in Danny's ID by rule (pairs / funds):
+               pairs  funds
+rule                       
+alias             40    312
+artifact_back      7     15
+artifact_fwd      26     54
+real              48    299
+funds in the index CSV with more than one family: Danny's ID 586, refined 282; distinct families 257 -> 217
+
+Table 2 without VA funds, 2010-2024: funds with a real acquisition or transfer 50 (of 1190); fund-months 3,214; asset share 0.0060
+                                                                   funds    first     last
+family_from                          family_to                                            
+Guggenheim Investments               Invesco                          13  2018.25  2018.75
+DB Commodity Services                Invesco                          11  2010.50  2015.00
+Morgan Stanley Investment Management Invesco                           4  2010.25  2010.25
+USAA Asset Management Company        Victory Capital Management        4  2023.25  2023.25
+OppenheimerFunds                     Invesco                           4  2019.25  2019.25
+Compass Efficient Model Portfolios   Victory Capital Management        3  2015.25  2015.25
+ETF Securities                       abrdn                             3  2021.50  2021.50
+Evergreen Investment Management      Allspring                         2  2010.50  2010.50
+U.S. Bancorp Asset Management        Nuveen                            2  2010.50  2010.50
+GE Asset Management                  State Street Global Advisors      2  2020.50  2020.50
+Lattice Strategies                   Hartford Funds                    1  2018.75  2018.75
+Recon Capital Advisors               Global X                          1  2018.75  2018.75
+                                                                                                        name                          family_from                    family_to  month_t  months     aum
+                                                                 GE RSP Program Funds: GE RSP US Equity Fund                  GE Asset Management State Street Global Advisors  2020.50      89 5119.60
+                                                        Global X Funds: Global X NASDAQ 100 Covered Call ETF               Recon Capital Advisors                     Global X  2018.75      53 5119.42
+                                                                    Invesco DB Commodity Index Tracking Fund                DB Commodity Services                      Invesco  2015.00     162 3460.20
+                                               Victory Portfolios III: Victory 500 Index Fund; Reward Shares        USAA Asset Management Company   Victory Capital Management  2023.25     166 3451.61
+                                               Victory Portfolios III: Victory 500 Index Fund; Member Shares        USAA Asset Management Company   Victory Capital Management  2023.25     166 3030.42
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2025 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      27 2645.66
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2024 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      51 2530.94
+                                                                    GE RSP Program Funds: GE RSP Income Fund                  GE Asset Management State Street Global Advisors  2020.50     104 2485.79
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco Russell 1000 Dynamic Multifactor ETF                     OppenheimerFunds                      Invesco  2019.25      63 2366.40
+                                                    Invesco Exchange-Traded Fund Trust II: Invesco Solar ETF               Guggenheim Investments                      Invesco  2018.25      46 2186.78
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2026 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      23 2129.31
+AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco Equally-Weighted S&P 500 Fund; Cl Y Shs Morgan Stanley Investment Management                      Invesco  2010.25     138 2122.21
+                                    Victory Portfolios III: Victory Nasdaq-100 Index Fund; Fund Shares Class        USAA Asset Management Company   Victory Capital Management  2023.25     142 2047.75
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2023 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      48 1914.42
+AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco Equally-Weighted S&P 500 Fund; Cl A Shs Morgan Stanley Investment Management                      Invesco  2010.25     166 1869.14
+                                Lattice Strategies Trust: Hartford Multifactor Developed Markets (ex-US) ETF                   Lattice Strategies               Hartford Funds  2018.75      63 1802.39
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2022 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      52 1707.21
+                                          Invesco Exchange-Traded Fund Trust II: Invesco S&P 500 Revenue ETF                     OppenheimerFunds                      Invesco  2019.25      48 1589.02
+                                                        abrdn Gold ETF Trust: abrdn Physical Gold Shares ETF                       ETF Securities                        abrdn  2021.50     163 1587.85
+                                 Wells Fargo Funds Trust: Wells Fargo Index Fund; Administrator Class Shares      Evergreen Investment Management                    Allspring  2010.50      97 1574.38
+                                        Invesco DB Multi-Sector Commodity Trust: Invesco DB Agriculture Fund                DB Commodity Services                      Invesco  2015.00     101 1549.58
+                         Victory Portfolios II: VictoryShares US EQ Income Enhanced Volatility Wtd Index ETF   Compass Efficient Model Portfolios   Victory Capital Management  2015.25      26 1547.08
+                               Invesco Exchange-Traded Fund Trust II: Invesco S&P Ultra Dividend Revenue ETF                     OppenheimerFunds                      Invesco  2019.25      20 1461.02
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2021 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      53 1384.56
+                                 Invesco Exchange-Traded Fund Trust II: Invesco S&P SmallCap 600 Revenue ETF                     OppenheimerFunds                      Invesco  2019.25      11 1379.50
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2020 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      55 1210.50
+                                   Invesco DB US Dollar Index Trust: Invesco DB US Dollar Index Bullish Fund                DB Commodity Services                      Invesco  2015.00      97 1092.96
+AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco Equally-Weighted S&P 500 Fund; Cl C Shs Morgan Stanley Investment Management                      Invesco  2010.25      66  982.87
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2019 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      43  958.64
+                               Victory Portfolios II: VictoryShares US 500 Enhanced Volatility Wtd Index ETF   Compass Efficient Model Portfolios   Victory Capital Management  2015.25      16  934.75
+                                        Victory Portfolios II: VictoryShares US 500 Volatility Wtd Index ETF   Compass Efficient Model Portfolios   Victory Capital Management  2015.25       2  900.55
+     AIM Counselor Series Trust (Invesco Counselor Series Trust): Invesco S&P 500 Index Fund; Class A Shares Morgan Stanley Investment Management                      Invesco  2010.25     166  852.27
+               Invesco Exchange-Traded Self-Indexed Fund Trust: Invesco BulletShares 2018 Corporate Bond ETF               Guggenheim Investments                      Invesco  2018.25      45  809.19
+                            PowerShares Exchange-Traded Fund Trust: PowerShares Multi-Asset Income Portfolio               Guggenheim Investments                      Invesco  2018.50      70  751.58
+                                                    Claymore Exchange-Traded Fund Trust: Guggenheim BRIC ETF               Guggenheim Investments                      Invesco  2018.75      35  656.78
+                                      Nuveen Investment Funds, Inc: Nuveen Equity Index Fund; Class I Shares        U.S. Bancorp Asset Management                       Nuveen  2010.50      67  587.35
+                                        PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Oil Fund                DB Commodity Services                      Invesco  2015.00      54  556.91
+                                                         USAA Mutual Funds Trust: Extended Market Index Fund        USAA Asset Management Company   Victory Capital Management  2023.25     100  555.60
+                                                    abrdn Silver ETF Trust: abrdn Physical Silver Shares ETF                       ETF Securities                        abrdn  2021.50      38  545.81
+                                                        ETFS Palladium Trust: ETFS Physical Palladium Shares                       ETF Securities                        abrdn  2021.50      35  503.53
+                                             Wells Fargo Funds Trust: Wells Fargo Index Fund; Class A Shares      Evergreen Investment Management                    Allspring  2010.50      83  487.27
+                                PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Base Metals Fund                DB Commodity Services                      Invesco  2015.00      36  434.35
+                            PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Precious Metals Fund                DB Commodity Services                      Invesco  2015.00      34  399.23
+                                       PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Gold Fund                DB Commodity Services                      Invesco  2015.00      31  371.92
+                                     PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Silver Fund                DB Commodity Services                      Invesco  2015.00       4  370.55
+                                                                    PowerShares DB G10 Currency Harvest Fund                DB Commodity Services                      Invesco  2015.00      37  348.35
+                                     PowerShares DB Multi-Sector Commodity Trust: PowerShares DB Energy Fund                DB Commodity Services                      Invesco  2015.00       8  308.99
+                                Claymore Exchange-Traded Fund Trust 2: Guggenheim S&P Global Water Index ETF               Guggenheim Investments                      Invesco  2018.25       7  234.11
+                           PowerShares DB US Dollar Index Trust: PowerShares DB US Dollar Index Bearish Fund                DB Commodity Services                      Invesco  2010.50       3  226.80
+                                    First American Investment Funds, Inc: Mid Cap Index Fund; Class Y Shares        U.S. Bancorp Asset Management                       Nuveen  2010.50       4  194.68
+SPY: PDR Services -> State Street Global Advisors  =>  State Street Global Advisors
+QQQ: Invesco  =>  Invesco
+iShares Silver: BlackRock  =>  BlackRock
+DB Commodity: DB Commodity Services -> Invesco  =>  DB Commodity Services -> Invesco
