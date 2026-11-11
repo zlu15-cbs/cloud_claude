@@ -1,0 +1,24 @@
+ETF flag, CSV rule vs CRSP et_flag: differs on 11,165 source fund-months, 110 funds (14 in Table 2)
+cheap classified from 2005: funds in the cross-section in January 2005: 925
+source panel: the fee in a fund's first month is not observed (imputed or backfilled) for 0.297 of funds
+cheap indicator: funds in both 5,532; agree 0.948; cheap share of funds csv 0.192, source 0.181; first CSV month is later than the first source month for 1.000 of funds (median gap 6 months)
+funds without an observed-fee entry month (CSV indicator used): 100
+cheap (source, observed fees): share of Table 2 fund-months 0.462; differs from csv on 4,018 fund-months, 47 funds
+Table 2 fund-months: cheap csv 0.447, source 0.433; differ on 8,166 fund-months, 98 funds (csv-cheap only 55, source-cheap only 43)
+share types of Table 2 fund-months: {'csv': {'etf': 55777, 'inst': 26154, 'retail': 21295, 'mf_other': 4637}, 'crsp': {'etf': 54875, 'inst': 26870, 'retail': 21481, 'mf_other': 4637}, 'danny': {'etf': 54875, 'inst': 27101, 'retail': 25887}}
+Table 2 fund-months, Lipper-6 class (rows) by category10 (columns):
+cat10        -1      1      2     3      4     5     6    7     8     9    10
+asset_class                                                                  
+allocation    88      0    924     0      0     0   207    0  4942     0    0
+bond           0      0      0     0      0  5442  3407  557  8202     0    3
+intl_equity    3      0  15065  5393   1290     0     0    0    18     0  243
+other          0     88      0     0    216     0     0    0     6     0  228
+real_asset     0      0      0     0   3277     0     0    0     0  1451    0
+us_equity    105  45546    165     0  10417     0     0    0   411    60  109
+V2 (cheap classified from 2005, 20th percentile)           N 96,069 | non-cheap -3.385 (0.541) | x cheap -20.059 (0.784) | F 177 | e>0 0.000 | T5 5/15 | neg MC 0.067-0.087 (no VA 0.054-0.081) | min MC -0.23 | Vanguard 0.15
+cutoff 15th percentile                                     N 96,069 | non-cheap -7.527 (0.880) | x cheap -29.120 (1.972) | F 128 | e>0 0.000 | T5 11/15 | neg MC 0.000-0.001 (no VA 0.000-0.000) | min MC -0.03 | Vanguard 0.00
+cutoff 25th percentile                                     N 96,069 | non-cheap -3.967 (0.607) | x cheap -17.409 (0.840) | F 144 | e>0 0.000 | T5 7/15 | neg MC 0.018-0.026 (no VA 0.010-0.021) | min MC -0.14 | Vanguard 0.04
+donors from the source panel                               N 96,224 | non-cheap -2.993 (0.544) | x cheap -19.031 (0.771) | F 179 | e>0 0.000 | T5 5/15 | neg MC 0.092-0.107 (no VA 0.083-0.102) | min MC -0.28 | Vanguard 0.17
+cheap classified from 1993 (the source panel's first month) N 96,069 | non-cheap -2.010 (0.412) | x cheap -20.542 (0.576) | F 278 | e>0 0.000 | T5 4/15 | neg MC 0.221-0.321 (no VA 0.212-0.289) | min MC -0.50 | Vanguard 0.24
+cheap from the index CSV (V2 as first sent to Danny)       N 96,069 | non-cheap -3.642 (0.419) | x cheap -20.562 (0.646) | F 316 | e>0 0.000 | T5 5/15 | neg MC 0.053-0.082 (no VA 0.041-0.073) | min MC -0.21 | Vanguard 0.13
+category10 exclusion                                       N 95,912 | non-cheap 1.562 (0.751) | x cheap -16.007 (0.643) | F 213 | e>0 0.513 | T5 3/15 | neg MC 0.000-0.000 (no VA 0.000-0.000) | min MC 0.06 | Vanguard 0.00

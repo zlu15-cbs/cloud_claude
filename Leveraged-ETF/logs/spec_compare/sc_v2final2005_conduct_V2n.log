@@ -1,0 +1,2 @@
+[   430s] V2n conduct [A: eta 0.024] main: ['PC (1.00)', 'B50 (0.11)', 'B65 (0.74)'] | rival2 x bab_usa: ['PC (1.00)'] | rival2 x fmax: ['PC (1.00)'] | rival2 x rotator: ['PC (1.00)'] | rival2 x csent_income3: ['PC (1.00)', 'B50 (0.16)', 'B65 (0.82)'] | rival3 x csent_index: ['PC (1.00)']
+[   430s]    main IV: PC p 1.000 T vs B65 -0.33 | B0 p 0.000 T vs B65 2.56 | B25 p 0.000 T vs B65 1.91 | B50 p 0.105 T vs B65 1.17 | B65 p 0.744 T vs B65 nan | min F 138
