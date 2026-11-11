@@ -62,7 +62,49 @@
 | T2 negative-MC share, B0, η = 0: Danny's 0.5156 | **0.516** |
 | Scale under PC: Danny's 0.0205 (0.0051) | **0.0205 (0.0051)** |
 
-## 1. Gene's proposal: exclude the variable-annuity funds from the sample
+## 1. What V2 is, next to T2 and A5
+
+V2 is not in the current paper. All three models are logit demand estimated by IV, with the same dependent variable, controls, fixed effects and clustering. They differ in the price interaction, the instrument and the rows used.
+
+    T2:  ln s_jt − ln s_0t = α p_jt                               + β1 |TE_jt| + β2 R_jt + β3 ln Age_jt + μ_j + τ_t + ξ_jt
+    A5:  ln s_jt − ln s_0t = α p_jt + α_b (p_jt × broad_j)        + (the same)
+    V2:  ln s_jt − ln s_0t = α p_jt + α_c (p_jt × cheap_j)        + (the same)
+
+p is the expense ratio in percent, TE the tracking error, R the past one-year return, μ_j fund (share-class) effects and τ_t month effects. Standard errors are clustered by month.
+
+| Element | T2 (paper Table 2 col 2) | A5 (paper Table A7 col 2) | V2 |
+|---|---|---|---|
+| Price interaction | none | broad-based | cheap |
+| Indicator | – | the paper's `broad_specialized` = "broad-based"; 53% of fund-months | `gene_idx`: the fund's expense ratio in its first month in the index CSV is at or below the 20th percentile of that month's expense ratios across all funds in the CSV. Fixed per fund; 47% of estimation fund-months |
+| Own-price slope | α for every fund | α (specialized), α + α_b (broad-based) | α (non-cheap), α + α_c (cheap) |
+| Instrument | the paper's `BLP_IV_hausman_exp_ratio` (IV0) | IV0 and IV0 × broad | Z and Z × cheap |
+| Donor funds: family | same `firm_f_old`; funds with a blank code are treated as one family | same as T2 | same `firm_f_old`; funds with a blank code get no instrument |
+| Donor funds: what is excluded | funds tracking the same index | same as T2 | funds in the same asset class (six classes from CRSP's Lipper class: US equity, international equity, bond, allocation, real asset, other) |
+| Donor funds: share type | any | any | the same type as the fund (ETF, institutional or retail, from `ETF_ind` and CRSP's `inst_fund` and `retail_fund` flags) |
+| Donor funds: aggregation | mean fee weighted by lagged AUM | same as T2 | unweighted median fee, same month |
+| Donor pool | every fund in the source panel that month | same as T2 | every fund in the index CSV that month, including funds outside the Table 2 sample; money market funds removed |
+| Money market funds (4 funds, 437 fund-months) | in the sample | in the sample | dropped from the sample and from the donors |
+| Rows used to estimate demand | 108,300 | 108,300 | 96,069 |
+| Supply-side rows | 108,300 | 108,300 | 107,863 |
+
+**Why V2 uses 96,069 rows.** A row enters the demand estimation only if Z is defined for it. The other rows stay in the market shares, the outside good and the supply side.
+
+| Rows | Fund-months |
+|---|---|
+| Table 2 Panel A sample | 108,300 |
+| minus the 4 money market funds | 107,863 |
+| minus variable-annuity funds (no family code) | −7,771 |
+| minus rows whose family has no fund in another asset class that month | −2,533 |
+| minus rows whose family has such funds, but none of the same share type | −1,490 |
+| **V2 demand estimation rows** | **96,069** |
+
+**Reading.**
+- **V2 changes three things relative to T2:** a cheap interaction, a stricter instrument (other asset class, same share type, median), and a sample without money market funds and without rows that lack a family instrument.
+- **A5 changes one thing relative to T2:** the broad-based interaction. Its instrument and sample are T2's.
+- **The modified T2 (column 2) changes only the instrument's exclusion:** donors must also be outside the fund's asset class. Share types stay pooled and the lag-AUM weights stay.
+- **Full definitions and code for V2:** `for_coauthor/V2_replication/NOTE_V2_replication.md` and `replicate_V2.py`.
+
+## 2. Gene's proposal: exclude the variable-annuity funds from the sample
 
 **Who they are.**
 - The 7,771 fund-months without a family code (`firm_f_old`) are all variable-annuity funds, and there are no other variable-annuity funds in the sample.
@@ -72,7 +114,7 @@
 
 **Why exclude them.**
 - **They are not bought in the open market.** These funds are chosen from an insurer's menu inside a contract, so the expense ratio is not the price the investor trades off against other index funds.
-- **Their fee data are not reliable, which is the harder reason.** In 85% of firm-months every variable-annuity fund of a firm has the same expense ratio in the CSV. Neither the price nor any family instrument is reliable for them (section 6).
+- **Their fee data are not reliable, which is the harder reason.** In 85% of firm-months every variable-annuity fund of a firm has the same expense ratio in the CSV. Neither the price nor any family instrument is reliable for them (section 7).
 - **Their instrument in the paper is not a family instrument.** CRSP has no management code for them, so their family code is blank, and blank codes match one another in IV0. Their donors are other insurers' funds.
 
 **What each treatment gives for Table 2 col 2** (`sc_blank_family_check.log`).
@@ -85,9 +127,9 @@
 
 **Reading.**
 - **The paper's coefficient exists only under the first treatment.** Each of the two alternatives removes the negative slope.
-- **Excluding them is the cleaner choice,** because the true-family version rests on the fee data described in section 6.
+- **Excluding them is the cleaner choice,** because the true-family version rests on the fee data described in section 7.
 
-## 2. Demand with and without the variable-annuity funds: T2 and A5 change sign
+## 3. Demand with and without the variable-annuity funds: T2 and A5 change sign
 
 | # | Specification | Sample | N | Price (SE) | Interaction (SE) | Min F | e > 0 | Avg e | Table 5 e < −1 |
 |---|---|---|---|---|---|---|---|---|---|
@@ -104,7 +146,7 @@
 - **The stricter exclusion keeps its sign but loses 60% of its size** (−9.1 to −3.5).
 - **V2 is unchanged by construction.** Rows without a family code have no Z, so they were never in its estimation. Dropping them changes only the outside share, which the month effects absorb.
 
-## 3. Scale η by conduct candidate: insensitive to demand, slightly higher without the variable-annuity funds
+## 4. Scale η by conduct candidate: insensitive to demand, slightly higher without the variable-annuity funds
 
 | # | Sample | PC | B0 | B25 | B50 | B65 |
 |---|---|---|---|---|---|---|
@@ -119,7 +161,7 @@
 - **η does not depend on the demand model or the conduct candidate.** Within a sample the spread is 0.001.
 - **The sample moves it more:** 0.021 with the variable-annuity funds and 0.024 without. The difference is about half a standard error.
 
-## 4. Negative marginal costs: the modified T2's good result depends on the variable-annuity funds; V2's does not
+## 5. Negative marginal costs: the modified T2's good result depends on the variable-annuity funds; V2's does not
 
 Monthly-mean share of fund-months with MC < 0, B0 → B65. PC is 0 in every row.
 
@@ -152,7 +194,7 @@ Monthly-mean share of fund-months with MC < 0, B0 → B65. PC is 0 in every row.
 - **V2's negatives stay on non-cheap funds,** with Vanguard at 10% to 16%. Securities lending cannot explain those, so the location caveat remains.
 - **T2 and A5 without the variable-annuity funds are not shown.** Their markups are negative for 100% and 49% of fund-months.
 
-## 5. Conduct test: B0 and B25 are rejected throughout; the weight on B65 rises without the variable-annuity funds
+## 6. Conduct test: B0 and B25 are rejected throughout; the weight on B65 rises without the variable-annuity funds
 
 Selected sets (MCS p ≥ 0.05), η scheme A (0.024); MCS p-values in brackets.
 
@@ -172,7 +214,7 @@ Schemes B (own η), C (PC η) and A with markups capped 1/99 by year give the sa
 - **Without the variable-annuity funds, B65 becomes the best-fitting model under V2** (MCS p of 1.00, with PC at 0.52). With them, PC fits best. The two are not separable in either sample.
 - **This is reported, not used to choose.** The demand criteria come first.
 
-## 6. The fee data for the variable-annuity funds, and a question for Danny
+## 7. The fee data for the variable-annuity funds, and a question for Danny
 
 **Why a result with their true families is not trustworthy either.** Rebuilding the instrument for these funds with their true families gives a Table 2 coefficient of about −0.3 (section 1). On those rows the rebuilt instrument tracks each fund's own fee almost one for one (first-stage F in the thousands). The cause is the fee data (`sc_blank_family_check.log`):
 
