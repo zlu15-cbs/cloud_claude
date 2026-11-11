@@ -1,0 +1,120 @@
+1. Funds by entry-fee quartile: the whole index CSV in 2010-2024, and the Table 2 sample
+     csv_funds  csv_fund_months  median_assets_m  share_fund_months_above_size_cut  prefer_1to5  table2_funds  table2_fund_months
+q                                                                                                                                
+1.0       1198           115408            825.3                             0.538        0.894           559               53156
+2.0       1346           116262            228.8                             0.313        0.896           388               32147
+3.0       1323           119279            132.1                             0.210        0.811           282               19487
+4.0       1096            75482             20.0                             0.062        0.761            73                3510
+size cut: market share >= 0.0001, i.e. assets of about 709 million (median month)
+
+2. Family-code changes within a fund (Table 2 sample)
+  firm_f_old: 720 of 1302 funds have more than one value; by entry-fee quartile {1.0: 389, 2.0: 210, 3.0: 106, 4.0: 15}; fund-months of those funds 81,719
+  firm_ids: 50 of 1302 funds have more than one value; by entry-fee quartile {1.0: 10, 2.0: 19, 3.0: 14, 4.0: 7}; fund-months of those funds 4,493
+  source panel: distinct mgmt_cd 555 | distinct fund_family 555 | mgmt_cd == fund_family on 1.0 of rows
+  parent firms (firm_ids) in Table 2: 90 | family codes (firm_f_old): 131 | family codes per parent firm (mean): 1.47
+  top-quartile funds with a family-code change:
+                                                                                          name                     codes                                    firms
+product_ids                                                                                                                                                      
+16393                                                    iShares, Inc: iShares MSCI Taiwan ETF         BZW -> BLK -> AHB                                BlackRock
+24698                                                 Invesco DB Commodity Index Tracking Fund         DBC -> ICA -> AIM         DB Commodity Services -> Invesco
+24773                     Invesco DB Multi-Sector Commodity Trust: Invesco DB Agriculture Fund  DBC -> PWR -> ICA -> AIM         DB Commodity Services -> Invesco
+27248                        Russell Investment Company: Emerging Markets Fund; Class S Shares                RUS -> BPO                      Russell Investments
+36970                                         WisdomTree Trust: WisdomTree India Earnings Fund                WTA -> BXS                               WisdomTree
+41912         Russell Investment Company: International Developed Markets Fund; Class S Shares                RUS -> BPO                      Russell Investments
+42271                           Russell Investment Company: Global Equity Fund; Class Y Shares                RUS -> BPO                      Russell Investments
+47628                                                      iShares Trust: iShares India 50 ETF                BZW -> BLK                                BlackRock
+55982                     Russell Investment Company: US Strategic Equity Fund; Class S Shares                RUS -> BPO                      Russell Investments
+59412            Exchange Traded Concepts Trust: ROBO Global Robotics and Automation Index ETF                FTH -> RBG  Exchange Traded Concepts -> ROBO Global
+59541                              DBX ETF Trust: Xtrackers Harvest CSI 300 China A-Shares ETF                DBX -> ARV            DBX Strategic Advisors -> DWS
+64252        Russell Investment Company: Tax-Managed International Equity Fund; Class S Shares                RUS -> BPO                      Russell Investments
+64937                                             iShares Trust: iShares MSCI Saudi Arabia ETF                BLK -> AHB                                BlackRock
+88613                          Global X Funds: Global X Robotics & Artificial Intelligence ETF                GLX -> AXN                                 Global X
+94470          Morningstar Funds Trust: Morningstar US Equity Fund; Institutional Class Shares                MRI -> MRN        Morningstar Investment Management
+  months with a family-code change: 895; mean |change in instrument| in those months 0.020 vs 0.0025 otherwise; mean |change in fee| 0.0031 vs 0.0010
+  months in which the instrument moves by more than 0.15: 64 (45 funds); of these with a family-code change 15; with a fee change above 0.02: 15
+
+3. CRSP index_fund_flag (B index-based, D pure index, E enhanced index) for Table 2 funds
+      funds  fund_months  aum_share  mean_fee  median_turnover    etf     va
+flag                                                                        
+B       170         9905      0.038     0.366            0.170  0.400  0.053
+D      1036        92454      0.945     0.297            0.167  0.535  0.086
+E        25         1552      0.002     0.531            0.960  0.360  0.240
+none     71         4389      0.014     0.598            0.350  0.000  0.113
+flag by entry-fee quartile (funds):
+flag   B    D   E  none
+q                      
+1.0   60  474   0    25
+2.0   52  306  17    13
+3.0   46  215   4    17
+4.0   12   41   4    16
+funds whose flag is not constant over time: 476 {'D': 643, 'BD': 458, 'B': 102, '': 71, 'BE': 11, 'E': 10, 'BDE': 7}
+  name contains "PIMCO": 5 funds; flags {'E': 3, 'B': 2}; objective codes {'EFRM': 1, 'ICQY': 1, 'I': 1, 'EDYG': 1}
+  name contains "Russell Investment": 39 funds; flags {'none': 39}; objective codes {'EDYG': 12, 'EF': 9, 'M': 4, 'EDYB': 4}
+  name contains "DB Commodity": 1 funds; flags {'D': 1}; objective codes {'EDSC': 1}
+  name contains "DB Agric": 1 funds; flags {'D': 1}; objective codes {'EDSC': 1}
+  name contains "SPDR S&P 500 ETF": 1 funds; flags {'D': 1}; objective codes {'EDCL': 1}
+  name contains "Vanguard 500 Index": 5 funds; flags {'D': 5}; objective codes {'EDCL': 5}
+  name contains "iShares MSCI Taiwan": 1 funds; flags {'D': 1}; objective codes {'EFRQ': 1}
+  name contains "Covered Call": 2 funds; flags {'D': 2}; objective codes {'EDYH': 2}
+  name contains "Dimensional": 8 funds; flags {'B': 7, 'D': 1}; objective codes {'EF': 4, 'EDCS': 1, 'EDYB': 1, 'EDCL': 1}
+  name contains "IndexPLUS": 3 funds; flags {'E': 3}; objective codes {'EFRM': 1, 'EDYG': 1, 'EF': 1}
+  name contains "Enhanced": 19 funds; flags {'E': 13, 'D': 4, 'B': 2}; objective codes {'EDYG': 6, 'EF': 6, 'EDYB': 3, 'EDCM': 1}
+  name contains "Morningstar": 13 funds; flags {'D': 12, 'none': 1}; objective codes {'EDYG': 5, 'EDCM': 2, 'EDCS': 2, 'EDYI': 1}
+
+funds with no flag, largest 25:
+                                                                                                             name    q       aum   fee et  turn   obj
+product_ids                                                                                                                                          
+17490        JPMorgan Trust I: JPMorgan 100% US Treasury Securities Money Market Fund; Institutional Class Shares  1.0  16959.34  0.15  -   NaN    IM
+31308                     Vanguard Bond Index Funds: Vanguard Inflation-Protected Securities Fund; Admiral Shares  1.0  14142.81  0.10  -  0.28   IGT
+31309               Vanguard Bond Index Funds: Vanguard Inflation-Protected Securities Fund; Institutional Shares  1.0  10286.56  0.07  -  0.29   IGT
+62651                Allspring Funds Trust: Allspring 100% Treasury Money Market Fund; Institutional Class Shares  1.0   7647.65  0.18  -  0.00    IM
+31320                    Vanguard Bond Index Funds: Vanguard Inflation-Protected Securities Fund; Investor Shares  1.0   6596.21  0.20  -  0.34   IGT
+13665                                                                 GE RSP Program Funds: GE RSP US Equity Fund  1.0   5119.60  0.15  -  0.40  EDYB
+97095                      Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2040 Fund; Premier Class Shares  1.0   3554.88  0.06  -  0.13  EDYB
+97094                      Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2035 Fund; Premier Class Shares  1.0   3532.72  0.06  -  0.15  EDYB
+97093                      Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2030 Fund; Premier Class Shares  1.0   3473.64  0.06  -  0.15  EDYB
+17491                     JPMorgan Trust I: JPMorgan 100% US Treasury Securities Money Market Fund; Agency Shares  1.0   3357.79  0.17  -   NaN    IM
+97096                       Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2045 Fund; Premier Class Share  1.0   3256.10  0.06  -  0.12  EDYG
+97097                      Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2050 Fund; Premier Class Shares  1.0   3025.36  0.06  -  0.12  EDYG
+55982                                        Russell Investment Company: US Strategic Equity Fund; Class S Shares  4.0   2944.74  0.76  -  0.85  EDYG
+97092                      Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2025 Fund; Premier Class Shares  1.0   2738.66  0.06  -  0.18  EDYB
+13664                                                                    GE RSP Program Funds: GE RSP Income Fund  1.0   2485.79  0.17  -  2.97     I
+27246                                   Russell Investment Company: Tax-Managed US Large Cap Fund; Class S Shares  3.0   2320.20  0.94  -  0.48  EDYG
+97098                      Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2055 Fund; Premier Class Shares  1.0   2200.23  0.06  -  0.12  EDYG
+93965                            BlackRock Funds III: BlackRock LifePath Index Retirement Fund; Investor P Shares  2.0   2052.03  0.36  -  0.18  EDYB
+41912                            Russell Investment Company: International Developed Markets Fund; Class S Shares  4.0   2000.72  0.97  -  0.68    EF
+93958                                  BlackRock Funds III: BlackRock LifePath Index 2030 Fund; Investor P Shares  2.0   1894.00  0.35  -  0.14  EDYB
+90708                                   Russell Investment Company: Tax-Managed US Large Cap Fund; Class M Shares  4.0   1786.94  0.82  -  0.31  EDYG
+97099                      Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2060 Fund; Premier Class Shares  1.0   1710.34  0.05  -  0.12  EDYG
+93956                                  BlackRock Funds III: BlackRock LifePath Index 2020 Fund; Investor P Shares  3.0   1610.10  0.44  -   NaN  EDYB
+27130                                              Russell Investment Company: Global Equity Fund; Class S Shares  4.0   1588.09  1.24  -  0.60    EF
+64252                           Russell Investment Company: Tax-Managed International Equity Fund; Class S Shares  4.0   1541.57  1.05  -  0.52    EF
+
+funds flagged E (enhanced) or B (index-based), largest 25:
+                                                                                                                     name flag    q       aum   fee et  turn   obj
+product_ids                                                                                                                                                       
+29218                                                                                   SPDR Gold Trust: SPDR Gold Shares    B  2.0  47720.74  0.40  F   NaN  EDSC
+8293              DFA Investment Dimensions Group Inc: Emerging Markets Core Equity Portfolio; Institutional Class Shares    B  3.0  15433.97  0.61  -  0.04  EFRM
+89522                                                                       iShares Trust: iShares ESG Aware MSCI USA ETF    B  1.0  14547.39  0.15  F  0.24  EDYG
+16382                                                                                                  iShares Gold Trust    B  2.0  14535.87  0.25  F  0.00  EDSC
+89648                                                                       Pacer Funds Trust: Pacer US Cash Cows 100 ETF    B  3.0  12751.42  0.49  F  1.02  EDYG
+93711                                            Select Sector SPDR Trust: Communication Services Select Sector SPDR Fund    B  1.0  10872.06  0.11  F  0.21  EDSA
+94974                             Vanguard Whitehall Funds: Vanguard High Dividend Yield Index Fund; Admiral Class Shares    B  1.0  10804.63  0.08  -  0.09  EDYI
+8314                        DFA Investment Dimensions Group Inc: US Large Cap Value Portfolio; Institutional Class Shares    B  2.0  10146.47  0.27  -  0.13  EDYB
+8309         DFA Investment Dimensions Group Inc: DFA International Small Cap Value Portfolio; Institutional Class Shares    B  3.0   9540.97  0.69  -  0.16  EFCS
+8313                        DFA Investment Dimensions Group Inc: US Small Cap Value Portfolio; Institutional Class Shares    B  2.0   8534.65  0.52  -  0.23  EDCS
+16513                                                                                                iShares Silver Trust    B  3.0   8362.73  0.50  F  0.00  EDSC
+31260                          Vanguard Tax-Managed Funds: Vanguard Tax-Managed Capital Appreciation Fund; Admiral Shares    B  1.0   8290.53  0.11  -  0.07  EDYG
+8305               DFA Investment Dimensions Group Inc: International Small Company Portfolio; Institutional Class Shares    B  3.0   7102.22  0.55  -  0.02  EFCS
+52392                                           Invesco Exchange-Traded Fund Trust II: Invesco S&P 500 Low Volatility ETF    B  2.0   7037.91  0.25  F  0.55  EDYG
+9092                      Dimensional Investment Group Inc: DFA International Value Portfolio; Institutional Class Shares    B  2.0   5940.08  0.44  -  0.15    EF
+64379                Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2040 Fund; Institutional Premium Class Shares    B  1.0   5297.93  0.07  -  0.13  EDYB
+94207                                                                      Vanguard World Fund: Vanguard ESG US Stock ETF    B  1.0   5182.37  0.09  F  0.06  EDYG
+11977                                                     Fidelity Aberdeen Street Trust: Fidelity Multi-Asset Index Fund    B  1.0   5081.72  0.08  -  0.12  EDYB
+92533                           JP Morgan Exchange-Traded Fund Trust: JPMorgan International Research Enhanced Equity ETF    B  2.0   5056.84  0.24  F  0.20    EF
+64380                Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2035 Fund; Institutional Premium Class Shares    B  1.0   4983.38  0.07  -  0.13  EDYB
+31262                                      Vanguard Tax-Managed Funds: Vanguard Tax-Managed Small-Cap Fund;Admiral Shares    B  1.0   4733.08  0.11  -  0.32  EDCS
+90738                                                          Global X Funds: Global X US Infrastructure Development ETF    B  3.0   4630.21  0.47  F  0.09  EDSI
+91438                                                             Pacer Funds Trust: Pacer US Small Cap Cash Cows 100 ETF    B  3.0   4592.30  0.59  F  1.23  EDCS
+92532                                     JPMorgan Trust I: JPMorgan Global Research Enhanced Index Fund; Class R6 Shares    E  2.0   4567.63  0.25  -  0.37    EF
+64376                 Fidelity Aberdeen Street Trust: Fidelity Freedom Index 2055 Fund; Institutional Premium Class Share    B  1.0   4448.65  0.08  -  0.12  EDYB
