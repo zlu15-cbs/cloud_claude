@@ -39,12 +39,42 @@ def remap_family(src, mode):
     return par.sort_index().reindex(s.sort_values('ord').index).to_numpy()
 
 
+LIPPER_GROUPS = {   # groups of Lipper classes (matched on lipper_class_name, per quarter; a fund is in a group if most of its quarters match)
+    'target_date': r'Mixed-Asset Target',
+    'extension': r'Extension|Extended U\.S\.',
+    'long_short_alt': r'Long/Short|Market Neutral|Absolute Return|Event Driven|Multi-Strat|Managed Futures|Currency Strateg|Currency Funds|Alternative (?!Act|Energy)',
+    'leveraged': r'Leverage|Short Bias',
+    'money_market': r'Money Market',
+}
+RULES = {'bd': [], 'full': ['target_date', 'extension', 'long_short_alt', 'leveraged', 'money_market'], 'narrow': ['long_short_alt', 'leveraged', 'money_market'],
+         'no_target': ['extension', 'long_short_alt', 'leveraged', 'money_market'], 'no_extension': ['target_date', 'long_short_alt', 'leveraged', 'money_market']}
+
+
+def lipper_groups(ids):
+    """fund -> group name (or NaN) from the Lipper class name held in most quarters."""
+    from sc_build import CRSP
+    cr = pd.read_csv(CRSP, usecols=['crsp_fundno', 'lipper_class_name'], encoding='latin-1', dtype=str)
+    cr['crsp_fundno'] = cr.crsp_fundno.astype(float).astype(int)
+    cr = cr[cr.crsp_fundno.isin(set(ids)) & cr.lipper_class_name.notna()]
+    out = pd.Series(np.nan, index=sorted(set(ids)), dtype=object)
+    for g, pat in LIPPER_GROUPS.items():
+        sh = cr.lipper_class_name.str.contains(pat, case=False, regex=True).groupby(cr.crsp_fundno).mean()
+        out[sh[sh > 0.5].index] = g
+    return out
+
+
 def pure_index_funds(ids):
-    """Funds that CRSP flags as an index fund, pure (index_fund_flag 'D') or index-based ('B'), in most of their quarters.
-    Enhanced index funds ('E') and funds with no flag are left out. B and D are pooled because 458 funds switch between them."""
+    """Index-fund restriction. Funds that CRSP flags as an index fund, pure ('D') or index-based ('B'), in most of their quarters
+    (enhanced 'E' and unflagged funds are left out), minus the Lipper groups of the rule named in SC_RULE (default 'bd': none)."""
+    import os
     from sc_build import CRSP
     cr = pd.read_csv(CRSP, usecols=['crsp_fundno', 'index_fund_flag'], encoding='latin-1', dtype=str)
     cr['crsp_fundno'] = cr.crsp_fundno.astype(float).astype(int)
     cr = cr[cr.crsp_fundno.isin(set(ids))]
     share = cr.index_fund_flag.isin(['B', 'D']).groupby(cr.crsp_fundno).mean()
-    return set(share[share > 0.5].index)
+    keep = set(share[share > 0.5].index)
+    rule = os.environ.get('SC_RULE', 'bd')
+    if RULES[rule]:
+        g = lipper_groups(ids)
+        keep -= set(g[g.isin(RULES[rule])].index)
+    return keep

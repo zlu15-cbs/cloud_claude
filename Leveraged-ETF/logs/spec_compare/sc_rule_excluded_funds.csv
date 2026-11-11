@@ -1,0 +1,24 @@
+product_ids,name,firm,months,fee,aum,group,bd,q,w
+47139,ProShares Trust: ProShares Large Cap Core Plus,ProFunds,36,0.45055555555555554,672.7666666666667,extension,True,4.0,24219.6
+61451,Global X Funds: Global X NASDAQ 100 Covered Call ETF,Global X,53,0.6154716981132075,5119.415094339623,leveraged,True,3.0,271329.0
+102153,iShares Bitcoin Trust ETF,BlackRock,1,0.22,21065.8,long_short_alt,True,2.0,21065.8
+102148,Fidelity Wise Origin Bitcoin Fund,Fidelity Investments,1,0.14,10521.4,long_short_alt,True,2.0,10521.4
+102152,ARK 21Shares Bitcoin ETF,ARK Invest,1,0.21,2612.1,long_short_alt,True,2.0,2612.1
+95215,Global X Funds: Global X Russell 2000 Covered Call ETF,Global X,22,0.5627272727272726,1402.5045454545455,long_short_alt,True,3.0,30855.1
+24777,Invesco DB US Dollar Index Trust: Invesco DB US Dollar Index Bullish Fund,Invesco,97,0.7903092783505155,1092.959793814433,long_short_alt,True,3.0,106017.09999999999
+44043,IndexIQ ETF Trust: IQ Hedge Multi-Strategy Tracker ETF,IndexIQ,80,0.6921250000000001,936.6450000000001,long_short_alt,True,3.0,74931.6
+48419,IndexIQ ETF Trust: IQ Merger Arbitrage ETF,IndexIQ,17,0.76,912.8352941176471,long_short_alt,True,3.0,15518.2
+57167,PowerShares Actively Managed Exchange-Traded Fund Trust: PowerShares S&P 500 Downside Hedged Portfolio,Invesco,13,0.3507692307692307,582.8615384615384,long_short_alt,True,2.0,7577.2
+24769,PowerShares DB G10 Currency Harvest Fund,DB Commodity Services,37,0.7967567567567567,348.3459459459459,long_short_alt,True,4.0,12888.8
+46299,Wells Fargo Funds Trust: Wells Fargo Dow Jones Target 2025 Fund; Class R6 Shares,Allspring,79,0.4196202531645569,1395.860759493671,target_date,True,3.0,110273.0
+43024,iShares Trust: iShares Core Growth Allocation ETF,BlackRock,110,0.14527272727272728,1374.209090909091,target_date,True,1.0,151163.0
+43023,iShares Trust: iShares Core Moderate Allocation ETF,BlackRock,93,0.15129032258064518,1136.531182795699,target_date,True,1.0,105697.4
+32280,Wells Fargo Funds Trust: Wells Fargo Dow Jones Target 2040 Fund; Class R6 Shares,Allspring,79,0.4408860759493671,790.0506329113924,target_date,True,3.0,62414.0
+57092,Wells Fargo Funds Trust: Wells Fargo Dow Jones Target 2030 Fund; Class R4 Shares,Allspring,41,0.51,754.4121951219513,target_date,True,3.0,30930.9
+46308,Wells Fargo Funds Trust: Wells Fargo Dow Jones Target 2050 Fund; Class R6 Shares,Allspring,79,0.43962025316455694,690.8594936708861,target_date,True,3.0,54577.9
+57097,Wells Fargo Funds Trust: Wells Fargo Dow Jones Target 2040 Fund; Class R4 Shares,Allspring,30,0.52,625.9833333333333,target_date,True,3.0,18779.5
+48906,Invesco Exchange-Traded Fund Trust II: Invesco CEF Income Composite ETF,Invesco,74,0.5,547.2635135135135,target_date,True,2.0,40497.5
+5914,BlackRock Funds III: LifePath 2020 Portfolio; Investor A Class Shares,BlackRock,19,0.994736842105263,371.37894736842105,target_date,True,4.0,7056.2
+31991,Wells Fargo Funds Trust: Wells Fargo Advantage Dow Jones Target 2040 Fund; Administrator Class Shares,Allspring,45,0.8022222222222223,342.1,target_date,True,3.0,15394.500000000002
+46305,Wells Fargo Funds Trust: Wells Fargo Advantage Dow Jones Target 2045 Fund; Institutional Class Shares,Allspring,1,0.42,323.7,target_date,True,3.0,323.7
+46300,Wells Fargo Funds Trust: Wells Fargo Advantage Dow Jones Target 2025 Fund; Investor Class Shares,Allspring,34,0.91,298.47058823529414,target_date,True,3.0,10148.0

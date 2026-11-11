@@ -76,7 +76,7 @@ def main():
     if os.environ.get('SC_PURE') == '1':   # keep only funds that CRSP flags B or D (index-based or pure index) in most quarters
         from sc_q4 import pure_index_funds
         keepp = d.product_ids.isin(pure_index_funds(d.product_ids)).to_numpy()
-        print(f'not flagged B or D by CRSP, dropped: {int((nova & ~keepp).sum()):,} fund-months, {d.loc[nova & ~keepp, "product_ids"].nunique()} funds', flush=True)
+        print(f'index-fund restriction ({os.environ.get("SC_RULE", "bd")}), dropped: {int((nova & ~keepp).sum()):,} fund-months, {d.loc[nova & ~keepp, "product_ids"].nunique()} funds', flush=True)
         nova = nova & keepp
     if DROPQ4:
         from sc_q4 import entry_quartile
