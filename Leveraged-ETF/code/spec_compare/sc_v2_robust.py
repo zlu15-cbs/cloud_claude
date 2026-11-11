@@ -256,6 +256,12 @@ def main():
             r['slopes'] = ' '.join(f'{v}:{b["prices"] + b["px_cheap"] * v:.2f}' for v in pts)
             r['share_alpha_pos'] = float((al > 0).mean())
             print(f"    implied fee slope at {r['slopes']} | share of fund-months with a positive slope {r['share_alpha_pos']:.3f} | avg e {r['avg_e']:.2f}", flush=True)
+        if os.environ.get('SC_SAVE') and label in ('V2: median, same share type', 'lag-AUM-weighted mean, same share type'):
+            nm_ = ('V2' if label.startswith('V2') else 'V2w') + os.environ['SC_SAVE']
+            m_ = nomm & fam_rows
+            np.save(f'{CACHE}/alpha_{nm_}.npy', b['prices'] + b['px_cheap'] * dd0[m_].cheap.to_numpy())
+            np.save(f'{CACHE}/rows_{nm_}.npy', np.flatnonzero(m_))
+            np.save(f'{CACHE}/cheap_{nm_}.npy', dd0.cheap.to_numpy())
         rows.append(r)
         t5s.append(t5.assign(variant=label))
         print(f"{label:58s} N {r['N']:,} | non-cheap {r['alpha']:.3f} ({r['se']:.3f}) | x cheap {r['alpha_x']:.3f} ({r['se_x']:.3f}) | F {r['min_F']:.0f} | e>0 {r['share_pos_e']:.3f} "

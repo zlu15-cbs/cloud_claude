@@ -51,7 +51,7 @@ def main():
     mmf = v2.money_market_funds(crsp, set(src.product_j))
     src['ETF_ind'] = src.product_j.isin(set(crsp.loc[crsp.et_flag == 'F', 'crsp_fundno'])).astype(float)
     del crsp
-    tmp = f'{CACHE}/source_as_index_grid.csv'
+    tmp = f'{CACHE}/source_as_index_grid_{os.getpid()}.csv'
     src.to_csv(tmp, index=False)
     raw = v2.build_instrument(tmp, CRSP, [])        # donors: every source fund-month with a fee (money market funds kept, as in the paper)
     os.remove(tmp)
@@ -78,6 +78,11 @@ def main():
         keepp = d.product_ids.isin(pure_index_funds(d.product_ids)).to_numpy()
         print(f'index-fund restriction ({os.environ.get("SC_RULE", "bd")}), dropped: {int((nova & ~keepp).sum()):,} fund-months, {d.loc[nova & ~keepp, "product_ids"].nunique()} funds', flush=True)
         nova = nova & keepp
+    if os.environ.get('SC_SUBQ') == '34':   # estimate on entry-fee quartiles 3 and 4 only
+        from sc_q4 import entry_quartile
+        hi = (d.product_ids.map(entry_quartile()) >= 3).to_numpy()
+        print(f'entry-fee quartiles 3-4 only: {int((nova & hi).sum()):,} fund-months, {d.loc[nova & hi, "product_ids"].nunique()} funds', flush=True)
+        nova = nova & hi
     if DROPQ4:
         from sc_q4 import entry_quartile
         keep = (d.product_ids.map(entry_quartile()) < 4).to_numpy()
@@ -101,7 +106,7 @@ def main():
                         o, res, dd, b = fit(est, 'iv', zs)
                         t5 = v2.table5(res, dd, dd0)
                         r.update({f'{model}_price': o['b_prices'], f'{model}_se': o['se_prices'], f'{model}_F': o['min_F'], f'{model}_pos_e': o['share_pos_e'],
-                                  f'{model}_avg_e': o['avg_e'], f'{model}_t5': int((t5.own_elasticity < -1).sum())})
+                                  f'{model}_avg_e': o['avg_e'], f'{model}_t5': int((t5.own_elasticity < -1).sum()) if 'own_elasticity' in t5 else 0})
                         if zs:
                             r.update(A5_xbroad=o['b_broad'], A5_xbroad_se=o['se_broad'])
                         if only and sample == 'no VA' and not DROPQ4 and not os.environ.get('SC_FAMILY') and not os.environ.get('SC_PURE') and not os.environ.get('SC_DONORS'):
@@ -110,6 +115,11 @@ def main():
                             np.save(f'{CACHE}/rows_{model}alt.npy', np.flatnonzero(base))
                             r.update({f'{model}_e_aum': o['e_aum_weighted'], f'{model}_avg_e_mkt': o['avg_e']})
                             t5.assign(spec=f'{model}alt').to_csv(f'sc_alt_table5_{model}.csv', index=False)
+                        if os.environ.get('SC_SAVE') and sample == 'no VA':   # save the coefficients for the downstream scripts
+                            sup = dd0[base]; nm_ = f"{model}{os.environ['SC_SAVE']}"
+                            np.save(f'{CACHE}/alpha_{nm_}.npy', np.full(len(sup), b['prices']) + sum(b[f'px_{z}'] * sup[z].to_numpy() for z in zs))
+                            np.save(f'{CACHE}/rows_{nm_}.npy', np.flatnonzero(base))
+                            t5.assign(spec=nm_).to_csv(f'sc_table5_{nm_}.csv', index=False)
                         if o['share_pos_e'] == 0 and sample == 'no VA':
                             ds = downstream(dd0[base].reset_index(drop=True), zs, b)
                             r.update({f'{model}_negmc_B0': ds['B0'][0], f'{model}_negmc_B65': ds['B65'][0], f'{model}_below020_B65': ds['B65'][2],

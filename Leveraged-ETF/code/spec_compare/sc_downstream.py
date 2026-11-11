@@ -23,6 +23,14 @@ SPECS = ['1_T2', '2_A5', '3_V2', '4p', '4q', '5_V2nocheap']
 
 def supply(d_all, spec):
     rows = np.load(f'{CACHE}/rows_{spec}.npy')
+    if os.path.exists(f'{CACHE}/cheap_{spec}.npy'):   # a spec saved with its own cheap indicator
+        d_all = d_all.assign(cheap=np.load(f'{CACHE}/cheap_{spec}.npy'))
+    if os.environ.get('SC_OWNER') == 'refined':   # ownership by the refined family ID (sc_family_refined.py) instead of firm_f
+        from sc_family_refined import refined_family
+        fam, _ = refined_family()
+        fam['mk'] = np.round(fam.month_t * 12).astype(int)
+        key = pd.MultiIndex.from_arrays([d_all.product_ids, np.round(d_all.month_t * 12).astype(int)])
+        d_all = d_all.assign(firm_ids=fam.set_index(['product_j', 'mk']).family.reindex(key).to_numpy())
     if spec in ('V2n', 'V2nx'):   # the new V2 uses the cheap indicator rebuilt on the source panel (location tables group by it)
         d_all = d_all.assign(cheap=np.load(f'{CACHE}/cheap_V2n.npy'))
     d = d_all.iloc[rows].reset_index(drop=True)
@@ -87,6 +95,8 @@ def conduct(spec):
             ('C: PC eta', mus, {m: float(eta['PC']) for m in v2.CONDUCT}),
             ('A capped 1/99 by year', capped, {m: 0.024 for m in v2.CONDUCT})]
     out = []
+    if os.environ.get('SC_SCHEMES') == 'A':
+        runs = runs[:1]
     for name, mu, etas in runs:
         cd = v2.conduct_test(d, mu, etas).assign(eta_scheme=name, spec=spec)
         out.append(cd)
