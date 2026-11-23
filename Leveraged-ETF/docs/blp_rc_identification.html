@@ -1,0 +1,475 @@
+<title>BLP Random-Coefficient Identification</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+/* Layout: one reading column (46rem); equations and tables scroll inside their own boxes; coauthor points sit on a highlighter ground. */
+:root {
+  --bg: #f2f5f7; --surface: #ffffff; --fg: #17212b; --muted: #55626f; --rule: #d3dae1;
+  --accent: #0f5e7a; --accent-soft: #dcebf1; --mark: #ffedb3; --mark-edge: #8a5a00;
+  --good: #1c7449; --bad: #b3372f;
+  --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #10161c; --surface: #18212a; --fg: #e5ebf0; --muted: #9aa8b6; --rule: #2d3945;
+  --accent: #6ec4e0; --accent-soft: #16323d; --mark: #4b3d12; --mark-edge: #e6bb55;
+  --good: #6fd3a0; --bad: #f08a80; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #10161c; --surface: #18212a; --fg: #e5ebf0; --muted: #9aa8b6; --rule: #2d3945;
+  --accent: #6ec4e0; --accent-soft: #16323d; --mark: #4b3d12; --mark-edge: #e6bb55;
+  --good: #6fd3a0; --bad: #f08a80; color-scheme: dark }
+[hidden] { display: none !important }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 1rem; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 2rem 4rem }
+main { max-width: 46rem; margin: 0 auto; display: flex; flex-direction: column; gap: 1.1rem; min-width: 0 }
+h1 { font-family: var(--serif); font-weight: 600; font-size: 1.9rem; line-height: 1.2; margin: 0; text-wrap: balance }
+h2 { font-family: var(--serif); font-weight: 600; font-size: 1.3rem; line-height: 1.25; margin: 1.6rem 0 0; text-wrap: balance }
+h3 { font-family: var(--sans); font-weight: 600; font-size: 1rem; margin: .4rem 0 0 }
+p, ul, ol { margin: 0 }
+ul, ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: .35rem }
+.kicker { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.lede { color: var(--muted) }
+.hint { font-size: .85rem; color: var(--muted) }
+.box { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .6rem; min-width: 0 }
+.danny { background: var(--mark); border-radius: 6px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .6rem; min-width: 0 }
+.danny .tag { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--mark-edge); font-weight: 500 }
+mark { background: var(--mark); color: inherit; padding: 0 .15em; border-radius: 2px }
+.t { border-bottom: 1.5px dotted var(--accent); cursor: help; border-radius: 3px; outline: none }
+.t:hover, .t:focus { background: var(--accent-soft) }
+.eqwrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: .8rem 1rem }
+.eq { display: flex; align-items: center; gap: .45rem; width: max-content; min-width: 100%; justify-content: center }
+.eq .t { padding: .25rem .2rem }
+.eq .n { margin-left: auto; padding-left: 1.2rem; font-family: var(--mono); font-size: .8rem; color: var(--muted) }
+.tblwrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface) }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; font-variant-numeric: tabular-nums }
+th, td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--rule); vertical-align: top }
+th { font-family: var(--mono); font-weight: 500; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap }
+tr:last-child td { border-bottom: 0 }
+td.num { white-space: nowrap }
+.ok { color: var(--good); font-weight: 600 } .no { color: var(--bad); font-weight: 600 }
+.presets { display: flex; flex-wrap: wrap; gap: .5rem }
+.presets button { font: inherit; font-size: .9rem; padding: .4rem .75rem; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); color: var(--fg); cursor: pointer }
+.presets button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg) }
+.presets button:focus-visible, .t:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+#chart { width: 100%; height: auto; display: block }
+#chart .axis { stroke: var(--rule); stroke-width: 1; fill: none }
+#chart .zero { stroke: var(--fg); stroke-width: 1.2; fill: none }
+#chart .curve { stroke: var(--accent); stroke-width: 2.5; fill: none }
+#chart .lbl { fill: var(--muted); font-family: var(--mono); font-size: 12px }
+#chart .dot { fill: var(--bad); stroke: var(--surface); stroke-width: 2 }
+#chart .dot.root { fill: var(--good) }
+#chart .gap { stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 4 3; fill: none }
+#chart .mk { fill: var(--fg); font-family: var(--sans); font-size: 13px; font-weight: 600 }
+dl.read { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: .35rem 1rem; margin: 0; font-size: .92rem }
+dl.read dt { color: var(--muted) } dl.read dd { margin: 0; min-width: 0 }
+@media (max-width: 30rem) { dl.read { grid-template-columns: 1fr } dl.read dd { margin-bottom: .4rem } h1 { font-size: 1.55rem } }
+#tip { position: fixed; z-index: 20; max-width: min(22rem, calc(100vw - 16px)); background: var(--fg); color: var(--bg); font-size: .85rem; line-height: 1.45; padding: .5rem .7rem; border-radius: 6px; pointer-events: none }
+footer { font-size: .85rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 1rem; margin-top: 1.5rem }
+mjx-container { margin: 0 !important }
+</style>
+<script>window.MathJax = { tex: { inlineMath: [['\\(', '\\)']] }, svg: { fontCache: 'global' }, options: { enableMenu: false } };</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js" async></script>
+
+<main>
+<p class="kicker">Passive fund demand · note for Gene, 23 Nov 2026</p>
+<h1>Why a just-identified BLP may not pin down the random coefficient on the expense ratio</h1>
+<p class="lede">A walk from the optimization problem to the moment conditions, to the rank deficiency Danny reports, to which instruments would identify the random coefficient.</p>
+<p class="hint">Hover over, or tap, any dotted-underlined symbol to see its definition. Passages on a yellow ground are the points Danny's note makes.</p>
+
+<div class="box">
+<h3>The short version</h3>
+<ul>
+<li>A just-identified GMM problem is M equations in M unknowns. If those equations have a solution, estimation is regular and the standard errors are valid.</li>
+<li>If they have no solution, the optimizer stops at a point where the moments are not zero. The Jacobian is always singular at such a point. <mark>This is the rank deficiency Danny describes.</mark></li>
+<li>Whether a solution exists depends on the instruments. The random coefficient needs an instrument that moves fees differently for high-fee and low-fee funds, or that shifts which rivals sit close in fee. An instrument that only shifts the fee level does not identify it.</li>
+<li><mark>Danny's extra instrument</mark> removes the algebraic obstacle. It does not by itself make the random coefficient well identified: for passive funds its standard error is still several hundred times the estimate.</li>
+</ul>
+</div>
+
+<h2>1. The demand model</h2>
+<p>Investor <span class="t" tabindex="0" data-tip="i indexes investors. Each investor draws one taste shock ν.">\(i\)</span> chooses among index funds <span class="t" tabindex="0" data-tip="j indexes funds (share classes). About 650 per month in the index sample.">\(j\)</span> in month <span class="t" tabindex="0" data-tip="t indexes months. Each month is one market.">\(t\)</span>, or the outside option.</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="Utility of investor i from fund j in month t.">\(\displaystyle u_{ijt}\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="Mean utility: the part of utility that every investor shares. Defined in equation (2).">\(\displaystyle \delta_{jt}\)</span>
+<span>\(+\)</span>
+<span class="t" tabindex="0" data-tip="The random coefficient: the standard deviation of investors' fee sensitivity around its mean. σ = 0 gives the plain logit.">\(\displaystyle \sigma\)</span>
+<span class="t" tabindex="0" data-tip="Expense ratio of fund j in month t, in percent per year.">\(\displaystyle p_{jt}\)</span>
+<span class="t" tabindex="0" data-tip="Investor i's taste shock, standard normal. An investor with ν below zero dislikes fees more than average.">\(\displaystyle \nu_i\)</span>
+<span>\(+\)</span>
+<span class="t" tabindex="0" data-tip="Logit (type-1 extreme value) taste shock, independent across investors, funds and months.">\(\displaystyle \varepsilon_{ijt}\)</span>
+<span class="n">(1)</span></div></div>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="Mean utility of fund j in month t.">\(\displaystyle \delta_{jt}\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="The K = 4 characteristics: expense ratio p, tracking error, past one-year return, log fund age. The expense ratio is endogenous.">\(\displaystyle x_{jt}'\)</span>
+<span class="t" tabindex="0" data-tip="Mean taste coefficients (K = 4). The first element, α, is the mean fee coefficient.">\(\displaystyle \beta\)</span>
+<span>\(+\)</span>
+<span class="t" tabindex="0" data-tip="Fund fixed effect.">\(\displaystyle \eta_j\)</span>
+<span>\(+\)</span>
+<span class="t" tabindex="0" data-tip="Month fixed effect.">\(\displaystyle \tau_t\)</span>
+<span>\(+\)</span>
+<span class="t" tabindex="0" data-tip="Unobserved demand shock for fund j in month t. This is the structural error: it is correlated with the fee, which is why instruments are needed.">\(\displaystyle \xi_{jt}\)</span>
+<span class="n">(2)</span></div></div>
+<p>The model's market share integrates the logit choice probability over investors:</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="Model-implied market share of fund j in month t, given all mean utilities in that month and σ.">\(\displaystyle s_{jt}(\delta_t,\sigma)\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="Average over investors' taste shocks ν. PyBLP approximates the integral with 3,000 Monte Carlo draws per month.">\(\displaystyle \int\)</span>
+<span class="t" tabindex="0" data-tip="Logit probability that an investor with taste shock ν picks fund j. The 1 in the denominator is the outside option.">\(\displaystyle \frac{\exp(\delta_{jt}+\sigma p_{jt}\nu)}{1+\sum_k \exp(\delta_{kt}+\sigma p_{kt}\nu)}\)</span>
+<span class="t" tabindex="0" data-tip="Standard normal density of ν.">\(\displaystyle \phi(\nu)\,d\nu\)</span>
+<span class="n">(3)</span></div></div>
+<p><strong>Share inversion.</strong> For any trial value of σ there is exactly one vector of mean utilities, <span class="t" tabindex="0" data-tip="The mean utilities that make the model's shares equal the observed shares, for a given σ. At σ = 0 this is ln(s_jt) − ln(s_0t), the logit inversion.">\(\delta(\sigma)\)</span>, that makes the model's shares match the observed ones. The implied demand shock is then</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="Demand shock implied by trial parameters (β, σ), after fund and month fixed effects are absorbed. A tilde means the fixed effects have been removed.">\(\displaystyle \tilde\xi(\beta,\sigma)\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="Inverted mean utilities at this σ, with fund and month means removed. Depends on σ only.">\(\displaystyle \tilde\delta(\sigma)\)</span>
+<span>\(-\)</span>
+<span class="t" tabindex="0" data-tip="N × K matrix of the four characteristics, with fixed effects removed.">\(\displaystyle \tilde X\)</span>
+<span class="t" tabindex="0" data-tip="Mean taste coefficients. They enter linearly, which is what lets them be concentrated out later.">\(\displaystyle \beta\)</span>
+<span class="n">(4)</span></div></div>
+
+<h2>2. The optimization problem</h2>
+<p>PyBLP chooses the parameters to make the demand shock as uncorrelated with the instruments as possible:</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="The estimate of θ = (β, σ). With one random coefficient there are P = K + R = 4 + 1 = 5 parameters.">\(\displaystyle \hat\theta\)</span>
+<span>\(=\ \arg\min_{\theta=(\beta,\sigma)}\)</span>
+<span class="t" tabindex="0" data-tip="The GMM criterion. It equals zero only if every sample moment is exactly zero.">\(\displaystyle Q(\theta)\)</span>
+<span>\(,\qquad\)</span>
+<span class="t" tabindex="0" data-tip="The GMM criterion.">\(\displaystyle Q(\theta)\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="Number of fund-months.">\(\displaystyle N\)</span>
+<span class="t" tabindex="0" data-tip="The M × 1 vector of sample moments, defined in equation (7).">\(\displaystyle g(\theta)'\)</span>
+<span class="t" tabindex="0" data-tip="M × M positive-definite weighting matrix, held fixed within a GMM step. Step 1 uses (Z'Z/N)⁻¹; step 2 uses the inverse of the month-clustered covariance of the moments.">\(\displaystyle W\)</span>
+<span class="t" tabindex="0" data-tip="The M × 1 vector of sample moments.">\(\displaystyle g(\theta)\)</span>
+<span class="n">(5)</span></div></div>
+<p>The first-order condition is the equation everything below turns on:</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="Gradient of the criterion with respect to all P parameters.">\(\displaystyle \nabla_\theta Q\)</span>
+<span>\(=\ 2N\)</span>
+<span class="t" tabindex="0" data-tip="Transpose of the M × P Jacobian of the moments, G = ∂g/∂θ'. Defined in equation (8).">\(\displaystyle G'\)</span>
+<span class="t" tabindex="0" data-tip="The weighting matrix.">\(\displaystyle W\)</span>
+<span class="t" tabindex="0" data-tip="The sample moments at the solution.">\(\displaystyle g\)</span>
+<span>\(=\ 0\)</span>
+<span class="n">(6)</span></div></div>
+
+<h2>3. The moment conditions</h2>
+<p><strong>Population.</strong> The identifying assumption is that the instruments are uncorrelated with the true demand shock:</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="Expectation over fund-months.">\(\displaystyle \mathbb{E}\big[\)</span>
+<span class="t" tabindex="0" data-tip="The M instruments for fund j in month t: the 3 exogenous controls (tracking error, past return, log age), which instrument for themselves, plus the excluded instruments. The fee is not in z.">\(\displaystyle z_{jt}\)</span>
+<span class="t" tabindex="0" data-tip="The demand shock evaluated at the true parameters θ₀.">\(\displaystyle \xi_{jt}(\theta_0)\)</span>
+<span>\(\big]=0\)</span>
+<span class="n">(M moments)</span></div></div>
+<p><strong>Sample.</strong> Because β enters linearly, the sample moments split into a part that depends on σ and a part that is linear in β:</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="M × 1 vector of sample moments: the sample covariance between each instrument and the implied demand shock.">\(\displaystyle g(\beta,\sigma)\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="Definition: instruments times implied demand shocks, averaged over fund-months.">\(\displaystyle \frac{\tilde Z'\tilde\xi(\beta,\sigma)}{N}\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="b(σ) = Z̃'δ̃(σ)/N. Covariance of the instruments with the inverted mean utilities. M × 1. The only place σ enters.">\(\displaystyle b(\sigma)\)</span>
+<span>\(-\)</span>
+<span class="t" tabindex="0" data-tip="A = Z̃'X̃/N. Covariance of the instruments with the four characteristics. M × K. Its fee column is the first stage for the fee.">\(\displaystyle A\)</span>
+<span class="t" tabindex="0" data-tip="Mean taste coefficients.">\(\displaystyle \beta\)</span>
+<span class="n">(7)</span></div></div>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="The M × P Jacobian: how each moment moves when each parameter moves.">\(\displaystyle G\)</span>
+<span>\(=\ \dfrac{\partial g}{\partial\theta'}\ =\ \big[\)</span>
+<span class="t" tabindex="0" data-tip="−A: how the moments respond to β. K columns.">\(\displaystyle -A\)</span>
+<span>\(,\)</span>
+<span class="t" tabindex="0" data-tip="B(σ) = Z̃'D(σ)/N, where D = ∂δ̃/∂σ' is how the inverted mean utilities change with σ. R columns: one per random coefficient.">\(\displaystyle B(\sigma)\)</span>
+<span>\(\big]\)</span>
+<span class="n">(8)</span></div></div>
+<p><strong>Two conditions.</strong></p>
+<ul>
+<li><strong>Order condition:</strong> at least as many moments as parameters, M ≥ P. With M = P the model is just identified.</li>
+<li><strong>Rank condition:</strong> the Jacobian at the truth has full column rank P. In words: the instruments must detect a change in every parameter, and a change in σ must move the moments in a way that no change in β can copy. Counting instruments does not check this.</li>
+</ul>
+<p>How the counts line up in the specifications we have discussed:</p>
+<div class="tblwrap"><table>
+<thead><tr><th>Model</th><th>Linear K</th><th>RCs R</th><th>Params P</th><th>Excluded IVs</th><th>Moments M</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Paper, Table 2 col 3 (one RC on the fee)</td><td class="num">4</td><td class="num">1</td><td class="num">5</td><td>2: Hausman, new-product count</td><td class="num">5</td><td>just identified</td></tr>
+<tr><td>Ours, one RC plus fee × cheap</td><td class="num">5</td><td class="num">1</td><td class="num">6</td><td>3: Z, Z × cheap, Z²</td><td class="num">6</td><td>just identified</td></tr>
+<tr><td>Danny, Table 7 (fee RC)</td><td class="num">4</td><td class="num">1</td><td class="num">5</td><td>4</td><td class="num">7</td><td>over-identified; rank 5 of 5</td></tr>
+<tr><td>Danny, Table 10 (fee, age, return RCs)</td><td class="num">4</td><td class="num">3</td><td class="num">7</td><td>4</td><td class="num">7</td><td>just identified; <span class="no">rank 6 of 7</span></td></tr>
+<tr><td>Danny, Table 10 plus a fifth IV</td><td class="num">4</td><td class="num">3</td><td class="num">7</td><td>5</td><td class="num">8</td><td>over-identified; <span class="ok">rank 7 of 7</span></td></tr>
+</tbody></table></div>
+
+<h2>4. One random coefficient: the problem collapses to one equation in σ</h2>
+<p>Take the just-identified case with one random coefficient, M = K + 1. For a given σ, the best β is a linear IV estimate:</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="The IV estimate of β when δ̃(σ) is treated as the dependent variable. One linear IV regression per trial σ.">\(\displaystyle \hat\beta(\sigma)\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="The usual linear GMM formula, with A = Z̃'X̃/N and b(σ) = Z̃'δ̃(σ)/N.">\(\displaystyle (A'WA)^{-1}A'W\,b(\sigma)\)</span>
+<span class="n">(9)</span></div></div>
+<p>That uses up K directions of the M-dimensional moment space. What is left over has dimension M − K = 1, so the leftover moment vector is a scalar times a fixed direction:</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="The moments that remain after β has adjusted, in whitened form: e(σ) = (I − P_A) L b(σ), where L'L = W and P_A projects onto the columns of LA.">\(\displaystyle e(\sigma)\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="A scalar function of σ: the one overidentifying restriction of the linear IV regression of δ̃(σ) on X̃. The whole estimation problem is to find where it equals zero.">\(\displaystyle s(\sigma)\)</span>
+<span class="t" tabindex="0" data-tip="A fixed unit vector spanning the one direction of moment space that β cannot reach.">\(\displaystyle u\)</span>
+<span>\(,\qquad\)</span>
+<span class="t" tabindex="0" data-tip="The criterion with β concentrated out. This is what a σ profile plots.">\(\displaystyle Q_c(\sigma)\)</span>
+<span>\(=\ N\,s(\sigma)^2\)</span>
+<span class="n">(10)</span></div></div>
+<p><strong>Intuition.</strong> For each σ, run the linear IV regression of δ̃(σ) on the characteristics. It has one more instrument than regressors, so it has one overidentifying restriction. Q<sub>c</sub>(σ) is that regression's Sargan-type statistic. BLP searches for the σ at which the extra instrument is exactly uncorrelated with the residual.</p>
+<p>The first-order condition for σ is</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="Derivative of the concentrated criterion N·s(σ)².">\(\displaystyle Q_c'(\sigma)\)</span>
+<span>\(=\ 2N\)</span>
+<span class="t" tabindex="0" data-tip="The leftover moment.">\(\displaystyle s(\sigma)\)</span>
+<span class="t" tabindex="0" data-tip="How fast the leftover moment moves with σ. This is the instrument's sensitivity to the random coefficient, after β has adjusted.">\(\displaystyle s'(\sigma)\)</span>
+<span>\(=\ 0\)</span>
+<span class="n">(11)</span></div></div>
+<p>so the optimizer can stop for two different reasons:</p>
+<ul>
+<li><strong>A root, s(σ) = 0.</strong> All moments are zero. If s′ ≠ 0 there, the Jacobian has full rank and the usual standard errors are valid.</li>
+<li><strong>No root: s′(σ) = 0 while s(σ) ≠ 0.</strong> The leftover moment has stopped moving with σ before reaching zero. A small change in σ then moves the moments only in directions that β can undo, so the σ column of G is a linear combination of the β columns. The Jacobian is singular.</li>
+</ul>
+
+<div class="box">
+<h3>See the four cases</h3>
+<p class="hint">The curve is the leftover moment s(σ). GMM stops where it is closest to zero. Shapes are stylized, not estimates.</p>
+<div class="presets" id="presets" role="group" aria-label="Choose a case">
+<button type="button" id="p-root" data-k="root" aria-pressed="false">Strong instrument</button>
+<button type="button" id="p-weak" data-k="weak" aria-pressed="false">Weak instrument</button>
+<button type="button" id="p-sign" data-k="sign" aria-pressed="false">Wrong sign</button>
+<button type="button" id="p-turn" data-k="turn" aria-pressed="true">Turns back</button>
+</div>
+<svg id="chart" viewBox="0 0 640 300" role="img" aria-label="Plot of the leftover moment s against sigma for the selected case"></svg>
+<dl class="read">
+<dt>Where GMM stops</dt><dd id="r-stop"></dd>
+<dt>Criterion there</dt><dd id="r-q"></dd>
+<dt>Slope s′ there</dt><dd id="r-slope"></dd>
+<dt>Jacobian</dt><dd id="r-jac"></dd>
+<dt>What we saw</dt><dd id="r-note"></dd>
+</dl>
+</div>
+
+<div class="danny">
+<span class="tag">What Danny is referring to: the rank deficiency</span>
+<p>Danny's note states the general version of equation (11). With M = P the Jacobian G is square. The first-order condition (6) says G′Wg = 0. If G were invertible, that would force g = 0. So at any interior stationary point where the criterion is positive, G must be singular:</p>
+<div class="eqwrap"><div class="eq">
+<span>\(M=P,\quad g\neq 0,\quad G'Wg=0\)</span>
+<span>\(\ \Longrightarrow\ \)</span>
+<span class="t" tabindex="0" data-tip="At most P − 1: at least one combination of parameters leaves all moments unchanged to first order. In Danny's Table 10 this is rank 6 of 7. In the earlier fee-only model with 5 moments and 5 parameters it is rank 4 of 5.">\(\displaystyle \operatorname{rank}(G)\le P-1\)</span>
+<span class="n">(12)</span></div></div>
+<ul>
+<li><strong>Where he sees it:</strong> Table 10 (three RCs, 7 moments, 7 parameters) stops with rank 6 of 7 in both markets. The earlier fee-only model with 5 moments and 5 parameters is the same case, with rank at most 4 of 5.</li>
+<li><strong>What the missing direction is:</strong> a combination of σ and β that the instruments cannot tell apart. More dispersion in tastes, offset by a shift in mean tastes, leaves every moment unchanged.</li>
+<li><strong>Why it matters:</strong> the standard-error formula inverts G′WG, which does not exist. PyBLP then prints numbers from a generalized inverse. They are not valid standard errors. The paper's σ = 0.027 (0.013), with a covariance condition number of 2.4 × 10¹⁷, is an example.</li>
+<li><strong>What it is not:</strong> a PyBLP bug, or a general property of just-identified models. His note records a just-identified leveraged run that reaches a criterion of 10⁻²⁵ with full rank. The deficiency appears only when no root exists.</li>
+</ul>
+</div>
+
+<h2>5. What moves s(σ): the instrument must have a first stage for a second regressor</h2>
+<p>Expanding the share inversion to second order in σ (the Salanié–Wolak approximation) turns the model into a linear regression with one extra regressor:</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="The logit dependent variable: log share of fund j minus log share of the outside option.">\(\displaystyle \ln\frac{s_{jt}}{s_{0t}}\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="The usual linear index, including the mean fee effect α·p.">\(\displaystyle x_{jt}'\beta\)</span>
+<span>\(+\)</span>
+<span class="t" tabindex="0" data-tip="The variance of fee sensitivity. It is the coefficient on K, and it cannot be negative.">\(\displaystyle \sigma^2\)</span>
+<span class="t" tabindex="0" data-tip="The artificial regressor: K = p·(p/2 − e). It is built from the fund's own fee and the market's share-weighted mean fee.">\(\displaystyle K_{jt}\)</span>
+<span>\(+\ \eta_j+\tau_t+\xi_{jt}\)</span>
+<span>\(,\qquad\)</span>
+<span class="t" tabindex="0" data-tip="The artificial regressor that carries σ².">\(\displaystyle K_{jt}\)</span>
+<span>\(=\ p_{jt}\Big(\dfrac{p_{jt}}{2}-\)</span>
+<span class="t" tabindex="0" data-tip="e_t = Σ_k s_kt·p_kt: the share-weighted mean fee in month t, with the outside option counted at a fee of zero.">\(\displaystyle e_t\)</span>
+<span>\(\Big)\)</span>
+<span class="n">(13)</span></div></div>
+<p>To this order, BLP with one random coefficient is a linear IV regression with <em>two</em> endogenous regressors: the fee and K. The leftover moment becomes</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="The leftover moment as a function of σ.">\(\displaystyle s(\sigma)\)</span>
+<span>\(\approx\)</span>
+<span class="t" tabindex="0" data-tip="The leftover moment of the plain logit IV model: how badly the logit fails its one overidentifying restriction.">\(\displaystyle s(0)\)</span>
+<span>\(-\ \sigma^2\)</span>
+<span class="t" tabindex="0" data-tip="c = u'L·(Z̃'K̃/N): the covariance between the instruments and K after the characteristics are partialled out. It is the first stage for K.">\(\displaystyle c\)</span>
+<span>\(\quad\Longrightarrow\quad\)</span>
+<span class="t" tabindex="0" data-tip="The implied estimate: the logit's leftover moment divided by the first stage for K.">\(\displaystyle \hat\sigma^2=\frac{s(0)}{c}\)</span>
+<span class="n">(14)</span></div></div>
+<ul>
+<li><strong>Weak first stage (c near zero):</strong> the profile is flat. σ runs to implausible values or has no root. Its standard error is huge even when a root exists.</li>
+<li><strong>Wrong sign (s(0)/c below zero):</strong> the data ask for a negative variance. The minimum sits at σ = 0 with a positive criterion.</li>
+<li><strong>Strong and right-signed:</strong> a regular root.</li>
+</ul>
+<p><strong>Why estimates near zero are suspect.</strong> A normal taste shock is symmetric, so δ(σ) = δ(−σ) and s′(0) = 0 always. The point σ = 0 is a stationary point with a singular Jacobian in every data set. An estimate such as 0.027 with a non-zero criterion is most likely this point, not a small, precisely estimated dispersion.</p>
+<p><strong>What variation is in K.</strong> The fee slope implied by (13) is</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="Effect of fund j's fee on its mean utility, holding the market mean fee fixed.">\(\displaystyle \frac{\partial}{\partial p_{jt}}\big(\alpha p_{jt}+\sigma^2K_{jt}\big)\)</span>
+<span>\(=\)</span>
+<span class="t" tabindex="0" data-tip="The mean fee coefficient (negative).">\(\displaystyle \alpha\)</span>
+<span>\(+\ \sigma^2\)</span>
+<span class="t" tabindex="0" data-tip="The fund's fee relative to the market's share-weighted mean. Negative for cheap funds, so their slope is steeper.">\(\displaystyle (p_{jt}-e_t)\)</span>
+<span class="n">(15)</span></div></div>
+<p>A random coefficient therefore says the same thing as our cheap interaction: cheap funds face steeper demand. It imposes a slope that is linear in the fee, where the cheap dummy is a step. With fund fixed effects and fees that rarely change, the within-fund part of K is roughly</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="K with fund and month means removed.">\(\displaystyle \tilde K_{jt}\)</span>
+<span>\(\approx\)</span>
+<span class="t" tabindex="0" data-tip="The fund's fee change scaled by its average fee level. This is a fee × fee-level interaction.">\(\displaystyle \bar p_j\,\tilde p_{jt}\)</span>
+<span>\(-\)</span>
+<span class="t" tabindex="0" data-tip="The fund's fee level times the movement in the market mean fee. This is a fee-level-specific time trend.">\(\displaystyle \bar p_j\,\tilde e_t\)</span>
+<span class="n">(16)</span></div></div>
+<p>This is why σ stopped being identified once fee × cheap entered our model: the two terms compete for the same variation. The expansion is rough when σ·p is large, so read it as a guide to the mechanism.</p>
+
+<h2>6. What an extra instrument does, and what it does not</h2>
+<div class="danny">
+<span class="tag">What Danny is referring to: the extra IV</span>
+<p>With one more excluded instrument, M = P + 1. The space of leftover moments now has dimension R + 1 instead of R. The stationarity condition still takes away one direction, but R remain, so the R random-coefficient columns can be independent even when the criterion is positive. The rank obstacle in (12) is gone.</p>
+<p>The new instrument must also see the missing direction. Let <span class="t" tabindex="0" data-tip="The null direction of the old Jacobian: the combination of β and σ changes that left all the old moments unchanged, Gv = 0.">\(v\)</span> be the direction the old moments could not detect and <span class="t" tabindex="0" data-tip="q_v = [−X̃, D]·v: how each fund-month's demand shock changes when the parameters move along v.">\(q_v\)</span> the change in the demand shock along it. Rank is restored exactly when</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="The added instrument, with fixed effects removed. For passive funds Danny uses the count of matched rival liquidations over months t−14 to t−3: same class and access type, another family, fee within 10 basis points, tracking error within .02.">\(\displaystyle \tilde z_+'\)</span>
+<span class="t" tabindex="0" data-tip="The change in the demand shock along the direction the old instruments could not see.">\(\displaystyle q_v\)</span>
+<span>\(/N\ \neq\ 0\)</span>
+<span class="n">(17)</span></div></div>
+<p>In his runs this holds: the rank goes from 6 of 7 to 7 of 7 in both markets.</p>
+</div>
+<p>Full rank is a low bar. Almost any instrument that is not a linear combination of the old ones satisfies (17) numerically. What matters is how strongly it does, and the note's own numbers answer that:</p>
+<div class="tblwrap"><table>
+<thead><tr><th>Five-IV fit, from Danny's note</th><th>Passive</th><th>Leveraged (Bull)</th></tr></thead>
+<tbody>
+<tr><td>Smallest scaled singular value of the Jacobian</td><td class="num">0.021</td><td class="num">0.159</td></tr>
+<tr><td>SD of fee tastes (standard error)</td><td class="num"><span class="no">0.049 (26.5)</span></td><td class="num"><span class="ok">2.07 (0.46)</span></td></tr>
+<tr><td>SD of return tastes (standard error)</td><td class="num"><span class="no">0.091 (47.3)</span></td><td class="num">0.84 (1.28)</td></tr>
+<tr><td>Mean own-price elasticity, four IVs → five IVs</td><td class="num">−3.904 → −3.902</td><td class="num">−6.764 → −6.799</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>Passive funds:</strong> rank is restored but σ on the fee is still unidentified in any useful sense. The elasticities do not move because the estimate is still close to σ = 0.</li>
+<li><strong>Leveraged funds:</strong> the fee dispersion is identified with or without the fifth instrument.</li>
+<li><strong>A separate warning sign:</strong> the four-IV fits end at criteria of 43.1 and 115.9 with zero degrees of freedom. If these are on the J-statistic scale, the moment conditions cannot all hold at any parameter value. That points to an invalid instrument or a misspecified model, and adding a moment does not fix it.</li>
+</ul>
+
+<h2>7. Which instruments should identify the random coefficient on the expense ratio</h2>
+<p>The requirement from Section 5 is a strong first stage for K̃, beyond the first stage for the fee itself. Two kinds of variation deliver it: fee changes that differ along the fee distribution, and changes in which rivals sit close to a fund in fee.</p>
+<div class="tblwrap"><table>
+<thead><tr><th>Instrument</th><th>How to build it</th><th>Why it identifies σ</th><th>Caveat</th></tr></thead>
+<tbody>
+<tr><td><strong>Cost shifter × fee level</strong></td><td>Share-class Hausman Z times the fund's launch fee, or Z², or Z times fee-tier dummies.</td><td>Equation (15): with σ above zero the fee slope depends on the fee level. This instrument moves fees differently for cheap and expensive funds, which is the fee × fee-level part of K̃.</td><td>Z × cheap is already used when fee × cheap is in the model, so the two compete. Our Z² run found an interior minimum (σ = 1.81) but not a root.</td></tr>
+<tr><td><strong>Differentiation instruments in fee space</strong> (Gandhi–Houde)</td><td>For each fund, the sum of squared gaps between its predicted fee and rivals' predicted fees, or the number of rivals within 10 basis points. Use fees predicted from exogenous variables, within the same asset class or tracked index.</td><td>With σ above zero, fee-sensitive investors concentrate in cheap funds, so a fund loses more share to rivals close to it in fee. Under plain logit only the number of rivals matters, not where they sit. The share response to near versus far rivals reveals σ.</td><td>Must be built from predicted fees, not actual ones. Our quick version built from Z conflicted with Z itself, so it needs care.</td></tr>
+<tr><td><strong>Entry and exit of rivals by fee distance</strong></td><td>Counts of rival launches or liquidations near the fund's fee, together with the matching count far from it. <mark>Danny's fifth IV is the near count.</mark></td><td>Same logic as above, using realized changes in the choice set. Losing a near-fee rival should raise a fund's share more than losing a far-fee rival if σ is above zero.</td><td>Liquidations and launches respond to segment demand, and demand shocks are persistent (within-fund AR(1) near 0.98 in our runs). Lags alone may not make it excluded. The near-minus-far contrast is cleaner than the near count alone.</td></tr>
+<tr><td><strong>Micro moments</strong></td><td>Outside data on who holds which funds: for example the institutional share of holders by fund, matched to the fee paid.</td><td>The covariance between investor type and the fee of the chosen fund measures taste dispersion directly. It does not rely on instruments tracing out substitution.</td><td>Needs new data. PyBLP supports micro moments.</td></tr>
+</tbody></table></div>
+<p><strong>What will not help.</strong></p>
+<ul>
+<li>More instruments that only shift the fee level, such as further Hausman variants. They strengthen the first stage for the fee, not for K.</li>
+<li>Counts of entrants that ignore fee distance. They identify σ only through an accidental correlation with K.</li>
+<li>The second term of (16) on its own. It is a trend by fee level, and any trend in demand toward cheap funds would be read as taste dispersion.</li>
+</ul>
+<p><strong>Checks before trusting any σ.</strong></p>
+<ol>
+<li>Run the linear version (13) by IV. Report the conditional first-stage F for K̃ and the sign of σ².</li>
+<li>Plot the concentrated criterion over a grid of σ. A regular estimate shows a clear interior minimum at or near zero criterion.</li>
+<li>Report the smallest singular value of the scaled Jacobian, not just its rank.</li>
+<li>With over-identification, report the J test and the share of fund-months with upward-sloping demand.</li>
+</ol>
+
+<h2>8. Where this leaves the paper</h2>
+<p>For passive funds, the heterogeneity in fee sensitivity is real, and equation (15) shows it is the same heterogeneity our fee × cheap interaction measures. The interaction has a first stage we can verify (F of 167). The random coefficient asks the same instruments for a second first stage that they do not have. Unless one of the instruments in Section 7 delivers that, the logit IV with the interaction is the specification the data can support, with the one-RC model reported as a sensitivity check.</p>
+
+<footer>
+Sources: Danny's note "Demand GMM rank and the fifth instrument" (22 Nov 2026) for equations (12) and (17) and all five-IV numbers; Salanié and Wolak (2019) for the expansion in (13); Gandhi and Houde (2019) for differentiation instruments; our earlier runs (MAIN_REPORT_sharecl_hausman.md, section 3b) for the Z² and new-product results. Equations (10), (11) and (14)–(16) are derived here and have not been estimated on the data.
+</footer>
+</main>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+(function () {
+  var tip = document.getElementById('tip');
+  function show(el) {
+    tip.textContent = el.getAttribute('data-tip');
+    tip.hidden = false;
+    var r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    var vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), vw - w - 8);
+    var y = r.bottom + 8;
+    if (y + h > vh - 8) y = r.top - h - 8;
+    tip.style.left = x + 'px';
+    tip.style.top = Math.max(8, y) + 'px';
+  }
+  function hide() { tip.hidden = true; }
+  function target(e) { return e.target && e.target.closest ? e.target.closest('[data-tip]') : null; }
+  document.addEventListener('mouseover', function (e) { var el = target(e); if (el) show(el); });
+  document.addEventListener('mouseout', function (e) { var el = target(e); if (el && !el.contains(e.relatedTarget)) hide(); });
+  document.addEventListener('focusin', function (e) { var el = target(e); if (el) show(el); });
+  document.addEventListener('focusout', hide);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+  window.addEventListener('scroll', hide, { passive: true });
+})();
+
+(function () {
+  var NS = 'http://www.w3.org/2000/svg', svg = document.getElementById('chart');
+  var L = 52, R = 16, T = 16, B = 40, W = 640, H = 300, XMAX = 4, YMIN = -1.5, YMAX = 2.5;
+  function X(v) { return L + (W - L - R) * v / XMAX; }
+  function Y(v) { return T + (H - T - B) * (YMAX - v) / (YMAX - YMIN); }
+  var CASES = {
+    root: { s0: 1, c: 0.5, d: 0, mark: Math.SQRT2, root: true,
+      stop: 'σ = 1.41, where s crosses zero.', q: 'Zero. This is a root.', slope: 's′ = −1.41, not zero.',
+      jac: 'Full rank. The standard errors are valid.',
+      note: 'Danny’s just-identified leveraged run: criterion 10⁻²⁵, full rank.' },
+    weak: { s0: 1, c: 0.04, d: 0, mark: null, root: false,
+      stop: 'Nowhere in a plausible range. s reaches zero only at σ = 5.', q: 'Falls slowly and steadily as σ rises.',
+      slope: 'Tiny at every σ.', jac: 'Close to singular. Standard errors are enormous.',
+      note: 'The new-product count as the extra instrument: a shallow, monotone profile and σ of 6.5 or 11.' },
+    sign: { s0: 1, c: -0.3, d: 0, mark: 0, root: false,
+      stop: 'σ = 0. s moves away from zero as σ rises.', q: 'Positive.', slope: 's′(0) = 0, by symmetry.',
+      jac: 'Singular.',
+      note: 'The paper’s Table 2 column 3 looks like this: σ = 0.027 with a criterion of 0.576.' },
+    turn: { s0: 1, c: 0.5, d: 0.09, mark: Math.sqrt(0.5 / 0.18), root: false,
+      stop: 'σ = 1.67, where s is closest to zero without reaching it.', q: 'Positive.',
+      slope: 's′ = 0 at the turning point.', jac: 'Singular.',
+      note: 'Our Z² run: σ = 1.81 at a criterion of 2.11, with a singular covariance matrix.' }
+  };
+  function el(name, attrs, text) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    svg.appendChild(n); return n;
+  }
+  function draw(key) {
+    var c = CASES[key], i, v;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var defs = document.createElementNS(NS, 'defs'), cp = document.createElementNS(NS, 'clipPath'), rc = document.createElementNS(NS, 'rect');
+    cp.setAttribute('id', 'plotclip');
+    rc.setAttribute('x', L); rc.setAttribute('y', T); rc.setAttribute('width', W - L - R); rc.setAttribute('height', H - T - B);
+    cp.appendChild(rc); defs.appendChild(cp); svg.appendChild(defs);
+    for (v = -1; v <= 2; v++) {
+      el('line', { x1: L, x2: W - R, y1: Y(v), y2: Y(v), 'class': v === 0 ? 'zero' : 'axis' });
+      el('text', { x: L - 8, y: Y(v) + 4, 'text-anchor': 'end', 'class': 'lbl' }, String(v));
+    }
+    for (v = 0; v <= XMAX; v++) {
+      el('line', { x1: X(v), x2: X(v), y1: H - B, y2: H - B + 5, 'class': 'axis' });
+      el('text', { x: X(v), y: H - B + 20, 'text-anchor': 'middle', 'class': 'lbl' }, String(v));
+    }
+    el('line', { x1: L, x2: L, y1: T, y2: H - B, 'class': 'axis' });
+    el('text', { x: (L + W - R) / 2, y: H - 4, 'text-anchor': 'middle', 'class': 'lbl' }, 'σ (SD of fee tastes)');
+    el('text', { x: L + 6, y: T + 12, 'class': 'lbl' }, 's(σ): leftover moment');
+    var f = function (x) { return c.s0 - c.c * x * x + c.d * x * x * x * x; };
+    var path = '';
+    for (i = 0; i <= 200; i++) { v = XMAX * i / 200; path += (i ? 'L' : 'M') + X(v).toFixed(1) + ' ' + Y(f(v)).toFixed(1); }
+    el('path', { d: path, 'class': 'curve', 'clip-path': 'url(#plotclip)' });
+    if (c.mark != null) {
+      var sy = f(c.mark);
+      if (!c.root) el('line', { x1: X(c.mark), x2: X(c.mark), y1: Y(0), y2: Y(sy), 'class': 'gap' });
+      el('circle', { cx: X(c.mark), cy: Y(sy), r: 7, 'class': c.root ? 'dot root' : 'dot' });
+      var right = X(c.mark) < W - 200;
+      el('text', { x: X(c.mark) + (right ? 12 : -12), y: c.root ? Y(sy) - 12 : (sy > 0.6 ? Y(sy) + 24 : Y(0) + 20), 'text-anchor': right ? 'start' : 'end', 'class': 'mk' },
+        c.root ? 'GMM stops at a root' : 'GMM stops here, short of zero');
+    } else {
+      el('text', { x: W - R - 8, y: Y(f(XMAX)) - 12, 'text-anchor': 'end', 'class': 'mk' }, 'still above zero at σ = 4');
+    }
+    document.getElementById('r-stop').textContent = c.stop;
+    document.getElementById('r-q').textContent = c.q;
+    document.getElementById('r-slope').textContent = c.slope;
+    document.getElementById('r-jac').textContent = c.jac;
+    document.getElementById('r-note').textContent = c.note;
+    var bs = document.querySelectorAll('#presets button');
+    for (i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', bs[i].getAttribute('data-k') === key ? 'true' : 'false');
+  }
+  document.getElementById('presets').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (b) draw(b.getAttribute('data-k'));
+  });
+  draw('turn');
+})();
+</script>
