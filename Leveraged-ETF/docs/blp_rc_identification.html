@@ -368,8 +368,47 @@ mjx-container { margin: 0 !important }
 <h2>8. Where this leaves the paper</h2>
 <p>For passive funds, the heterogeneity in fee sensitivity is real, and equation (15) shows it is the same heterogeneity our fee × cheap interaction measures. The interaction has a first stage we can verify (F of 167). The random coefficient asks the same instruments for a second first stage that they do not have. Unless one of the instruments in Section 7 delivers that, the logit IV with the interaction is the specification the data can support, with the one-RC model reported as a sensitivity check.</p>
 
+<h2>9. The two parts of K: two experiments behind one coefficient</h2>
+<p>Equation (16) splits the within-fund variation in K into two terms. Each is a different experiment, and each needs a different kind of instrument. The random coefficient forces a single coefficient, σ², on both.</p>
+<div class="eqwrap"><div class="eq">
+<span class="t" tabindex="0" data-tip="K with fund and month means removed. In our sample the two terms on the right together have a correlation of 0.78 with it.">\(\displaystyle \tilde K_{jt}\)</span>
+<span>\(\approx\)</span>
+<span class="t" tabindex="0" data-tip="Own-fee term: the fund's own fee change, scaled by its fee level. Correlation with K̃ in our sample: 0.71.">\(\displaystyle \underbrace{\bar p_j\,\tilde p_{jt}}_{\text{own fee}}\)</span>
+<span>\(-\)</span>
+<span class="t" tabindex="0" data-tip="Market-position term: the fund's fee level times the movement in the market's share-weighted mean fee. Correlation of its negative with K̃ in our sample: 0.16.">\(\displaystyle \underbrace{\bar p_j\,\tilde e_t}_{\text{market position}}\)</span>
+<span class="n">(16)</span></div></div>
+<div class="tblwrap"><table>
+<thead><tr><th></th><th>Own-fee term</th><th>Market-position term</th></tr></thead>
+<tbody>
+<tr><td><strong>What moves</strong></td><td>The fund's own fee.</td><td>The market around the fund: the share-weighted mean fee e<sub>t</sub>, through rivals' fee cuts, entry of cheap funds and flows toward them.</td></tr>
+<tr><td><strong>The experiment</strong></td><td>Cut the fee by one basis point at a cheap fund and at an expensive fund. Compare the share gains.</td><td>Hold a fund's fee fixed while the rest of the market gets cheaper. Compare what happens to cheap and expensive funds.</td></tr>
+<tr><td><strong>What σ above zero predicts</strong></td><td>The cheap fund gains more. Its investors are the fee-sensitive ones.</td><td>The expensive fund holds up better than a logit predicts. Its investors are the ones who do not chase low fees, and its distance from the market average, (p − e)², has grown.</td></tr>
+<tr><td><strong>Instruments that isolate it</strong></td><td>A cost shifter interacted with the fee level: Z × cheap, Z × launch fee, Z².</td><td>Rival entry, exit and fee changes sorted by fee distance; differentiation instruments.</td></tr>
+<tr><td><strong>Main threat</strong></td><td>Z must be valid within each fee tier.</td><td>Any secular shift in demand toward cheap funds looks like this term with a negative sign.</td></tr>
+</tbody></table></div>
+<h3>What our data say about each term</h3>
+<p class="hint">Linear IV version of equation (13) on the 97,429 fund-months. Fund and month fixed effects, the three controls, standard errors clustered by month. Z is the share-class Hausman instrument. Run on 24 Nov 2026 (code/explore/step44_rc1_zcheap.py).</p>
+<div class="tblwrap"><table>
+<thead><tr><th>Regressor next to the fee</th><th>Excluded instruments</th><th>Coefficient (SE)</th><th>First-stage F</th><th>Sign of σ²</th></tr></thead>
+<tbody>
+<tr><td>Fee × launch fee (own-fee term only)</td><td>Z, Z × launch fee</td><td class="num">+92.9 (20.0)</td><td class="num"></td><td><span class="ok">positive</span></td></tr>
+<tr><td>p²/2 (curvature only)</td><td>Z, Z²</td><td class="num">+99.1 (51.3)</td><td class="num"></td><td><span class="ok">positive</span>, imprecise</td></tr>
+<tr><td>Full K</td><td>Z, Z × launch fee</td><td class="num">−64.6 (8.7)</td><td class="num">212</td><td><span class="no">negative</span></td></tr>
+<tr><td>Full K</td><td>Z, Z × cheap</td><td class="num">−266.3 (60.6)</td><td class="num">16</td><td><span class="no">negative</span></td></tr>
+<tr><td>Full K</td><td>Z, Z²</td><td class="num">−51.3 (14.4)</td><td class="num">22</td><td><span class="no">negative</span></td></tr>
+<tr><td>Full K, with month × cheap fixed effects</td><td>Z, Z × launch fee</td><td class="num">−49.4 (15.4)</td><td class="num"></td><td><span class="no">negative</span></td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>The own-fee term agrees with the cheap interaction.</strong> Entered alone, it says demand is steeper for funds with lower fees, which is the direction σ above zero implies. For reference, fee × cheap is −22.7 (0.8), and −42.0 (5.7) with month × cheap fixed effects.</li>
+<li><strong>The full K has the opposite sign with every instrument set.</strong> The market-position term drives this. The market mean fee e<sub>t</sub> fell from 0.19 in 2010 to 0.08 in 2024. A positive σ² predicts that expensive funds hold up better as that happens. The negative coefficient says they did worse than their own fees and the fixed effects explain.</li>
+<li><strong>One coefficient cannot fit both.</strong> The random coefficient ties the two terms to the same σ². The data want opposite signs. In the linear version, passive funds are therefore in the wrong-sign case of Section 4, where a normal random coefficient stops at σ = 0 with a positive criterion. The paper's 0.027 and the 0.049 in Danny's five-instrument fit are both close to zero.</li>
+<li><strong>What the second term does not show.</strong> Here it is identified from one market-wide time series interacted with the fee level. That cannot separate substitution patterns from a secular move toward cheap funds. A clean test of the rival-position channel needs variation in rival positions across funds within the same month, which is what near-versus-far entry and exit provides.</li>
+<li><strong>Entering the two terms separately does not settle it.</strong> With three instruments the estimates are −92.5 (36.1) on p²/2 and −69.1 (16.1) on −p·e<sub>t</sub>, but the first of these is +99 when it enters alone. Both terms are highly correlated with the fee itself (0.77 for K̃).</li>
+</ul>
+<p id="blp-status" class="hint">The matching BLP runs (normal and lognormal random coefficient, instruments Z and Z × cheap, no cheap term in utility) were still running when this version was published. Their results will be added as Section 10.</p>
+
 <footer>
-Sources: Danny's note "Demand GMM rank and the fifth instrument" (22 Nov 2026) for equations (12) and (17) and all five-IV numbers; Salanié and Wolak (2019) for the expansion in (13); Gandhi and Houde (2019) for differentiation instruments; our earlier runs (MAIN_REPORT_sharecl_hausman.md, section 3b) for the Z² and new-product results. Equations (10), (11) and (14)–(16) are derived here and have not been estimated on the data.
+Sources: Danny's note "Demand GMM rank and the fifth instrument" (22 Nov 2026) for equations (12) and (17) and all five-IV numbers; Salanié and Wolak (2019) for the expansion in (13); Gandhi and Houde (2019) for differentiation instruments; our earlier runs (MAIN_REPORT_sharecl_hausman.md, section 3b) for the Z² and new-product results. Equations (10), (11) and (14)–(16) are derived here. Section 9 reports linear-IV estimates of (13); the BLP model itself had not been re-estimated with these instruments when this version was written.
 </footer>
 </main>
 <div id="tip" role="tooltip" hidden></div>
