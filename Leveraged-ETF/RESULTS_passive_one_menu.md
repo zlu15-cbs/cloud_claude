@@ -106,9 +106,37 @@ Robustness, month effects:
 4. **The model is no longer static.** Lagged share in mean utility is a reduced form for investors who re-optimise
    rarely (about 2% of assets a month).
 
-## 7. Next steps
+## 7. BLP estimate of the inertia version (`T7-lag`)
 
-- BLP estimate of `T7-lag` (running): σ, its standard error, J, share of investors with a positive coefficient.
+pyblp, his 3,000 archived draws per month, fee random coefficient only, lagged log share ratio in mean utility,
+96,499 fund-months. One-step GMM finished. The two-step stage was stopped by the session's time limit after its
+first evaluation and was not restarted.
+
+| | One-step estimate |
+|---|---|
+| σ (fee random coefficient, monthly units) | 0.78 (0.16) |
+| Mean fee coefficient | −0.46 (0.12) |
+| Lag coefficient | 0.983 (0.002) |
+| Long-run mean fee coefficient, −0.46 / (1 − 0.983) | −26.4 |
+| Long-run σ, 0.78 / √(1 − 0.983) | 5.9 |
+| AUM-weighted own elasticity: monthly; long-run | −0.04; −2.5 |
+| Fund-months with a positive own elasticity | 0.4% |
+| Smallest scaled singular value of the Jacobian | 0.36 (Table 7: 0.70; Tables 8 and 10: 0.03) |
+| Profile over σ, 500 draws | interior minimum between 0.5 and 1 |
+
+- σ is significant here (t = 4.9), more so than in the linear screen (t = 2.6).
+- **J still rejects under his weighting.** With the heteroskedasticity-robust second-step weight that his package
+  uses, the criterion at the one-step σ is 31.8 on 3 df. That is an upper bound on J (the stage was not
+  minimized), against 144.4 for his Table 7. The J of 7.1 in §5 uses a month-clustered weight; the same statistic
+  for Table 7 is 60.7. Under either weight J falls by a factor of four or more, but only the clustered version
+  does not reject.
+- **Sign of individual coefficients.** Read literally, a normal coefficient with mean −0.46 and SD 0.78 is
+  positive for 28% of investors. Under the partial-adjustment reading (each month 1.7% of assets move toward a
+  static target with mean −26.4 and SD 5.9) almost none are. The data do not distinguish the two readings; the
+  second is an interpretation, not an estimate.
+
+## 7b. Next steps
+
 - A check on ρ that is free of the fixed-effect bias (first differences with lagged instruments).
 - If the inertia version is adopted, the same change for the leveraged sample.
 
