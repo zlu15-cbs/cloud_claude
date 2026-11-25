@@ -9,9 +9,9 @@ ours  Same problem as step44 lognormal: fee coefficient -exp(pi + sigma nu) < 0 
       (1) sigma = 0 exactly. The model is a logit with a fixed fee coefficient a = -exp(pi). With beta concentrated
           out, the criterion is the 2SLS quadratic q(a) = N gbar(a)' W gbar(a). Evaluated on a grid of a <= 0 and at
           the unconstrained minimum (which must match step44's normal profile at sigma = 0.001: a = +14.85, 354.8).
-      (2) sigma > 0. pyblp objective (no optimization) on a (sigma, pi) grid with DRAWS Monte Carlo draws, skipping
-          points with exp(pi + 3 sigma) > 150, plus step44's last good point (0.28373, 1.31343; 667.5 at 3,000 draws)
-          as a check on simulation noise.
+      (2) sigma > 0. pyblp objective and gradient (no optimization) at nine (sigma, pi) points with DRAWS Monte Carlo
+          draws, all with exp(pi + 3 sigma) <= 150, including step44's last good point (0.28373, 1.31343; 667.5 at
+          3,000 draws) as a check on simulation noise. Resumes from the CSV.
 danny Lognormal at the point that matches the mean and SD of his Table 7 step-1 normal fee coefficient
       N(-18.53, 2.239^2): sigma = sqrt(ln(1 + (sd/mean)^2)), pi = ln(mean) - sigma^2/2. One evaluation with his
       3,000 archived draws: objective (his normal RC: 100.87) and gradient.
@@ -62,9 +62,14 @@ def ours(procs, draws):
     lp.to_csv('step47_sigma0_profile.csv', index=False)
 
     integ = pyblp.Integration('monte_carlo', size=draws, specification_options={'seed': 623543})
-    grid = [(s, p) for s in (0.25, 0.5, 1.0, 1.5) for p in (-2.0, -1.0, 0.0, 1.0, 2.0, 3.0) if p + 3 * s <= 5.01]
-    grid = [(0.28372927543112303, 1.3134266506262935)] + grid
-    rows = []
+    # pi = 0 exactly would be read by pyblp as a fixed parameter, so the grid avoids it. Small sigma first, then a
+    # sparse set spanning larger dispersion (where a second basin would have to be).
+    grid = [(0.28372927543112303, 1.3134266506262935), (0.25, -2.0), (0.25, -1.0),
+            (0.5, -1.0), (0.5, 1.5), (1.0, -1.0), (1.0, 1.5), (1.5, -1.0), (1.5, 0.5)]
+    out = f'step47_lognormal_grid_d{draws}.csv'
+    rows = pd.read_csv(out).to_dict('records') if os.path.exists(out) else []
+    done = {(round(r['sigma'], 6), round(r['pi'], 6)) for r in rows}
+    grid = [g for g in grid if (round(g[0], 6), round(g[1], 6)) not in done]
     with pyblp.parallel(procs):
         ids, nodes, weights = integ._build_many(1, np.unique(d.market_ids))
         pr = pyblp.Problem((pyblp.Formulation('0 + ' + s44.X1C, absorb='C(product_ids) + C(market_ids)'),
@@ -77,13 +82,13 @@ def ours(procs, draws):
             e = res.extract_diagonals(res.compute_elasticities()).flatten()
             slope = e / d.prices.to_numpy()
             row = dict(sigma=s, pi=p, median_fee_coef=-np.exp(p), mean_fee_coef=-np.exp(p + s * s / 2),
-                       objective=float(res.objective), grad_sigma=float(res.gradient[0, 0]), grad_pi=float(res.gradient[1, 0]),
+                       objective=float(res.objective), grad_sigma=float(res.gradient.flat[0]), grad_pi=float(res.gradient.flat[1]),
                        contraction_converged=float(np.mean(res.fp_converged)), mean_e=float(e.mean()),
                        share_abs_e_gt1=float((np.abs(e) > 1).mean()), slope_cheap=float(slope[d.cheap == 1].mean()),
                        slope_noncheap=float(slope[d.cheap == 0].mean()), draws=draws, secs=round(time.time() - t))
             rows.append(row)
             print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()}, flush=True)
-            pd.DataFrame(rows).to_csv(f'step47_lognormal_grid_d{draws}.csv', index=False)
+            pd.DataFrame(rows).to_csv(out, index=False)
 
 
 def danny(pkg, procs):
