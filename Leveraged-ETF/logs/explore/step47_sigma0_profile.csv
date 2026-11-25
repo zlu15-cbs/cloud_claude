@@ -1,0 +1,14 @@
+a,pi,objective,note
+14.845084821274412,,354.8385781636131,unconstrained minimum (positive fee coefficient)
+0.0,-inf,546.3181457895276,"sigma = 0, sign-constrained"
+-0.1,-2.3025850929940455,548.9065377825815,"sigma = 0, sign-constrained"
+-0.5,-0.6931471805599453,559.4338806626971,"sigma = 0, sign-constrained"
+-1.0,0.0,572.9840528056234,"sigma = 0, sign-constrained"
+-2.0,0.6931471805599453,601.3877089007667,"sigma = 0, sign-constrained"
+-3.7,1.308332819650179,653.662058398924,"sigma = 0, sign-constrained"
+-5.0,1.6094379124341003,697.0251716604788,"sigma = 0, sign-constrained"
+-7.4,2.0014800002101243,784.7957559004956,"sigma = 0, sign-constrained"
+-10.0,2.302585092994046,891.1759245076532,"sigma = 0, sign-constrained"
+-15.0,2.70805020110221,1128.7704043310382,"sigma = 0, sign-constrained"
+-20.0,2.995732273553991,1409.8086111306409,"sigma = 0, sign-constrained"
+-30.0,3.4011973816621555,2102.2162056584953,"sigma = 0, sign-constrained"

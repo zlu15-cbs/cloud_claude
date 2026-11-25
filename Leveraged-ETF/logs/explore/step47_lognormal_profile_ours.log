@@ -1,0 +1,99 @@
+<class 'pandas.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), str(10)
+memory usage: 113.5 MB
+      a     pi  objective                                             note
+ 14.845    NaN    354.839 unconstrained minimum (positive fee coefficient)
+  0.000   -inf    546.318                      sigma = 0, sign-constrained
+ -0.100 -2.303    548.907                      sigma = 0, sign-constrained
+ -0.500 -0.693    559.434                      sigma = 0, sign-constrained
+ -1.000  0.000    572.984                      sigma = 0, sign-constrained
+ -2.000  0.693    601.388                      sigma = 0, sign-constrained
+ -3.700  1.308    653.662                      sigma = 0, sign-constrained
+ -5.000  1.609    697.025                      sigma = 0, sign-constrained
+ -7.400  2.001    784.796                      sigma = 0, sign-constrained
+-10.000  2.303    891.176                      sigma = 0, sign-constrained
+-15.000  2.708   1128.770                      sigma = 0, sign-constrained
+-20.000  2.996   1409.809                      sigma = 0, sign-constrained
+-30.000  3.401   2102.216                      sigma = 0, sign-constrained
+{'sigma': 0.2837, 'pi': 1.3134, 'median_fee_coef': np.float64(-3.7189), 'mean_fee_coef': np.float64(-3.8716), 'objective': 670.8771, 'grad_sigma': 80.6243, 'grad_pi': 143.5781, 'contraction_converged': 1.0, 'mean_e': -0.9149, 'share_abs_e_gt1': 0.3659, 'slope_cheap': -3.883, 'slope_noncheap': -3.5849, 'draws': 500, 'secs': 1032}
+{'sigma': 0.25, 'pi': -2.0, 'median_fee_coef': np.float64(-0.1353), 'mean_fee_coef': np.float64(-0.1396), 'objective': 550.0991, 'grad_sigma': 1.6134, 'grad_pi': 3.8074, 'contraction_converged': 1.0, 'mean_e': -0.036, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.1395, 'slope_noncheap': -0.1394, 'draws': 500, 'secs': 1023}
+{'sigma': 0.25, 'pi': -1.0, 'median_fee_coef': np.float64(-0.3679), 'mean_fee_coef': np.float64(-0.3796), 'objective': 556.7181, 'grad_sigma': 4.751, 'grad_pi': 10.5919, 'contraction_converged': 1.0, 'mean_e': -0.0975, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.3793, 'slope_noncheap': -0.3773, 'draws': 500, 'secs': 543}
+Traceback (most recent call last):
+  File "/home/user/cloud_claude/Leveraged-ETF/code/explore/step47_lognormal_profile.py", line 113, in <module>
+    ours(int(sys.argv[2]), int(sys.argv[3]))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/cloud_claude/Leveraged-ETF/code/explore/step47_lognormal_profile.py", line 80, in ours
+    objective=float(res.objective), grad_sigma=float(res.gradient[0, 0]), grad_pi=float(res.gradient[1, 0]),
+                                                                                        ~~~~~~~~~~~~^^^^^^
+IndexError: index 1 is out of bounds for axis 0 with size 1
+<class 'pandas.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), str(10)
+memory usage: 113.5 MB
+      a     pi  objective                                             note
+ 14.845    NaN    354.839 unconstrained minimum (positive fee coefficient)
+  0.000   -inf    546.318                      sigma = 0, sign-constrained
+ -0.100 -2.303    548.907                      sigma = 0, sign-constrained
+ -0.500 -0.693    559.434                      sigma = 0, sign-constrained
+ -1.000  0.000    572.984                      sigma = 0, sign-constrained
+ -2.000  0.693    601.388                      sigma = 0, sign-constrained
+ -3.700  1.308    653.662                      sigma = 0, sign-constrained
+ -5.000  1.609    697.025                      sigma = 0, sign-constrained
+ -7.400  2.001    784.796                      sigma = 0, sign-constrained
+-10.000  2.303    891.176                      sigma = 0, sign-constrained
+-15.000  2.708   1128.770                      sigma = 0, sign-constrained
+-20.000  2.996   1409.809                      sigma = 0, sign-constrained
+-30.000  3.401   2102.216                      sigma = 0, sign-constrained
+{'sigma': 0.5, 'pi': -1.0, 'median_fee_coef': np.float64(-0.3679), 'mean_fee_coef': np.float64(-0.4169), 'objective': 558.3821, 'grad_sigma': 8.7207, 'grad_pi': 12.4122, 'contraction_converged': 1.0, 'mean_e': -0.1042, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.4178, 'slope_noncheap': -0.4052, 'draws': 500, 'secs': 486}
+{'sigma': 0.5, 'pi': 1.5, 'median_fee_coef': np.float64(-4.4817), 'mean_fee_coef': np.float64(-5.0784), 'objective': 719.8723, 'grad_sigma': 62.008, 'grad_pi': 202.2177, 'contraction_converged': 1.0, 'mean_e': -0.9917, 'share_abs_e_gt1': 0.4202, 'slope_cheap': -5.0769, 'slope_noncheap': -3.9521, 'draws': 500, 'secs': 491}
+{'sigma': 1.0, 'pi': -1.0, 'median_fee_coef': np.float64(-0.3679), 'mean_fee_coef': np.float64(-0.6065), 'objective': 564.4045, 'grad_sigma': 12.8673, 'grad_pi': 16.7172, 'contraction_converged': 1.0, 'mean_e': -0.1272, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.6091, 'slope_noncheap': -0.5038, 'draws': 500, 'secs': 487}
+{'sigma': 1.0, 'pi': 1.5, 'median_fee_coef': np.float64(-4.4817), 'mean_fee_coef': np.float64(-7.3891), 'objective': 721.4305, 'grad_sigma': -35.8547, 'grad_pi': 194.0171, 'contraction_converged': 1.0, 'mean_e': -0.8178, 'share_abs_e_gt1': 0.3428, 'slope_cheap': -6.4002, 'slope_noncheap': -3.2922, 'draws': 500, 'secs': 484}
+{'sigma': 1.5, 'pi': -1.0, 'median_fee_coef': np.float64(-0.3679), 'mean_fee_coef': np.float64(-1.1331), 'objective': 568.1295, 'grad_sigma': 0.5998, 'grad_pi': 14.4754, 'contraction_converged': 1.0, 'mean_e': -0.1537, 'share_abs_e_gt1': 0.0, 'slope_cheap': -1.0234, 'slope_noncheap': -0.6166, 'draws': 500, 'secs': 483}
+{'sigma': 1.5, 'pi': 0.5, 'median_fee_coef': np.float64(-1.6487), 'mean_fee_coef': np.float64(-5.0784), 'objective': 605.6859, 'grad_sigma': -23.3703, 'grad_pi': 45.6914, 'contraction_converged': 1.0, 'mean_e': -0.3997, 'share_abs_e_gt1': 0.0, 'slope_cheap': -3.6047, 'slope_noncheap': -1.603, 'draws': 500, 'secs': 494}
+<class 'pandas.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), str(10)
+memory usage: 113.5 MB
+      a     pi  objective                                             note
+ 14.845    NaN    354.839 unconstrained minimum (positive fee coefficient)
+  0.000   -inf    546.318                      sigma = 0, sign-constrained
+ -0.100 -2.303    548.907                      sigma = 0, sign-constrained
+ -0.500 -0.693    559.434                      sigma = 0, sign-constrained
+ -1.000  0.000    572.984                      sigma = 0, sign-constrained
+ -2.000  0.693    601.388                      sigma = 0, sign-constrained
+ -3.700  1.308    653.662                      sigma = 0, sign-constrained
+ -5.000  1.609    697.025                      sigma = 0, sign-constrained
+ -7.400  2.001    784.796                      sigma = 0, sign-constrained
+-10.000  2.303    891.176                      sigma = 0, sign-constrained
+-15.000  2.708   1128.770                      sigma = 0, sign-constrained
+-20.000  2.996   1409.809                      sigma = 0, sign-constrained
+-30.000  3.401   2102.216                      sigma = 0, sign-constrained
+{'sigma': 2.0, 'pi': -1.0, 'median_fee_coef': np.float64(-0.3679), 'mean_fee_coef': np.float64(-2.7183), 'objective': 565.4433, 'grad_sigma': -9.7025, 'grad_pi': 9.0824, 'contraction_converged': 1.0, 'mean_e': -0.1756, 'share_abs_e_gt1': 0.0, 'slope_cheap': -1.6196, 'slope_noncheap': -0.7029, 'draws': 500, 'secs': 500}
+{'sigma': 2.5, 'pi': -2.5, 'median_fee_coef': np.float64(-0.0821), 'mean_fee_coef': np.float64(-1.8682), 'objective': 554.3026, 'grad_sigma': -4.2378, 'grad_pi': 2.8688, 'contraction_converged': 1.0, 'mean_e': -0.0893, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.8511, 'slope_noncheap': -0.3566, 'draws': 500, 'secs': 493}
+<class 'pandas.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), str(10)
+memory usage: 113.5 MB
+      a     pi  objective                                             note
+ 14.845    NaN    354.839 unconstrained minimum (positive fee coefficient)
+  0.000   -inf    546.318                      sigma = 0, sign-constrained
+ -0.100 -2.303    548.907                      sigma = 0, sign-constrained
+ -0.500 -0.693    559.434                      sigma = 0, sign-constrained
+ -1.000  0.000    572.984                      sigma = 0, sign-constrained
+ -2.000  0.693    601.388                      sigma = 0, sign-constrained
+ -3.700  1.308    653.662                      sigma = 0, sign-constrained
+ -5.000  1.609    697.025                      sigma = 0, sign-constrained
+ -7.400  2.001    784.796                      sigma = 0, sign-constrained
+-10.000  2.303    891.176                      sigma = 0, sign-constrained
+-15.000  2.708   1128.770                      sigma = 0, sign-constrained
+-20.000  2.996   1409.809                      sigma = 0, sign-constrained
+-30.000  3.401   2102.216                      sigma = 0, sign-constrained
+{'sigma': 3.0, 'pi': -4.0, 'median_fee_coef': np.float64(-0.0183), 'mean_fee_coef': np.float64(-1.6487), 'objective': 550.0267, 'grad_sigma': -2.0537, 'grad_pi': 1.1525, 'contraction_converged': 1.0, 'mean_e': -0.0507, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.5055, 'slope_noncheap': -0.2021, 'draws': 500, 'secs': 485}
+{'sigma': 3.0, 'pi': -3.0, 'median_fee_coef': np.float64(-0.0498), 'mean_fee_coef': np.float64(-4.4817), 'objective': 551.0558, 'grad_sigma': -5.0632, 'grad_pi': 0.8606, 'contraction_converged': 1.0, 'mean_e': -0.0837, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.9381, 'slope_noncheap': -0.3321, 'draws': 500, 'secs': 482}
+{'sigma': 3.5, 'pi': -5.5, 'median_fee_coef': np.float64(-0.0041), 'mean_fee_coef': np.float64(-1.8682), 'objective': 548.0653, 'grad_sigma': -1.0744, 'grad_pi': 0.5546, 'contraction_converged': 1.0, 'mean_e': -0.0315, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.3304, 'slope_noncheap': -0.125, 'draws': 500, 'secs': 491}
+{'sigma': 4.0, 'pi': -7.0, 'median_fee_coef': np.float64(-0.0009), 'mean_fee_coef': np.float64(-2.7183), 'objective': 547.045, 'grad_sigma': -0.7653, 'grad_pi': 0.24, 'contraction_converged': 1.0, 'mean_e': -0.021, 'share_abs_e_gt1': 0.0, 'slope_cheap': -0.2327, 'slope_noncheap': -0.0831, 'draws': 500, 'secs': 492}

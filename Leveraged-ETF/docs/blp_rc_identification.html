@@ -72,7 +72,7 @@ mjx-container { margin: 0 !important }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js" async></script>
 
 <main>
-<p class="kicker">Passive fund demand · note for Gene, 23 Nov 2026</p>
+<p class="kicker">Passive fund demand · note for Gene, 23 Nov 2026 · Section 10 added 25 Nov</p>
 <h1>Why a just-identified BLP may not pin down the random coefficient on the expense ratio</h1>
 <p class="lede">A walk from the optimization problem to the moment conditions, to the rank deficiency Danny reports, to which instruments would identify the random coefficient.</p>
 <p class="hint">Hover over, or tap, any dotted-underlined symbol to see its definition. Passages on a yellow ground are the points Danny's note makes.</p>
@@ -84,6 +84,7 @@ mjx-container { margin: 0 !important }
 <li>If they have no solution, the optimizer stops at a point where the moments are not zero. The Jacobian is always singular at such a point. <mark>This is the rank deficiency Danny describes.</mark></li>
 <li>Whether a solution exists depends on the instruments. The random coefficient needs an instrument that moves fees differently for high-fee and low-fee funds, or that shifts which rivals sit close in fee. An instrument that only shifts the fee level does not identify it.</li>
 <li><mark>Danny's extra instrument</mark> removes the algebraic obstacle. It does not by itself make the random coefficient well identified: for passive funds its standard error is still several hundred times the estimate.</li>
+<li><a href="#sec10">Section 10</a> estimates the full BLP model. A sign-constrained (lognormal) random coefficient does not help. With our instruments its best fit is zero fee sensitivity. In Danny's fee-only fit (Table 7) the constraint does not bind, and his σ there is fragile for other reasons.</li>
 </ul>
 </div>
 
@@ -405,10 +406,93 @@ mjx-container { margin: 0 !important }
 <li><strong>What the second term does not show.</strong> Here it is identified from one market-wide time series interacted with the fee level. That cannot separate substitution patterns from a secular move toward cheap funds. A clean test of the rival-position channel needs variation in rival positions across funds within the same month, which is what near-versus-far entry and exit provides.</li>
 <li><strong>Entering the two terms separately does not settle it.</strong> With three instruments the estimates are −92.5 (36.1) on p²/2 and −69.1 (16.1) on −p·e<sub>t</sub>, but the first of these is +99 when it enters alone. Both terms are highly correlated with the fee itself (0.77 for K̃).</li>
 </ul>
-<p id="blp-status" class="hint">The matching BLP runs (normal and lognormal random coefficient, instruments Z and Z × cheap, no cheap term in utility) were still running when this version was published. Their results will be added as Section 10.</p>
+<h2 id="sec10">10. The full BLP model: normal and sign-constrained random coefficients</h2>
+<p>Section 9 used the linear version. This section estimates the BLP model itself, with one random coefficient on the expense ratio, on two datasets. Estimation is one-step GMM with the 2SLS weight throughout, so criteria can be compared within a dataset.</p>
+<div class="tblwrap"><table>
+<thead><tr><th></th><th>Our data</th><th>Danny's package (24 Nov)</th></tr></thead>
+<tbody>
+<tr><td><strong>Sample</strong></td><td>97,429 passive fund-months</td><td>98,110 passive fund-months, 1,063 share classes</td></tr>
+<tr><td><strong>Excluded instruments</strong></td><td>Z and Z × cheap</td><td>His five (IV0–IV4)</td></tr>
+<tr><td><strong>Utility</strong></td><td colspan="2">Fee, tracking error, past return, log age; fund and month fixed effects. No cheap term.</td></tr>
+<tr><td><strong>Moments, parameters</strong></td><td>5 and 5: just identified</td><td>8 and 5</td></tr>
+</tbody></table></div>
+<p>Two families for the fee coefficient of investor i:</p>
+<div class="eqwrap"><div class="eq">
+<span>normal:</span>
+<span class="t" tabindex="0" data-tip="Mean fee coefficient α plus σ times a standard normal draw. Some investors have a positive fee coefficient whenever σ is large relative to |α|.">\(\displaystyle \alpha_i = \alpha + \sigma\nu_i\)</span>
+<span>\(,\qquad\)</span>
+<span>lognormal:</span>
+<span class="t" tabindex="0" data-tip="Negative for every investor. exp(π) is the median fee sensitivity, σ its dispersion. σ = 0 is plain logit with coefficient −exp(π); the coefficient reaches zero only as π → −∞.">\(\displaystyle \alpha_i = -\exp(\pi + \sigma\nu_i) < 0\)</span>
+<span class="n">(18)</span></div></div>
+
+<h3>Our instruments: the data want an upward-sloping fee response</h3>
+<p class="hint">Our data, instruments Z and Z × cheap. "Criterion" is the one-step GMM objective. Logit rows (σ = 0) are exact, with β concentrated out. Rows with σ above 0 use 500 Monte Carlo draws. At the 3,000 draws of the step44 runs the first such point gives 667.5, against 670.9 here, so simulation noise is a few units. Code: step44_rc1_zcheap.py and step47_lognormal_profile.py, 25 Nov 2026.</p>
+<div class="tblwrap"><table>
+<thead><tr><th>Model</th><th>Fee coefficient</th><th class="num">Criterion</th><th>Demand</th></tr></thead>
+<tbody>
+<tr><td>Normal RC at its minimum</td><td>mean +14.85, σ 0.216</td><td class="num">354.7</td><td><span class="no">upward-sloping</span> for every fund-month</td></tr>
+<tr><td>Logit, sign free</td><td>+14.85</td><td class="num">354.8</td><td><span class="no">upward-sloping</span></td></tr>
+<tr><td>Logit, sign imposed</td><td>−10</td><td class="num">891</td><td>downward</td></tr>
+<tr><td></td><td>−3.7</td><td class="num">654</td><td>downward</td></tr>
+<tr><td></td><td>−1</td><td class="num">573</td><td>downward</td></tr>
+<tr><td></td><td>0 (limit)</td><td class="num">546</td><td><span class="no">flat</span>: no response to fees</td></tr>
+</tbody></table></div>
+<p class="hint">The 15 lognormal points, ordered by σ. "Median, mean" is the fee coefficient. "Logit, same mean" is the exact σ = 0 criterion at the lognormal's mean coefficient. A positive gradient in π means a smaller median coefficient lowers the criterion.</p>
+<div class="tblwrap"><table>
+<thead><tr><th>σ</th><th>π</th><th>Median, mean</th><th class="num">Criterion</th><th>Logit, same mean</th><th>Gradient σ, π</th></tr></thead>
+<tbody>
+<tr><td class="num">0.25</td><td class="num">−2.0</td><td>−0.14, −0.14</td><td class="num">550.1</td><td class="num">549.9</td><td>+1.6, +3.8</td></tr>
+<tr><td class="num">0.25</td><td class="num">−1.0</td><td>−0.37, −0.38</td><td class="num">556.7</td><td class="num">556.2</td><td>+4.8, +10.6</td></tr>
+<tr><td class="num">0.28</td><td class="num">1.31</td><td>−3.72, −3.87</td><td class="num">670.9</td><td class="num">659.2</td><td>+80.6, +143.6</td></tr>
+<tr><td class="num">0.5</td><td class="num">−1.0</td><td>−0.37, −0.42</td><td class="num">558.4</td><td class="num">557.2</td><td>+8.7, +12.4</td></tr>
+<tr><td class="num">0.5</td><td class="num">1.5</td><td>−4.48, −5.08</td><td class="num">719.9</td><td class="num">699.7</td><td>+62.0, +202.2</td></tr>
+<tr><td class="num">1.0</td><td class="num">−1.0</td><td>−0.37, −0.61</td><td class="num">564.4</td><td class="num">562.3</td><td>+12.9, +16.7</td></tr>
+<tr><td class="num">1.0</td><td class="num">1.5</td><td>−4.48, −7.39</td><td class="num">721.4</td><td class="num">784.4</td><td>−35.9, +194.0</td></tr>
+<tr><td class="num">1.5</td><td class="num">−1.0</td><td>−0.37, −1.13</td><td class="num">568.1</td><td class="num">576.7</td><td>+0.6, +14.5</td></tr>
+<tr><td class="num">1.5</td><td class="num">0.5</td><td>−1.65, −5.08</td><td class="num">605.7</td><td class="num">699.7</td><td>−23.4, +45.7</td></tr>
+<tr><td class="num">2.0</td><td class="num">−1.0</td><td>−0.37, −2.72</td><td class="num">565.4</td><td class="num">622.9</td><td>−9.7, +9.1</td></tr>
+<tr><td class="num">2.5</td><td class="num">−2.5</td><td>−0.08, −1.87</td><td class="num">554.3</td><td class="num">597.5</td><td>−4.2, +2.9</td></tr>
+<tr><td class="num">3.0</td><td class="num">−3.0</td><td>−0.05, −4.48</td><td class="num">551.1</td><td class="num">679.4</td><td>−5.1, +0.9</td></tr>
+<tr><td class="num">3.0</td><td class="num">−4.0</td><td>−0.02, −1.65</td><td class="num">550.0</td><td class="num">591.2</td><td>−2.1, +1.2</td></tr>
+<tr><td class="num">3.5</td><td class="num">−5.5</td><td>−0.004, −1.87</td><td class="num">548.1</td><td class="num">597.5</td><td>−1.1, +0.6</td></tr>
+<tr><td class="num">4.0</td><td class="num">−7.0</td><td>−0.001, −2.72</td><td class="num">547.0</td><td class="num">622.9</td><td>−0.8, +0.2</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>The normal RC fails on the mean, not on the dispersion.</strong> Its minimum has a mean fee coefficient of +14.85, and every own elasticity is positive. Its criterion equals plain logit's (354.7 against 354.8), so the random coefficient adds nothing. Its column of the Jacobian depends linearly on the others (the smallest scaled singular value is 1.5 × 10<sup>−8</sup>). This is the no-root case of Section 4.</li>
+<li><strong>The lognormal keeps every coefficient negative, and then the fit improves as fee sensitivity goes to zero.</strong> With σ = 0 the criterion falls from 891 at a coefficient of −10 to 546 at zero. Every one of the 15 points with dispersion is above 546. The gradient in π is positive at all of them, so a smaller median coefficient always fits better. At large σ, dispersion does beat plain logit at the same mean coefficient (606 against 700 at σ = 1.5 and a mean of −5.1). Along the path that does best, though, the median coefficient goes to zero. A shrinking group of very fee-sensitive investors then simply chooses the outside option, which the month fixed effects absorb. On that path the criterion falls from 554 at σ = 2.5 to 547 at σ = 4, toward the same limit of 546 and never below it. The mean elasticity there is −0.02. The sign-constrained estimate therefore runs to the boundary: no fee sensitivity, and no identified dispersion. It replaces the normal RC's corner with another.</li>
+<li><strong>Why.</strong> With no cheap term in utility, the random coefficient is the only way the model can make cheap funds' demand steeper. Section 9 showed that these instruments, through K, ask for the opposite curvature. A normal random coefficient responds by flipping the sign of the mean. A lognormal cannot do that, so it shrinks the coefficient toward zero instead.</li>
+</ul>
+
+<h3>Danny's instruments: the sign constraint does not bind in Table 7, and his σ is fragile for other reasons</h3>
+<p class="hint">Danny's prepared data and his 3,000 archived draws per month, read without running his code. We reproduce his Table 7 step-1 criterion: 100.8708, against his 100.87. Linear-version rows: step46_danny_iv_checks.py. Code for the lognormal: step47_lognormal_profile.py.</p>
+<ul>
+<li><strong>His normal coefficient is already negative for every investor.</strong> At his step-1 estimate the fee coefficient is N(−18.5, 2.24²), eight standard deviations below zero. A lognormal with the same mean and SD (σ = 0.120, π = 2.912) gives a criterion of 101.7. The gradient points to slightly more dispersion, so the lognormal minimum lies a little below that. The elasticities of the 15 Table 5 funds are the same in both models: the largest gap is 0.07, at a 40-basis-point fund, and 6 of the 15 have |e| above 1 in each. The constraint is not binding, so it cannot change his results.</li>
+</ul>
+<div class="tblwrap"><table>
+<thead><tr><th>Check on Danny's data and instruments</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>J statistic, Table 7 (step 2)</td><td>144.4 on 3 df (p ≈ 4 × 10<sup>−31</sup>). All eight of his fits, passive and leveraged, reject.</td></tr>
+<tr><td>Linear version, all five instruments</td><td>σ² = +3.07 (1.53): positive, as in Table 7.</td></tr>
+<tr><td>Linear version, IV0 plus one other instrument</td><td>With IV1: −14.9 (3.8). With IV3: −57.4 (19.5). With IV4: −12.8 (3.4). With IV2: not identified. <span class="no">Every pair that identifies σ² gives a negative value.</span></td></tr>
+<tr><td>Linear version, with the age term added</td><td>Fee σ² −12.7 (3.0); age +1.43 (0.26).</td></tr>
+<tr><td>BLP with an age random coefficient (Tables 8 and 10)</td><td>σ<sub>fee</sub> 0.049 (20.5) and 0.040 (24.3). The smallest scaled singular value is 0.03, against 0.70 in Table 7.</td></tr>
+<tr><td>Fee slope from each instrument alone (logit IV)</td><td>IV0 −5.7 (F 40); IV1 −17.3 (F 343); IV2 −28.2 (F 118); IV3 −82.6 (F 6); IV4 −15.9 (F 89).</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>The positive σ in Table 7 comes from combining all five instruments.</strong> Each pair gives the wrong sign, J rejects, and σ collapses to zero once age has its own random coefficient. In Tables 8 and 10 the fee random coefficient sits at the zero-dispersion corner. A lognormal shares that corner, because σ = 0 is the same model in both families, so it cannot help there either.</li>
+<li><strong>The mean fee slope of about −18, and the average elasticity of about −4, come mainly from IV1</strong>, the strongest single instrument.</li>
+</ul>
+
+<div class="box">
+<h3>What this means</h3>
+<ul>
+<li>A sign constraint rules out upward-sloping demand. It does not identify dispersion. With our instruments it pushes fee sensitivity to zero. With Danny's it does not bind in Table 7, and it cannot leave the zero-dispersion corner of Tables 8 and 10.</li>
+<li>For passive funds, the options from Section 8 stand: the logit IV with the fee × cheap interaction, or no passive fee random coefficient. To identify investor-level fee heterogeneity would take moments that measure substitution directly, such as where AUM goes after a certified liquidation, or investor-type micro moments.</li>
+</ul>
+</div>
 
 <footer>
-Sources: Danny's note "Demand GMM rank and the fifth instrument" (22 Nov 2026) for equations (12) and (17) and all five-IV numbers; Salanié and Wolak (2019) for the expansion in (13); Gandhi and Houde (2019) for differentiation instruments; our earlier runs (MAIN_REPORT_sharecl_hausman.md, section 3b) for the Z² and new-product results. Equations (10), (11) and (14)–(16) are derived here. Section 9 reports linear-IV estimates of (13); the BLP model itself had not been re-estimated with these instruments when this version was written.
+Sources: Danny's note "Demand GMM rank and the fifth instrument" (22 Nov 2026) for equations (12) and (17) and all five-IV numbers; Salanié and Wolak (2019) for the expansion in (13); Gandhi and Houde (2019) for differentiation instruments; our earlier runs (MAIN_REPORT_sharecl_hausman.md, section 3b) for the Z² and new-product results. Equations (10), (11) and (14)–(16) are derived here. Section 9 reports linear-IV estimates of (13). Section 10 estimates the BLP model on our data and evaluates it on Danny's Tables 7–10 package of 24 Nov 2026. From that package we read only the prepared data and archived draws; his code was not run. Equation (18) is the standard lognormal random coefficient.
 </footer>
 </main>
 <div id="tip" role="tooltip" hidden></div>

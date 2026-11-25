@@ -2,7 +2,7 @@
 
 Source: `P16_LeverageMKT/Data/tables7_10_replication_20261124.zip`, which contains the Section 3 PDF, the prepared samples, the five instruments, and the archived fits.
 
-Our checks are in `code/explore/step46_danny_iv_checks.py`, with output in `logs/explore/step46_danny_iv_checks.log`. The script reads only his prepared arrays and runs none of his code. The numbers below are his archived fits unless marked "our check".
+Our checks are in `code/explore/step46_danny_iv_checks.py`, with output in `logs/explore/step46_danny_iv_checks.log`. The lognormal runs (25 Nov) are in `step45_lognormal_danny.py` and `step47_lognormal_profile.py`, with output in `logs/explore/step45_*` and `step47_*`. The script reads only his prepared arrays and runs none of his code. The numbers below are his archived fits unless marked "our check".
 
 ## 1. What his Slack message means
 
@@ -110,7 +110,7 @@ The RC forces one σ² on both channels.
 
 A normal RC cannot have σ² < 0. When the data want a negative value, the estimator stops at σ ≈ 0 with a positive criterion: the "wrong-sign case" in Section 4 of the explainer.
 
-**Correction to the explainer page.** It said "the 0.049 in Danny's five-instrument fit". That number is his fee + age fit (Table 8); Table 10 gives 0.040. His fee-only five-IV fit (Table 7) gives σ = 1.875 (0.367), which is away from zero but fragile, as shown in §2. The page is corrected in the next version.
+**Correction to the explainer page.** It said "the 0.049 in Danny's five-instrument fit". That number is his fee + age fit (Table 8); Table 10 gives 0.040. His fee-only five-IV fit (Table 7) gives σ = 1.875 (0.367), which is away from zero but fragile, as shown in §2. The page is now corrected (25 Nov).
 
 **How to solve it, and what does not work:**
 
@@ -119,7 +119,7 @@ A normal RC cannot have σ² < 0. When the data want a negative value, the estim
 | Fund-specific linear trends, to remove the secular move to cheap funds | **Does not work.** σ² stays negative: −28.4 (8.4). The fee slope collapses to −1.3 (2.0) because fees trend within fund. |
 | Month × cheap fixed effects | **Does not work.** σ² = −49.4 (15.4). |
 | Month × launch-fee-quintile fixed effects | Absorbs the variation; nothing is identified. |
-| Sign-constrained (lognormal) RC | Running on both our data (Z, Z × cheap) and Danny's (five IVs). It keeps every investor's fee coefficient negative, which normal RCs with σ ≈ 2 nearly do anyway. If the data want σ² < 0, it should also go to σ ≈ 0. Results will be added here and to the explainer page. |
+| Sign-constrained (lognormal) RC | **Does not work** (run 25 Nov; explainer Section 10). *Our data, Z and Z × cheap:* unconstrained logit gives fee coefficient +14.85 (criterion 354.8), and the normal RC stops at mean +14.85, σ 0.216 (354.7), so demand slopes up everywhere. With every coefficient forced negative, the fit improves as fee sensitivity goes to zero: logit criterion 891 at −10, 654 at −3.7, 546 at 0. All 15 lognormal points with σ > 0 are above 546, with a positive π gradient. The best path (σ up to 4, median coefficient → 0) falls 554 → 547 toward 546, never below; mean elasticity there is −0.02. *Danny's data, five IVs:* the constraint does not bind. His Table 7 coefficient N(−18.5, 2.24²) is negative for every investor; the matched lognormal (σ 0.120, π 2.912) gives 101.7 vs his 100.87, with the same 15-fund elasticities (largest gap 0.07). In Tables 8 and 10 the corner is zero dispersion, which a lognormal shares. |
 | Drop the passive fee RC; keep age and return RCs | The honest reading of Danny's Tables 8 and 10. It removes the near-singular direction and costs nothing: the fit is the same. |
 | Fee heterogeneity as product heterogeneity (our cheap × fee slope) | Fits the own-fee channel directly. It does not claim investor heterogeneity, which these data cannot separate from product differences. |
 | Substitution evidence: diversion moments from certified liquidations | The real fix if investor-level fee heterogeneity is needed. When a fund exits, where does its AUM go: to near or far funds in fee? Danny already uses these exits as IV4; used as a moment, they measure substitution directly. Investor-type micro moments (institutional vs retail AUM by fee tier) would also work. |
@@ -133,3 +133,4 @@ Ask Gene before sending.
 3. The mean elasticity of −4 rests on IV1. It is built from the fund's own lagged fee; what is the argument for its exclusion?
 4. For passive funds, fix σ_fee = 0 in Tables 8 and 10 rather than report 0.040 (24.3).
 5. The largest funds (VOO, IVV, VTI, VFIAX) have |e| ≈ 0.4–0.7. PC conduct is consistent with that, but the Bertrand rejection partly reflects it.
+6. A lognormal (sign-constrained) fee RC is not a fix. In Table 7 the constraint never binds: the lognormal matched to his coefficient gives criterion 101.7 vs 100.87 and the same elasticities. In Tables 8 and 10 the fee RC is at zero dispersion, which a lognormal shares.

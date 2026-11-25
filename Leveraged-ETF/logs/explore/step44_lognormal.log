@@ -1,0 +1,16 @@
+<class 'pandas.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), str(10)
+memory usage: 113.5 MB
+lognormal_s0.5_p2.3: N=97,429; start sigma 0.5000 pi 2.3000 (0 checkpointed evaluations)
+  eval 1: theta [0.5, 2.3] obj 1009.33
+  eval 2: theta [0.28373, 1.31343] obj 667.496
+=== restart 01:50 with bounds, resuming from checkpoint
+<class 'pandas.DataFrame'>
+Index: 108300 entries, 500 to 579513
+Columns: 114 entries, market_m_index to rotator
+dtypes: float64(87), int64(17), str(10)
+memory usage: 113.5 MB
+lognormal_s0.5_p2.3: N=97,429; start sigma 0.2837 pi 1.3134 (2 checkpointed evaluations)
+  eval 3: theta [0.28373, 1.31343] obj 667.496
