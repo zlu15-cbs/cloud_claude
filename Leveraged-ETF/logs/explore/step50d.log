@@ -1,0 +1,31 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+
+Two segments, month x ETF FE
+S2 logit                           prices -1.222 (0.572) F 50.6; p_etf -14.315 (1.287) F 68.2; J 98.5 on 5 df
+S2 with K                          prices -8.487 (1.452) F 31.1; p_etf -35.480 (3.599) F 61.6; K +54.514 (7.589) F 11.0; J 40.7 on 4 df
+S2 split (p^2/2, -p e_t)           prices -11.067 (1.015) F 37.1; p_etf -19.302 (3.133) F 75.3; pp2 +38.682 (5.457) F 7.5; mpe +2.836 (9.213) F 26.1; J 41.0 on 3 df
+S2 + age K                         prices -8.395 (1.459) F 37.6; p_etf -35.562 (3.645) F 27.7; K +54.252 (7.451) F 11.1; Ka -0.080 (0.359) F 160.6; J 42.2 on 3 df
+S2 with K, all five x segment (10 IVs) prices +3.377 (0.959) F 39.4; p_etf -24.289 (2.190) F 48.3; K +13.706 (5.155) F 25.1; J 140.0 on 7 df
+S2 logit, all five x segment (10 IVs) prices +4.683 (0.576) F 48.6; p_etf -18.656 (1.159) F 43.5; J 146.3 on 8 df
+S2 with K, IV0 and IV1 x segment (just identified + 1) prices -6.090 (1.852) F 33.3; p_etf -31.078 (3.174) F 102.1; K +37.594 (9.833) F 16.8; J 1.8 on 1 df
+S2 with K, IV0 and IV2 x segment (just identified + 1) prices +8.892 (1.533) F 98.0; p_etf +33.786 (5.913) F 36.3; K -73.280 (9.581) F 20.0; J 14.1 on 1 df
+S2 with K, IV0 and IV3 x segment (just identified + 1) prices +8.853 (3.419) F 31.9; p_etf +15.990 (8.579) F 17.8; K -68.169 (22.494) F 5.5; J 34.1 on 1 df
+S2 with K, IV0 and IV4 x segment (just identified + 1) prices -9.472 (5.531) F 25.5; p_etf -45.591 (15.474) F 19.7; K +71.061 (43.556) F 4.3; J 13.7 on 1 df
+
+ETF rows only (K built from the whole market), fund + month FE, five IVs
+ETF only, logit                    prices -13.633 (0.994) F 75.6; J 124.5 on 4 df
+ETF only, with K                   prices -73.189 (12.693) F 3.4; K +116.069 (23.191) F 2.5; J 9.8 on 3 df
+ETF only, split                    prices -54.558 (34.303) F 0.7; pp2 +85.568 (55.537) F 0.9; mpe +65.332 (93.948) F 0.7; J 18.2 on 2 df
+ETF only, + age K                  prices -81.811 (12.752) F 4.4; K +135.706 (22.619) F 3.3; Ka +0.909 (0.439) F 171.4; J 0.0 on 2 df
+ETF only, with K, IV0 + IV1        prices -46.990 (16.716) F 2.3; K +58.735 (35.359) F 1.8; just identified
+ETF only, with K, IV0 + IV2        prices +187.587 (374.723) F 0.1; K -306.074 (611.982) F 0.1; just identified
+ETF only, with K, IV0 + IV3        prices -73.927 (65.389) F 1.0; K +100.628 (111.939) F 1.0; just identified
+ETF only, with K, IV0 + IV4        prices -61.120 (22.293) F 3.3; K +80.711 (45.593) F 2.4; just identified
+
+Mutual-fund rows only, fund + month FE, five IVs
+mutual-fund classes only, logit    prices +4.426 (0.585) F 67.8; J 99.5 on 4 df
+mutual-fund classes only, with K   prices +9.590 (1.446) F 68.2; K -53.039 (7.262) F 50.4; J 43.9 on 3 df
+
+S2 logit: slope mutual fund -1.22, ETF -15.54; AUM-weighted elasticity, last month: mutual fund -0.06, ETF -1.82; all months -1.33

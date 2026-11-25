@@ -1,0 +1,21 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+
+Mutual-fund product = portfolio: 334 products from 469 classes; fund-months 32,516; with more than one class 0.213; months with a fee change 0.234
+portfolio: mutual funds only, logit, five IVs prices +1.284 (0.366) F 80.5; J 117.0 on 4 df
+portfolio: mutual funds only, logit, IV0 alone prices -0.154 (0.364) F 118.1; just identified
+portfolio: mutual funds only, before 2019, five IVs prices -1.941 (0.440) F 41.2; J 75.8 on 4 df
+portfolio: mutual funds only, 2019 on, five IVs prices +0.781 (0.467) F 74.0; J 28.1 on 4 df
+portfolio: mutual funds only, with K prices +17.002 (1.649) F 46.2; K -94.215 (7.754) F 45.3; J 9.5 on 3 df
+portfolio: S2 logit                prices -2.772 (0.516) F 74.2; p_etf -13.628 (1.292) F 68.1; J 102.1 on 5 df
+portfolio: S2 with K               prices -11.939 (1.983) F 26.4; p_etf -29.312 (3.428) F 30.7; K +47.403 (9.258) F 5.2; J 66.2 on 4 df
+
+Mutual-fund product = portfolio x access: 379 products from 469 classes; fund-months 36,580; with more than one class 0.134; months with a fee change 0.157
+portfolio x access: mutual funds only, logit, five IVs prices +2.391 (0.428) F 99.2; J 115.5 on 4 df
+portfolio x access: mutual funds only, logit, IV0 alone prices -0.340 (0.393) F 132.0; just identified
+portfolio x access: mutual funds only, before 2019, five IVs prices -2.409 (0.515) F 34.8; J 71.7 on 4 df
+portfolio x access: mutual funds only, 2019 on, five IVs prices +1.030 (0.606) F 62.7; J 25.5 on 4 df
+portfolio x access: mutual funds only, with K prices +15.846 (1.708) F 56.0; K -90.763 (8.116) F 49.7; J 4.4 on 3 df
+portfolio x access: S2 logit       prices -2.328 (0.571) F 82.8; p_etf -14.140 (1.323) F 69.4; J 91.7 on 5 df
+portfolio x access: S2 with K      prices -10.661 (1.895) F 30.0; p_etf -29.799 (3.340) F 39.6; K +45.991 (8.852) F 5.9; J 58.8 on 4 df

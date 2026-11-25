@@ -1,0 +1,51 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+
+1. Fee level and variation by access (0 retail, 1 institutional, 2 ETF); fee in the units of `prices`
+  access 0: classes  180, fund-months 18,028, mean AUM share 0.258; fee p10/p50/p90 0.0500/0.1200/0.4500, AUM-weighted 0.0815; within SD 0.0337; months with a fee change 0.025
+  access 1: classes  289, fund-months 23,668, mean AUM share 0.242; fee p10/p50/p90 0.0350/0.0800/0.3400, AUM-weighted 0.0664; within SD 0.0252; months with a fee change 0.028
+  access 2: classes  594, fund-months 56,414, mean AUM share 0.500; fee p10/p50/p90 0.0600/0.2500/0.5900, AUM-weighted 0.1605; within SD 0.0371; months with a fee change 0.030
+
+2. Logit IV by access, alone (fund + month FE, five IVs)
+logit, retail only                 prices -0.104 (0.347) F 101.2; J 107.7 on 4 df
+logit, institutional only          prices +12.974 (1.421) F 50.7; J 93.3 on 4 df
+logit, ETF only                    prices -13.633 (0.994) F 75.6; J 124.5 on 4 df
+   retail only, one instrument at a time
+logit, retail, IV0 alone           prices -1.912 (0.316) F 273.0; just identified
+logit, retail, IV1 alone           prices +9.742 (1.703) F 123.6; just identified
+logit, retail, IV2 alone           prices -17.992 (2.280) F 21.5; just identified
+logit, retail, IV3 alone           prices +33.477 (23.713) F 3.1; just identified
+logit, retail, IV4 alone           prices -62.589 (30.128) F 7.6; just identified
+
+3. Which flag choice gives the zero retail slope (logit B: fee, fee x inst, fee x ETF; month x access FE)
+logit B, corrected flag            prices +0.116 (0.342) F 82.8; p_inst -28.475 (5.725) F 33.5; p_etf -17.507 (1.238) F 62.2; J 106.1 on 6 df
+logit B, original flag             prices -2.595 (0.544) F 63.2; p_inst_o +1.112 (0.897) F 36.7; p_etf_o -13.055 (1.217) F 58.8; J 109.8 on 6 df
+flag changes vs original: 1,834 fund-months, 43 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 17642, 1: 24054, 2: 56414}
+logit B, time-invariant flag, Admiral not recoded prices -0.029 (0.351) F 81.2; p_inst -28.744 (5.935) F 32.9; p_etf -17.401 (1.245) F 62.2; J 106.6 on 6 df
+
+4. Retail by share-class type
+  admiral : classes   38, fund-months  4,668, retail AUM share 0.520, median fee 0.0900, within SD 0.0127
+     e.g. Vanguard Index Trust: Vanguard 500 Index Fund; Admiral Share; Vanguard Index Trust: Vanguard Total Stock Market Index Fund; Vanguard Bond Index Funds: Vanguard Total Bond Market Index ; Vanguard STAR Funds: Vanguard Total International Stock Inde
+  broker  : classes   15, fund-months    460, retail AUM share 0.001, median fee 0.7500, within SD 0.0568
+     e.g. AdvisorOne Funds: Amerigo Fund; Class N Shares; State Farm Mutual Fund Trust: State Farm S&P 500 Index Fund;; MassMutual Institutional Funds: MassMutual Indexed Equity Fu; Nationwide Mutual Funds: Nationwide International Index Fund
+  noload  : classes  127, fund-months 12,900, retail AUM share 0.480, median fee 0.1700, within SD 0.0376
+     e.g. Vanguard Index Trust: Vanguard 500 Index Fund; Investor Shar; Vanguard STAR Funds: Vanguard Total International Stock Inde; Fidelity US Equity Index Portfolio; Vanguard Bond Index Funds: Vanguard Total Bond Market II Ind
+logit, retail admiral only         prices -7.645 (2.704) F 65.6; J 51.9 on 4 df
+logit, retail noload only          prices -0.170 (0.740) F 94.3; J 100.9 on 4 df
+logit, retail broker only          prices -0.600 (0.080) F 439.6; J 60.2 on 4 df
+logit B + fee x broker-sold (month x access FE) prices +0.257 (0.465) F 75.5; p_broker -0.395 (0.407) F 104.8; p_inst -28.646 (5.651) F 29.7; p_etf -17.652 (1.283) F 55.8; J 126.7 on 7 df
+logit B + fee x broker-sold (month x 4-segment FE) prices +0.296 (0.473) F 73.0; p_broker -0.932 (0.462) F 79.0; p_inst -28.846 (5.671) F 29.4; p_etf -17.668 (1.285) F 54.5; J 102.7 on 7 df
+
+5. Fixed-effect alternatives (logit; fee x access slopes)
+logit, month FE                    prices -5.181 (0.483) F 167.8; p_inst -7.108 (1.128) F 175.4; p_etf -8.039 (0.482) F 409.4; J 132.1 on 6 df
+logit, month x ETF FE              prices -1.566 (0.658) F 91.0; p_inst +0.293 (1.610) F 136.8; p_etf -13.892 (1.285) F 62.0; J 123.7 on 6 df
+
+6. Candidate fixes with the random-coefficient term K
+B (reference)                      prices -8.638 (1.737) F 24.9; p_inst -7.069 (6.088) F 37.1; p_etf -27.464 (2.652) F 57.5; K +38.368 (7.201) F 16.0; J 111.4 on 5 df
+B4: B + fee x broker-sold, month x 4-segment FE prices -6.738 (1.129) F 27.8; p_broker -12.833 (1.956) F 89.3; p_inst -8.278 (5.780) F 32.7; p_etf -32.131 (2.921) F 50.0; K +44.209 (6.624) F 14.6; J 106.8 on 6 df
+B3: slopes {no-load retail + inst, broker, ETF} prices -4.728 (1.218) F 46.5; p_broker -21.544 (3.006) F 105.9; p_etf -41.462 (4.222) F 50.6; K +59.918 (8.394) F 12.8; J 61.8 on 5 df
+B3-split                           prices -7.569 (0.875) F 48.6; p_broker -13.273 (2.182) F 122.7; p_etf -20.305 (3.271) F 54.2; pp2 +36.025 (5.711) F 6.9; mpe -5.043 (8.990) F 27.4; J 64.9 on 4 df
+logit B, broker-sold classes dropped (shares unchanged) prices +0.297 (0.473) F 76.2; p_inst -29.206 (5.709) F 33.7; p_etf -17.631 (1.284) F 62.0; J 102.4 on 6 df
+B, broker-sold classes dropped (shares unchanged) prices -7.194 (1.197) F 32.2; p_inst -8.278 (6.014) F 38.4; p_etf -32.961 (3.059) F 54.4; K +47.072 (7.061) F 17.1; J 105.9 on 5 df

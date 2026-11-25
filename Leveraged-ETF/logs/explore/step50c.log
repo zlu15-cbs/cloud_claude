@@ -1,0 +1,83 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+
+11. Retail groups: classes, AUM share of retail by period, AUM-weighted fee by period, fee changes
+  V-Admiral     classes  38; share of retail AUM before/from 2019 0.490/0.538; AUM-weighted fee 0.0653/0.0559; fee cuts 91, increases 7
+  V-Investor    classes  32; share of retail AUM before/from 2019 0.253/0.147; AUM-weighted fee 0.1566/0.1342; fee cuts 107, increases 1
+  other retail  classes 110; share of retail AUM before/from 2019 0.257/0.316; AUM-weighted fee 0.1462/0.0480; fee cuts 196, increases 44
+  V-Investor examples: Vanguard Index Trust: Vanguard 500 Index Fund; Investor Shares; Vanguard STAR Funds: Vanguard Total International Stock Index Fund; Vanguard Bond Index Funds: Vanguard Total Bond Market II Index Fund; I; Vanguard Bond Index Fd:Total Bond Market Port; Vanguard Index Funds: Vanguard 500 Index Fund; Signal Shares; Vanguard Charlotte Funds: Vanguard Total International Bond Index Fund
+  V-Investor by year (classes, mean fee, share of retail AUM):
+       n     fee  share_of_retail_aum
+year                                 
+2010  26  0.2447               0.4412
+2011  27  0.2313               0.3449
+2012  26  0.2142               0.3333
+2013  28  0.2114               0.3138
+2014  28  0.2070               0.2612
+2015  26  0.1925               0.2169
+2016  26  0.1770               0.2169
+2017  25  0.1693               0.2112
+2018  23  0.1589               0.2052
+2019  23  0.1449               0.1740
+2020   9  0.1189               0.1612
+2021  10  0.1190               0.1514
+2022   9  0.1139               0.1303
+2023   6  0.1196               0.1261
+2024   6  0.1183               0.1456
+
+12. Retail slope by group and period (logit, fund + month FE)
+V-Admiral, before 2019, five IVs   prices -0.239 (3.011) F 52.6; J 18.3 on 4 df
+V-Admiral, before 2019, IV0 alone  prices +0.801 (3.145) F 144.3; just identified
+V-Admiral, 2019 on, five IVs       prices -14.212 (5.131) F 38.1; J 41.0 on 4 df
+V-Admiral, 2019 on, IV0 alone      prices -58.175 (8.272) F 232.5; just identified
+V-Investor, before 2019, five IVs  prices -7.530 (2.252) F 12.3; J 57.8 on 4 df
+V-Investor, before 2019, IV0 alone prices +16.595 (5.729) F 35.2; just identified
+V-Investor, 2019 on, five IVs      prices +28.928 (14.500) F 9.5; J 15.3 on 4 df
+V-Investor, 2019 on, IV0 alone     prices -11.580 (21.637) F 30.4; just identified
+other retail, before 2019, five IVs prices -0.791 (0.287) F 36.1; J 57.5 on 4 df
+other retail, before 2019, IV0 alone prices +0.081 (0.210) F 97.6; just identified
+other retail, 2019 on, five IVs    prices +5.061 (0.675) F 78.6; J 47.9 on 4 df
+other retail, 2019 on, IV0 alone   prices +13.832 (2.108) F 119.1; just identified
+retail without V-Investor, before 2019, five IVs prices -0.066 (0.271) F 33.4; J 62.7 on 4 df
+retail without V-Investor, before 2019, IV0 alone prices +1.372 (0.358) F 101.7; just identified
+retail without V-Investor, 2019 on, five IVs prices +6.679 (0.809) F 97.2; J 40.3 on 4 df
+retail without V-Investor, 2019 on, IV0 alone prices +10.870 (1.554) F 213.6; just identified
+
+13. Fixes for the Vanguard Investor wind-down
+   wind-down class-months: 611 (24 classes)
+retail only, as is, five IVs       prices -0.104 (0.347) F 101.2; J 107.7 on 4 df
+retail only, as is, IV0 alone      prices -1.912 (0.316) F 273.0; just identified
+logit B, as is                     prices +0.116 (0.342) F 82.8; p_inst -28.475 (5.725) F 33.5; p_etf -17.507 (1.238) F 62.2; J 106.1 on 6 df
+B with K, as is                    prices -8.638 (1.737) F 24.9; p_inst -7.069 (6.088) F 37.1; p_etf -27.464 (2.652) F 57.5; K +38.368 (7.201) F 16.0; J 111.4 on 5 df
+two-segment logit, as is           prices -1.222 (0.572) F 50.6; p_etf -14.315 (1.287) F 68.2; J 98.5 on 5 df
+two-segment with K, as is          prices -8.487 (1.452) F 31.1; p_etf -35.480 (3.599) F 61.6; K +54.514 (7.589) F 11.0; J 40.7 on 4 df
+retail only, (a) wind-down months dropped, five IVs prices +0.180 (0.338) F 97.2; J 94.5 on 4 df
+retail only, (a) wind-down months dropped, IV0 alone prices -1.120 (0.271) F 268.5; just identified
+logit B, (a) wind-down months dropped prices +0.363 (0.336) F 80.7; p_inst -28.444 (5.715) F 33.9; p_etf -17.807 (1.236) F 61.8; J 85.1 on 6 df
+B with K, (a) wind-down months dropped prices -7.324 (1.712) F 25.4; p_inst -9.696 (6.023) F 36.5; p_etf -26.476 (2.601) F 57.6; K +33.551 (7.173) F 16.0; J 98.1 on 5 df
+two-segment logit, (a) wind-down months dropped prices -0.915 (0.548) F 50.9; p_etf -14.601 (1.268) F 68.0; J 99.0 on 5 df
+two-segment with K, (a) wind-down months dropped prices -7.891 (1.410) F 31.3; p_etf -35.013 (3.546) F 62.6; K +52.529 (7.443) F 11.0; J 50.5 on 4 df
+retail only, (b) own month effects, five IVs prices +0.336 (0.344) F 100.3; J 102.7 on 4 df
+retail only, (b) own month effects, IV0 alone prices -1.082 (0.269) F 268.5; just identified
+logit B, (b) own month effects     prices +0.566 (0.344) F 82.5; p_inst -28.742 (5.738) F 33.7; p_etf -17.976 (1.234) F 62.0; J 92.4 on 6 df
+B with K, (b) own month effects    prices -7.341 (1.709) F 25.2; p_inst -9.445 (6.019) F 36.9; p_etf -26.895 (2.582) F 57.6; K +34.517 (7.073) F 16.0; J 100.3 on 5 df
+two-segment logit, (b) own month effects prices -0.752 (0.551) F 50.9; p_etf -14.721 (1.262) F 67.9; J 99.5 on 5 df
+two-segment with K, (b) own month effects prices -7.858 (1.432) F 31.4; p_etf -35.660 (3.575) F 61.9; K +53.798 (7.457) F 11.1; J 47.0 on 4 df
+
+14. Institutional slope by period and family (logit, fund + month FE, five IVs)
+   Vanguard share of institutional AUM 0.814
+institutional before 2019          prices +12.056 (2.485) F 11.8; J 42.5 on 4 df
+institutional 2019 on              prices +3.610 (3.748) F 50.4; J 41.6 on 4 df
+institutional Vanguard             prices -1.613 (1.138) F 54.0; J 75.9 on 4 df
+institutional non-Vanguard         prices +6.312 (1.179) F 47.4; J 117.6 on 4 df
+all mutual-fund classes, five IVs  prices +4.426 (0.585) F 67.8; J 99.5 on 4 df
+all mutual-fund classes, IV0 alone prices -0.826 (0.371) F 162.3; just identified
+mutual-fund classes, non-Vanguard, five IVs prices +3.627 (0.624) F 75.9; J 62.2 on 4 df
+mutual-fund classes, non-Vanguard, IV0 alone prices +0.711 (0.413) F 98.1; just identified
+mutual-fund classes, Vanguard, five IVs prices +3.782 (1.113) F 47.5; J 79.7 on 4 df
+mutual-fund classes, Vanguard, IV0 alone prices -0.826 (1.162) F 155.1; just identified
+mutual-fund classes, before 2019, five IVs prices -0.992 (0.518) F 19.7; J 65.1 on 4 df
+mutual-fund classes, before 2019, IV0 alone prices +0.359 (0.441) F 51.0; just identified
+mutual-fund classes, 2019 on, five IVs prices +5.399 (1.619) F 40.7; J 30.5 on 4 df
+mutual-fund classes, 2019 on, IV0 alone prices +7.781 (1.923) F 74.2; just identified

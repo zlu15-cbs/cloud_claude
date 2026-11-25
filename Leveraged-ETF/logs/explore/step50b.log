@@ -1,0 +1,63 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+
+7. One instrument at a time by segment: slope (2SLS); first stage on fee [t]; reduced form on log share ratio [t]
+retail, IV0 alone                  prices -1.912 (0.316) F 273.0; just identified
+      first stage +0.26593 [+16.5]   reduced form -0.50856 [-7.1]   SD of instrument 0.157
+retail, IV1 alone                  prices +9.742 (1.703) F 123.6; just identified
+      first stage -0.00122 [-11.1]   reduced form -0.01189 [-7.3]   SD of instrument 5.625
+retail, IV2 alone                  prices -17.992 (2.280) F 21.5; just identified
+      first stage -0.00007 [-4.6]   reduced form +0.00133 [+6.5]   SD of instrument 169.266
+retail, IV3 alone                  prices +33.477 (23.713) F 3.1; just identified
+      first stage +0.00003 [+1.7]   reduced form +0.00106 [+2.6]   SD of instrument 25.143
+retail, IV4 alone                  prices -62.589 (30.128) F 7.6; just identified
+      first stage +0.00153 [+2.8]   reduced form -0.09587 [-3.7]   SD of instrument 0.105
+institutional, IV0 alone           prices +32.601 (33.540) F 1.0; just identified
+      first stage +0.00532 [+1.0]   reduced form +0.17343 [+2.9]   SD of instrument 0.147
+institutional, IV1 alone           prices -31.783 (9.086) F 22.2; just identified
+      first stage -0.00017 [-4.7]   reduced form +0.00544 [+6.9]   SD of instrument 9.186
+institutional, IV2 alone           prices +12.804 (1.532) F 166.1; just identified
+      first stage +0.00019 [+12.9]   reduced form +0.00244 [+8.2]   SD of instrument 168.883
+institutional, IV3 alone           prices +50.419 (15.350) F 8.7; just identified
+      first stage +0.00005 [+3.0]   reduced form +0.00277 [+12.8]   SD of instrument 25.992
+institutional, IV4 alone           prices +12.428 (3.949) F 65.1; just identified
+      first stage +0.00317 [+8.1]   reduced form +0.03943 [+3.7]   SD of instrument 0.333
+ETF, IV0 alone                     prices -9.222 (3.095) F 12.7; just identified
+      first stage -0.04654 [-3.6]   reduced form +0.42921 [+4.4]   SD of instrument 0.156
+ETF, IV1 alone                     prices -20.618 (1.207) F 248.1; just identified
+      first stage -0.00066 [-15.8]   reduced form +0.01369 [+22.7]   SD of instrument 8.876
+ETF, IV2 alone                     prices -0.413 (0.776) F 59.6; just identified
+      first stage -0.00006 [-7.7]   reduced form +0.00003 [+0.5]   SD of instrument 263.107
+ETF, IV3 alone                     prices -35.588 (15.894) F 9.6; just identified
+      first stage -0.00004 [-3.1]   reduced form +0.00154 [+4.2]   SD of instrument 24.265
+ETF, IV4 alone                     prices -27.207 (2.362) F 44.0; just identified
+      first stage +0.00458 [+6.6]   reduced form -0.12450 [-8.2]   SD of instrument 0.319
+
+8. Logit B, instrument subsets fully interacted with access (month x access FE)
+logit B, IV0 x access              prices -1.993 (0.317) F 276.0; p_inst +34.036 (31.347) F 1.1; p_etf -8.013 (3.224) F 14.0; just identified
+logit B, IV0, IV2 x access         prices -2.248 (0.330) F 90.3; p_inst +14.511 (1.336) F 41.0; p_etf +0.473 (0.572) F 23.1; J 47.9 on 3 df
+logit B, IV0, IV2, IV4 x access    prices -2.203 (0.329) F 53.2; p_inst +14.425 (1.305) F 38.7; p_etf -3.141 (0.655) F 21.4; J 120.0 on 6 df
+logit B, IV1 x access              prices +9.864 (1.650) F 139.9; p_inst -31.861 (7.787) F 23.2; p_etf -30.976 (1.926) F 240.0; just identified
+logit B, IV0, IV1 x access         prices -0.033 (0.343) F 110.6; p_inst -17.889 (7.679) F 9.5; p_etf -19.657 (1.399) F 64.9; J 88.1 on 3 df
+logit B, all five x access         prices -0.254 (0.346) F 51.8; p_inst +13.237 (1.331) F 26.2; p_etf -13.595 (1.076) F 53.3; J 148.9 on 12 df
+
+9. Retail sub-samples (logit, fund + month FE, five IVs; then IV0 alone)
+   Vanguard share of retail fund-months 0.443, of retail AUM 0.706
+retail Vanguard, five IVs          prices +6.228 (2.403) F 23.5; J 53.2 on 4 df
+retail Vanguard, IV0 alone         prices +3.921 (2.472) F 112.7; just identified
+retail non-Vanguard, five IVs      prices +0.725 (0.430) F 102.7; J 106.0 on 4 df
+retail non-Vanguard, IV0 alone     prices -0.833 (0.335) F 220.4; just identified
+retail before 2019, five IVs       prices -1.845 (0.418) F 29.7; J 42.1 on 4 df
+retail before 2019, IV0 alone      prices -1.026 (0.300) F 82.8; just identified
+retail 2019 on, five IVs           prices +6.768 (0.914) F 99.6; J 39.3 on 4 df
+retail 2019 on, IV0 alone          prices +9.990 (1.376) F 228.7; just identified
+   retail classes whose fee ever changes: 132 of 180
+
+10. With the random-coefficient term K
+month FE; fee x access; K; B instruments prices +2.168 (1.160) F 52.4; p_inst +3.841 (1.525) F 73.4; p_etf -8.787 (0.770) F 378.7; K -21.629 (3.716) F 45.6; J 128.1 on 5 df
+B, all five x access (15 IVs)      prices -12.621 (1.704) F 18.8; p_inst +27.040 (2.314) F 27.0; p_etf -28.884 (2.754) F 56.4; K +54.628 (6.828) F 15.1; J 136.1 on 11 df
+B, IV0 and IV2 x access (6 IVs)    prices +0.085 (1.122) F 26.4; p_inst +11.838 (1.869) F 45.7; p_etf +4.667 (2.140) F 29.5; K -10.738 (5.338) F 20.2; J 38.3 on 2 df
+B, IV0, IV2, IV4 x access (9 IVs)  prices -11.425 (1.873) F 16.8; p_inst +24.856 (2.678) F 35.4; p_etf -18.597 (3.327) F 23.8; K +42.502 (8.393) F 20.2; J 106.1 on 5 df
+two segments (mutual fund, ETF): slopes, month x ETF FE; K prices -8.487 (1.452) F 31.1; p_etf -35.480 (3.599) F 61.6; K +54.514 (7.589) F 11.0; J 40.7 on 4 df
+two segments, logit                prices -1.222 (0.572) F 50.6; p_etf -14.315 (1.287) F 68.2; J 98.5 on 5 df

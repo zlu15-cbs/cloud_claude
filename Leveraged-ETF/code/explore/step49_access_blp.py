@@ -7,6 +7,8 @@ SPEC  B      fee with a normal random coefficient; fee x institutional, fee x ET
              month x access FE (corrected flag); IVs: Danny's five + IV0 and IV1 x {institutional, ETF} (9).
       T7     Danny's Table 7 on the same code path (fee RC; month FE; five IVs), for comparison.
       B-orig B with Danny's original, time-varying flag.
+      S2     two segments, no retail / institutional flag: fee RC; fee x ETF; fund FE and month x ETF FE;
+             IVs: Danny's five + IV0 and IV1 x ETF (7). See step50d_two_segment.py for why.
 Stage 1: profile of the one-step criterion over sigma, 500 of his archived draws per month (no optimization).
 Stage 2: L-BFGS-B on sigma within +-2 of the profile minimum, all 3,000 draws, one-step weight; every evaluation
          checkpointed. Stage 3: two-step GMM at the stage-2 sigma (weight from step-1 residuals, clustered by month),
@@ -38,6 +40,8 @@ def spec(name):
         return ['prices:inst', 'prices:etf'], IV + IVX, 'C(product_ids) + C(month_access)'
     if name == 'B-orig':
         return ['prices:inst_o', 'prices:etf_o'], IV + IVXO, 'C(product_ids) + C(month_access_orig)'
+    if name == 'S2':
+        return ['prices:etf'], IV + ['iv0_etf', 'iv1_etf'], 'C(product_ids) + C(month_etf)'
     return [], IV, 'C(product_ids) + C(market_ids)'
 
 
@@ -102,6 +106,7 @@ def checkpointed(ckpt, history):
 def main(P, D, names, procs, name):
     d = load(P, D, names)
     d['month_access'] = d.market_ids.astype(str) + '_' + d.access.astype(int).astype(str)
+    d['month_etf'] = d.market_ids.astype(str) + '_' + d.etf.astype(int).astype(str)
     d['month_access_orig'] = d.market_ids.astype(str) + '_' + d.access_orig.astype(int).astype(str)
     z = np.load(f'{P}/data/prepared/passive.npz', allow_pickle=False)
     d['firm_ids'] = z['firm_ids']
