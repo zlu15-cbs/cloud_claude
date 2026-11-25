@@ -9,7 +9,7 @@ ours  Same problem as step44 lognormal: fee coefficient -exp(pi + sigma nu) < 0 
       (1) sigma = 0 exactly. The model is a logit with a fixed fee coefficient a = -exp(pi). With beta concentrated
           out, the criterion is the 2SLS quadratic q(a) = N gbar(a)' W gbar(a). Evaluated on a grid of a <= 0 and at
           the unconstrained minimum (which must match step44's normal profile at sigma = 0.001: a = +14.85, 354.8).
-      (2) sigma > 0. pyblp objective and gradient (no optimization) at nine (sigma, pi) points with DRAWS Monte Carlo
+      (2) sigma > 0. pyblp objective and gradient (no optimization) at eleven (sigma, pi) points with DRAWS Monte Carlo
           draws, all with exp(pi + 3 sigma) <= 150, including step44's last good point (0.28373, 1.31343; 667.5 at
           3,000 draws) as a check on simulation noise. Resumes from the CSV.
 danny Lognormal at the point that matches the mean and SD of his Table 7 step-1 normal fee coefficient
@@ -65,7 +65,8 @@ def ours(procs, draws):
     # pi = 0 exactly would be read by pyblp as a fixed parameter, so the grid avoids it. Small sigma first, then a
     # sparse set spanning larger dispersion (where a second basin would have to be).
     grid = [(0.28372927543112303, 1.3134266506262935), (0.25, -2.0), (0.25, -1.0),
-            (0.5, -1.0), (0.5, 1.5), (1.0, -1.0), (1.0, 1.5), (1.5, -1.0), (1.5, 0.5)]
+            (0.5, -1.0), (0.5, 1.5), (1.0, -1.0), (1.0, 1.5), (1.5, -1.0), (1.5, 0.5),
+            (2.0, -1.0), (2.5, -2.5)]
     out = f'step47_lognormal_grid_d{draws}.csv'
     rows = pd.read_csv(out).to_dict('records') if os.path.exists(out) else []
     done = {(round(r['sigma'], 6), round(r['pi'], 6)) for r in rows}
