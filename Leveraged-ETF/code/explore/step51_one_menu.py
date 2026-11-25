@@ -38,6 +38,9 @@ _G = {}
 
 
 def _resid(cols):
+    if _G.get('A') is not None:      # fund FE + FE columns + fund-specific linear trends: sparse least squares
+        from scipy.sparse.linalg import lsmr
+        return np.column_stack([_G['M'][:, c] - _G['A'] @ lsmr(_G['A'], _G['M'][:, c], atol=1e-10, btol=1e-10, maxiter=5000)[0] for c in cols])
     alg = pyhdfe.create(_G['ids'], drop_singletons=False, residualize_method='lsmr')
     return alg.residualize(_G['M'][:, cols])
 
@@ -45,12 +48,20 @@ def _resid(cols):
 class Panel:
     """Columns of d residualized on fund FE + the given FE columns, computed once."""
 
-    def __init__(self, d, fe, cols, tag):
+    def __init__(self, d, fe, cols, tag, fund_trend=False):
         d = d.reset_index(drop=True)
         t0 = time.time()
         self.tag, self.cols, self.n = tag, list(cols), len(d)
         _G['ids'] = np.column_stack([pd.factorize(d.product_ids)[0]] + [pd.factorize(d[c].astype(str))[0] for c in fe])
         _G['M'] = d[self.cols].to_numpy(float)
+        _G['A'] = None
+        if fund_trend:
+            from scipy import sparse
+            n, ids = len(d), _G['ids']
+            blocks = [sparse.csr_matrix((np.ones(n), (np.arange(n), ids[:, j])), shape=(n, ids[:, j].max() + 1)) for j in range(ids.shape[1])]
+            tt = (d.t - d.t.mean()).to_numpy()
+            blocks.append(sparse.csr_matrix((tt, (np.arange(n), ids[:, 0])), shape=(n, ids[:, 0].max() + 1)))
+            _G['A'] = sparse.hstack(blocks).tocsr()
         chunks = [list(c) for c in np.array_split(np.arange(len(self.cols)), PROCS)]
         with ProcessPoolExecutor(PROCS) as ex:       # fork: workers inherit _G
             parts = list(ex.map(_resid, chunks))
@@ -58,10 +69,10 @@ class Panel:
         self.clu = pd.factorize(d.market_ids)[0]
         print(f'  [panel {tag}: {len(d):,} rows, {len(self.cols)} columns, {time.time() - t0:.0f}s]', flush=True)
 
-    def est(self, endog, excl, label, controls=()):
+    def est(self, endog, excl, label, controls=(), dep='y'):
         R, clu = self.R, self.clu
         con = list(CON) + list(controls)
-        y = R['y']
+        y = R[dep]
         Xe, Ze, W = (np.column_stack([R[c] for c in v]) for v in (endog, excl, con))
         k, L = len(endog), len(excl)
         X, Zm = np.column_stack([Xe, W]), np.column_stack([Ze, W])
