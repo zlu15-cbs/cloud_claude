@@ -1,0 +1,37 @@
+step46_danny_iv_checks.py on tables7_10_replication (Danny, 24 Nov 2026), passive; run 25 Nov 2026
+N 98,110; s0 mean 0.092; e_t 0.202 -> 0.081
+  within corr (trend=False): K_fee~K_age 0.009  K_fee~K_ret 0.005  K_fee~fee 0.764  K_age~log age -0.907  K_fee~log age -0.009
+IV logit, IV0                                              prices    -5.67 (1.13)
+logit, five IVs                                            prices   -17.88 (0.91)  J 62.9 df 4
+p, K | five IVs                                            prices   -18.33 (0.92)  K     3.07 (1.53)  J 60.7 df 3
+p, p^2/2, -p e_t | five IVs                                prices    -3.80 (7.39)  pp2   -56.78 (31.23)  mpe   -13.33 (8.26)  J 25.9 df 2
+p, K | IV0, IV1                                            prices   -11.94 (1.41)  K   -14.91 (3.82)
+p, K | IV0, IV2                                            prices    80.59 (188.54)  K   205.19 (385.92)
+p, K | IV0, IV3                                            prices   -29.78 (10.72)  K   -57.35 (19.45)
+p, K | IV0, IV4                                            prices   -11.06 (1.62)  K   -12.83 (3.43)
+p, K, K_age | five IVs                                     prices   -12.81 (1.30)  K   -12.72 (3.03)  Ka     1.43 (0.26)  J 22.9 df 2
+IV logit, IV0 + fund trends                                prices    -0.66 (0.77)
+logit, five IVs + fund trends                              prices    -5.73 (0.75)  J 57.3 df 4
+p, K | five IVs + fund trends                              prices    -1.34 (1.98)  K   -28.35 (8.36)  J 43.6 df 3
+p, p^2/2, -p e_t | five IVs + fund trends                  prices    -7.73 (2.64)  pp2   -27.78 (7.96)  mpe   -83.50 (15.31)  J 6.8 df 2
+p, K | IV0, IV1 + fund trends                              prices    -0.02 (1.41)  K   -20.44 (5.98)
+p, K | IV0, IV2 + fund trends                              prices     0.51 (2.31)  K   -37.50 (16.97)
+p, K | IV0, IV3 + fund trends                              prices     2.23 (5.35)  K   -92.72 (47.71)
+p, K | IV0, IV4 + fund trends                              prices    -5.83 (7.95)  K   165.70 (144.89)
+p, K, K_age | five IVs + fund trends                       prices    -6.08 (2.94)  K    44.06 (23.91)  Ka    -4.99 (1.74)  J 6.7 df 2
+  within corr (trend=True): K_fee~K_age -0.007  K_fee~K_ret 0.004  K_fee~fee 0.840  K_age~log age -0.954  K_fee~log age 0.007
+IV0 alone: fee slope    -5.67 (1.13)  first-stage F    40.2  first-stage coef sign +1
+IV1 alone: fee slope   -17.25 (1.05)  first-stage F   343.4  first-stage coef sign -1
+IV2 alone: fee slope   -28.19 (2.50)  first-stage F   118.4  first-stage coef sign -1
+IV3 alone: fee slope   -82.60 (40.51)  first-stage F     5.7  first-stage coef sign -1
+IV4 alone: fee slope   -15.88 (1.62)  first-stage F    89.2  first-stage coef sign +1
+
+Danny's archived BLP fits (fits/*/diagnostics.json): step-2 objective (J, robust W), smallest standardized Jacobian singular value
+passive  price         step2 obj   144.38 df 3 p 4.3e-31 | min std sv 0.701 | sigma_price 1.875 (0.367) | mean e -4.19
+passive  price_age     step2 obj   102.26 df 2 p 6.2e-23 | min std sv 0.031 | sigma_price 0.049 (20.471) | mean e -3.90
+passive  price_return  step2 obj    59.64 df 2 p 1.1e-13 | min std sv 0.467 | sigma_price 2.354 (0.378) | mean e -3.75
+passive  joint         step2 obj    37.00 df 1 p 1.2e-09 | min std sv 0.032 | sigma_price 0.040 (24.267) | mean e -3.53
+bull     price         step2 obj   152.88 df 3 p 6.3e-33 | min std sv 0.322 | sigma_price 1.581 (0.382) | mean e -6.80
+bull     price_age     step2 obj   141.43 df 2 p 1.9e-31 | min std sv 0.192 | sigma_price 1.960 (0.453) | mean e -7.32
+bull     price_return  step2 obj   136.42 df 2 p 2.4e-30 | min std sv 0.170 | sigma_price 1.706 (0.405) | mean e -6.33
+bull     joint         step2 obj   125.27 df 1 p 4.4e-29 | min std sv 0.159 | sigma_price 2.077 (0.460) | mean e -6.83

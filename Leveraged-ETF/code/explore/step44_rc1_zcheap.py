@@ -10,7 +10,8 @@ Modes:
   normal PROCS            BLP, normal RC on prices. X1 = prices + controls, X2 = prices; excluded IVs Z, Z x cheap
                           (5 moments, 5 parameters). Sigma profile on a grid, then BFGS from the best grid point.
   lognormal PROCS [s0 p0] BLP, lognormal RC on -prices: fee coefficient = -exp(pi + sigma nu) < 0 for every investor.
-                          X1 = controls, X2 = -prices, agent constant; same IVs (5 moments, 5 parameters). BFGS.
+                          X1 = controls, X2 = -prices, agent constant; same IVs (5 moments, 5 parameters).
+                          L-BFGS-B with sigma in [0, 3] and pi in [-4, 5]; at most 3,000 contraction evaluations.
 One-step GMM (2SLS weight), Monte Carlo 3000 draws, seed 623543, SE clustered by month. Every objective evaluation is
 checkpointed to step44_<mode>_ckpt.json; rerunning resumes from the best point.
 
@@ -34,6 +35,9 @@ from tiers import raw_entry_tiers
 
 pyblp.options.verbose = False
 X1C = ' + '.join(CONTROLS)
+# lognormal search box: sigma in [0, 3]; median fee coefficient exp(pi) between 0.02 and 150
+SIGMA_MAX, PI_MIN, PI_MAX = 3.0, -4.0, 5.0
+ITERATION = pyblp.Iteration('squarem', {'atol': 1e-14, 'max_evaluations': 3000})
 
 
 def data():
@@ -122,10 +126,11 @@ def describe(res, d, funds, label, extra):
     return row, fr
 
 
-def checkpointed(tag, history):
+def checkpointed(tag, history, bounded=False):
+    """BFGS (or L-BFGS-B within pyblp's sigma/pi bounds) that writes every objective evaluation to a checkpoint file."""
     ckpt = f'step44_{tag}_ckpt.json'
 
-    def bfgs(initial, bounds, objective_function, iteration_callback, **opts):
+    def optimizer(initial, bounds, objective_function, iteration_callback, **opts):
         def wrapped(values):
             out = objective_function(values)
             history.append({'theta': [float(v) for v in np.asarray(values).flatten()], 'obj': float(out[0])})
@@ -133,8 +138,9 @@ def checkpointed(tag, history):
             os.replace(ckpt + '.tmp', ckpt)
             print(f'  eval {len(history)}: theta {np.round(history[-1]["theta"], 5).tolist()} obj {history[-1]["obj"]:.6g}', flush=True)
             return out
-        return scipy_optimizer(initial, None, wrapped, iteration_callback, method='BFGS', compute_gradient=True, **opts)
-    return pyblp.Optimization(bfgs, {'gtol': 1e-7})
+        return scipy_optimizer(initial, bounds if bounded else None, wrapped, iteration_callback,
+                               method='L-BFGS-B' if bounded else 'BFGS', compute_gradient=True, **opts)
+    return pyblp.Optimization(optimizer, {'gtol': 1e-7})
 
 
 def normal(procs):
@@ -182,8 +188,11 @@ def lognormal(procs, sigma0, pi0):
         pr = pyblp.Problem((pyblp.Formulation('0 + ' + X1C, absorb='C(product_ids) + C(market_ids)'), pyblp.Formulation('0 + I(-prices)')),
                            d, agent_formulation=pyblp.Formulation('1'),
                            agent_data={'market_ids': ids, 'nodes': nodes, 'weights': weights}, rc_types=['log'])
-        opt = pyblp.Optimization('return') if os.environ.get('FINALIZE') == '1' else checkpointed(tag, history)
-        res = pr.solve(sigma=np.array([[sigma0]]), pi=np.array([[pi0]]), optimization=opt, method='1s', se_type='clustered')
+        opt = pyblp.Optimization('return') if os.environ.get('FINALIZE') == '1' else checkpointed(tag, history, bounded=True)
+        # bounds keep the line search away from extreme dispersion, where the contraction stalls (the first run hung there)
+        res = pr.solve(sigma=np.array([[sigma0]]), pi=np.array([[pi0]]), sigma_bounds=(np.array([[0.0]]), np.array([[SIGMA_MAX]])),
+                       pi_bounds=(np.array([[PI_MIN]]), np.array([[PI_MAX]])), optimization=opt, iteration=ITERATION,
+                       method='1s', se_type='clustered')
         print(res, flush=True)
         s, p = float(res.sigma[0, 0]), float(res.pi[0, 0])
         row, fr = describe(res, d, funds, f'lognormal RC, IVs Z and Z x cheap ({tag})',
