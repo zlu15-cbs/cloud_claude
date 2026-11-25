@@ -111,3 +111,69 @@ Robustness, month effects:
 - BLP estimate of `T7-lag` (running): σ, its standard error, J, share of investors with a positive coefficient.
 - A check on ρ that is free of the fixed-effect bias (first differences with lagged instruments).
 - If the inertia version is adopted, the same change for the leveraged sample.
+
+## 8. Danny's 25 Nov package (`section3_replication_20261125.zip`, note v13)
+
+Read as data; none of its code was run. Code: `code/explore/step53_passive_iv_variants.py`,
+`step53b_own_lagged_fee.py`. Output: `logs/explore/step53.log`, `step53b.log`.
+
+**What changed.** Nothing for passive funds. The prepared passive sample, all five passive instruments, the
+draws and all five passive fits are identical to the 24 Nov package (his note: "The passive and OLS/IV-Logit
+columns retain their verified earlier estimates"). The new instruments are for the leveraged Bull market only:
+
+| Leveraged instrument | 24 Nov | 25 Nov | Correlation old/new |
+|---|---|---|---|
+| IV1 | scaled count | distinct adjacent Bull benchmarks of rivals | 0.58 |
+| IV2 | scaled count | distinct adjacent Bear benchmarks of rivals | 0.06 |
+| IV4 | prior local stock | certified rival liquidations in [t−12, t−1] (663 positive rows, 7 events) | 0.16 |
+
+Leveraged BLP1 moved from fee −6.46, price SD 1.58 (0.38) to fee −7.42, price SD 2.23 (0.26). His note says the
+new set was adopted after a screen of 146 instrument definitions and 64 estimated endpoints, and that the
+table's nominal inference "does not receive a confirmatory interpretation". The conduct set moves from PC
+p-values of .05, .03, .01, .03 to .0004–.002 across the BLP columns. Not reviewed further here (1x focus).
+
+**Table 8, passive, incremental fee F:** IV0 17.1; IV1 348.3; IV2 42.7; IV3 4.3; IV4 88.9. IV3 is weak, as in §5.
+
+**Carrying the leveraged redesign over to passive.** The leveraged counts now use no fee or tracking gate and
+binary ETF / mutual-fund access. The passive IV1 and IV4 still match rivals within 10 bp of the fund's own
+lagged fee, within 0.02 of its tracking error, and on the three-way CRSP access flag. I rebuilt the passive
+counts from his input panels (my code reproduces his IV1, IV2 and IV4 exactly) and removed the gates:
+
+| Instrument set | Static: fee slope | Static: σ² | With lag: fee slope (K version) | With lag: σ² |
+|---|---|---|---|---|
+| His five | −17.9 (0.9) | +3.1 (1.5) | −0.47 (0.12) | +0.67 (0.26) |
+| Gates removed, three-way access | −14.2 (1.1) | −100 (31) | +0.64 (0.37) | +2.08 (0.69) |
+| Gates removed, ETF / mutual-fund access | −7.5 (0.8) | −33 (14) | +0.26 (0.20) | +1.62 (0.44) |
+| No access match at all (one menu) | −3.0 (0.9) | −7.9 (1.3) | −0.04 (0.22) | +0.39 (0.24) |
+| One menu + benchmark breadth | −12.9 (1.4) | −27.1 (2.8) | −0.02 (0.21) | +0.69 (0.32) |
+
+- Without the gates the rival count loses its fee relevance: alone, F falls from 368 to 14.5.
+- The static σ² is negative in every ungated set. With the lag, σ² stays positive but the fee slope goes to
+  zero or positive and the lag coefficient to one.
+- **The redesign does not improve the passive results; it removes them.**
+
+**Why: the fee gate carries IV1.**
+
+| IV1 version (alone, static logit) | Fee slope | F |
+|---|---|---|
+| His IV1 (fee and tracking gates) | −15.4 (1.0) | 368 |
+| Fee gate only | −16.1 (0.6) | 740 |
+| Tracking gate only | −59 (15) | 15 |
+| No gate | −140 (37) | 15 |
+
+- IV1 is not a function of the fund's own lagged fee: a cubic in the lagged fee explains 1.5% of it within fund
+  and month. It moves when *rivals'* fees come within 10 bp of the fund's fee.
+- So IV1 (and IV4, which uses the same matching) is built from rival prices. Its exclusion needs rival fee
+  changes to be unrelated to the fund's own demand shock, which fails if demand shocks are common within a segment.
+  His note lists this ("lagged fee matching and availability can remain related to persistent segment demand").
+- The fund's own lagged fee as the only instrument gives −1.9 (0.1), close to OLS, so IV1 is not just fee
+  persistence either.
+
+**What still holds without rival fees.** IV0 (same-family fees in other asset classes) alone gives a negative
+fee slope in both versions: −5.7 (1.1) static, −0.55 (0.19) per month with the lag. σ² needs a second
+instrument, and every candidate for that is either built from rival fees (IV1, IV4), behaves like a vehicle trend
+(IV2), or is weak (IV3, the ungated counts).
+
+**Small improvements available now**
+- Drop IV3 from the inertia version: σ² +0.63 (0.25), J 4.4 on 2 df (p = 0.11).
+- Report the IV0-only fee slope alongside, as the estimate that does not use rival fees.

@@ -1,0 +1,183 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+reproduce IV1: max abs difference from his archived column 0
+reproduce IV2: max abs difference from his archived column 0
+reproduce IV4: max abs difference from his archived column 0
+
+New columns: mean, SD, share positive, correlation with the archived instrument it replaces
+  n1_3:   45.208   29.417 0.958  corr 0.460
+  n1_v:   57.673   35.131 0.964  corr 0.445
+  n1_a:  114.088   66.811 0.968  corr 0.415
+  x4_3:    0.793    1.489 0.358  corr 0.399
+  x4_v:    1.107    2.141 0.412  corr 0.288
+  x4_a:    2.064    3.071 0.590  corr 0.196
+  r2_a: 1352.470  355.883 1.000  corr 0.736
+  br_v:   92.133   70.067 0.985
+  br_a:  149.772   62.510 0.985
+  [panel static: 98,110 rows, 23 columns, 7s]
+  [panel lag: 96,499 rows, 24 columns, 8s]
+  [panel static; mutual-fund rows: 41,696 rows, 23 columns, 2s]
+  [panel static; ETF rows: 56,414 rows, 23 columns, 4s]
+  [panel lag; mutual-fund rows: 41,085 rows, 24 columns, 2s]
+  [panel lag; ETF rows: 55,414 rows, 24 columns, 4s]
+
+=== static: one instrument at a time (logit fee slope)
+static | n1_3 alone                                            prices -133.563 (29.321) F 20.7;  just identified
+static | n1_v alone                                            prices -208.573 (65.982) F 9.9;  just identified
+static | n1_a alone                                            prices -154.691 (81.189) F 3.7;  just identified
+static | x4_3 alone                                            prices +4.476 (3.968) F 13.1;  just identified
+static | x4_v alone                                            prices +0.357 (2.110) F 45.8;  just identified
+static | x4_a alone                                            prices +6.561 (2.978) F 44.8;  just identified
+static | r2_a alone                                            prices -3.659 (1.703) F 11.1;  just identified
+static | br_v alone                                            prices -68.174 (8.397) F 58.0;  just identified
+static | br_a alone                                            prices -22.646 (2.585) F 123.6;  just identified
+--- static: his five
+static; his five | logit                                       prices -17.878 (0.909) F 99.9;  J 62.9 on 4 df
+static; his five | K                                           prices -18.326 (0.921) F 120.8; K +3.073 (1.527) F 202.7;  J 60.7 on 3 df
+static; his five | K + age K                                   prices -12.814 (1.302) F 100.6; K -12.718 (3.029) F 66.7; Ka +1.433 (0.263) F 507.7;  J 22.9 on 2 df
+static; his five | K, without IV1                              prices -19.001 (1.431) F 87.5; K +1.671 (2.580) F 65.4;  J 56.8 on 2 df
+static; his five | K, without IV2                              prices -11.527 (1.450) F 83.4; K -17.114 (3.857) F 50.3;  J 23.0 on 2 df
+static; his five | K, without IV3                              prices -18.171 (0.908) F 161.2; K +4.504 (1.490) F 266.1;  J 49.5 on 2 df
+static; his five | K, without IV4                              prices -18.542 (0.960) F 150.4; K +2.764 (1.640) F 257.4;  J 58.9 on 2 df
+static; his five; mutual-fund rows | logit                     prices +4.426 (0.585) F 67.8;  J 99.5 on 4 df
+static; his five; ETF rows | logit                             prices -13.633 (0.994) F 75.6;  J 124.5 on 4 df
+--- static: gates removed (3-way access)
+static; gates removed (3-way access) | logit                   prices -14.173 (1.114) F 66.4;  J 141.0 on 4 df
+static; gates removed (3-way access) | K                       prices -61.824 (16.052) F 15.6; K -100.395 (31.030) F 20.7;  J 24.1 on 3 df
+static; gates removed (3-way access) | K + age K               prices -52.393 (20.376) F 11.3; K -118.845 (28.365) F 26.9; Ka +2.199 (1.430) F 528.6;  J 16.9 on 2 df
+static; gates removed (3-way access) | K, without n1_3         prices -26.903 (7.488) F 17.0; K -16.608 (15.419) F 15.8;  J 23.0 on 2 df
+static; gates removed (3-way access) | K, without IV2          prices -64.825 (16.728) F 14.7; K -139.188 (38.612) F 20.8;  J 17.7 on 2 df
+static; gates removed (3-way access) | K, without IV3          prices -85.197 (28.790) F 9.4; K -143.417 (53.354) F 22.2;  J 5.7 on 2 df
+static; gates removed (3-way access) | K, without x4_3         prices -64.562 (16.097) F 20.1; K -102.282 (31.679) F 27.7;  J 22.2 on 2 df
+static; gates removed (3-way access); mutual-fund rows | logit prices +4.104 (0.641) F 69.9;  J 105.2 on 4 df
+static; gates removed (3-way access); ETF rows | logit         prices -12.518 (1.250) F 23.3;  J 129.8 on 4 df
+--- static: gates removed, ETF/MF access
+static; gates removed, ETF/MF access | logit                   prices -7.539 (0.805) F 66.5;  J 151.6 on 4 df
+static; gates removed, ETF/MF access | K                       prices -21.730 (6.805) F 16.0; K -32.507 (14.414) F 16.0;  J 126.8 on 3 df
+static; gates removed, ETF/MF access | K + age K               prices -18.641 (10.578) F 12.6; K -65.851 (19.514) F 17.3; Ka +2.307 (0.663) F 423.6;  J 88.0 on 2 df
+static; gates removed, ETF/MF access | K, without n1_v         prices -17.948 (4.366) F 20.2; K +0.095 (9.124) F 18.6;  J 62.0 on 2 df
+static; gates removed, ETF/MF access | K, without IV2          prices -22.338 (7.138) F 16.8; K -42.113 (14.531) F 18.5;  J 120.5 on 2 df
+static; gates removed, ETF/MF access | K, without IV3          prices -11.975 (5.408) F 11.3; K -11.851 (11.149) F 12.0;  J 145.1 on 2 df
+static; gates removed, ETF/MF access | K, without x4_v         prices -33.591 (10.987) F 17.7; K -52.194 (23.144) F 16.4;  J 94.3 on 2 df
+static; gates removed, ETF/MF access; mutual-fund rows | logit prices +5.189 (0.630) F 68.0;  J 99.5 on 4 df
+static; gates removed, ETF/MF access; ETF rows | logit         prices -12.518 (1.250) F 23.3;  J 129.8 on 4 df
+--- static: one menu: no access match, IV2 any vehicle
+static; one menu: no access match, IV2 any vehicle | logit     prices -3.017 (0.868) F 33.9;  J 107.6 on 4 df
+static; one menu: no access match, IV2 any vehicle | K         prices -1.502 (0.908) F 41.6; K -7.940 (1.347) F 43.0;  J 119.7 on 3 df
+static; one menu: no access match, IV2 any vehicle | K + age K prices -2.419 (0.891) F 49.2; K -11.256 (2.149) F 47.5; Ka -2.430 (0.314) F 33.1;  J 89.4 on 2 df
+static; one menu: no access match, IV2 any vehicle | K, without n1_a prices -1.888 (0.897) F 51.1; K -4.314 (1.219) F 41.8;  J 96.0 on 2 df
+static; one menu: no access match, IV2 any vehicle | K, without r2_a prices -17.493 (5.435) F 21.4; K -51.708 (8.278) F 45.7;  J 48.9 on 2 df
+static; one menu: no access match, IV2 any vehicle | K, without IV3 prices -1.673 (0.895) F 53.3; K -5.259 (1.090) F 38.8;  J 111.9 on 2 df
+static; one menu: no access match, IV2 any vehicle | K, without x4_a prices -6.434 (1.119) F 38.8; K -5.461 (1.794) F 54.7;  J 96.1 on 2 df
+static; one menu: no access match, IV2 any vehicle; mutual-fund rows | logit prices +3.763 (0.516) F 144.1;  J 95.2 on 4 df
+static; one menu: no access match, IV2 any vehicle; ETF rows | logit prices -7.673 (0.976) F 18.2;  J 110.1 on 4 df
+--- static: one menu, no IV2
+static; one menu, no IV2 | logit                               prices -4.256 (1.280) F 23.2;  J 104.0 on 3 df
+static; one menu, no IV2 | K                                   prices -17.493 (5.435) F 21.4; K -51.708 (8.278) F 45.7;  J 48.9 on 2 df
+static; one menu, no IV2 | K + age K                           prices -9.599 (2.923) F 27.5; K -30.646 (6.582) F 48.1; Ka -1.641 (0.302) F 34.8;  J 67.7 on 1 df
+static; one menu, no IV2 | K, without n1_a                     prices -10.426 (4.062) F 22.5; K -29.801 (10.548) F 31.0;  J 63.4 on 1 df
+static; one menu, no IV2 | K, without IV3                      prices -16.451 (4.976) F 31.4; K -46.756 (7.601) F 49.7;  J 41.1 on 1 df
+static; one menu, no IV2 | K, without x4_a                     prices -30.167 (9.119) F 16.8; K -58.360 (10.724) F 65.6;  J 0.0 on 1 df
+static; one menu, no IV2; mutual-fund rows | logit             prices +2.573 (0.420) F 120.5;  J 89.9 on 3 df
+static; one menu, no IV2; ETF rows | logit                     prices -25.379 (3.071) F 19.6;  J 37.6 on 3 df
+--- static: one menu + breadth
+static; one menu + breadth | logit                             prices -12.933 (1.360) F 43.9;  J 108.6 on 4 df
+static; one menu + breadth | K                                 prices -5.904 (1.667) F 50.2; K -27.062 (2.838) F 48.5;  J 88.7 on 3 df
+static; one menu + breadth | K + age K                         prices -0.308 (1.171) F 65.3; K -9.667 (2.288) F 39.6; Ka -2.110 (0.301) F 28.9;  J 106.5 on 2 df
+static; one menu + breadth | K, without n1_a                   prices -7.179 (1.604) F 51.3; K -20.931 (2.929) F 53.4;  J 69.7 on 2 df
+static; one menu + breadth | K, without br_a                   prices -17.493 (5.435) F 21.4; K -51.708 (8.278) F 45.7;  J 48.9 on 2 df
+static; one menu + breadth | K, without IV3                    prices -7.537 (1.818) F 69.8; K -26.728 (3.031) F 55.8;  J 76.5 on 2 df
+static; one menu + breadth | K, without x4_a                   prices -9.952 (1.936) F 69.3; K -23.087 (3.269) F 55.5;  J 58.0 on 2 df
+static; one menu + breadth; mutual-fund rows | logit           prices +3.470 (0.501) F 123.0;  J 94.7 on 4 df
+static; one menu + breadth; ETF rows | logit                   prices -38.030 (4.851) F 16.0;  J 54.1 on 4 df
+--- static: ETF/MF access + breadth, no IV2
+static; ETF/MF access + breadth, no IV2 | logit                prices -16.169 (1.770) F 30.2;  J 145.5 on 4 df
+static; ETF/MF access + breadth, no IV2 | K                    prices -14.551 (3.724) F 12.4; K +3.893 (7.648) F 25.3;  J 147.9 on 3 df
+static; ETF/MF access + breadth, no IV2 | K + age K            prices -18.041 (9.659) F 12.2; K -45.672 (18.885) F 32.6; Ka +3.569 (0.497) F 258.1;  J 78.1 on 2 df
+static; ETF/MF access + breadth, no IV2 | K, without n1_v      prices -6.616 (5.494) F 16.1; K +41.841 (11.584) F 19.5;  J 118.8 on 2 df
+static; ETF/MF access + breadth, no IV2 | K, without br_v      prices -22.338 (7.138) F 16.8; K -42.113 (14.531) F 18.5;  J 120.5 on 2 df
+static; ETF/MF access + breadth, no IV2 | K, without IV3       prices +7.494 (9.520) F 10.3; K +54.112 (18.794) F 15.0;  J 117.7 on 2 df
+static; ETF/MF access + breadth, no IV2 | K, without x4_v      prices -26.895 (7.494) F 11.8; K -14.566 (12.140) F 23.9;  J 124.2 on 2 df
+static; ETF/MF access + breadth, no IV2; mutual-fund rows | logit prices +1.677 (0.508) F 80.4;  J 122.0 on 4 df
+static; ETF/MF access + breadth, no IV2; ETF rows | logit      prices -43.403 (6.408) F 16.2;  J 67.9 on 4 df
+
+=== lag: one instrument at a time (logit fee slope)
+lag | n1_3 alone                                               prices +2.653 (1.588) F 3.7; [y_lag +1.013 (0.017)] just identified
+lag | n1_v alone                                               prices +1.438 (0.628) F 16.2; [y_lag +1.000 (0.007)] just identified
+lag | n1_a alone                                               prices -6.535 (9.113) F 0.6; [y_lag +0.914 (0.097)] just identified
+lag | x4_3 alone                                               prices +1.768 (1.158) F 13.6; [y_lag +1.004 (0.013)] just identified
+lag | x4_v alone                                               prices +1.248 (0.658) F 43.7; [y_lag +0.998 (0.007)] just identified
+lag | x4_a alone                                               prices +1.352 (0.640) F 39.6; [y_lag +0.999 (0.007)] just identified
+lag | r2_a alone                                               prices +0.150 (0.368) F 10.8; [y_lag +0.986 (0.004)] just identified
+lag | br_v alone                                               prices -3.642 (2.388) F 3.7; [y_lag +0.945 (0.026)] just identified
+lag | br_a alone                                               prices +0.276 (0.340) F 55.6; [y_lag +0.988 (0.004)] just identified
+--- lag: his five
+lag; his five | logit                                          prices -0.395 (0.112) F 83.2; [y_lag +0.980 (0.002)] J 11.0 on 4 df
+lag; his five | K                                              prices -0.466 (0.117) F 101.5; K +0.666 (0.256) F 281.3; [y_lag +0.983 (0.002)] J 7.1 on 3 df
+lag; his five | K + age K                                      prices -0.419 (0.109) F 94.2; K +0.491 (0.257) F 55.4; Ka +0.017 (0.016) F 486.2; [y_lag +0.982 (0.003)] J 5.3 on 2 df
+lag; his five | K, without IV1                                 prices -0.636 (0.239) F 74.4; K +0.426 (0.442) F 104.4; [y_lag +0.980 (0.004)] J 6.4 on 2 df
+lag; his five | K, without IV2                                 prices -0.409 (0.109) F 82.1; K +0.449 (0.274) F 40.3; [y_lag +0.982 (0.002)] J 5.3 on 2 df
+lag; his five | K, without IV3                                 prices -0.466 (0.117) F 132.6; K +0.628 (0.250) F 329.3; [y_lag +0.983 (0.002)] J 4.4 on 2 df
+lag; his five | K, without IV4                                 prices -0.401 (0.118) F 116.0; K +0.731 (0.256) F 353.8; [y_lag +0.984 (0.002)] J 4.5 on 2 df
+lag; his five; mutual-fund rows | logit                        prices -0.106 (0.077) F 85.7; [y_lag +0.985 (0.003)] J 14.2 on 4 df
+lag; his five; ETF rows | logit                                prices -0.175 (0.112) F 37.1; [y_lag +0.981 (0.003)] J 11.8 on 4 df
+--- lag: gates removed (3-way access)
+lag; gates removed (3-way access) | logit                      prices -0.283 (0.191) F 71.2; [y_lag +0.982 (0.003)] J 18.3 on 4 df
+lag; gates removed (3-way access) | K                          prices +0.642 (0.367) F 15.9; K +2.083 (0.691) F 31.5; [y_lag +1.001 (0.007)] J 4.1 on 3 df
+lag; gates removed (3-way access) | K + age K                  prices +1.860 (1.011) F 11.5; K +5.230 (2.559) F 8.4; Ka -0.095 (0.083) F 73.1; [y_lag +1.033 (0.025)] J 0.6 on 2 df
+lag; gates removed (3-way access) | K, without n1_3            prices +0.936 (0.879) F 3.3; K +2.434 (1.323) F 5.9; [y_lag +1.006 (0.016)] J 3.7 on 2 df
+lag; gates removed (3-way access) | K, without IV2             prices +0.629 (0.388) F 16.7; K +2.228 (0.683) F 37.4; [y_lag +1.002 (0.007)] J 4.0 on 2 df
+lag; gates removed (3-way access) | K, without IV3             prices +0.506 (0.350) F 16.5; K +1.834 (0.628) F 38.9; [y_lag +0.999 (0.007)] J 3.0 on 2 df
+lag; gates removed (3-way access) | K, without x4_3            prices +0.488 (0.358) F 20.1; K +1.945 (0.672) F 43.2; [y_lag +0.999 (0.007)] J 1.8 on 2 df
+lag; gates removed (3-way access); mutual-fund rows | logit    prices -0.182 (0.088) F 85.3; [y_lag +0.985 (0.003)] J 12.9 on 4 df
+lag; gates removed (3-way access); ETF rows | logit            prices +0.105 (0.136) F 50.8; [y_lag +0.986 (0.003)] J 6.7 on 4 df
+--- lag: gates removed, ETF/MF access
+lag; gates removed, ETF/MF access | logit                      prices -0.201 (0.165) F 89.3; [y_lag +0.982 (0.003)] J 19.4 on 4 df
+lag; gates removed, ETF/MF access | K                          prices +0.255 (0.203) F 48.3; K +1.621 (0.436) F 62.6; [y_lag +0.995 (0.004)] J 4.9 on 3 df
+lag; gates removed, ETF/MF access | K + age K                  prices +0.592 (0.356) F 44.2; K +2.873 (1.028) F 28.8; Ka -0.050 (0.041) F 140.7; [y_lag +1.007 (0.010)] J 2.8 on 2 df
+lag; gates removed, ETF/MF access | K, without n1_v            prices +0.914 (0.667) F 10.7; K +2.465 (1.047) F 21.9; [y_lag +1.006 (0.012)] J 2.5 on 2 df
+lag; gates removed, ETF/MF access | K, without IV2             prices +0.301 (0.230) F 31.5; K +1.527 (0.434) F 65.0; [y_lag +0.995 (0.004)] J 4.7 on 2 df
+lag; gates removed, ETF/MF access | K, without IV3             prices +0.209 (0.202) F 61.0; K +1.503 (0.409) F 83.0; [y_lag +0.994 (0.004)] J 3.9 on 2 df
+lag; gates removed, ETF/MF access | K, without x4_v            prices +0.136 (0.205) F 58.9; K +1.503 (0.437) F 83.3; [y_lag +0.993 (0.004)] J 2.0 on 2 df
+lag; gates removed, ETF/MF access; mutual-fund rows | logit    prices -0.156 (0.091) F 144.0; [y_lag +0.985 (0.003)] J 12.9 on 4 df
+lag; gates removed, ETF/MF access; ETF rows | logit            prices +0.105 (0.136) F 50.8; [y_lag +0.986 (0.003)] J 6.7 on 4 df
+--- lag: one menu: no access match, IV2 any vehicle
+lag; one menu: no access match, IV2 any vehicle | logit        prices -0.001 (0.215) F 47.6; [y_lag +0.985 (0.003)] J 16.6 on 4 df
+lag; one menu: no access match, IV2 any vehicle | K            prices -0.044 (0.222) F 52.0; K +0.388 (0.242) F 28.3; [y_lag +0.986 (0.003)] J 12.1 on 3 df
+lag; one menu: no access match, IV2 any vehicle | K + age K    prices -0.155 (0.160) F 47.3; K +0.220 (0.391) F 36.7; Ka -0.084 (0.103) F 11.3; [y_lag +0.988 (0.004)] J 9.8 on 2 df
+lag; one menu: no access match, IV2 any vehicle | K, without n1_a prices +0.076 (0.222) F 55.7; K +0.289 (0.230) F 31.3; [y_lag +0.987 (0.003)] J 12.7 on 2 df
+lag; one menu: no access match, IV2 any vehicle | K, without r2_a prices +0.779 (0.459) F 19.1; K +2.151 (0.941) F 23.1; [y_lag +1.003 (0.009)] J 2.9 on 2 df
+lag; one menu: no access match, IV2 any vehicle | K, without IV3 prices -0.038 (0.219) F 68.5; K +0.367 (0.245) F 35.0; [y_lag +0.986 (0.003)] J 12.0 on 2 df
+lag; one menu: no access match, IV2 any vehicle | K, without x4_a prices -0.466 (0.185) F 54.2; K +0.520 (0.229) F 37.3; [y_lag +0.982 (0.003)] J 4.5 on 2 df
+lag; one menu: no access match, IV2 any vehicle; mutual-fund rows | logit prices -0.204 (0.094) F 130.5; [y_lag +0.985 (0.003)] J 12.4 on 4 df
+lag; one menu: no access match, IV2 any vehicle; ETF rows | logit prices +0.173 (0.142) F 13.4; [y_lag +0.987 (0.003)] J 6.3 on 4 df
+--- lag: one menu, no IV2
+lag; one menu, no IV2 | logit                                  prices +0.052 (0.280) F 33.7; [y_lag +0.985 (0.003)] J 17.7 on 3 df
+lag; one menu, no IV2 | K                                      prices +0.779 (0.459) F 19.1; K +2.151 (0.941) F 23.1; [y_lag +1.003 (0.009)] J 2.9 on 2 df
+lag; one menu, no IV2 | K + age K                              prices +0.680 (0.481) F 16.9; K +2.059 (1.000) F 27.7; Ka -0.145 (0.120) F 14.6; [y_lag +1.008 (0.010)] J 0.9 on 1 df
+lag; one menu, no IV2 | K, without n1_a                        prices +1.545 (0.770) F 17.9; K +4.644 (2.151) F 21.2; [y_lag +1.023 (0.017)] J 0.2 on 1 df
+lag; one menu, no IV2 | K, without IV3                         prices +0.875 (0.466) F 21.6; K +2.267 (0.956) F 34.6; [y_lag +1.005 (0.009)] J 2.0 on 1 df
+lag; one menu, no IV2 | K, without x4_a                        prices +0.263 (0.533) F 5.7; K +1.634 (1.039) F 18.8; [y_lag +0.995 (0.010)] J 1.6 on 1 df
+lag; one menu, no IV2; mutual-fund rows | logit                prices -0.311 (0.100) F 145.2; [y_lag +0.985 (0.003)] J 7.8 on 3 df
+lag; one menu, no IV2; ETF rows | logit                        prices +0.238 (0.354) F 15.1; [y_lag +0.988 (0.006)] J 6.4 on 3 df
+--- lag: one menu + breadth
+lag; one menu + breadth | logit                                prices +0.078 (0.203) F 36.8; [y_lag +0.985 (0.003)] J 18.4 on 4 df
+lag; one menu + breadth | K                                    prices -0.016 (0.209) F 43.4; K +0.688 (0.318) F 51.0; [y_lag +0.988 (0.003)] J 8.1 on 3 df
+lag; one menu + breadth | K + age K                            prices +0.598 (0.389) F 29.4; K +1.924 (0.688) F 35.5; Ka -0.170 (0.078) F 18.4; [y_lag +1.007 (0.010)] J 1.1 on 2 df
+lag; one menu + breadth | K, without n1_a                      prices +0.039 (0.190) F 42.9; K +0.440 (0.370) F 49.1; [y_lag +0.987 (0.003)] J 9.9 on 2 df
+lag; one menu + breadth | K, without br_a                      prices +0.779 (0.459) F 19.1; K +2.151 (0.941) F 23.1; [y_lag +1.003 (0.009)] J 2.9 on 2 df
+lag; one menu + breadth | K, without IV3                       prices +0.039 (0.212) F 62.9; K +0.741 (0.332) F 59.2; [y_lag +0.989 (0.003)] J 7.1 on 2 df
+lag; one menu + breadth | K, without x4_a                      prices -0.339 (0.200) F 60.5; K +0.791 (0.304) F 53.2; [y_lag +0.985 (0.003)] J 3.8 on 2 df
+lag; one menu + breadth; mutual-fund rows | logit              prices -0.192 (0.104) F 129.9; [y_lag +0.985 (0.003)] J 13.6 on 4 df
+lag; one menu + breadth; ETF rows | logit                      prices +0.257 (0.358) F 23.0; [y_lag +0.989 (0.006)] J 7.5 on 4 df
+--- lag: ETF/MF access + breadth, no IV2
+lag; ETF/MF access + breadth, no IV2 | logit                   prices -0.032 (0.210) F 50.5; [y_lag +0.984 (0.003)] J 21.9 on 4 df
+lag; ETF/MF access + breadth, no IV2 | K                       prices +0.319 (0.238) F 38.3; K +1.407 (0.388) F 62.9; [y_lag +0.995 (0.004)] J 4.8 on 3 df
+lag; ETF/MF access + breadth, no IV2 | K + age K               prices +0.999 (0.514) F 22.2; K +2.732 (0.913) F 47.3; Ka -0.073 (0.042) F 32.6; [y_lag +1.011 (0.011)] J 0.9 on 2 df
+lag; ETF/MF access + breadth, no IV2 | K, without n1_v         prices +0.388 (0.313) F 17.5; K +1.447 (0.479) F 72.9; [y_lag +0.996 (0.005)] J 4.6 on 2 df
+lag; ETF/MF access + breadth, no IV2 | K, without br_v         prices +0.301 (0.230) F 31.5; K +1.527 (0.434) F 65.0; [y_lag +0.995 (0.004)] J 4.7 on 2 df
+lag; ETF/MF access + breadth, no IV2 | K, without IV3          prices +0.293 (0.231) F 50.8; K +1.259 (0.383) F 84.7; [y_lag +0.994 (0.004)] J 4.0 on 2 df
+lag; ETF/MF access + breadth, no IV2 | K, without x4_v         prices +0.169 (0.245) F 48.4; K +1.307 (0.387) F 82.8; [y_lag +0.993 (0.004)] J 2.2 on 2 df
+lag; ETF/MF access + breadth, no IV2; mutual-fund rows | logit prices -0.256 (0.095) F 150.1; [y_lag +0.985 (0.003)] J 7.8 on 4 df
+lag; ETF/MF access + breadth, no IV2; ETF rows | logit         prices +0.620 (0.460) F 10.5; [y_lag +0.995 (0.009)] J 6.0 on 4 df

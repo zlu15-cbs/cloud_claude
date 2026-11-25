@@ -1,0 +1,37 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+correlation of IV1 with: fee-gate-only count 0.750; tracking-gate-only count 0.735; ungated count 0.460
+share of months in which the fee equals last month's fee: 0.972
+  [panel static: 96,499 rows, 21 columns, 7s]
+
+=== static. Within-fund, within-month R^2 of IV1 on a cubic in the own lagged fee: 0.015
+static | own lagged fee as the only instrument                 prices -1.881 (0.119) F 1429.0;  just identified
+static | IV1 alone                                             prices -15.350 (0.973) F 367.5;  just identified
+static | IV1 with the fee gate only                            prices -16.061 (0.593) F 740.2;  just identified
+static | IV1 with the tracking gate only                       prices -59.058 (14.919) F 15.3;  just identified
+static | IV1 with no gate                                      prices -140.482 (36.657) F 14.5;  just identified
+static | IV1 alone, cubic in own lagged fee as control         prices -1732.017 (3057.752) F 0.3; [p_lag +1672.409 (2980.865)] [p_lag2 +34.422 (90.328)] [p_lag3 -42.975 (76.280)] just identified
+static | IV4 alone                                             prices -15.556 (1.626) F 89.7;  just identified
+static | IV4 alone, cubic in own lagged fee as control         prices -200.905 (95.928) F 5.3; [p_lag +186.791 (94.104)] [p_lag2 +14.277 (11.687)] [p_lag3 -8.709 (8.973)] just identified
+static | IV0 alone, cubic in own lagged fee as control         prices -39.936 (19.662) F 5.1; [p_lag +30.604 (19.011)] [p_lag2 +12.159 (2.454)] [p_lag3 -5.106 (1.940)] just identified
+static | his five, logit                                       prices -16.417 (0.828) F 105.7;  J 69.5 on 4 df
+static | his five, logit, cubic in own lagged fee as control   prices -73.826 (25.741) F 3.4; [p_lag +63.487 (24.818)] [p_lag2 +12.605 (4.481)] [p_lag3 -5.865 (3.503)] J 109.9 on 4 df
+static | his five, K                                           prices -17.124 (0.845) F 126.5; K +4.599 (1.510) F 195.0;  J 70.2 on 3 df
+static | his five, K, cubic in own lagged fee as control       prices -21.191 (12.841) F 4.2; K +11.381 (1.279) F 387.8; [p_lag +11.881 (12.474)] [p_lag2 +10.118 (0.951)] [p_lag3 -5.842 (0.656)] J 140.4 on 3 df
+  [panel lag: 96,499 rows, 21 columns, 6s]
+
+=== lag. Within-fund, within-month R^2 of IV1 on a cubic in the own lagged fee: 0.015
+lag | own lagged fee as the only instrument                    prices -0.056 (0.008) F 1390.1; [y_lag +0.984 (0.002)] just identified
+lag | IV1 alone                                                prices -0.201 (0.129) F 282.6; [y_lag +0.982 (0.002)] just identified
+lag | IV1 with the fee gate only                               prices -0.272 (0.069) F 629.4; [y_lag +0.982 (0.002)] just identified
+lag | IV1 with the tracking gate only                          prices -0.486 (1.952) F 1.9; [y_lag +0.979 (0.021)] just identified
+lag | IV1 with no gate                                         prices +2.653 (1.588) F 3.7; [y_lag +1.013 (0.017)] just identified
+lag | IV1 alone, cubic in own lagged fee as control            prices -15.014 (41.199) F 0.2; [y_lag +0.980 (0.007)] [p_lag +14.326 (40.020)] [p_lag2 +0.508 (0.873)] [p_lag3 -0.440 (0.947)] just identified
+lag | IV4 alone                                                prices -0.791 (0.399) F 98.6; [y_lag +0.976 (0.004)] just identified
+lag | IV4 alone, cubic in own lagged fee as control            prices -11.246 (9.202) F 5.0; [y_lag +0.981 (0.002)] [p_lag +10.676 (8.958)] [p_lag2 +0.450 (0.669)] [p_lag3 -0.353 (0.533)] just identified
+lag | IV0 alone, cubic in own lagged fee as control            prices -4.285 (2.542) F 5.0; [y_lag +0.982 (0.002)] [p_lag +3.931 (2.461)] [p_lag2 +0.344 (0.269)] [p_lag3 -0.192 (0.212)] just identified
+lag | his five, logit                                          prices -0.395 (0.112) F 83.2; [y_lag +0.980 (0.002)] J 11.0 on 4 df
+lag | his five, logit, cubic in own lagged fee as control      prices -7.660 (3.170) F 3.4; [y_lag +0.982 (0.002)] [p_lag +7.201 (3.060)] [p_lag2 +0.396 (0.474)] [p_lag3 -0.270 (0.369)] J 5.0 on 4 df
+lag | his five, K                                              prices -0.466 (0.117) F 101.5; K +0.666 (0.256) F 281.3; [y_lag +0.983 (0.002)] J 7.1 on 3 df
+lag | his five, K, cubic in own lagged fee as control          prices -5.355 (2.627) F 4.1; K +0.493 (0.251) F 526.1; [y_lag +0.984 (0.002)] [p_lag +4.958 (2.551)] [p_lag2 +0.264 (0.302)] [p_lag3 -0.260 (0.242)] J 4.8 on 3 df
