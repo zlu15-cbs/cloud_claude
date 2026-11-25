@@ -1,0 +1,14 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+T7 (fee, K; month FE)              prices -18.326 (0.921) F 120.8; K +3.073 (1.527) F 202.7; J 60.7 on 3 df
+A (+ month x access FE)            prices -8.707 (1.949) F 23.0; K -8.485 (4.622) F 18.3; J 107.4 on 3 df
+B (+ fee x access)                 prices -8.638 (1.737) F 24.9; p_inst -7.069 (6.088) F 37.1; p_etf -27.464 (2.652) F 57.5; K +38.368 (7.201) F 16.0; J 111.4 on 5 df
+B-orig (original flag)             prices -9.798 (1.477) F 22.5; p_inst_o +7.643 (1.291) F 39.5; p_etf_o -27.912 (2.673) F 59.4; K +42.799 (6.698) F 11.5; J 89.6 on 5 df
+B-split (p^2/2, -p e_t)            prices -13.549 (1.898) F 19.6; p_inst +9.515 (6.354) F 44.5; p_etf -13.825 (2.462) F 49.6; pp2 +36.201 (5.770) F 9.2; mpe -6.582 (7.368) F 27.5; J 104.0 on 4 df
+B-age (+ age K)                    prices -8.948 (1.600) F 29.2; p_inst -6.454 (5.927) F 40.9; p_etf -27.626 (2.628) F 68.7; K +39.670 (6.814) F 18.2; Ka +0.103 (0.314) F 111.6; J 111.7 on 4 df
+A-orig (original flag)             prices -8.127 (1.982) F 23.3; K -10.759 (4.738) F 18.9; J 112.0 on 3 df
+logit B (no K)                     prices +0.116 (0.342) F 82.8; p_inst -28.475 (5.725) F 33.5; p_etf -17.507 (1.238) F 62.2; J 106.1 on 6 df
+logit B fee slope: retail 0.12, institutional -28.36, ETF -17.39
+logit B elasticity: mean -3.90; AUM-weighted -1.87; share |e|<1 0.259; AUM share |e|<1 0.511
+logit B elasticity, last month, by access (AUM-weighted): {0: 0.01, 1: -1.12, 2: -2.04}
