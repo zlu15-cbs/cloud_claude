@@ -15,10 +15,10 @@ The split-sample results that led here are in `RESULTS_passive_access_spec.md`.
   instrument alone.
 - **The fee random coefficient is.** In the static model σ² is positive only because of IV2, which moves like an
   ETF-versus-mutual-fund time trend. Without IV2, or with an ETF taste trend, σ² is negative.
-- **Candidate: Table 7 plus the lagged share in mean utility (inertia).** It is the only version where the
-  instruments agree with each other (J 7.1 on 3 df, p = 0.07; every static version gives 23 or more), the fee
-  slope is negative for each instrument, σ² is positive whichever instrument is dropped, and mutual-fund rows
-  alone no longer give a positive slope.
+- **Candidate: Table 7 plus the lagged share in mean utility (inertia).** It is the only version with a positive
+  σ² whose J does not reject at 5% (7.1 on 3 df, p = 0.07; static versions with a positive σ² give 61 to 148).
+  The fee slope is negative for each instrument, σ² is positive whichever instrument is dropped, and mutual-fund
+  rows alone no longer give a positive slope.
 - **Open issues with the candidate:** σ² is only marginally significant; the long-run magnitudes depend on a lag
   coefficient close to one; markups need a long-run elasticity. The BLP estimate is running.
 
