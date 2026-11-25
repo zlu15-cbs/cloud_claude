@@ -42,7 +42,11 @@ def _resid(cols):
         from scipy.sparse.linalg import lsmr
         return np.column_stack([_G['M'][:, c] - _G['A'] @ lsmr(_G['A'], _G['M'][:, c], atol=1e-10, btol=1e-10, maxiter=5000)[0] for c in cols])
     alg = pyhdfe.create(_G['ids'], drop_singletons=False, residualize_method='lsmr')
-    return alg.residualize(_G['M'][:, cols])
+    out = np.zeros((_G['M'].shape[0], len(cols)))
+    live = [i for i, c in enumerate(cols) if np.ptp(_G['M'][:, c]) > 0]     # a constant column (e.g. ETF x trend on mutual-fund rows) stays zero
+    if live:
+        out[:, live] = alg.residualize(_G['M'][:, [cols[i] for i in live]])
+    return out
 
 
 class Panel:

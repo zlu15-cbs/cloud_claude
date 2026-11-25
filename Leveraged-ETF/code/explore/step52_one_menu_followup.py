@@ -79,7 +79,7 @@ def main(P, D, names):
             q.est(['prices', 'p_t', 'K'], IV + ZT, 'K + fee x trend')
 
     print('\nG3. Fund-specific linear trends (static)')
-    for lab, fe in (('month', ['market_ids']), ('month x asset class', ['mp8'])):
+    for lab, fe in (('month', ['market_ids']),):
         p = Panel(d, fe, BASE, f'{lab}; fund trends', fund_trend=True)
         p.est(['prices'], IV, 'logit')
         p.est(['prices', 'K'], IV, 'K')

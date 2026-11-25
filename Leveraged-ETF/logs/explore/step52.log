@@ -1,0 +1,155 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+
+G1. Inertia
+  [panel month; lag: 96,499 rows, 26 columns, 5s]
+month; lag | logit                                             prices -0.395 (0.112) F 83.2; [y_lag +0.980 (0.002)] J 11.0 on 4 df
+      long-run fee slope -20.14
+month; lag | K                                                 prices -0.466 (0.117) F 101.5; K +0.666 (0.256) F 281.3; [y_lag +0.983 (0.002)] J 7.1 on 3 df
+      long-run fee slope -27.01, long-run sigma^2 +38.6
+month; lag | split                                             prices -0.171 (0.241) F 22.9; pp2 -0.588 (0.938) F 3.1; mpe +0.322 (0.289) F 159.1; [y_lag +0.983 (0.002)] J 5.9 on 2 df
+month; lag | K + age K                                         prices -0.419 (0.109) F 94.2; K +0.491 (0.257) F 55.4; Ka +0.017 (0.016) F 486.2; [y_lag +0.982 (0.003)] J 5.3 on 2 df
+month; lag | K + ETF x trend                                   prices -0.406 (0.145) F 32.2; K +0.494 (0.337) F 17.6; [y_lag +0.982 (0.002)] [etf_t +0.000 (0.000)] J 6.4 on 3 df
+month; lag | K + fee x trend                                   prices -0.491 (0.118) F 62.9; p_t -0.012 (0.003) F 154.1; K +1.864 (0.467) F 35.3; [y_lag +0.982 (0.002)] J 38.8 on 7 df
+month; lag | logit, IV0 alone                                  prices -0.545 (0.194) F 37.6; [y_lag +0.979 (0.003)] just identified
+month; lag | logit, IV1 alone                                  prices -0.201 (0.129) F 282.6; [y_lag +0.982 (0.002)] just identified
+month; lag | logit, IV2 alone                                  prices -1.178 (0.381) F 75.3; [y_lag +0.972 (0.005)] just identified
+month; lag | logit, IV3 alone                                  prices +32.846 (148.201) F 0.0; [y_lag +1.338 (1.602)] just identified
+month; lag | logit, IV4 alone                                  prices -0.791 (0.399) F 98.6; [y_lag +0.976 (0.004)] just identified
+month; lag | K, IV0 + IV1                                      prices -0.346 (0.111) F 157.5; K +0.428 (0.258) F 72.0; [y_lag +0.983 (0.002)] just identified
+month; lag | K, IV0 + IV2                                      prices +0.094 (0.535) F 7.1; K +1.376 (0.877) F 10.2; [y_lag +0.992 (0.009)] just identified
+month; lag | K, IV0 + IV3                                      prices +2.577 (3.070) F 4.5; K +6.726 (6.113) F 5.9; [y_lag +1.044 (0.062)] just identified
+month; lag | K, IV0 + IV4                                      prices -0.684 (0.232) F 180.4; K -0.299 (0.581) F 46.4; [y_lag +0.976 (0.005)] just identified
+month; lag | K, all but IV0                                    prices -0.531 (0.140) F 89.8; K +0.778 (0.297) F 152.3; [y_lag +0.983 (0.002)] J 5.2 on 2 df
+month; lag | K, all but IV1                                    prices -0.636 (0.239) F 74.4; K +0.426 (0.442) F 104.4; [y_lag +0.980 (0.004)] J 6.4 on 2 df
+month; lag | K, all but IV2                                    prices -0.409 (0.109) F 82.1; K +0.449 (0.274) F 40.3; [y_lag +0.982 (0.002)] J 5.3 on 2 df
+month; lag | K, all but IV3                                    prices -0.466 (0.117) F 132.6; K +0.628 (0.250) F 329.3; [y_lag +0.983 (0.002)] J 4.4 on 2 df
+month; lag | K, all but IV4                                    prices -0.401 (0.118) F 116.0; K +0.731 (0.256) F 353.8; [y_lag +0.984 (0.002)] J 4.5 on 2 df
+month; lag | logit, rho imposed 0.95                           prices -0.890 (0.092) F 105.7;  J 19.5 on 4 df
+month; lag | K, rho imposed 0.95                               prices -1.015 (0.101) F 126.5; K +0.815 (0.270) F 195.0;  J 20.5 on 3 df
+month; lag | logit, rho imposed 0.98                           prices -0.399 (0.092) F 105.7;  J 10.6 on 4 df
+month; lag | K, rho imposed 0.98                               prices -0.506 (0.099) F 126.5; K +0.696 (0.261) F 195.0;  J 7.5 on 3 df
+month; lag | logit, rho imposed 0.99                           prices -0.236 (0.094) F 105.7;  J 10.7 on 4 df
+month; lag | K, rho imposed 0.99                               prices -0.337 (0.099) F 126.5; K +0.656 (0.260) F 195.0;  J 6.6 on 3 df
+month; lag | logit, rho imposed 1.0                            prices -0.072 (0.096) F 105.7;  J 12.7 on 4 df
+month; lag | K, rho imposed 1.0                                prices -0.167 (0.101) F 126.5; K +0.616 (0.259) F 195.0;  J 7.8 on 3 df
+  [panel month; lag instrumented with second lag: 95,072 rows, 16 columns, 3s]
+month; lag instrumented with second lag | logit                prices -0.426 (0.110) F 82.0; y_lag +0.978 (0.002) F 53939.4;  J 11.5 on 4 df
+month; lag instrumented with second lag | K                    prices -0.498 (0.114) F 100.6; K +0.676 (0.256) F 269.1; y_lag +0.981 (0.002) F 55526.4;  J 8.0 on 3 df
+  [panel month; lag; diagnostic, mutual-fund rows: 41,085 rows, 26 columns, 2s]
+month; lag; diagnostic, mutual-fund rows | logit               prices -0.106 (0.077) F 85.7; [y_lag +0.985 (0.003)] J 14.2 on 4 df
+month; lag; diagnostic, mutual-fund rows | logit, IV0 alone    prices -0.241 (0.067) F 165.6; [y_lag +0.985 (0.003)] just identified
+month; lag; diagnostic, mutual-fund rows | logit, IV1 alone    prices +0.129 (0.285) F 105.8; [y_lag +0.985 (0.003)] just identified
+month; lag; diagnostic, mutual-fund rows | logit, IV2 alone    prices +0.569 (0.284) F 93.0; [y_lag +0.985 (0.003)] just identified
+month; lag; diagnostic, mutual-fund rows | logit, IV4 alone    prices -0.642 (0.414) F 90.3; [y_lag +0.985 (0.003)] just identified
+month; lag; diagnostic, mutual-fund rows | logit, rho imposed 0.98 prices -0.081 (0.079) F 82.2;  J 15.6 on 4 df
+month; lag; diagnostic, mutual-fund rows | logit, rho imposed 1.0 prices -0.174 (0.079) F 82.2;  J 10.2 on 4 df
+  [panel month; lag; diagnostic, ETF rows: 55,414 rows, 26 columns, 3s]
+month; lag; diagnostic, ETF rows | logit                       prices -0.175 (0.112) F 37.1; [y_lag +0.981 (0.003)] J 11.8 on 4 df
+month; lag; diagnostic, ETF rows | logit, IV0 alone            prices -0.095 (0.407) F 9.1; [y_lag +0.982 (0.008)] just identified
+month; lag; diagnostic, ETF rows | logit, IV1 alone            prices -0.323 (0.165) F 127.0; [y_lag +0.978 (0.003)] just identified
+month; lag; diagnostic, ETF rows | logit, IV2 alone            prices -0.049 (0.138) F 68.4; [y_lag +0.983 (0.003)] just identified
+month; lag; diagnostic, ETF rows | logit, IV4 alone            prices -1.435 (0.810) F 27.2; [y_lag +0.958 (0.015)] just identified
+month; lag; diagnostic, ETF rows | logit, rho imposed 0.98     prices -0.210 (0.094) F 78.3;  J 12.0 on 4 df
+month; lag; diagnostic, ETF rows | logit, rho imposed 1.0      prices +0.048 (0.097) F 78.3;  J 6.3 on 4 df
+  [panel month x asset class; lag: 96,499 rows, 26 columns, 9s]
+month x asset class; lag | logit                               prices -0.260 (0.082) F 104.8; [y_lag +0.982 (0.002)] J 39.7 on 4 df
+      long-run fee slope -14.65
+month x asset class; lag | K                                   prices -0.418 (0.095) F 122.3; K +0.880 (0.192) F 618.6; [y_lag +0.984 (0.002)] J 25.4 on 3 df
+      long-run fee slope -26.46, long-run sigma^2 +55.7
+month x asset class; lag | split                               prices +0.312 (0.361) F 24.6; pp2 -2.293 (1.538) F 7.4; mpe +0.719 (0.233) F 434.9; [y_lag +0.985 (0.002)] J 7.4 on 2 df
+month x asset class; lag | K + age K                           prices -0.384 (0.093) F 148.1; K +0.387 (0.191) F 70.5; Ka +0.059 (0.015) F 443.0; [y_lag +0.979 (0.003)] J 0.9 on 2 df
+month x asset class; lag | K + ETF x trend                     prices -0.254 (0.090) F 82.0; K -0.115 (0.298) F 31.1; [y_lag +0.981 (0.002)] [etf_t +0.001 (0.000)] J 7.8 on 3 df
+month x asset class; lag | K + fee x trend                     prices -0.500 (0.102) F 159.1; p_t -0.016 (0.002) F 289.4; K +2.330 (0.383) F 59.8; [y_lag +0.982 (0.002)] J 42.4 on 7 df
+month x asset class; lag | logit, IV0 alone                    prices -0.532 (0.184) F 46.4; [y_lag +0.979 (0.003)] just identified
+month x asset class; lag | logit, IV1 alone                    prices -0.249 (0.104) F 322.6; [y_lag +0.982 (0.002)] just identified
+month x asset class; lag | logit, IV2 alone                    prices +42.153 (106.870) F 0.2; [y_lag +1.447 (1.166)] just identified
+month x asset class; lag | logit, IV3 alone                    prices -1.170 (0.522) F 29.4; [y_lag +0.972 (0.006)] just identified
+month x asset class; lag | logit, IV4 alone                    prices -0.477 (0.202) F 152.2; [y_lag +0.980 (0.003)] just identified
+month x asset class; lag | K, IV0 + IV1                        prices -0.338 (0.096) F 282.8; K +0.311 (0.203) F 105.4; [y_lag +0.983 (0.002)] just identified
+month x asset class; lag | K, IV0 + IV2                        prices +0.204 (0.211) F 59.8; K +1.183 (0.247) F 1745.4; [y_lag +0.992 (0.003)] just identified
+month x asset class; lag | K, IV0 + IV3                        prices -1.340 (0.679) F 17.3; K -1.300 (1.271) F 20.4; [y_lag +0.965 (0.013)] just identified
+month x asset class; lag | K, IV0 + IV4                        prices -0.493 (0.152) F 300.7; K +0.062 (0.310) F 75.7; [y_lag +0.980 (0.003)] just identified
+month x asset class; lag | K, all but IV0                      prices -0.658 (0.135) F 118.8; K +1.248 (0.249) F 797.2; [y_lag +0.983 (0.002)] J 1.1 on 2 df
+month x asset class; lag | K, all but IV1                      prices -0.287 (0.136) F 108.2; K +0.970 (0.228) F 619.4; [y_lag +0.986 (0.002)] J 20.9 on 2 df
+month x asset class; lag | K, all but IV2                      prices -0.389 (0.092) F 139.1; K +0.280 (0.202) F 42.8; [y_lag +0.982 (0.002)] J 3.2 on 2 df
+month x asset class; lag | K, all but IV3                      prices -0.396 (0.093) F 163.9; K +0.866 (0.193) F 781.4; [y_lag +0.984 (0.002)] J 17.8 on 2 df
+month x asset class; lag | K, all but IV4                      prices -0.367 (0.098) F 108.2; K +0.886 (0.192) F 637.3; [y_lag +0.985 (0.002)] J 22.1 on 2 df
+month x asset class; lag | logit, rho imposed 0.95             prices -0.735 (0.076) F 119.9;  J 96.2 on 4 df
+month x asset class; lag | K, rho imposed 0.95                 prices -0.955 (0.086) F 148.2; K +1.503 (0.195) F 337.3;  J 93.4 on 3 df
+month x asset class; lag | logit, rho imposed 0.98             prices -0.389 (0.075) F 119.9;  J 43.2 on 4 df
+month x asset class; lag | K, rho imposed 0.98                 prices -0.519 (0.084) F 148.2; K +0.893 (0.185) F 337.3;  J 35.2 on 3 df
+month x asset class; lag | logit, rho imposed 0.99             prices -0.273 (0.076) F 119.9;  J 22.9 on 4 df
+month x asset class; lag | K, rho imposed 0.99                 prices -0.374 (0.085) F 148.2; K +0.690 (0.183) F 337.3;  J 13.1 on 3 df
+month x asset class; lag | logit, rho imposed 1.0              prices -0.158 (0.078) F 119.9;  J 12.2 on 4 df
+month x asset class; lag | K, rho imposed 1.0                  prices -0.229 (0.086) F 148.2; K +0.487 (0.182) F 337.3;  J 3.7 on 3 df
+  [panel month x asset class; lag instrumented with second lag: 95,072 rows, 16 columns, 5s]
+month x asset class; lag instrumented with second lag | logit  prices -0.277 (0.079) F 101.5; y_lag +0.981 (0.002) F 115471.9;  J 45.9 on 4 df
+month x asset class; lag instrumented with second lag | K      prices -0.440 (0.091) F 119.4; K +0.929 (0.189) F 596.9; y_lag +0.983 (0.002) F 143447.3;  J 30.4 on 3 df
+  [panel month x asset class; lag; diagnostic, mutual-fund rows: 41,085 rows, 26 columns, 2s]
+month x asset class; lag; diagnostic, mutual-fund rows | logit prices -0.108 (0.054) F 126.1; [y_lag +0.986 (0.003)] J 6.8 on 4 df
+month x asset class; lag; diagnostic, mutual-fund rows | logit, IV0 alone prices -0.159 (0.054) F 213.4; [y_lag +0.985 (0.003)] just identified
+month x asset class; lag; diagnostic, mutual-fund rows | logit, IV1 alone prices +0.016 (0.196) F 150.0; [y_lag +0.986 (0.003)] just identified
+month x asset class; lag; diagnostic, mutual-fund rows | logit, IV2 alone prices +0.263 (0.312) F 74.0; [y_lag +0.986 (0.003)] just identified
+month x asset class; lag; diagnostic, mutual-fund rows | logit, IV4 alone prices -0.738 (0.289) F 93.2; [y_lag +0.985 (0.003)] just identified
+month x asset class; lag; diagnostic, mutual-fund rows | logit, rho imposed 0.98 prices -0.093 (0.055) F 121.6;  J 6.5 on 4 df
+month x asset class; lag; diagnostic, mutual-fund rows | logit, rho imposed 1.0 prices -0.150 (0.056) F 121.6;  J 6.7 on 4 df
+  [panel month x asset class; lag; diagnostic, ETF rows: 55,414 rows, 26 columns, 5s]
+month x asset class; lag; diagnostic, ETF rows | logit         prices -0.298 (0.106) F 41.0; [y_lag +0.978 (0.003)] J 0.8 on 4 df
+month x asset class; lag; diagnostic, ETF rows | logit, IV0 alone prices -0.402 (0.375) F 13.4; [y_lag +0.976 (0.007)] just identified
+month x asset class; lag; diagnostic, ETF rows | logit, IV1 alone prices -0.296 (0.125) F 158.8; [y_lag +0.978 (0.003)] just identified
+month x asset class; lag; diagnostic, ETF rows | logit, IV2 alone prices -2.097 (3.216) F 0.7; [y_lag +0.945 (0.057)] just identified
+month x asset class; lag; diagnostic, ETF rows | logit, IV4 alone prices -0.390 (0.342) F 77.8; [y_lag +0.976 (0.006)] just identified
+month x asset class; lag; diagnostic, ETF rows | logit, rho imposed 0.98 prices -0.277 (0.075) F 55.9;  J 0.6 on 4 df
+month x asset class; lag; diagnostic, ETF rows | logit, rho imposed 1.0 prices +0.064 (0.074) F 55.9;  J 1.0 on 4 df
+
+G2. Fee x trend
+  [panel month: 98,110 rows, 20 columns, 4s]
+month | K + fee x trend                                        prices -21.769 (0.973) F 73.9; p_t -0.456 (0.028) F 148.3; K +62.211 (5.525) F 40.2;  J 147.5 on 7 df
+month | split + fee x trend                                    prices -17.796 (3.355) F 17.0; p_t -0.640 (0.128) F 13.5; pp2 +59.948 (6.322) F 22.4; mpe +82.190 (12.897) F 11.1;  J 148.0 on 6 df
+month | K + fee x trend, all but IV0                           prices -35.094 (2.105) F 55.8; p_t -0.659 (0.046) F 151.8; K +125.499 (6.905) F 51.3;  J 63.6 on 5 df
+month | K + fee x trend, all but IV1                           prices -20.156 (1.270) F 49.9; p_t -0.204 (0.055) F 85.9; K +17.701 (10.102) F 7.6;  J 144.0 on 5 df
+month | K + fee x trend, all but IV2                           prices -14.254 (0.996) F 46.6; p_t -0.447 (0.028) F 143.2; K +49.755 (5.941) F 19.8;  J 74.6 on 5 df
+month | K + fee x trend, all but IV3                           prices -21.430 (1.139) F 102.5; p_t -0.453 (0.030) F 190.0; K +62.775 (5.889) F 53.7;  J 133.3 on 5 df
+month | K + fee x trend, all but IV4                           prices -21.742 (0.982) F 102.4; p_t -0.457 (0.028) F 193.0; K +62.429 (5.571) F 53.2;  J 141.3 on 5 df
+  [panel month; diagnostic, mutual-fund rows: 41,696 rows, 20 columns, 1s]
+month; diagnostic, mutual-fund rows | logit + fee x trend      prices +5.710 (0.511) F 98.4; p_t -0.263 (0.017) F 741.6;  J 125.9 on 8 df
+month; diagnostic, mutual-fund rows | K + fee x trend          prices +8.111 (1.082) F 63.1; p_t -0.199 (0.027) F 825.1; K -23.738 (6.025) F 16.9;  J 125.3 on 7 df
+  [panel month; diagnostic, ETF rows: 56,414 rows, 20 columns, 2s]
+month; diagnostic, ETF rows | logit + fee x trend              prices +0.918 (0.485) F 36.0; p_t -0.326 (0.007) F 995.4;  J 150.7 on 8 df
+month; diagnostic, ETF rows | K + fee x trend                  prices -5.431 (1.682) F 17.8; p_t -0.360 (0.014) F 864.5; K +14.568 (4.005) F 11.5;  J 137.2 on 7 df
+  [panel month x asset class: 98,110 rows, 20 columns, 7s]
+month x asset class | K + fee x trend                          prices -20.404 (1.035) F 189.7; p_t -0.529 (0.023) F 367.8; K +65.114 (4.201) F 66.8;  J 150.7 on 7 df
+month x asset class | split + fee x trend                      prices -37.658 (3.179) F 28.5; p_t +0.370 (0.120) F 16.5; pp2 +67.288 (5.009) F 42.9; mpe -34.947 (13.929) F 10.4;  J 156.0 on 6 df
+month x asset class | K + fee x trend, all but IV0             prices -32.682 (1.173) F 151.9; p_t -0.427 (0.040) F 114.8; K +95.659 (4.989) F 73.3;  J 75.0 on 5 df
+month x asset class | K + fee x trend, all but IV1             prices -23.298 (1.578) F 133.2; p_t -0.644 (0.039) F 269.6; K +82.485 (5.086) F 44.3;  J 141.3 on 5 df
+month x asset class | K + fee x trend, all but IV2             prices -11.390 (0.769) F 80.8; p_t -0.440 (0.025) F 663.9; K +40.695 (4.743) F 21.9;  J 65.0 on 5 df
+month x asset class | K + fee x trend, all but IV3             prices -20.296 (1.050) F 135.2; p_t -0.539 (0.024) F 201.9; K +66.907 (4.507) F 74.0;  J 144.1 on 5 df
+month x asset class | K + fee x trend, all but IV4             prices -21.243 (1.153) F 207.6; p_t -0.536 (0.023) F 332.7; K +66.231 (4.190) F 82.1;  J 141.0 on 5 df
+  [panel month x asset class; diagnostic, mutual-fund rows: 41,696 rows, 20 columns, 2s]
+month x asset class; diagnostic, mutual-fund rows | logit + fee x trend prices -0.191 (0.275) F 329.6; p_t -0.323 (0.010) F 1490.3;  J 145.7 on 8 df
+month x asset class; diagnostic, mutual-fund rows | K + fee x trend prices -5.090 (0.368) F 242.1; p_t -0.491 (0.032) F 808.4; K +54.236 (6.844) F 19.9;  J 60.7 on 7 df
+  [panel month x asset class; diagnostic, ETF rows: 56,414 rows, 20 columns, 3s]
+month x asset class; diagnostic, ETF rows | logit + fee x trend prices -6.223 (0.478) F 45.3; p_t -0.252 (0.008) F 2616.4;  J 73.1 on 8 df
+month x asset class; diagnostic, ETF rows | K + fee x trend    prices -7.318 (0.829) F 21.4; p_t -0.267 (0.013) F 562.2; K +3.318 (2.420) F 9.5;  J 69.3 on 7 df
+
+G3. Fund-specific linear trends (static)
+  [panel month; fund trends: 98,110 rows, 14 columns, 23s]
+month; fund trends | logit                                     prices -5.729 (0.748) F 42.2;  J 57.3 on 4 df
+month; fund trends | K                                         prices -1.338 (1.981) F 20.0; K -28.346 (8.362) F 6.6;  J 43.6 on 3 df
+month; fund trends | split                                     prices -7.731 (2.640) F 25.6; pp2 -27.778 (7.960) F 3.9; mpe -83.502 (15.315) F 10.7;  J 6.8 on 2 df
+month; fund trends | logit, IV0 alone                          prices -0.660 (0.770) F 72.9;  just identified
+month; fund trends | logit, IV1 alone                          prices -6.117 (1.069) F 89.9;  just identified
+month; fund trends | logit, IV2 alone                          prices -1620.166 (53792.467) F 0.0;  just identified
+month; fund trends | logit, IV3 alone                          prices -18.415 (4.069) F 38.0;  just identified
+month; fund trends | logit, IV4 alone                          prices -31.697 (9.727) F 12.7;  just identified
+month; fund trends | K, all but IV0                            prices -8.217 (2.933) F 16.0; K -7.994 (10.940) F 4.3;  J 29.5 on 2 df
+month; fund trends | K, all but IV1                            prices -1.738 (3.238) F 26.2; K -48.715 (19.975) F 2.6;  J 33.4 on 2 df
+month; fund trends | K, all but IV2                            prices -2.331 (1.712) F 26.2; K -22.259 (6.882) F 8.6;  J 42.1 on 2 df
+month; fund trends | K, all but IV3                            prices -0.479 (1.426) F 27.0; K -20.133 (6.216) F 8.9;  J 30.8 on 2 df
+month; fund trends | K, all but IV4                            prices -0.159 (2.253) F 20.6; K -33.973 (9.478) F 6.5;  J 18.3 on 2 df
+  [panel month; fund trends; diagnostic, mutual-fund rows: 41,696 rows, 14 columns, 13s]
+month; fund trends; diagnostic, mutual-fund rows | logit       prices +2.327 (0.360) F 71.4;  J 84.4 on 4 df
+  [panel month; fund trends; diagnostic, ETF rows: 56,414 rows, 14 columns, 19s]
+month; fund trends; diagnostic, ETF rows | logit               prices -4.161 (1.283) F 13.6;  J 94.8 on 4 df

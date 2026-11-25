@@ -7,6 +7,9 @@ SPEC  B      fee with a normal random coefficient; fee x institutional, fee x ET
              month x access FE (corrected flag); IVs: Danny's five + IV0 and IV1 x {institutional, ETF} (9).
       T7     Danny's Table 7 on the same code path (fee RC; month FE; five IVs), for comparison.
       B-orig B with Danny's original, time-varying flag.
+      T7-lag Table 7 plus the lagged log share ratio in mean utility (inertia); fund-months without a previous
+             month are dropped. One menu: no vehicle-specific term. See step51/step52. Reports the long-run fee
+             coefficient b/(1 - rho) and sigma/sqrt(1 - rho) (partial adjustment toward a static target).
       S2     two segments, no retail / institutional flag: fee RC; fee x ETF; fund FE and month x ETF FE;
              IVs: Danny's five + IV0 and IV1 x ETF (7). See step50d_two_segment.py for why.
 Stage 1: profile of the one-step criterion over sigma, 500 of his archived draws per month (no optimization).
@@ -47,6 +50,8 @@ def spec(name):
 
 def problem(d, agents, name):
     extra, ivs, absorb = spec(name)
+    if name == 'T7-lag':
+        extra = ['y_lag']
     dd = d.copy()
     for k in [c for c in dd.columns if c.startswith('demand_instruments')]:
         dd = dd.rename(columns={k: '_' + k})
@@ -73,6 +78,9 @@ def summarize(res, d, label, extra):
     bi = next((v for k, v in b.items() if 'inst' in k and 'prices' in k), 0.0)  # pyblp label: inst*prices
     be = next((v for k, v in b.items() if 'etf' in k and 'prices' in k), 0.0)
     mean_by = {a: b['prices'] + bi * (a == 1) + be * (a == 2) for a in (0, 1, 2)}
+    if 'y_lag' in b:
+        extra = dict(extra, rho=float(b['y_lag']), long_run_mean_fee_coef=float(b['prices'] / (1 - b['y_lag'])),
+                     long_run_sigma=float(s / np.sqrt(1 - b['y_lag'])), long_run_aum_weighted_elasticity=float(np.average(dd.e, weights=w) / (1 - b['y_lag'])))
     row = dict(spec=label, N=len(d), objective=float(res.objective), sigma=s,
                sigma_se=float(res.sigma_se[0, 0]) if np.isfinite(res.sigma_se[0, 0]) else np.nan,
                **{f'mean_fee_coef_access{a}': float(m) for a, m in mean_by.items()},
@@ -106,15 +114,27 @@ def checkpointed(ckpt, history):
 def main(P, D, names, procs, name):
     d = load(P, D, names)
     d['month_access'] = d.market_ids.astype(str) + '_' + d.access.astype(int).astype(str)
+    grid = GRID
+    if name == 'T7-lag':
+        x = d.sort_values(['product_ids', 'month'])
+        lag = x.groupby('product_ids').y.shift(1)
+        lag[x.groupby('product_ids').month.diff() != 1] = np.nan
+        d['y_lag'] = lag
+        grid = (0.25, 0.5, 1.0, 2.0, 4.0)
     d['month_etf'] = d.market_ids.astype(str) + '_' + d.etf.astype(int).astype(str)
     d['month_access_orig'] = d.market_ids.astype(str) + '_' + d.access_orig.astype(int).astype(str)
     z = np.load(f'{P}/data/prepared/passive.npz', allow_pickle=False)
     d['firm_ids'] = z['firm_ids']
+    if name == 'T7-lag':
+        d = d.dropna(subset=['y_lag']).reset_index(drop=True)
     a = np.load(f'{P}/data/draws/passive.npz', allow_pickle=False)
     full = {'market_ids': a['market_ids'], 'nodes': a['nodes'][:, [0]], 'weights': a['weights']}
     order = pd.Series(np.arange(len(a['market_ids']))).groupby(a['market_ids']).cumcount().to_numpy()
     keep = order < 500
     sub = {'market_ids': a['market_ids'][keep], 'nodes': a['nodes'][keep][:, [0]], 'weights': np.full(keep.sum(), 1 / 500)}
+    live = np.isin(a['market_ids'], d.market_ids.unique())      # the lag drops the first month altogether
+    full = {k: v[live] for k, v in full.items()}
+    sub = {k: v[live[keep]] for k, v in sub.items()}
     tag = name.replace('-', '_')
     print(f'{name}: N={len(d):,}; IVs {len(spec(name)[1])}', flush=True)
     with pyblp.parallel(procs):
@@ -122,7 +142,7 @@ def main(P, D, names, procs, name):
         rows = pd.read_csv(prof_file).to_dict('records') if os.path.exists(prof_file) else []
         done = {round(r['sigma'], 6) for r in rows}
         pr = problem(d, sub, name)
-        for s in GRID:
+        for s in grid:
             if round(s, 6) in done:
                 continue
             t = time.time()
