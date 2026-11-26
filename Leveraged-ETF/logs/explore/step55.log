@@ -1,0 +1,71 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+
+1. Inertia version by period (fund + month FE, five IVs)
+  [panel before 2019: 56,375 rows, 15 columns, 1s]
+before 2019 | logit                                            prices -0.299 (0.196) F 41.0; [y_lag +0.975 (0.004)] J 11.7 on 4 df
+before 2019 | K                                                prices -0.651 (0.219) F 18.8; K +1.346 (0.603) F 27.5; [y_lag +0.977 (0.004)] J 8.0 on 3 df
+before 2019 | logit, IV0 alone                                 prices -0.762 (0.401) F 7.4; [y_lag +0.970 (0.005)] just identified
+  [panel 2019 on: 40,124 rows, 15 columns, 1s]
+2019 on | logit                                                prices +0.300 (0.322) F 57.9; [y_lag +0.960 (0.005)] J 7.2 on 4 df
+2019 on | K                                                    prices +0.241 (0.317) F 69.1; K +3.335 (1.928) F 52.0; [y_lag +0.964 (0.005)] J 8.0 on 3 df
+2019 on | logit, IV0 alone                                     prices -0.229 (0.420) F 135.8; [y_lag +0.959 (0.005)] just identified
+  [panel first half of sample: 45,150 rows, 15 columns, 1s]
+first half of sample | logit                                   prices -0.213 (0.229) F 36.2; [y_lag +0.971 (0.005)] J 10.0 on 4 df
+first half of sample | K                                       prices -0.102 (0.284) F 18.5; K -0.285 (0.512) F 34.5; [y_lag +0.971 (0.005)] J 11.3 on 3 df
+first half of sample | logit, IV0 alone                        prices -2.018 (3.331) F 0.4; [y_lag +0.954 (0.031)] just identified
+  [panel second half of sample: 51,349 rows, 15 columns, 1s]
+second half of sample | logit                                  prices -0.287 (0.218) F 130.4; [y_lag +0.967 (0.004)] J 9.5 on 4 df
+second half of sample | K                                      prices -0.200 (0.228) F 104.7; K +1.211 (0.765) F 293.5; [y_lag +0.970 (0.004)] J 10.2 on 3 df
+second half of sample | logit, IV0 alone                       prices -0.209 (0.300) F 323.9; [y_lag +0.967 (0.004)] just identified
+  [panel static; before 2019: 57,554 rows, 14 columns, 1s]
+static; before 2019 | logit                                    prices -16.885 (1.517) F 32.6;  J 60.3 on 4 df
+static; before 2019 | K                                        prices -18.718 (2.272) F 20.4; K +6.644 (4.582) F 22.9;  J 56.9 on 3 df
+  [panel static; 2019 on: 40,556 rows, 14 columns, 1s]
+static; 2019 on | logit                                        prices -6.547 (1.238) F 58.0;  J 57.7 on 4 df
+static; 2019 on | K                                            prices -7.014 (1.216) F 70.4; K +20.454 (7.726) F 46.6;  J 53.9 on 3 df
+
+2. Static, no fee random coefficient: age and return random coefficients
+  [panel static: 98,110 rows, 22 columns, 5s]
+static | logit                                                 prices -17.878 (0.909) F 99.9;  J 62.9 on 4 df
+static | age K + return K                                      prices -14.901 (0.971) F 156.9; Ka +0.939 (0.152) F 506.9; Kr +11.322 (3.677) F 11.7;  J 20.4 on 2 df
+static | age K only                                            prices -15.700 (0.987) F 118.0; Ka +0.972 (0.142) F 380.9;  J 33.6 on 3 df
+static | return K only                                         prices -16.939 (0.892) F 123.1; Kr +12.179 (3.199) F 9.0;  J 47.4 on 3 df
+static | fee K + age K + return K                              prices -12.793 (1.266) F 139.7; K -9.862 (3.104) F 58.0; Ka +1.302 (0.260) F 760.2; Kr +9.483 (3.924) F 17.1;  J 20.9 on 1 df
+static | logit, ETF x trend                                    prices -11.696 (0.744) F 90.9; [etf_t +0.023 (0.001)] J 119.0 on 4 df
+static | age K + return K, ETF x trend                         prices -12.602 (0.913) F 106.0; Ka +1.356 (0.323) F 148.0; Kr +12.865 (3.995) F 14.2; [etf_t -0.001 (0.005)] J 40.0 on 2 df
+static | age K only, ETF x trend                               prices -13.637 (0.983) F 91.7; Ka +1.804 (0.295) F 114.8; [etf_t -0.008 (0.005)] J 69.0 on 3 df
+static | fee K + age K                                         prices -12.814 (1.302) F 100.6; K -12.718 (3.029) F 66.7; Ka +1.433 (0.263) F 507.7;  J 22.9 on 2 df
+static | logit, without IV0                                    prices -19.544 (0.961) F 97.0;  J 58.1 on 3 df
+static | age K only, without IV0                               prices -17.206 (1.003) F 126.4; Ka +0.750 (0.128) F 144.9;  J 20.0 on 2 df
+static | age K + return K, without IV0                         prices -16.375 (1.005) F 186.1; Ka +0.724 (0.142) F 214.9; Kr +11.158 (3.599) F 17.4;  J 16.6 on 1 df
+static | logit, without IV1                                    prices -19.425 (1.259) F 84.0;  J 55.8 on 3 df
+static | age K only, without IV1                               prices -11.203 (1.526) F 65.5; Ka +1.209 (0.148) F 468.6;  J 23.4 on 2 df
+static | age K + return K, without IV1                         prices -8.376 (1.565) F 95.3; Ka +1.270 (0.146) F 676.2; Kr +13.405 (3.791) F 16.2;  J 0.0 on 1 df
+static | logit, without IV2                                    prices -15.737 (0.943) F 115.1;  J 41.5 on 3 df
+static | age K only, without IV2                               prices -16.425 (1.446) F 152.8; Ka +4.624 (1.167) F 17.6;  J 16.6 on 2 df
+static | age K + return K, without IV2                         prices -15.471 (1.201) F 220.5; Ka +2.959 (1.071) F 18.6; Kr +8.913 (5.806) F 15.2;  J 19.0 on 1 df
+static | logit, without IV3                                    prices -17.529 (0.901) F 125.2;  J 46.7 on 3 df
+static | age K only, without IV3                               prices -15.427 (0.976) F 157.2; Ka +0.946 (0.141) F 499.4;  J 20.5 on 2 df
+static | age K + return K, without IV3                         prices -15.549 (1.060) F 208.5; Ka +0.948 (0.141) F 741.8; Kr -2.490 (4.467) F 10.7;  J 22.0 on 1 df
+static | logit, without IV4                                    prices -18.199 (0.966) F 114.9;  J 59.1 on 3 df
+static | age K only, without IV4                               prices -16.001 (1.045) F 140.5; Ka +0.971 (0.144) F 497.9;  J 33.3 on 2 df
+static | age K + return K, without IV4                         prices -15.454 (1.019) F 210.6; Ka +0.934 (0.157) F 735.1; Kr +12.205 (3.934) F 14.3;  J 13.9 on 1 df
+static | logit, band 8 bp                                      prices -17.983 (0.824) F 105.0;  J 60.4 on 4 df
+static | age K only, band 8 bp                                 prices -15.938 (0.917) F 124.6; Ka +0.986 (0.145) F 390.9;  J 37.4 on 3 df
+static | age K + return K, band 8 bp                           prices -15.087 (0.915) F 164.8; Ka +0.953 (0.156) F 521.2; Kr +12.048 (3.709) F 12.2;  J 12.1 on 2 df
+static | logit, band 12 bp                                     prices -20.938 (1.108) F 84.7;  J 47.9 on 4 df
+static | age K only, band 12 bp                                prices -18.584 (1.230) F 95.2; Ka +0.825 (0.162) F 374.7;  J 42.5 on 3 df
+static | age K + return K, band 12 bp                          prices -17.705 (1.195) F 126.9; Ka +0.796 (0.169) F 496.8; Kr +10.840 (3.691) F 12.1;  J 31.2 on 2 df
+static | logit, band 15 bp                                     prices -21.571 (1.287) F 69.7;  J 49.5 on 4 df
+static | age K only, band 15 bp                                prices -18.582 (1.463) F 70.4; Ka +0.805 (0.169) F 373.2;  J 45.0 on 3 df
+static | age K + return K, band 15 bp                          prices -17.123 (1.409) F 93.9; Ka +0.802 (0.170) F 494.4; Kr +11.183 (3.660) F 12.4;  J 37.3 on 2 df
+  [panel static; before 2019: 57,554 rows, 14 columns, 2s]
+static; before 2019 | age K only                               prices -14.820 (1.551) F 40.2; Ka +0.966 (0.153) F 109.8;  J 27.5 on 3 df
+  [panel static; 2019 on: 40,556 rows, 14 columns, 1s]
+static; 2019 on | age K only                                   prices -5.863 (1.281) F 52.8; Ka +0.623 (0.448) F 68.3;  J 58.4 on 3 df
+  [panel static; mutual-fund rows: 41,696 rows, 14 columns, 1s]
+static; mutual-fund rows | age K only                          prices +3.815 (1.252) F 82.6; Ka -4.000 (0.707) F 10.0;  J 24.8 on 3 df
+  [panel static; ETF rows: 56,414 rows, 14 columns, 1s]
+static; ETF rows | age K only                                  prices -14.560 (0.919) F 85.5; Ka -0.580 (0.214) F 174.8;  J 126.2 on 3 df

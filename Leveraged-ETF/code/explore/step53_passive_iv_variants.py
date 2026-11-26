@@ -33,7 +33,7 @@ def read(P, name):
     return pd.read_csv(f'{P}/data/iv_inputs/{name}.csv.gz', keep_default_na=False, low_memory=False)
 
 
-def local_stock(f, gate, access):
+def local_stock(f, gate, access, band=.10):
     """Other-family certified rivals in the inside menu at t-1, same asset class; optional gates and access rule."""
     out = np.zeros(len(f))
     menus = f.groupby('month', sort=False).indices
@@ -56,14 +56,14 @@ def local_stock(f, gate, access):
         elif access == 2:
             mt &= t.vehicle.to_numpy()[:, None] == d.vehicle.to_numpy()
         if gate in (True, 'fee'):
-            mt &= abs(t.price.to_numpy()[:, None] - d.price.to_numpy()) <= .10 + 1e-12
+            mt &= abs(t.price.to_numpy()[:, None] - d.price.to_numpy()) <= band + 1e-12
         if gate in (True, 'tracking'):
             mt &= abs(t.tracking.to_numpy()[:, None] - d.tracking.to_numpy()) <= .02
         out[tr] = mt.sum(1)
     return out
 
 
-def exits(f, hist, ev, gate, access):
+def exits(f, hist, ev, gate, access, band=.10):
     """Certified liquidations in [t-12, t-1] of other-family classes in the same asset class as the focal t-1 anchor."""
     out = np.zeros(len(f))
     num = lambda s: pd.to_numeric(s, errors='coerce')
@@ -89,7 +89,7 @@ def exits(f, hist, ev, gate, access):
         elif access == 2:
             mt &= veh(a.access3.to_numpy())[:, None] == veh(d.access3.to_numpy())
         if gate:
-            mt &= abs(a.price.to_numpy()[:, None] - d.price.to_numpy()) <= .10 + 1e-12
+            mt &= abs(a.price.to_numpy()[:, None] - d.price.to_numpy()) <= band + 1e-12
             mt &= abs(a.tracking.to_numpy()[:, None] - d.tracking.to_numpy()) <= .02 + 1e-12
         out[r] = mt.sum(1)
     return out

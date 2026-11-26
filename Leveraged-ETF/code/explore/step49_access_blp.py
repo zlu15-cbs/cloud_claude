@@ -159,23 +159,28 @@ def main(P, D, names, procs, name):
         print(f'stage 2 from sigma {s0:.4f}, bounds [{lo:.2f}, {hi:.2f}]', flush=True)
         t = time.time()
         pr = problem(d, full, name)
+        # FINALIZE=1: one evaluation at the checkpointed stage-2 sigma instead of re-optimizing.
+        # WTYPE: second-step weight, 'robust' (heteroskedasticity only; Danny's convention) or 'clustered' (by month).
+        wt = os.environ.get('WTYPE', 'robust')
+        sfx = '' if wt == 'robust' else '_' + wt
         opt = pyblp.Optimization('return') if os.environ.get('FINALIZE') == '1' else checkpointed(ckpt, history)
         res1 = pr.solve(np.array([[s0]]), sigma_bounds=(np.array([[lo]]), np.array([[hi]])), optimization=opt,
-                        iteration=ITERATION, method='1s', se_type='clustered')
+                        iteration=ITERATION, method='1s', W_type=wt, se_type='clustered')
         row1, fr1 = summarize(res1, d, f'{name}, one-step, 3000 draws', dict(minutes=round((time.time() - t) / 60, 1)))
-        pd.DataFrame([row1]).to_csv(f'step49_{tag}_step1.csv', index=False)
-        fr1.to_csv(f'step49_{tag}_step1_funds.csv', index=False)
+        if not sfx:
+            pd.DataFrame([row1]).to_csv(f'step49_{tag}_step1.csv', index=False)
+            fr1.to_csv(f'step49_{tag}_step1_funds.csv', index=False)
         t = time.time()
         W2 = res1.updated_W
         s1 = float(res1.sigma[0, 0])
         hist2 = []
         res2 = pr.solve(np.array([[s1]]), sigma_bounds=(np.array([[max(s1 - 2, 0.0)]]), np.array([[s1 + 2]])), W=W2,
-                        optimization=checkpointed(f'step49_{tag}_step2_ckpt.json', hist2), iteration=ITERATION,
-                        method='1s', se_type='clustered')
-        row2, fr2 = summarize(res2, d, f'{name}, two-step, 3000 draws', dict(J=float(res2.objective), J_df=len(spec(name)[1]) - len(spec(name)[0]) - 2,
+                        optimization=checkpointed(f'step49_{tag}_step2{sfx}_ckpt.json', hist2), iteration=ITERATION,
+                        method='1s', W_type=wt, se_type='clustered')
+        row2, fr2 = summarize(res2, d, f'{name}, two-step ({wt} weight), 3000 draws', dict(J=float(res2.objective), J_df=len(spec(name)[1]) - len(spec(name)[0]) - 2,
                                                                             minutes=round((time.time() - t) / 60, 1)))
-        pd.DataFrame([row2]).to_csv(f'step49_{tag}_step2.csv', index=False)
-        fr2.to_csv(f'step49_{tag}_step2_funds.csv', index=False)
+        pd.DataFrame([row2]).to_csv(f'step49_{tag}_step2{sfx}.csv', index=False)
+        fr2.to_csv(f'step49_{tag}_step2{sfx}_funds.csv', index=False)
 
 
 if __name__ == '__main__':

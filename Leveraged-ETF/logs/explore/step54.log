@@ -1,0 +1,128 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+distinct fee values: 134; share of fees on a whole basis point: 0.995
+
+1. Fee band in IV1 and IV4
+  [panel static: 98,110 rows, 32 columns, 8s]
+   band 6 bp: mean IV1 5.61, mean IV4 0.031
+static; band 6 bp | IV1 alone, logit                           prices -16.514 (0.840) F 441.1;  just identified
+static; band 6 bp | five IVs, logit                            prices -16.877 (0.751) F 121.9;  J 66.3 on 4 df
+static; band 6 bp | five IVs, K                                prices -17.605 (0.776) F 141.7; K +4.369 (1.611) F 207.9;  J 67.3 on 3 df
+static; band 6 bp | K, without IV2                             prices -11.611 (1.270) F 102.2; K -18.116 (4.361) F 41.7;  J 17.5 on 2 df
+   band 8 bp: mean IV1 6.80, mean IV4 0.040
+static; band 8 bp | IV1 alone, logit                           prices -17.144 (0.936) F 363.5;  just identified
+static; band 8 bp | five IVs, logit                            prices -17.983 (0.824) F 105.0;  J 60.4 on 4 df
+static; band 8 bp | five IVs, K                                prices -18.416 (0.848) F 126.5; K +2.897 (1.616) F 197.1;  J 61.2 on 3 df
+static; band 8 bp | K, without IV2                             prices -11.969 (1.387) F 89.3; K -18.590 (4.315) F 44.5;  J 17.3 on 2 df
+   band 9 bp: mean IV1 7.34, mean IV4 0.048
+static; band 9 bp | IV1 alone, logit                           prices -16.870 (1.001) F 344.4;  just identified
+static; band 9 bp | five IVs, logit                            prices -17.740 (0.876) F 104.7;  J 61.7 on 4 df
+static; band 9 bp | five IVs, K                                prices -18.217 (0.891) F 126.7; K +3.331 (1.549) F 194.4;  J 61.5 on 3 df
+static; band 9 bp | K, without IV2                             prices -11.620 (1.418) F 88.0; K -17.408 (3.953) F 45.4;  J 19.7 on 2 df
+   band 10 bp: mean IV1 8.08, mean IV4 0.055
+static; band 10 bp | IV1 alone, logit                          prices -17.249 (1.052) F 343.4;  just identified
+static; band 10 bp | five IVs, logit                           prices -17.878 (0.909) F 99.9;  J 62.9 on 4 df
+static; band 10 bp | five IVs, K                               prices -18.326 (0.921) F 120.8; K +3.073 (1.527) F 202.7;  J 60.7 on 3 df
+static; band 10 bp | K, without IV2                            prices -11.527 (1.450) F 83.4; K -17.114 (3.857) F 50.3;  J 23.0 on 2 df
+   band 11 bp: mean IV1 8.72, mean IV4 0.061
+static; band 11 bp | IV1 alone, logit                          prices -19.003 (1.182) F 320.4;  just identified
+static; band 11 bp | five IVs, logit                           prices -19.011 (0.987) F 92.4;  J 57.1 on 4 df
+static; band 11 bp | five IVs, K                               prices -19.204 (0.994) F 112.7; K +1.304 (1.571) F 214.4;  J 56.1 on 3 df
+static; band 11 bp | K, without IV2                            prices -12.222 (1.576) F 79.0; K -18.497 (4.049) F 51.3;  J 24.0 on 2 df
+   band 12 bp: mean IV1 9.32, mean IV4 0.066
+static; band 12 bp | IV1 alone, logit                          prices -21.643 (1.356) F 284.1;  just identified
+static; band 12 bp | five IVs, logit                           prices -20.938 (1.108) F 84.7;  J 47.9 on 4 df
+static; band 12 bp | five IVs, K                               prices -20.731 (1.118) F 104.9; K -1.623 (1.639) F 200.0;  J 48.8 on 3 df
+static; band 12 bp | K, without IV2                            prices -13.507 (1.776) F 72.1; K -21.005 (4.464) F 52.0;  J 19.0 on 2 df
+   band 14 bp: mean IV1 10.39, mean IV4 0.074
+static; band 14 bp | IV1 alone, logit                          prices -23.193 (1.683) F 210.2;  just identified
+static; band 14 bp | five IVs, logit                           prices -21.382 (1.225) F 75.1;  J 51.8 on 4 df
+static; band 14 bp | five IVs, K                               prices -21.143 (1.227) F 93.8; K -2.643 (1.714) F 196.3;  J 53.5 on 3 df
+static; band 14 bp | K, without IV2                            prices -13.547 (1.894) F 66.2; K -21.002 (4.278) F 53.8;  J 24.6 on 2 df
+   band 15 bp: mean IV1 10.99, mean IV4 0.079
+static; band 15 bp | IV1 alone, logit                          prices -23.782 (1.914) F 178.0;  just identified
+static; band 15 bp | five IVs, logit                           prices -21.571 (1.287) F 69.7;  J 49.5 on 4 df
+static; band 15 bp | five IVs, K                               prices -21.377 (1.290) F 86.8; K -3.123 (1.799) F 192.9;  J 51.2 on 3 df
+static; band 15 bp | K, without IV2                            prices -13.537 (1.956) F 58.6; K -20.833 (4.150) F 56.8;  J 22.4 on 2 df
+   band 20 bp: mean IV1 13.21, mean IV4 0.105
+static; band 20 bp | IV1 alone, logit                          prices -31.927 (3.412) F 90.4;  just identified
+static; band 20 bp | five IVs, logit                           prices -22.867 (1.471) F 60.3;  J 61.2 on 4 df
+static; band 20 bp | five IVs, K                               prices -22.984 (1.558) F 71.5; K -7.607 (2.132) F 170.8;  J 68.0 on 3 df
+static; band 20 bp | K, without IV2                            prices -14.469 (2.310) F 47.3; K -24.119 (4.171) F 58.5;  J 33.5 on 2 df
+  [panel lag: 96,499 rows, 33 columns, 7s]
+   band 6 bp: mean IV1 5.61, mean IV4 0.031
+lag; band 6 bp | IV1 alone, logit                              prices -0.237 (0.097) F 376.6; [y_lag +0.982 (0.002)] just identified
+lag; band 6 bp | five IVs, logit                               prices -0.351 (0.089) F 100.5; [y_lag +0.981 (0.002)] J 11.7 on 4 df
+lag; band 6 bp | five IVs, K                                   prices -0.438 (0.098) F 120.4; K +0.693 (0.261) F 276.1; [y_lag +0.983 (0.002)] J 8.7 on 3 df
+lag; band 6 bp | K, without IV2                                prices -0.391 (0.092) F 100.7; K +0.457 (0.282) F 31.3; [y_lag +0.983 (0.002)] J 6.9 on 2 df
+   band 8 bp: mean IV1 6.80, mean IV4 0.040
+lag; band 8 bp | IV1 alone, logit                              prices -0.198 (0.115) F 315.4; [y_lag +0.983 (0.002)] just identified
+lag; band 8 bp | five IVs, logit                               prices -0.362 (0.101) F 86.1; [y_lag +0.981 (0.002)] J 13.0 on 4 df
+lag; band 8 bp | five IVs, K                                   prices -0.436 (0.108) F 105.2; K +0.696 (0.257) F 276.0; [y_lag +0.983 (0.002)] J 9.3 on 3 df
+lag; band 8 bp | K, without IV2                                prices -0.384 (0.100) F 87.1; K +0.466 (0.279) F 34.4; [y_lag +0.983 (0.002)] J 7.7 on 2 df
+   band 9 bp: mean IV1 7.34, mean IV4 0.048
+lag; band 9 bp | IV1 alone, logit                              prices -0.223 (0.121) F 297.5; [y_lag +0.982 (0.002)] just identified
+lag; band 9 bp | five IVs, logit                               prices -0.404 (0.107) F 85.6; [y_lag +0.980 (0.002)] J 11.4 on 4 df
+lag; band 9 bp | five IVs, K                                   prices -0.470 (0.113) F 104.6; K +0.648 (0.257) F 273.5; [y_lag +0.983 (0.002)] J 7.9 on 3 df
+lag; band 9 bp | K, without IV2                                prices -0.410 (0.105) F 83.4; K +0.401 (0.280) F 35.6; [y_lag +0.982 (0.002)] J 6.1 on 2 df
+   band 10 bp: mean IV1 8.08, mean IV4 0.055
+lag; band 10 bp | IV1 alone, logit                             prices -0.201 (0.129) F 282.6; [y_lag +0.982 (0.002)] just identified
+lag; band 10 bp | five IVs, logit                              prices -0.395 (0.112) F 83.2; [y_lag +0.980 (0.002)] J 11.0 on 4 df
+lag; band 10 bp | five IVs, K                                  prices -0.466 (0.117) F 101.5; K +0.666 (0.256) F 281.3; [y_lag +0.983 (0.002)] J 7.1 on 3 df
+lag; band 10 bp | K, without IV2                               prices -0.409 (0.109) F 82.1; K +0.449 (0.274) F 40.3; [y_lag +0.982 (0.002)] J 5.3 on 2 df
+   band 11 bp: mean IV1 8.72, mean IV4 0.061
+lag; band 11 bp | IV1 alone, logit                             prices -0.216 (0.138) F 249.4; [y_lag +0.982 (0.002)] just identified
+lag; band 11 bp | five IVs, logit                              prices -0.414 (0.116) F 73.9; [y_lag +0.980 (0.002)] J 9.7 on 4 df
+lag; band 11 bp | five IVs, K                                  prices -0.481 (0.120) F 91.3; K +0.643 (0.259) F 286.5; [y_lag +0.982 (0.002)] J 6.5 on 3 df
+lag; band 11 bp | K, without IV2                               prices -0.421 (0.113) F 76.2; K +0.423 (0.275) F 41.5; [y_lag +0.982 (0.002)] J 4.7 on 2 df
+   band 12 bp: mean IV1 9.32, mean IV4 0.066
+lag; band 12 bp | IV1 alone, logit                             prices -0.249 (0.155) F 209.2; [y_lag +0.982 (0.003)] just identified
+lag; band 12 bp | five IVs, logit                              prices -0.478 (0.127) F 64.3; [y_lag +0.979 (0.002)] J 9.1 on 4 df
+lag; band 12 bp | five IVs, K                                  prices -0.517 (0.129) F 80.2; K +0.589 (0.266) F 264.7; [y_lag +0.982 (0.002)] J 7.2 on 3 df
+lag; band 12 bp | K, without IV2                               prices -0.450 (0.121) F 67.4; K +0.348 (0.283) F 41.6; [y_lag +0.981 (0.003)] J 5.1 on 2 df
+   band 14 bp: mean IV1 10.39, mean IV4 0.074
+lag; band 14 bp | IV1 alone, logit                             prices -0.214 (0.185) F 150.6; [y_lag +0.982 (0.003)] just identified
+lag; band 14 bp | five IVs, logit                              prices -0.535 (0.138) F 56.5; [y_lag +0.979 (0.002)] J 9.2 on 4 df
+lag; band 14 bp | five IVs, K                                  prices -0.545 (0.139) F 70.3; K +0.560 (0.267) F 260.5; [y_lag +0.981 (0.003)] J 7.7 on 3 df
+lag; band 14 bp | K, without IV2                               prices -0.474 (0.130) F 61.7; K +0.323 (0.284) F 45.5; [y_lag +0.981 (0.003)] J 5.6 on 2 df
+   band 15 bp: mean IV1 10.99, mean IV4 0.079
+lag; band 15 bp | IV1 alone, logit                             prices -0.149 (0.203) F 122.4; [y_lag +0.983 (0.003)] just identified
+lag; band 15 bp | five IVs, logit                              prices -0.552 (0.146) F 51.7; [y_lag +0.979 (0.003)] J 9.7 on 4 df
+lag; band 15 bp | five IVs, K                                  prices -0.542 (0.147) F 63.8; K +0.573 (0.267) F 255.1; [y_lag +0.981 (0.003)] J 7.9 on 3 df
+lag; band 15 bp | K, without IV2                               prices -0.473 (0.138) F 54.3; K +0.353 (0.282) F 48.1; [y_lag +0.981 (0.003)] J 5.9 on 2 df
+   band 20 bp: mean IV1 13.21, mean IV4 0.105
+lag; band 20 bp | IV1 alone, logit                             prices -0.175 (0.309) F 48.2; [y_lag +0.983 (0.004)] just identified
+lag; band 20 bp | five IVs, logit                              prices -0.717 (0.170) F 43.2; [y_lag +0.977 (0.003)] J 7.5 on 4 df
+lag; band 20 bp | five IVs, K                                  prices -0.655 (0.172) F 49.3; K +0.429 (0.276) F 205.4; [y_lag +0.980 (0.003)] J 8.1 on 3 df
+lag; band 20 bp | K, without IV2                               prices -0.580 (0.165) F 44.4; K +0.197 (0.291) F 51.2; [y_lag +0.979 (0.003)] J 5.4 on 2 df
+
+2. Lag coefficient
+   funds 1043; months per fund: mean 93, median 85; mean of 1/T 0.0420; (1 + 0.983) x mean(1/T) = 0.0832
+  [panel jackknife; full: 96,276 rows, 15 columns, 2s]
+jackknife; full | logit                                        prices -0.391 (0.112) F 83.1; [y_lag +0.981 (0.002)] J 10.9 on 4 df
+jackknife; full | K                                            prices -0.462 (0.117) F 101.3; K +0.660 (0.256) F 280.6; [y_lag +0.983 (0.002)] J 7.4 on 3 df
+  [panel jackknife; first halves: 48,324 rows, 15 columns, 2s]
+jackknife; first halves | logit                                prices -0.417 (0.132) F 39.5; [y_lag +0.960 (0.004)] J 10.7 on 4 df
+jackknife; first halves | K                                    prices -0.759 (0.185) F 32.1; K +1.196 (0.458) F 21.4; [y_lag +0.961 (0.004)] J 3.5 on 3 df
+  [panel jackknife; second halves: 47,952 rows, 15 columns, 2s]
+jackknife; second halves | logit                               prices +0.226 (0.134) F 83.0; [y_lag +0.968 (0.004)] J 18.3 on 4 df
+jackknife; second halves | K                                   prices -0.208 (0.228) F 86.5; K +1.735 (0.689) F 179.3; [y_lag +0.970 (0.004)] J 10.6 on 3 df
+   logit: y_lag: full +0.9805; halves +0.9600, +0.9677; jackknife +0.9972
+   logit: prices: full -0.3914; halves -0.4168, +0.2256; jackknife -0.6872
+   K: y_lag: full +0.9829; halves +0.9612, +0.9698; jackknife +1.0002
+   K: prices: full -0.4623; halves -0.7594, -0.2084; jackknife -0.4408
+   K: K: full +0.6603; halves +1.1961, +1.7347; jackknife -0.1448
+  [panel funds with at least 60 months (686 funds): 86,616 rows, 15 columns, 1s]
+funds with at least 60 months (686 funds) | logit              prices -0.318 (0.110) F 74.0; [y_lag +0.983 (0.002)] J 12.2 on 4 df
+funds with at least 60 months (686 funds) | K                  prices -0.380 (0.113) F 92.4; K +0.640 (0.249) F 251.9; [y_lag +0.985 (0.002)] J 9.7 on 3 df
+  [panel funds with at least 120 months (349 funds): 56,988 rows, 15 columns, 0s]
+funds with at least 120 months (349 funds) | logit             prices -0.280 (0.112) F 62.4; [y_lag +0.985 (0.002)] J 12.7 on 4 df
+funds with at least 120 months (349 funds) | K                 prices -0.349 (0.113) F 77.9; K +0.419 (0.178) F 519.5; [y_lag +0.987 (0.002)] J 7.9 on 3 df
+  [panel funds with at least 170 months (206 funds): 36,202 rows, 15 columns, 0s]
+funds with at least 170 months (206 funds) | logit             prices -0.255 (0.133) F 62.0; [y_lag +0.984 (0.003)] J 17.1 on 4 df
+funds with at least 170 months (206 funds) | K                 prices -0.299 (0.128) F 76.9; K +0.451 (0.197) F 353.6; [y_lag +0.987 (0.003)] J 13.8 on 3 df
+
+3. Target log share ratios y* = (y_t - rho y_{t-1}) / (1 - rho)
+   rho 0.95: y in [-7.2, -0.4]; y* quantiles 1/50/99%: -10.8 / -5.1 / 0.7; max 47.9; months with implied outside share below 1e-6: 8 of 176; months where one fund has target share above 0.5: 61
+   rho 0.983: y in [-7.2, -0.4]; y* quantiles 1/50/99%: -21.2 / -5.1 / 11.0; max 153.3; months with implied outside share below 1e-6: 124 of 176; months where one fund has target share above 0.5: 159
