@@ -1,0 +1,31 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+lag: N=96,499
+robust weight: max relative difference from pyblp 3.05e-12
+{'spec': 'lag, one-step, 3000 draws', 'N': 96499, 'objective': 0.1499, 'sigma': 0.7827, 'sigma_se': 0.1593, 'mean_fee_coef_access0': -0.4574, 'mean_fee_coef_access1': -0.4574, 'mean_fee_coef_access2': -0.4574, 'share_pos_coef_access0': 0.2795, 'share_pos_coef_access1': 0.2795, 'share_pos_coef_access2': 0.2795, 'mean_own_elasticity_equal_month': -0.0706, 'aum_weighted_elasticity': -0.0427, 'share_e_pos': 0.0042, 'share_abs_e_lt1': 0.9999, 'aum_share_abs_e_lt1': 1.0, 'n15_abs_e_gt1': 0, 'min_scaled_singular_value': 0.3594, 'aum_e_last_access0': -0.0282, 'aum_e_last_access1': -0.0179, 'aum_e_last_access2': -0.0395, 'minutes': 9.0, 'rho': 0.9826, 'long_run_mean_fee_coef': -26.3556, 'long_run_sigma': 5.9418, 'long_run_aum_weighted_elasticity': -2.4614, 'b[prices]': -0.4574, 'se[prices]': 0.1175, 'b[y_lag]': 0.9826, 'se[y_lag]': 0.0022, 'b[product_tracking_err]': -0.0106, 'se[product_tracking_err]': 0.009, 'b[product_past_1yr_ret]': 0.028, 'se[product_past_1yr_ret]': 0.0099, 'b[log_product_fund_age]': -0.0146, 'se[log_product_fund_age]': 0.0023}
+two-step, robust weight, from sigma 0.78274 (0 earlier evaluations)
+  eval 1: theta [0.78274] obj 31.7515
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+lag: N=96,499
+two-step, robust weight, from sigma 0.78274 (1 earlier evaluations)
+  eval 2: theta [0.78274] obj 31.7515
+  eval 3: theta [0.4] obj 40.7831
+  eval 4: theta [0.77188] obj 31.7395
+  eval 5: theta [0.77253] obj 31.7394
+  eval 6: theta [0.77254] obj 31.7394
+{'spec': 'lag, two-step (robust weight), 3000 draws', 'N': 96499, 'objective': 31.7394, 'sigma': 0.7725, 'sigma_se': 0.1586, 'mean_fee_coef_access0': -0.4528, 'mean_fee_coef_access1': -0.4528, 'mean_fee_coef_access2': -0.4528, 'share_pos_coef_access0': 0.2789, 'share_pos_coef_access1': 0.2789, 'share_pos_coef_access2': 0.2789, 'mean_own_elasticity_equal_month': -0.0705, 'aum_weighted_elasticity': -0.0425, 'share_e_pos': 0.0038, 'share_abs_e_lt1': 0.9999, 'aum_share_abs_e_lt1': 1.0, 'n15_abs_e_gt1': 0, 'min_scaled_singular_value': 0.4239, 'aum_e_last_access0': -0.0279, 'aum_e_last_access1': -0.0177, 'aum_e_last_access2': -0.0393, 'J': 31.7394, 'J_df': 3, 'minutes': 25.9, 'rho': 0.9827, 'long_run_mean_fee_coef': -26.1312, 'long_run_sigma': 5.8691, 'long_run_aum_weighted_elasticity': -2.4504, 'b[prices]': -0.4528, 'se[prices]': 0.1138, 'b[y_lag]': 0.9827, 'se[y_lag]': 0.0021, 'b[product_tracking_err]': -0.0071, 'se[product_tracking_err]': 0.0091, 'b[product_past_1yr_ret]': 0.0281, 'se[product_past_1yr_ret]': 0.0099, 'b[log_product_fund_age]': -0.014, 'se[log_product_fund_age]': 0.0023}
+two-step, clustered weight, from sigma 0.78274 (0 earlier evaluations)
+  eval 1: theta [0.78274] obj 7.40175
+  eval 2: theta [0.4] obj 8.30991
+  eval 3: theta [0.65668] obj 6.75045
+  eval 4: theta [0.65853] obj 6.75025
+  eval 5: theta [0.65908] obj 6.75024
+  eval 6: theta [0.65908] obj 6.75024
+{'spec': 'lag, two-step (clustered weight), 3000 draws', 'N': 96499, 'objective': 6.7502, 'sigma': 0.6591, 'sigma_se': 0.1646, 'mean_fee_coef_access0': -0.3968, 'mean_fee_coef_access1': -0.3968, 'mean_fee_coef_access2': -0.3968, 'share_pos_coef_access0': 0.2735, 'share_pos_coef_access1': 0.2735, 'share_pos_coef_access2': 0.2735, 'mean_own_elasticity_equal_month': -0.0674, 'aum_weighted_elasticity': -0.0388, 'share_e_pos': 0.0019, 'share_abs_e_lt1': 1.0, 'aum_share_abs_e_lt1': 1.0, 'n15_abs_e_gt1': 0, 'min_scaled_singular_value': 0.4496, 'aum_e_last_access0': -0.0246, 'aum_e_last_access1': -0.0155, 'aum_e_last_access2': -0.0364, 'J': 6.7502, 'J_df': 3, 'minutes': 27.5, 'rho': 0.9833, 'long_run_mean_fee_coef': -23.7628, 'long_run_sigma': 5.1, 'long_run_aum_weighted_elasticity': -2.3233, 'b[prices]': -0.3968, 'se[prices]': 0.1076, 'b[y_lag]': 0.9833, 'se[y_lag]': 0.0021, 'b[product_tracking_err]': -0.0088, 'se[product_tracking_err]': 0.009, 'b[product_past_1yr_ret]': 0.0256, 'se[product_past_1yr_ret]': 0.0098, 'b[log_product_fund_age]': -0.015, 'se[log_product_fund_age]': 0.0023}
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+lag: N=96,499

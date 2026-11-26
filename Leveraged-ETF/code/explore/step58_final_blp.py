@@ -33,6 +33,22 @@ START = {'lag': 0.78274, 'age': 1.5}
 BOUNDS = {'lag': (0.4, 1.2), 'age': (0.8, 2.2)}
 
 
+def search(ckpt, history):
+    """L-BFGS-B with every evaluation checkpointed; stops on a relative criterion change below 1e-9."""
+    from pyblp.configurations.optimization import scipy_optimizer
+
+    def optimizer(initial, bounds, objective_function, iteration_callback, **opts):
+        def wrapped(values):
+            out = objective_function(values)
+            history.append({'theta': [float(v) for v in np.asarray(values).flatten()], 'obj': float(out[0])})
+            json.dump(history, open(ckpt + '.tmp', 'w'))
+            os.replace(ckpt + '.tmp', ckpt)
+            print(f'  eval {len(history)}: theta {np.round(history[-1]["theta"], 5).tolist()} obj {history[-1]["obj"]:.6g}', flush=True)
+            return out
+        return scipy_optimizer(initial, bounds, wrapped, iteration_callback, method='L-BFGS-B', compute_gradient=True, **opts)
+    return pyblp.Optimization(optimizer, {'gtol': 1e-6, 'ftol': 1e-9, 'maxls': 6})
+
+
 def weights(res, d):
     g = res.problem.products.ZD * res.xi
     g = g - g.mean(0)
@@ -70,7 +86,7 @@ def main(spec, P, names, procs):
             ck = f'step58_{spec}_step1_ckpt.json'
             h = json.load(open(ck)) if os.path.exists(ck) else []
             s0 = min(h, key=lambda r: r['obj'])['theta'][0] if h else START[spec]
-            opt = pyblp.Optimization('return') if spec == 'lag' else s49.checkpointed(ck, h)
+            opt = pyblp.Optimization('return') if spec == 'lag' else search(ck, h)
             res1 = pr.solve(np.array([[s0]]), sigma_bounds=bnd, optimization=opt, iteration=s49.ITERATION, method='1s', se_type='clustered')
             Wr, Wc = weights(res1, d)
             print('robust weight: max relative difference from pyblp %.2e' % float(np.abs(Wr / res1.updated_W - 1).max()), flush=True)
@@ -89,7 +105,12 @@ def main(spec, P, names, procs):
             h = json.load(open(ck)) if os.path.exists(ck) else []
             s1 = min(h, key=lambda r: r['obj'])['theta'][0] if h else float(W['sigma'])
             print(f'two-step, {wt} weight, from sigma {s1:.5f} ({len(h)} earlier evaluations)', flush=True)
-            res2 = pr.solve(np.array([[s1]]), sigma_bounds=bnd, W=W[wt], optimization=s49.checkpointed(ck, h), iteration=s49.ITERATION,
+            # converged already if the two best checkpointed evaluations agree: then one final evaluation, no search
+            # (L-BFGS-B otherwise keeps re-evaluating the same point when the gradient is at numerical noise)
+            best = sorted(h, key=lambda r: r['obj'])[:2]
+            done = len(best) == 2 and abs(best[1]['obj'] - best[0]['obj']) < 1e-6 * best[0]['obj'] and abs(best[1]['theta'][0] - best[0]['theta'][0]) < 1e-3
+            opt = pyblp.Optimization('return') if done else search(ck, h)
+            res2 = pr.solve(np.array([[s1]]), sigma_bounds=bnd, W=W[wt], optimization=opt, iteration=s49.ITERATION,
                             method='1s', W_type=wt, se_type='clustered')
             row, fr = summ(res2, f'{spec}, two-step ({wt} weight), 3000 draws', dict(J=float(res2.objective), J_df=df, minutes=round((time.time() - t) / 60, 1)))
             pd.DataFrame([row]).to_csv(out, index=False)

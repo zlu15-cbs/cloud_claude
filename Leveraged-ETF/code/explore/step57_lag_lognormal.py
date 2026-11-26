@@ -21,7 +21,7 @@ from step48_access_spec_linear import load, IV
 pyblp.options.verbose = False
 CON = ['product_tracking_err', 'product_past_1yr_ret', 'log_product_fund_age']
 ITERATION = pyblp.Iteration('squarem', {'atol': 1e-14, 'max_evaluations': 3000})
-GRID = [(0.46, 0.20), (0.46, 0.40), (0.46, 0.78), (0.46, 1.20), (0.30, 0.40), (0.30, 0.78), (0.70, 0.78), (0.70, 1.50), (1.00, 2.00), (0.46, 3.00)]
+GRID = [(0.46, 0.78), (0.46, 0.40), (0.46, 1.20), (0.70, 1.50), (0.30, 0.78), (0.30, 0.40), (1.00, 2.00), (0.46, 0.20), (0.70, 0.78), (0.46, 3.00)]   # most informative first
 
 
 def main(P, names, procs):

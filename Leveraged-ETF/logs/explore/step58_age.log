@@ -1,0 +1,36 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+age: N=98,110
+  eval 1: theta [1.5] obj 44.0454
+  eval 2: theta [2.2] obj 56.9129
+  eval 3: theta [1.52846] obj 44.0202
+  eval 4: theta [1.52802] obj 44.0202
+  eval 5: theta [1.52802] obj 44.0202
+robust weight: max relative difference from pyblp 7.36e-12
+{'spec': 'age, one-step, 3000 draws', 'N': 98110, 'objective': 44.0202, 'sigma_age': 1.528, 'sigma_age_se': 0.2005, 'mean_own_elasticity_equal_month': -3.7973, 'aum_weighted_elasticity': -1.8488, 'share_e_pos': 0.0, 'aum_share_abs_e_lt1': 0.4774, 'n15_abs_e_gt1': 6, 'min_scaled_singular_value': 0.0475, 'minutes': 74.5, 'b[prices]': -15.6882, 'se[prices]': 0.9864, 'b[product_tracking_err]': -0.3554, 'se[product_tracking_err]': 0.0571, 'b[product_past_1yr_ret]': 0.4731, 'se[product_past_1yr_ret]': 0.0349, 'b[log_product_fund_age]': 2.0118, 'se[log_product_fund_age]': 0.245}
+two-step, robust weight, from sigma 1.52802 (0 earlier evaluations)
+  eval 1: theta [1.52802] obj 102.723
+  eval 2: theta [0.8] obj 120.039
+  eval 3: theta [1.42928] obj 102.273
+  eval 4: theta [1.42318] obj 102.272
+  eval 5: theta [1.42334] obj 102.272
+  eval 6: theta [1.42334] obj 102.272
+  eval 7: theta [1.42334] obj 102.272
+  eval 8: theta [1.42334] obj 102.272
+  eval 9: theta [1.42334] obj 102.272
+  eval 10: theta [1.42334] obj 102.272
+  eval 11: theta [1.42334] obj 102.272
+  eval 12: theta [1.42334] obj 102.272
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+age: N=98,110
+two-step, robust weight, from sigma 1.42334 (12 earlier evaluations)
+{'spec': 'age, two-step (robust weight), 3000 draws', 'N': 98110, 'objective': 102.2716, 'sigma_age': 1.4233, 'sigma_age_se': 0.1939, 'mean_own_elasticity_equal_month': -3.8998, 'aum_weighted_elasticity': -1.899, 'share_e_pos': 0.0, 'aum_share_abs_e_lt1': 0.4774, 'n15_abs_e_gt1': 6, 'min_scaled_singular_value': 0.0474, 'J': 102.2716, 'J_df': 3, 'minutes': 14.9, 'b[prices]': -16.111, 'se[prices]': 0.9539, 'b[product_tracking_err]': -0.4053, 'se[product_tracking_err]': 0.0599, 'b[product_past_1yr_ret]': 0.4583, 'se[product_past_1yr_ret]': 0.0344, 'b[log_product_fund_age]': 1.8989, 'se[log_product_fund_age]': 0.2348}
+two-step, clustered weight, from sigma 1.52802 (0 earlier evaluations)
+  eval 1: theta [1.52802] obj 31.9049
+  eval 2: theta [0.8] obj 35.9518
+  eval 3: theta [1.24018] obj 28.9463
+  eval 4: theta [1.23276] obj 28.9446
+  eval 5: theta [1.23327] obj 28.9446
