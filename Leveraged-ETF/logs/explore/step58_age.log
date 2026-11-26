@@ -34,3 +34,5 @@ two-step, clustered weight, from sigma 1.52802 (0 earlier evaluations)
   eval 3: theta [1.24018] obj 28.9463
   eval 4: theta [1.23276] obj 28.9446
   eval 5: theta [1.23327] obj 28.9446
+  eval 6: theta [1.23327] obj 28.9446
+{'spec': 'age, two-step (clustered weight), 3000 draws', 'N': 98110, 'objective': 28.9446, 'sigma_age': 1.2333, 'sigma_age_se': 0.162, 'mean_own_elasticity_equal_month': -3.9118, 'aum_weighted_elasticity': -1.9055, 'share_e_pos': 0.0, 'aum_share_abs_e_lt1': 0.4774, 'n15_abs_e_gt1': 6, 'min_scaled_singular_value': 0.0536, 'J': 28.9446, 'J_df': 3, 'minutes': 42.1, 'b[prices]': -16.1595, 'se[prices]': 0.9366, 'b[product_tracking_err]': -0.4721, 'se[product_tracking_err]': 0.0561, 'b[product_past_1yr_ret]': 0.4971, 'se[product_past_1yr_ret]': 0.0339, 'b[log_product_fund_age]': 1.6698, 'se[log_product_fund_age]': 0.1946}
