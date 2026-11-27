@@ -14,6 +14,7 @@ def J(r):
     return f'{float(r["J"]):.1f} on 3 df ({"p < 0.001" if pv < 0.001 else f"p = {pv:.2f}"})'
 a2, a2c = csv('step58_lag_step2_robust.csv'), csv('step58_lag_step2_clustered.csv')
 b2, b2c = csv('step58_age_step2_robust.csv'), csv('step58_age_step2_clustered.csv')
+ae, be = csv('step58_lag_pct10_step2_clustered.csv'), csv('step58_age_pct10_step2_clustered.csv')
 p = os.path.join(R, 'step57_lag_lognormal.csv')
 ln = pd.read_csv(p) if os.path.exists(p) else None
 lntab = ''
@@ -39,7 +40,9 @@ Code: `code/explore/step54` to `step58`. Output: `logs/explore/step54*` to `step
 - **A, with partial adjustment (dynamic extension).** Table 7 plus last month's log share ratio in mean utility;
   random coefficient on the fee.
 - **Not recommended:** a fee random coefficient in the static model (Table 7 column 3). It fails four checks (§3).
-- **Instruments in both:** Danny's IV0 to IV4, unchanged, with the 10 bp fee band.
+- **Instruments:** Danny's IV0 to IV4 for the reported column. Robustness column: IV1 and IV4 with rivals matched on
+  the fee at entry (§7b), which removes rival repricing. B keeps its signs under it; A's fee random coefficient
+  does not survive it.
 - **Which to use for markups:** B. A's long-run magnitudes depend on an adjustment speed the data do not pin down.
 
 ## 2. Estimates (full BLP, two-step GMM, 3,000 draws per month)
@@ -50,17 +53,25 @@ Code: `code/explore/step54` to `step58`. Output: `logs/explore/step54*` to `step
 | Mean utility | fee, tracking error, past return, log age | same, plus lagged log share ratio |
 | Fixed effects | fund, month | fund, month |
 | Fund-months | 98,110 | 96,499 |
+| **Month-clustered second-step weight (main)** | | |
+| Mean fee coefficient | {est(b2c, 'b[prices]', 'se[prices]')} | {est(a2c, 'b[prices]', 'se[prices]')} per month |
+| Random-coefficient SD | age {est(b2c, 'sigma_age', 'sigma_age_se')} | fee {est(a2c, 'sigma', 'sigma_se')} per month |
+| Lag coefficient ρ | | {est(a2c, 'b[y_lag]', 'se[y_lag]', 3)} |
+| Long-run mean fee coefficient, SD (at estimated ρ) | | {f(a2c, 'long_run_mean_fee_coef', 1)}, {f(a2c, 'long_run_sigma', 1)} |
+| Own elasticity, equal-month mean | {f(b2c, 'mean_own_elasticity_equal_month')} | {f(a2c, 'mean_own_elasticity_equal_month')} per month |
+| Own elasticity, AUM-weighted | {f(b2c, 'aum_weighted_elasticity')} | {f(a2c, 'aum_weighted_elasticity')} per month; {f(a2c, 'long_run_aum_weighted_elasticity')} long-run |
+| Fund-months with upward-sloping demand | {100 * float(b2c['share_e_pos']):.1f}% | {100 * float(a2c['share_e_pos']):.1f}% |
+| J | {J(b2c)} | {J(a2c)} |
+| Smallest scaled singular value | {f(b2c, 'min_scaled_singular_value')} | {f(a2c, 'min_scaled_singular_value')} |
+| **Heteroskedasticity-robust weight (Danny's convention)** | | |
 | Mean fee coefficient | {est(b2, 'b[prices]', 'se[prices]')} | {est(a2, 'b[prices]', 'se[prices]')} per month |
 | Random-coefficient SD | age {est(b2, 'sigma_age', 'sigma_age_se')} | fee {est(a2, 'sigma', 'sigma_se')} per month |
-| Lag coefficient ρ | | {est(a2, 'b[y_lag]', 'se[y_lag]', 3)} |
-| Long-run mean fee coefficient, SD (at estimated ρ) | | {f(a2, 'long_run_mean_fee_coef', 1)}, {f(a2, 'long_run_sigma', 1)} |
-| Own elasticity, equal-month mean | {f(b2, 'mean_own_elasticity_equal_month')} | {f(a2, 'mean_own_elasticity_equal_month')} per month |
-| Own elasticity, AUM-weighted | {f(b2, 'aum_weighted_elasticity')} | {f(a2, 'aum_weighted_elasticity')} per month; {f(a2, 'long_run_aum_weighted_elasticity')} long-run |
-| Fund-months with upward-sloping demand | {100 * float(b2['share_e_pos']):.1f}% | {100 * float(a2['share_e_pos']):.1f}% |
-| J, heteroskedasticity-robust weight (his convention) | {J(b2)} | {J(a2)} |
-| J, month-clustered weight | {J(b2c)} | {J(a2c)} |
-| Estimates with the clustered weight | fee {est(b2c, 'b[prices]', 'se[prices]')}; age SD {est(b2c, 'sigma_age', 'sigma_age_se')} | fee {est(a2c, 'b[prices]', 'se[prices]')}; fee SD {est(a2c, 'sigma', 'sigma_se')} |
-| Smallest scaled singular value | {f(b2, 'min_scaled_singular_value')} | {f(a2, 'min_scaled_singular_value')} |
+| J | {J(b2)} | {J(a2)} |
+| **Entry-fee-matched IV1 and IV4 (percentile, 10 points), clustered weight; see §7b** | | |
+| Mean fee coefficient | {est(be, 'b[prices]', 'se[prices]')} | {est(ae, 'b[prices]', 'se[prices]')} per month |
+| Random-coefficient SD | age {est(be, 'sigma_age', 'sigma_age_se')} | fee {est(ae, 'sigma', 'sigma_se')}: lower end of the search range |
+| Own elasticity, AUM-weighted | {f(be, 'aum_weighted_elasticity')} | {f(ae, 'aum_weighted_elasticity')} per month; {f(ae, 'long_run_aum_weighted_elasticity')} long-run |
+| J | {J(be)} | {J(ae)} |
 
 Danny's Table 7 for comparison. Column (3): fee −18.20 (0.92), fee SD 1.88 (0.37), elasticity −4.19, J 144.4 on 3 df.
 Column (4): fee −16.11 (1.22), fee SD 0.05 (20.47), age SD 1.42 (0.27), elasticity −3.90, J 102.3 on 2 df.
@@ -150,7 +161,7 @@ Weak points of A:
 - The partial-adjustment model cannot be estimated directly at monthly frequency: at ρ = 0.983 the implied target
   shares put more than half the market in one fund in 159 of 176 months.
 
-**Sign of individual coefficients.** Read literally, the estimate gives {100 * float(a2['share_pos_coef_access0']):.0f}% of investors a positive fee
+**Sign of individual coefficients.** Read literally, the estimate gives {100 * float(a2c['share_pos_coef_access0']):.0f}% of investors a positive fee
 coefficient. Under the long-run reading almost none are. A coefficient constrained to be negative for everyone
 (lognormal) was evaluated on a grid, one-step criterion, same weight and 500 draws:
 
@@ -173,6 +184,40 @@ rejects under the robust weight.
 | IV4 | Certified rival liquidations over the previous 12 months, matched like IV1 | 88.9 | Built from rival fees |
 
 Exclusion of IV1 and IV4 needs rivals' fee changes to be unrelated to the fund's own demand shock.
+
+## 7b. IV1 and IV4 matched on the fee at entry (27 Nov)
+
+Following our "cheap" definition (`tiers.py`): each fund's expense ratio in its first month in the full raw index
+file, fixed per fund; 51% of funds entered before January 2010. Rivals are matched on that entry fee instead of
+last month's fee, so the counts move only with rival entry and exit. All else in IV1 and IV4 is unchanged.
+74% of fund-months have a current fee within 10 bp of the entry fee; the entry-matched IV1 has a correlation of
+0.85 with Danny's. Linear screens, month-clustered J. Code: `step60_entry_fee_band.py`.
+
+| IV1 and IV4 matched on | Static fee slope | Static fee σ² | B: fee slope | B: age σ² | A: fee slope | A: fee σ² | A: J (3 df) |
+|---|---|---|---|---|---|---|---|
+| Last month's fee, 10 bp (Danny's) | −17.9 (0.9) | +3.1 (1.5) | −15.7 (1.0) | +0.97 (0.14) | −0.40 (0.11) | +0.67 (0.26) | 7.1 |
+| Entry fee, 5 bp | −22.4 (1.5) | −27.1 (5.0) | −15.5 (2.0) | +0.88 (0.19) | −0.76 (0.21) | +0.34 (0.55) | 11.3 |
+| Entry fee, 10 bp | −21.8 (1.5) | −28.4 (5.0) | −15.7 (2.0) | +0.82 (0.18) | −0.74 (0.20) | +0.47 (0.50) | 10.3 |
+| Entry fee, 15 bp | −21.9 (1.6) | −35.8 (6.8) | −15.5 (2.1) | +0.81 (0.19) | −0.76 (0.21) | +0.60 (0.58) | 10.1 |
+| Entry fee, 20 bp | −21.6 (1.5) | −29.1 (5.9) | −15.3 (2.0) | +0.84 (0.18) | −0.77 (0.20) | +0.52 (0.53) | 10.3 |
+| Entry percentile, 5 points | −22.6 (1.6) | −28.5 (5.6) | −16.3 (2.1) | +0.80 (0.19) | −0.77 (0.22) | +0.52 (0.60) | 9.0 |
+| Entry percentile, 10 points | −24.1 (1.7) | −28.4 (5.2) | −19.0 (2.3) | +0.68 (0.21) | −0.79 (0.21) | +0.47 (0.53) | 8.8 |
+| Entry percentile, 20 points | −23.3 (1.7) | −27.4 (5.7) | −17.0 (2.2) | +0.82 (0.19) | −0.84 (0.21) | +0.21 (0.55) | 9.3 |
+| Same cheap tier (20th percentile) | −21.4 (1.5) | −36.5 (8.9) | −12.9 (1.9) | +1.03 (0.16) | −0.73 (0.22) | +0.60 (0.69) | 16.5 |
+
+A's fee slope is from the logit with the lag; its σ² and J from the version with K.
+
+- The mean fee slope does not depend on rival repricing: it stays negative in every row.
+- B survives in sign and significance: the age σ² is positive and significant in all eight entry-fee rows, and in
+  the full BLP the fee coefficient is {est(be, 'b[prices]', 'se[prices]')} and the age SD {est(be, 'sigma_age', 'sigma_age_se')}.
+- The static fee σ² is clearly negative.
+- A's fee σ² stays positive but is never significant; in the full BLP the fee SD goes to the lower end of the search
+  range (§2). A's fee random coefficient depended on rival repricing.
+- Costs: alone, the entry-matched IV1 has a first-stage F of 17 (10 bp) to 29 (10 points), against 343. With the
+  entry-matched instruments B's age σ² turns negative when IV0 is also dropped (−1.4 to −4.9), and B's
+  over-identification is much worse: BLP J of {J(be)} against {J(b2c)}. Counts that move with rival entry and exit
+  are not clean either, because entry responds to segment demand. So Danny's instruments stay in the reported
+  column and the entry-fee version is a robustness check.
 
 ## 8. Open questions
 

@@ -1,0 +1,191 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+funds 1063; entry before Jan 2010: 0.511; cheap at entry (20th pct): 0.431; entry fee p10/p50/p90 0.07/0.25/0.66; exits with an entry fee 151 of 153
+share of fund-months whose current fee is within 10 bp of the entry fee: 0.741; correlation of fee and entry fee across fund-months 0.863
+
+New columns: mean, SD, correlation with his IV1 / IV4
+  e1_lvl5:   4.379   5.980   corr 0.800
+  e4_lvl5:   0.032   0.212   corr 0.595
+  e1_lvl10:   7.653   9.215   corr 0.853
+  e4_lvl10:   0.057   0.303   corr 0.732
+  e1_lvl15:  10.369  11.559   corr 0.866
+  e4_lvl15:   0.081   0.372   corr 0.709
+  e1_lvl20:  12.394  13.120   corr 0.852
+  e4_lvl20:   0.105   0.439   corr 0.672
+  e1_pct5:   3.991   5.487   corr 0.776
+  e4_pct5:   0.027   0.199   corr 0.555
+  e1_pct10:   6.966   8.083   corr 0.844
+  e4_pct10:   0.050   0.290   corr 0.655
+  e1_pct20:  11.771  12.119   corr 0.859
+  e4_pct20:   0.100   0.444   corr 0.706
+  e1_tier:  12.802  12.413   corr 0.655
+  e4_tier:   0.178   0.681   corr 0.596
+  [panel static: 98,110 rows, 30 columns, 4s]
+  [panel lag: 96,499 rows, 31 columns, 3s]
+  [panel : 41,696 rows, 30 columns, 1s]
+  [panel : 56,414 rows, 30 columns, 2s]
+  [panel : 41,085 rows, 31 columns, 1s]
+  [panel : 55,414 rows, 31 columns, 2s]
+
+=== static: his five instruments (reference)
+static; his five | IV1 alone, logit                            prices -17.249 (1.052) F 343.4;  just identified
+static; his five | logit                                       prices -17.878 (0.909) F 99.9;  J 62.9 on 4 df
+static; his five | fee K                                       prices -18.326 (0.921) F 120.8; K +3.073 (1.527) F 202.7;  J 60.7 on 3 df
+static; his five | age K                                       prices -15.700 (0.987) F 118.0; Ka +0.972 (0.142) F 380.9;  J 33.6 on 3 df
+--- static: entry-fee matching, lvl5
+static; lvl5 | entry-matched IV1 alone, logit                  prices -78.714 (17.098) F 24.5;  just identified
+static; lvl5 | entry-matched IV4 alone, logit                  prices -32.565 (7.237) F 23.3;  just identified
+static; lvl5 | logit                                           prices -22.394 (1.549) F 71.6;  J 70.7 on 4 df
+static; lvl5 | fee K                                           prices -32.638 (3.261) F 65.7; K -27.075 (5.014) F 115.4;  J 20.0 on 3 df
+static; lvl5 | age K                                           prices -15.476 (2.026) F 37.1; Ka +0.884 (0.185) F 380.3;  J 85.8 on 3 df
+--- static: entry-fee matching, lvl10
+static; lvl10 | entry-matched IV1 alone, logit                 prices -100.418 (25.337) F 16.5;  just identified
+static; lvl10 | entry-matched IV4 alone, logit                 prices -17.851 (3.647) F 34.5;  just identified
+static; lvl10 | logit                                          prices -21.787 (1.516) F 89.7;  J 76.4 on 4 df
+static; lvl10 | fee K                                          prices -32.064 (3.158) F 87.3; K -28.396 (4.967) F 103.6;  J 48.3 on 3 df
+static; lvl10 | age K                                          prices -15.671 (2.022) F 66.8; Ka +0.815 (0.182) F 385.5;  J 86.7 on 3 df
+static; lvl10 | fee K, without IV0                             prices -39.773 (4.324) F 59.1; K -26.659 (5.982) F 139.8;  J 34.3 on 2 df
+static; lvl10 | age K, without IV0                             prices -48.583 (6.387) F 28.7; Ka -1.391 (0.451) F 78.0;  J 32.9 on 2 df
+static; lvl10 | fee K, without e1_lvl10                        prices -22.613 (2.692) F 98.0; K -5.220 (5.205) F 58.2;  J 41.9 on 2 df
+static; lvl10 | age K, without e1_lvl10                        prices -11.502 (1.727) F 84.7; Ka +1.185 (0.151) F 474.9;  J 26.8 on 2 df
+static; lvl10 | fee K, without IV2                             prices -23.238 (4.713) F 52.8; K -46.701 (7.511) F 43.5;  J 36.1 on 2 df
+static; lvl10 | age K, without IV2                             prices -45.375 (26.946) F 16.3; Ka +16.003 (11.424) F 1.8;  J 6.0 on 2 df
+static; lvl10 | fee K, without IV3                             prices -30.248 (3.067) F 114.0; K -25.196 (4.335) F 133.9;  J 47.1 on 2 df
+static; lvl10 | age K, without IV3                             prices -14.260 (1.864) F 89.9; Ka +0.832 (0.169) F 504.1;  J 85.5 on 2 df
+static; lvl10 | fee K, without e4_lvl10                        prices -39.342 (5.251) F 38.6; K -40.363 (8.365) F 122.8;  J 6.3 on 2 df
+static; lvl10 | age K, without e4_lvl10                        prices -15.098 (2.126) F 21.0; Ka +0.844 (0.187) F 502.5;  J 83.8 on 2 df
+static; lvl10 | fee K + age K                                  prices -25.638 (4.145) F 88.6; K -44.873 (7.232) F 57.2; Ka +1.651 (0.643) F 511.2;  J 28.2 on 2 df
+static; lvl10; mutual-fund rows | logit                        prices +3.653 (0.655) F 78.4;  J 115.6 on 4 df
+static; lvl10; ETF rows | logit                                prices -8.508 (0.980) F 30.2;  J 135.5 on 4 df
+--- static: entry-fee matching, lvl15
+static; lvl15 | entry-matched IV1 alone, logit                 prices -111.056 (29.829) F 14.1;  just identified
+static; lvl15 | entry-matched IV4 alone, logit                 prices -22.123 (6.005) F 16.5;  just identified
+static; lvl15 | logit                                          prices -21.935 (1.574) F 67.1;  J 81.0 on 4 df
+static; lvl15 | fee K                                          prices -36.135 (4.200) F 52.0; K -35.828 (6.759) F 91.2;  J 38.7 on 3 df
+static; lvl15 | age K                                          prices -15.505 (2.119) F 41.8; Ka +0.814 (0.185) F 370.2;  J 90.7 on 3 df
+--- static: entry-fee matching, lvl20
+static; lvl20 | entry-matched IV1 alone, logit                 prices -106.497 (28.739) F 13.7;  just identified
+static; lvl20 | entry-matched IV4 alone, logit                 prices -17.549 (4.072) F 32.5;  just identified
+static; lvl20 | logit                                          prices -21.602 (1.536) F 77.5;  J 83.5 on 4 df
+static; lvl20 | fee K                                          prices -32.258 (3.505) F 64.4; K -29.090 (5.877) F 88.2;  J 54.9 on 3 df
+static; lvl20 | age K                                          prices -15.291 (2.006) F 57.4; Ka +0.838 (0.179) F 375.4;  J 90.1 on 3 df
+--- static: entry-fee matching, pct5
+static; pct5 | entry-matched IV1 alone, logit                  prices -73.825 (17.824) F 18.2;  just identified
+static; pct5 | entry-matched IV4 alone, logit                  prices -51.132 (11.720) F 20.3;  just identified
+static; pct5 | logit                                           prices -22.596 (1.577) F 66.6;  J 70.2 on 4 df
+static; pct5 | fee K                                           prices -33.788 (3.560) F 52.0; K -28.536 (5.644) F 103.4;  J 11.5 on 3 df
+static; pct5 | age K                                           prices -16.319 (2.090) F 34.4; Ka +0.799 (0.187) F 377.0;  J 88.6 on 3 df
+--- static: entry-fee matching, pct10
+static; pct10 | entry-matched IV1 alone, logit                 prices -67.761 (12.482) F 28.9;  just identified
+static; pct10 | entry-matched IV4 alone, logit                 prices -38.456 (8.635) F 16.9;  just identified
+static; pct10 | logit                                          prices -24.079 (1.658) F 68.7;  J 69.5 on 4 df
+static; pct10 | fee K                                          prices -33.544 (3.186) F 52.9; K -28.388 (5.183) F 103.3;  J 22.6 on 3 df
+static; pct10 | age K                                          prices -18.967 (2.276) F 35.2; Ka +0.683 (0.206) F 365.2;  J 82.7 on 3 df
+static; pct10 | fee K, without IV0                             prices -41.255 (4.592) F 45.5; K -25.493 (6.201) F 139.0;  J 7.3 on 2 df
+static; pct10 | age K, without IV0                             prices -60.130 (8.895) F 16.6; Ka -2.080 (0.588) F 92.7;  J 4.9 on 2 df
+static; pct10 | fee K, without e1_pct10                        prices -27.936 (3.049) F 58.1; K -15.804 (6.267) F 40.2;  J 21.4 on 2 df
+static; pct10 | age K, without e1_pct10                        prices -12.540 (1.771) F 44.3; Ka +1.144 (0.160) F 472.7;  J 55.4 on 2 df
+static; pct10 | fee K, without IV2                             prices -25.271 (4.603) F 35.7; K -46.713 (8.904) F 37.6;  J 13.1 on 2 df
+static; pct10 | age K, without IV2                             prices -44.351 (19.093) F 24.4; Ka +16.780 (9.596) F 3.5;  J 1.6 on 2 df
+static; pct10 | fee K, without IV3                             prices -32.192 (3.064) F 66.2; K -26.032 (4.559) F 135.2;  J 22.3 on 2 df
+static; pct10 | age K, without IV3                             prices -17.620 (2.098) F 46.7; Ka +0.702 (0.193) F 475.1;  J 82.7 on 2 df
+static; pct10 | fee K, without e4_pct10                        prices -36.631 (4.551) F 39.6; K -34.122 (7.408) F 127.6;  J 7.7 on 2 df
+static; pct10 | age K, without e4_pct10                        prices -17.491 (2.323) F 23.3; Ka +0.747 (0.202) F 486.4;  J 76.7 on 2 df
+static; pct10 | fee K + age K                                  prices -27.017 (4.125) F 46.9; K -43.384 (7.757) F 50.5; Ka +1.540 (0.657) F 485.9;  J 11.0 on 2 df
+static; pct10; mutual-fund rows | logit                        prices +3.602 (0.637) F 76.2;  J 117.6 on 4 df
+static; pct10; ETF rows | logit                                prices -9.450 (1.090) F 24.3;  J 139.6 on 4 df
+--- static: entry-fee matching, pct20
+static; pct20 | entry-matched IV1 alone, logit                 prices -73.093 (15.385) F 22.2;  just identified
+static; pct20 | entry-matched IV4 alone, logit                 prices -36.148 (7.870) F 13.6;  just identified
+static; pct20 | logit                                          prices -23.335 (1.653) F 64.2;  J 66.5 on 4 df
+static; pct20 | fee K                                          prices -32.839 (3.470) F 42.8; K -27.428 (5.702) F 73.9;  J 31.0 on 3 df
+static; pct20 | age K                                          prices -17.010 (2.166) F 33.8; Ka +0.824 (0.194) F 372.2;  J 87.1 on 3 df
+--- static: entry-fee matching, tier
+static; tier | entry-matched IV1 alone, logit                  prices -82.563 (24.557) F 10.3;  just identified
+static; tier | entry-matched IV4 alone, logit                  prices -296.965 (646.880) F 0.2;  just identified
+static; tier | logit                                           prices -21.428 (1.533) F 56.9;  J 74.3 on 4 df
+static; tier | fee K                                           prices -37.503 (5.372) F 25.1; K -36.474 (8.919) F 39.0;  J 7.6 on 3 df
+static; tier | age K                                           prices -12.872 (1.887) F 17.1; Ka +1.027 (0.162) F 370.6;  J 100.5 on 3 df
+static; tier | fee K, without IV0                              prices -49.130 (8.504) F 25.9; K -39.621 (10.936) F 48.0;  J 0.1 on 2 df
+static; tier | age K, without IV0                              prices -104.191 (32.929) F 2.9; Ka -4.935 (2.127) F 20.6;  J 0.6 on 2 df
+static; tier | fee K, without e1_tier                          prices -33.578 (6.070) F 29.6; K -27.903 (11.730) F 25.1;  J 10.2 on 2 df
+static; tier | age K, without e1_tier                          prices -10.785 (1.723) F 21.4; Ka +1.225 (0.150) F 478.3;  J 54.2 on 2 df
+static; tier | fee K, without IV2                              prices -29.691 (6.403) F 18.1; K -56.009 (12.771) F 26.9;  J 1.4 on 2 df
+static; tier | age K, without IV2                              prices -34.995 (15.812) F 15.4; Ka +13.423 (6.540) F 4.6;  J 3.0 on 2 df
+static; tier | fee K, without IV3                              prices -35.858 (5.416) F 26.1; K -33.576 (8.075) F 44.5;  J 6.2 on 2 df
+static; tier | age K, without IV3                              prices -10.926 (1.624) F 22.9; Ka +1.069 (0.142) F 486.7;  J 100.9 on 2 df
+static; tier | fee K, without e4_tier                          prices -36.829 (6.276) F 25.0; K -35.000 (11.232) F 36.5;  J 7.6 on 2 df
+static; tier | age K, without e4_tier                          prices -12.529 (1.844) F 21.0; Ka +1.045 (0.159) F 490.9;  J 71.3 on 2 df
+static; tier | fee K + age K                                   prices -30.652 (6.325) F 21.0; K -50.868 (11.453) F 34.4; Ka +1.583 (0.757) F 489.1;  J 0.9 on 2 df
+static; tier; mutual-fund rows | logit                         prices +3.387 (0.636) F 59.2;  J 115.7 on 4 df
+static; tier; ETF rows | logit                                 prices -5.763 (0.742) F 22.1;  J 131.1 on 4 df
+
+=== lag: his five instruments (reference)
+lag; his five | IV1 alone, logit                               prices -0.201 (0.129) F 282.6; [y_lag +0.982 (0.002)] just identified
+lag; his five | logit                                          prices -0.395 (0.112) F 83.2; [y_lag +0.980 (0.002)] J 11.0 on 4 df
+lag; his five | fee K                                          prices -0.466 (0.117) F 101.5; K +0.666 (0.256) F 281.3; [y_lag +0.983 (0.002)] J 7.1 on 3 df
+--- lag: entry-fee matching, lvl5
+lag; lvl5 | entry-matched IV1 alone, logit                     prices -5.146 (4.934) F 1.6; [y_lag +0.929 (0.054)] just identified
+lag; lvl5 | entry-matched IV4 alone, logit                     prices -0.632 (1.044) F 10.2; [y_lag +0.978 (0.011)] just identified
+lag; lvl5 | logit                                              prices -0.756 (0.212) F 44.8; [y_lag +0.977 (0.003)] J 9.7 on 4 df
+lag; lvl5 | fee K                                              prices -0.542 (0.336) F 20.0; K +0.343 (0.553) F 81.3; [y_lag +0.980 (0.006)] J 11.3 on 3 df
+--- lag: entry-fee matching, lvl10
+lag; lvl10 | entry-matched IV1 alone, logit                    prices -37.915 (323.230) F 0.0; [y_lag +0.577 (3.485)] just identified
+lag; lvl10 | entry-matched IV4 alone, logit                    prices -0.556 (0.738) F 32.5; [y_lag +0.979 (0.008)] just identified
+lag; lvl10 | logit                                             prices -0.736 (0.202) F 61.5; [y_lag +0.977 (0.003)] J 9.0 on 4 df
+lag; lvl10 | fee K                                             prices -0.463 (0.295) F 44.7; K +0.466 (0.503) F 82.9; [y_lag +0.982 (0.005)] J 10.3 on 3 df
+lag; lvl10 | fee K, without IV0                                prices -0.862 (0.463) F 29.0; K +0.223 (0.543) F 106.9; [y_lag +0.976 (0.007)] J 6.4 on 2 df
+lag; lvl10 | fee K, without e1_lvl10                           prices -0.229 (0.331) F 56.5; K +0.957 (0.589) F 81.7; [y_lag +0.987 (0.006)] J 5.2 on 2 df
+lag; lvl10 | fee K, without IV2                                prices -0.549 (0.321) F 45.1; K -0.104 (0.679) F 29.0; [y_lag +0.978 (0.006)] J 5.9 on 2 df
+lag; lvl10 | fee K, without IV3                                prices -0.600 (0.267) F 59.7; K +0.267 (0.460) F 109.6; [y_lag +0.979 (0.005)] J 7.2 on 2 df
+lag; lvl10 | fee K, without e4_lvl10                           prices -0.162 (0.423) F 5.0; K +0.845 (0.685) F 50.2; [y_lag +0.987 (0.007)] J 8.7 on 2 df
+lag; lvl10 | fee K + age K                                     prices -0.613 (0.357) F 59.5; K -0.083 (0.707) F 32.1; Ka +0.029 (0.022) F 319.9; [y_lag +0.976 (0.008)] J 5.9 on 2 df
+lag; lvl10; mutual-fund rows | logit                           prices -0.147 (0.085) F 76.9; [y_lag +0.985 (0.003)] J 11.5 on 4 df
+lag; lvl10; ETF rows | logit                                   prices -0.018 (0.134) F 25.7; [y_lag +0.984 (0.003)] J 9.0 on 4 df
+--- lag: entry-fee matching, lvl15
+lag; lvl15 | entry-matched IV1 alone, logit                    prices +11.253 (41.007) F 0.1; [y_lag +1.106 (0.440)] just identified
+lag; lvl15 | entry-matched IV4 alone, logit                    prices -1.134 (1.142) F 13.4; [y_lag +0.972 (0.012)] just identified
+lag; lvl15 | logit                                             prices -0.759 (0.207) F 47.1; [y_lag +0.976 (0.003)] J 8.4 on 4 df
+lag; lvl15 | fee K                                             prices -0.383 (0.342) F 23.8; K +0.599 (0.580) F 61.7; [y_lag +0.983 (0.006)] J 10.1 on 3 df
+--- lag: entry-fee matching, lvl20
+lag; lvl20 | entry-matched IV1 alone, logit                    prices +27.975 (238.611) F 0.0; [y_lag +1.286 (2.564)] just identified
+lag; lvl20 | entry-matched IV4 alone, logit                    prices -0.902 (0.733) F 28.5; [y_lag +0.975 (0.008)] just identified
+lag; lvl20 | logit                                             prices -0.766 (0.201) F 57.0; [y_lag +0.976 (0.003)] J 8.4 on 4 df
+lag; lvl20 | fee K                                             prices -0.468 (0.307) F 35.8; K +0.516 (0.533) F 72.8; [y_lag +0.982 (0.005)] J 10.3 on 3 df
+--- lag: entry-fee matching, pct5
+lag; pct5 | entry-matched IV1 alone, logit                     prices -2.901 (2.867) F 2.7; [y_lag +0.953 (0.031)] just identified
+lag; pct5 | entry-matched IV4 alone, logit                     prices -1.250 (1.982) F 4.3; [y_lag +0.971 (0.021)] just identified
+lag; pct5 | logit                                              prices -0.769 (0.217) F 39.7; [y_lag +0.976 (0.003)] J 7.6 on 4 df
+lag; pct5 | fee K                                              prices -0.438 (0.364) F 14.3; K +0.519 (0.596) F 84.5; [y_lag +0.982 (0.006)] J 9.0 on 3 df
+--- lag: entry-fee matching, pct10
+lag; pct10 | entry-matched IV1 alone, logit                    prices -1.437 (1.542) F 4.2; [y_lag +0.969 (0.017)] just identified
+lag; pct10 | entry-matched IV4 alone, logit                    prices -1.319 (1.224) F 7.6; [y_lag +0.970 (0.013)] just identified
+lag; pct10 | logit                                             prices -0.791 (0.211) F 46.0; [y_lag +0.976 (0.003)] J 6.9 on 4 df
+lag; pct10 | fee K                                             prices -0.508 (0.313) F 19.0; K +0.473 (0.525) F 78.3; [y_lag +0.981 (0.005)] J 8.8 on 3 df
+lag; pct10 | fee K, without IV0                                prices -1.014 (0.496) F 13.4; K +0.176 (0.573) F 80.5; [y_lag +0.975 (0.008)] J 3.9 on 2 df
+lag; pct10 | fee K, without e1_pct10                           prices -0.292 (0.368) F 23.2; K +0.831 (0.632) F 39.5; [y_lag +0.985 (0.006)] J 6.7 on 2 df
+lag; pct10 | fee K, without IV2                                prices -0.592 (0.341) F 22.5; K -0.080 (0.697) F 22.8; [y_lag +0.978 (0.007)] J 4.6 on 2 df
+lag; pct10 | fee K, without IV3                                prices -0.662 (0.287) F 25.3; K +0.264 (0.484) F 98.4; [y_lag +0.979 (0.005)] J 5.2 on 2 df
+lag; pct10 | fee K, without e4_pct10                           prices -0.171 (0.380) F 7.8; K +0.924 (0.637) F 88.7; [y_lag +0.987 (0.007)] J 6.1 on 2 df
+lag; pct10 | fee K + age K                                     prices -0.627 (0.363) F 25.2; K -0.008 (0.696) F 28.9; Ka +0.026 (0.021) F 338.3; [y_lag +0.977 (0.008)] J 4.7 on 2 df
+lag; pct10; mutual-fund rows | logit                           prices -0.144 (0.085) F 71.7; [y_lag +0.985 (0.003)] J 11.5 on 4 df
+lag; pct10; ETF rows | logit                                   prices -0.019 (0.131) F 24.1; [y_lag +0.984 (0.003)] J 9.3 on 4 df
+--- lag: entry-fee matching, pct20
+lag; pct20 | entry-matched IV1 alone, logit                    prices -1.055 (1.886) F 2.3; [y_lag +0.973 (0.021)] just identified
+lag; pct20 | entry-matched IV4 alone, logit                    prices -2.534 (1.362) F 8.0; [y_lag +0.957 (0.014)] just identified
+lag; pct20 | logit                                             prices -0.844 (0.210) F 44.4; [y_lag +0.976 (0.003)] J 7.9 on 4 df
+lag; pct20 | fee K                                             prices -0.719 (0.329) F 19.7; K +0.213 (0.549) F 57.6; [y_lag +0.978 (0.006)] J 9.3 on 3 df
+--- lag: entry-fee matching, tier
+lag; tier | entry-matched IV1 alone, logit                     prices +2.119 (7.108) F 0.2; [y_lag +1.007 (0.077)] just identified
+lag; tier | entry-matched IV4 alone, logit                     prices +16.220 (22.853) F 0.5; [y_lag +1.159 (0.247)] just identified
+lag; tier | logit                                              prices -0.729 (0.219) F 38.6; [y_lag +0.977 (0.003)] J 15.3 on 4 df
+lag; tier | fee K                                              prices -0.324 (0.421) F 4.7; K +0.603 (0.693) F 26.2; [y_lag +0.984 (0.007)] J 16.5 on 3 df
+lag; tier | fee K, without IV0                                 prices -1.463 (1.335) F 2.2; K -0.423 (1.390) F 11.4; [y_lag +0.967 (0.021)] J 11.5 on 2 df
+lag; tier | fee K, without e1_tier                             prices -0.291 (0.481) F 5.1; K +0.659 (0.810) F 11.9; [y_lag +0.985 (0.008)] J 16.0 on 2 df
+lag; tier | fee K, without IV2                                 prices -0.899 (0.661) F 6.1; K -0.967 (1.309) F 11.2; [y_lag +0.970 (0.013)] J 11.3 on 2 df
+lag; tier | fee K, without IV3                                 prices -0.678 (0.376) F 6.2; K +0.130 (0.617) F 34.6; [y_lag +0.978 (0.006)] J 13.5 on 2 df
+lag; tier | fee K, without e4_tier                             prices +0.350 (0.559) F 4.5; K +1.703 (0.860) F 23.6; [y_lag +0.996 (0.010)] J 2.3 on 2 df
+lag; tier | fee K + age K                                      prices -0.746 (0.653) F 6.1; K -0.381 (1.192) F 13.5; Ka +0.036 (0.029) F 196.8; [y_lag +0.973 (0.013)] J 13.5 on 2 df
+lag; tier; mutual-fund rows | logit                            prices -0.140 (0.084) F 58.2; [y_lag +0.985 (0.003)] J 17.5 on 4 df
+lag; tier; ETF rows | logit                                    prices +0.061 (0.125) F 23.4; [y_lag +0.985 (0.003)] J 11.2 on 4 df

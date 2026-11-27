@@ -10,6 +10,11 @@ Stage 1  one-step GMM (2SLS weight). 'lag' evaluates at the sigma found by step4
          pyblp's own) and month-clustered.
 Stage 2  two-step GMM for each weight, every evaluation checkpointed; its criterion is J.
 Writes step58_<spec>_step1.csv, step58_<spec>_step2_<weight>.csv and the 15 Table 5 funds' elasticities.
+
+Environment variables:
+  ENTRY=<variant> ENTRY_NPZ=<file>  replace his IV1 and IV4 by the entry-fee-matched counts e1_<variant>, e4_<variant>
+                                    built by step60_entry_fee_band.py (output files get the suffix _<variant>).
+  WEIGHTS=clustered                 second-step weights to run (default "robust,clustered").
 """
 import json
 import os
@@ -30,7 +35,7 @@ CON = s49.CON
 START = {'lag': 0.78274, 'age': 1.5}
 # Search ranges. A wide range let L-BFGS-B's first trial step land at an extreme sigma where the share contraction
 # takes tens of minutes per evaluation; a minimum at either end of these ranges would be reported as such.
-BOUNDS = {'lag': (0.4, 1.2), 'age': (0.8, 2.2)}
+BOUNDS = {'lag': (0.4, 1.2), 'age': (0.2, 2.2)}
 
 
 def search(ckpt, history):
@@ -61,6 +66,12 @@ def main(spec, P, names, procs):
     d = load(P, f'{P}/data/iv_inputs', names)
     z = np.load(f'{P}/data/prepared/passive.npz', allow_pickle=False)
     d['firm_ids'] = z['firm_ids']
+    entry = os.environ.get('ENTRY', '')
+    tag = spec + ('_' + entry if entry else '')
+    if entry:
+        nz = np.load(os.environ['ENTRY_NPZ'], allow_pickle=False)
+        assert (nz['source_row'] == z['source_row']).all()
+        d['demand_instruments1'], d['demand_instruments4'] = nz[f'e1_{entry}'], nz[f'e4_{entry}']
     a = np.load(f'{P}/data/draws/passive.npz', allow_pickle=False)
     if spec == 'lag':
         x = d.sort_values(['product_ids', 'month'])
@@ -75,33 +86,33 @@ def main(spec, P, names, procs):
         summ = lambda res, lab, ex: s56.summarize(res, d, lab, ex)
     live = np.isin(a['market_ids'], d.market_ids.unique())
     agents = {'market_ids': a['market_ids'][live], 'nodes': a['nodes'][live][:, [col]], 'weights': a['weights'][live]}
-    lo, hi = BOUNDS[spec]
+    lo, hi = (0.1, 1.4) if (spec == 'lag' and entry) else BOUNDS[spec]
     bnd = (np.array([[lo]]), np.array([[hi]]))
-    print(f'{spec}: N={len(d):,}', flush=True)
+    print(f'{tag}: N={len(d):,}', flush=True)
     with pyblp.parallel(procs):
         pr = pyblp.Problem((pyblp.Formulation(x1, absorb='C(product_ids) + C(market_ids)'), pyblp.Formulation(x2)), d, agent_data=agents)
-        wf = f'step58_{spec}_W.npz'
+        wf = f'step58_{tag}_W.npz'
         if not os.path.exists(wf):
             t = time.time()
-            ck = f'step58_{spec}_step1_ckpt.json'
+            ck = f'step58_{tag}_step1_ckpt.json'
             h = json.load(open(ck)) if os.path.exists(ck) else []
             s0 = min(h, key=lambda r: r['obj'])['theta'][0] if h else START[spec]
-            opt = pyblp.Optimization('return') if spec == 'lag' else search(ck, h)
+            opt = pyblp.Optimization('return') if spec == 'lag' and not entry else search(ck, h)
             res1 = pr.solve(np.array([[s0]]), sigma_bounds=bnd, optimization=opt, iteration=s49.ITERATION, method='1s', se_type='clustered')
             Wr, Wc = weights(res1, d)
             print('robust weight: max relative difference from pyblp %.2e' % float(np.abs(Wr / res1.updated_W - 1).max()), flush=True)
-            row, fr = summ(res1, f'{spec}, one-step, 3000 draws', dict(minutes=round((time.time() - t) / 60, 1)))
-            pd.DataFrame([row]).to_csv(f'step58_{spec}_step1.csv', index=False)
-            fr.to_csv(f'step58_{spec}_step1_funds.csv', index=False)
+            row, fr = summ(res1, f'{tag}, one-step, 3000 draws', dict(minutes=round((time.time() - t) / 60, 1)))
+            pd.DataFrame([row]).to_csv(f'step58_{tag}_step1.csv', index=False)
+            fr.to_csv(f'step58_{tag}_step1_funds.csv', index=False)
             np.savez(wf + '.tmp.npz', robust=res1.updated_W, clustered=Wc, sigma=float(res1.sigma[0, 0]))
             os.replace(wf + '.tmp.npz', wf)
         W = np.load(wf)
-        for wt in ('robust', 'clustered'):
-            out = f'step58_{spec}_step2_{wt}.csv'
+        for wt in os.environ.get('WEIGHTS', 'robust,clustered').split(','):
+            out = f'step58_{tag}_step2_{wt}.csv'
             if os.path.exists(out):
                 continue
             t = time.time()
-            ck = f'step58_{spec}_step2_{wt}_ckpt.json'
+            ck = f'step58_{tag}_step2_{wt}_ckpt.json'
             h = json.load(open(ck)) if os.path.exists(ck) else []
             s1 = min(h, key=lambda r: r['obj'])['theta'][0] if h else float(W['sigma'])
             print(f'two-step, {wt} weight, from sigma {s1:.5f} ({len(h)} earlier evaluations)', flush=True)
@@ -112,9 +123,9 @@ def main(spec, P, names, procs):
             opt = pyblp.Optimization('return') if done else search(ck, h)
             res2 = pr.solve(np.array([[s1]]), sigma_bounds=bnd, W=W[wt], optimization=opt, iteration=s49.ITERATION,
                             method='1s', W_type=wt, se_type='clustered')
-            row, fr = summ(res2, f'{spec}, two-step ({wt} weight), 3000 draws', dict(J=float(res2.objective), J_df=df, minutes=round((time.time() - t) / 60, 1)))
+            row, fr = summ(res2, f'{tag}, two-step ({wt} weight), 3000 draws', dict(J=float(res2.objective), J_df=df, minutes=round((time.time() - t) / 60, 1)))
             pd.DataFrame([row]).to_csv(out, index=False)
-            fr.to_csv(f'step58_{spec}_step2_{wt}_funds.csv', index=False)
+            fr.to_csv(f'step58_{tag}_step2_{wt}_funds.csv', index=False)
 
 
 if __name__ == '__main__':

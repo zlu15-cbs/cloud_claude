@@ -1,0 +1,27 @@
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+age_pct10: N=98,110
+  eval 1: theta [1.5] obj 163.613
+  eval 2: theta [0.8] obj 164.797
+  eval 3: theta [1.17949] obj 160.908
+  eval 4: theta [1.1737] obj 160.907
+  eval 5: theta [1.17415] obj 160.907
+  eval 6: theta [1.17415] obj 160.907
+robust weight: max relative difference from pyblp 1.86e-12
+{'spec': 'age_pct10, one-step, 3000 draws', 'N': 98110, 'objective': 160.9068, 'sigma_age': 1.1741, 'sigma_age_se': 0.2756, 'mean_own_elasticity_equal_month': -4.5277, 'aum_weighted_elasticity': -2.2057, 'share_e_pos': 0.0, 'aum_share_abs_e_lt1': 0.4439, 'n15_abs_e_gt1': 6, 'min_scaled_singular_value': 0.044, 'minutes': 37.4, 'b[prices]': -18.7035, 'se[prices]': 2.281, 'b[product_tracking_err]': -0.4205, 'se[product_tracking_err]': 0.0715, 'b[product_past_1yr_ret]': 0.4669, 'se[product_past_1yr_ret]': 0.0339, 'b[log_product_fund_age]': 1.5986, 'se[log_product_fund_age]': 0.3244}
+two-step, clustered weight, from sigma 1.17415 (0 earlier evaluations)
+  eval 1: theta [1.17415] obj 142.942
+  eval 2: theta [0.8] obj 137.782
+Admiral rows recoded to retail: 320 of 4668
+flag changes vs original: 2,088 fund-months, 45 classes; classes that flip in the original: 43
+fund-months by corrected access: {0: 18028, 1: 23668, 2: 56414}
+age_pct10: N=98,110
+two-step, clustered weight, from sigma 0.80000 (2 earlier evaluations)
+  eval 3: theta [0.8] obj 137.782
+  eval 4: theta [0.2] obj 139.015
+  eval 5: theta [0.62953] obj 137.163
+  eval 6: theta [0.6143] obj 137.159
+  eval 7: theta [0.61309] obj 137.159
+  eval 8: theta [0.61307] obj 137.159
+{'spec': 'age_pct10, two-step (clustered weight), 3000 draws', 'N': 98110, 'objective': 137.1588, 'sigma_age': 0.6131, 'sigma_age_se': 0.2391, 'mean_own_elasticity_equal_month': -4.8339, 'aum_weighted_elasticity': -2.3572, 'share_e_pos': 0.0, 'aum_share_abs_e_lt1': 0.4439, 'n15_abs_e_gt1': 6, 'min_scaled_singular_value': 0.0388, 'J': 137.1588, 'J_df': 3, 'minutes': 30.3, 'b[prices]': -19.9649, 'se[prices]': 2.0948, 'b[product_tracking_err]': -0.5525, 'se[product_tracking_err]': 0.0717, 'b[product_past_1yr_ret]': 0.5016, 'se[product_past_1yr_ret]': 0.0341, 'b[log_product_fund_age]': 0.9989, 'se[log_product_fund_age]': 0.2379}
